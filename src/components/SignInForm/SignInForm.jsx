@@ -1,17 +1,15 @@
 import { useForm } from "react-hook-form";
-import Logo from "../Logo/Logo";
 
 const SignInForm = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (d) => {
-    //TODO axios post
+    //TODO dispatch(login)
     console.log(d);
   };
 
   return (
     <>
-      <Logo />
       <form onSubmit={handleSubmit(onSubmit)}>
         <p>Sign In</p>
         <label>
