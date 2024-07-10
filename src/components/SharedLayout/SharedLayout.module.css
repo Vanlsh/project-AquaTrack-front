@@ -1,4 +1,7 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin: 0 auto;
   max-width: 375px;
   padding: 0 16px;
@@ -13,6 +16,8 @@
 
 @media screen and (min-width: 1440px) {
   .container {
+    flex-direction: row;
+    gap: 32px;
     max-width: 1440px;
   }
 }
