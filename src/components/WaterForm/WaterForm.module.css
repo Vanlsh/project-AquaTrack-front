@@ -3,7 +3,6 @@
   max-width: 343px;
   padding: 0;
   margin: 0;
-  border: solid 1px red;
   display: flex;
   flex-direction: column;
   font-family: "Poppins", sans-serif;
@@ -46,39 +45,23 @@
   border-radius: 30px;
   border: 1.5px solid #323f47;
   background-color: inherit;
-  background-repeat: no-repeat;
-  background-position: center;
   width: 40px;
   height: 40px;
-  background-color: inherit;
   position: relative;
 }
 
-
-.ToMinus {
-  margin: 0;
-  max-width: 100%;
-  max-height: 100%;
-  position: relative;
-}
-
-
-.ToPlus {
-  margin: 0;
-  width: 70%;
-  max-width: 100%;
-  max-height: 100%;
+.TapAddWaterIcon {
+  width: 20px;
+  height: 20px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform: translate(-50%, -50%);
+  fill: #323f47;
 }
 
 .TapAddWaterWrapper button:hover {
   border: 1.5px solid #87d28d;
-}
-
-.TapAddWaterWrapper button:hover > .ToMinus, .TapAddWaterWrapper button:hover > .ToPlus {
   fill: #87d28d;
 }
 

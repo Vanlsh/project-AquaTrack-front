@@ -18,19 +18,12 @@ const WaterForm = ({ operationType }) => {
             {FormHeader(operationType)}
             <p className={css.AmountOfWater}>Amount of water</p>
             <div className={css.TapAddWaterWrapper}> 
-                <button type="button" className={css.TapAddWaterMinusBtn}>
-                    <svg className={css.ToMinus}>
-                        <use href="src\assets\icons.svg#icon-minus"></use>
-                    </svg>
-                </button>
+                 <button type="button" className={css.TapAddWater}>
+                    -
+                 </button>
                  <p className={css.TapAddWaterValue}>50ml</p>
-                <button type="button" className={css.TapAddWaterPlusBtn}>
-                    <svg className={css.ToMinus}>
-                        <use href="src\assets\icons.svg#icon-minus"></use>
-                    </svg>
-                    <svg className={css.ToPlus}>
-                        <use href="src\assets\icons.svg#icon-minus"></use>
-                    </svg>
+                 <button type="button" className={css.TapAddWater}>
+                    +
                  </button>
             </div>
             
@@ -41,9 +34,6 @@ const WaterForm = ({ operationType }) => {
                 <input type="number" className={css.WaterValue}/>
             </label>
             <button type="button" className={css.SaveBtn}>Save</button>
-           
-            
-
         </form>
     )
 };
