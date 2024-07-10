@@ -18,9 +18,10 @@ const WaterForm = ({ operationType }) => {
             {FormHeader(operationType)}
             <p className={css.AmountOfWater}>Amount of water</p>
             <div className={css.TapAddWaterWrapper}> 
-                <button type="button">-</button>
+                <button type="button" className={css.TapAddWaterMinusBtn}>
+                </button>
                  <p>50ml</p>
-                 <button type="button">+</button>
+                 <button type="button" className={css.TapAddWaterPlusBtn}></button>
             </div>
             
             <label >Recording time:

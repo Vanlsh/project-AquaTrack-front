@@ -44,4 +44,16 @@
   border: 1.5px solid #323f47;
   background-color: inherit;
   fill: #323f47;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+}
+
+.TapAddWaterMinusBtn {
+  background-image: url("../../assets/minus.svg");
+}
+
+.TapAddWaterPlusBtn {
+  background-image: url("../../assets/minus.svg"), url("../../assets/plus.svg");
 }
