@@ -19,18 +19,28 @@ const WaterForm = ({ operationType }) => {
             <p className={css.AmountOfWater}>Amount of water</p>
             <div className={css.TapAddWaterWrapper}> 
                 <button type="button" className={css.TapAddWaterMinusBtn}>
+                    <svg className={css.ToMinus}>
+                        <use href="src\assets\icons.svg#icon-minus"></use>
+                    </svg>
                 </button>
-                 <p>50ml</p>
-                 <button type="button" className={css.TapAddWaterPlusBtn}></button>
+                 <p className={css.TapAddWaterValue}>50ml</p>
+                <button type="button" className={css.TapAddWaterPlusBtn}>
+                    <svg className={css.ToMinus}>
+                        <use href="src\assets\icons.svg#icon-minus"></use>
+                    </svg>
+                    <svg className={css.ToPlus}>
+                        <use href="src\assets\icons.svg#icon-minus"></use>
+                    </svg>
+                 </button>
             </div>
             
-            <label >Recording time:
-                <input type="time" />
+            <label className={css.RecordingTimeLabel}>Recording time:
+                <input type="text" className={css.RecordingTime}/>
             </label>
-            <label>Enter the value of the water used:
-                <input type="number" />
+            <label className={css.WaterValueLabel}>Enter the value of the water used:
+                <input type="number" className={css.WaterValue}/>
             </label>
-            <button type="submit">Save</button>
+            <button type="button" className={css.SaveBtn}>Save</button>
            
             
 

@@ -6,11 +6,12 @@
   border: solid 1px red;
   display: flex;
   flex-direction: column;
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
 }
 
 .FormHeader {
   display: block;
-  font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.25;
@@ -18,17 +19,18 @@
   text-align: left;
   color: #323f47;
   margin: 0 0 20px 0;
+  background-color: inherit;
 }
 
 .AmountOfWater {
   display: block;
-  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.28571;
   letter-spacing: -0.01em;
   color: #2f2f2f;
   margin: 0 0 8px 0;
+  background-color: inherit;
 }
 
 .TapAddWaterWrapper {
@@ -37,23 +39,136 @@
   align-items: center;
   margin: 0 0 16px 0;
   gap: 8px;
+  background-color: inherit;
 }
 
 .TapAddWaterWrapper button {
   border-radius: 30px;
   border: 1.5px solid #323f47;
   background-color: inherit;
-  fill: #323f47;
   background-repeat: no-repeat;
   background-position: center;
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
+  background-color: inherit;
+  position: relative;
 }
 
-.TapAddWaterMinusBtn {
-  background-image: url("../../assets/minus.svg");
+
+.ToMinus {
+  margin: 0;
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
 }
 
-.TapAddWaterPlusBtn {
-  background-image: url("../../assets/minus.svg"), url("../../assets/plus.svg");
+
+.ToPlus {
+  margin: 0;
+  width: 70%;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.TapAddWaterWrapper button:hover {
+  border: 1.5px solid #87d28d;
+}
+
+.TapAddWaterWrapper button:hover > .ToMinus, .TapAddWaterWrapper button:hover > .ToPlus {
+  fill: #87d28d;
+}
+
+.TapAddWaterValue {
+  border-radius: 30px;
+  padding: 11px 20px;
+  height: 43px;
+  background: #323f47;
+  padding: 11px 20px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.49333;
+  color: #fff;
+}
+
+.RecordingTimeLabel {
+  margin: 0 0 8px 0;
+  display: block;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  background-color: inherit;
+}
+
+.RecordingTime {
+  display: block;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px 16px 16px;
+  height: 56px;
+  max-width: 100%;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  margin: 0 0 24px 0;
+}
+
+.WaterValueLabel {
+  margin: 0 0 8px 0;
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.WaterValue {
+  display: block;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px 16px 16px;
+  height: 56px;
+  max-width: 100%;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  margin: 0 0 24px 0;
+}
+
+.SaveBtn {
+  display: block;
+  border-radius: 30px;
+  padding: 18px 50px;
+  width: 141px;
+  height: 60px;
+  background: #9be1a0;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+  border: none;
+}
+
+.SaveBtn:hover,
+.SaveBtn:active,
+.SaveBtn:focus {
+  background-color: #87d28d;
+  color: #323f47;
 }

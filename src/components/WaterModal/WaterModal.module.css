@@ -3,6 +3,8 @@
   max-width: 343px;
   padding: 40px 20px;
   border: solid 1px aqua;
+  border-radius: 15px;
+  background-color: #fff;
 }
 
 .WaterModal h1 {
