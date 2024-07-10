@@ -1,0 +1,4 @@
+.signInForm {
+  display: flex;
+  flex-direction: column;
+}

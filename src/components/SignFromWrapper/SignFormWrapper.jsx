@@ -1,6 +1,14 @@
+import Logo from "../Logo/Logo";
+import styles from "./SignFormWrapper.module.css";
 const SignFormWrapper = ({ children }) => {
-  console.log(children);
-  return <div>{children}</div>;
+  return (
+    <div className={styles.signFormWrapper}>
+      <div style={{ position: "absolute", top: "24px", left: "16px" }}>
+        <Logo />
+      </div>
+      <div>{children}</div>
+    </div>
+  );
 };
 
 export default SignFormWrapper;

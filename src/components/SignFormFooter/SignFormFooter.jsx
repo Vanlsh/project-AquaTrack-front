@@ -3,9 +3,11 @@ import styles from "./SignFormFooter.module.css";
 
 const SignFormFooter = ({ text, link, linkName }) => {
   return (
-    <p className={styles.signInFormFooter}>
+    <p className={styles.signFormFooter}>
       {text}
-      <Link to={link}>{linkName}</Link>
+      <Link className={styles.signFormFooterLink} to={link}>
+        {linkName}
+      </Link>
     </p>
   );
 };

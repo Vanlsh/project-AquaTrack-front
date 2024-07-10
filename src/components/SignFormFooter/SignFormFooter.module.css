@@ -1,7 +1,10 @@
-.signInFormFooter {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 129%;
-  letter-spacing: -0.01em;
+.signFormFooter {
   color: rgba(47, 47, 47, 0.5);
+}
+
+.signFormFooterLink {
+  font-weight: 700;
+  text-decoration: underline;
+  color: var(--color-font-main);
+  display: inline-block;
 }
