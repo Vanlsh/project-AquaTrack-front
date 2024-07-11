@@ -43,6 +43,7 @@ const SignUpForm = () => {
           <label className={styles.signUpLabel}>
             Password
             <input
+              // type="password"
               className={styles.signUpInput}
               {...register("password")}
               placeholder="Enter your password"
@@ -52,6 +53,7 @@ const SignUpForm = () => {
           <label className={styles.signUpLabel}>
             Repeat password
             <input
+              // type="password"
               className={styles.signUpInput}
               {...register("repeatpassword")}
               placeholder="Repeat password"
