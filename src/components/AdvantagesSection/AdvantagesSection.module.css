@@ -1,0 +1,86 @@
+.advantagesSection {
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 16px;
+  background-image: url("../../../public/img/bg/drinking_girl_bg_mob.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  aspect-ratio: 16 / 20;
+  flex: 1;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .advantagesSection {
+    background-image: url("../../../public/img/bg/drinking_girl_bg_mob_2x.jpg");
+  }
+}
+
+.advantagesList {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  margin-left: auto;
+  width: 168px;
+}
+
+.advantagesHabit,
+.advantagesStatistics,
+.advantagesSetting {
+  padding: 9px 12px;
+  border-radius: 30px;
+  font-size: 8px;
+  line-height: 100%;
+}
+.advantagesHabit {
+  background-color: var(--color-font-main);
+  color: var(--white);
+}
+.advantagesStatistics {
+  background-color: var(--color-second-bg);
+}
+.advantagesSetting {
+  background-color: var(--white);
+}
+@media screen and (min-width: 768px) {
+  .advantagesSection {
+    padding: 32px;
+    background-image: url("../../../public/img/bg/drinking_girl_bg_tab.jpg");
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .advantagesSection {
+      background-image: url("../../../public/img/bg/drinking_girl_bg_tab_2x.jpg");
+    }
+    .advantagesList {
+      width: 242px;
+    }
+  }
+
+  .advantagesList {
+  }
+
+  .advantagesHabit,
+  .advantagesStatistics,
+  .advantagesSetting {
+    padding: 11px 16px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .advantagesSection {
+    padding: 64px 32px;
+    background-image: url("../../../public/img/bg/drinking_girl_bg_desk.jpg");
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .advantagesSection {
+      background-image: url("../../../public/img/bg/drinking_girl_bg_desk_2x.jpg");
+    }
+  }
+}
