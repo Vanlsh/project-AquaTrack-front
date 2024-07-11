@@ -6,7 +6,7 @@ const SignFormWrapper = ({ children }) => {
       <div style={{ position: "absolute", top: "24px", left: "16px" }}>
         <Logo />
       </div>
-      <div>{children}</div>
+      <div style={{ width: "100%" }}>{children}</div>
     </div>
   );
 };

@@ -11,15 +11,25 @@ const SignInForm = () => {
 
   return (
     <form className={styles.signInForm} onSubmit={handleSubmit(onSubmit)}>
-      <p>Sign In</p>
-      <label>
-        Email
-        <input {...register("email")} placeholder="Enter you email" />
-      </label>
-      <label>
-        Password
-        <input {...register("password")} placeholder="Enter your password" />
-      </label>
+      <h1>Sign In</h1>
+      <div className={styles.signInFormInputWrapper}>
+        <label className={styles.signInFormLabel}>
+          Email
+          <input
+            className={styles.signInFormInput}
+            {...register("email")}
+            placeholder="Enter you email"
+          />
+        </label>
+        <label className={styles.signInFormLabel}>
+          Password
+          <input
+            className={styles.signInFormInput}
+            {...register("password")}
+            placeholder="Enter your password"
+          />
+        </label>
+      </div>
       <button type="submit">Sing In</button>
     </form>
   );
