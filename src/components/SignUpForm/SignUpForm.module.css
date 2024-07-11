@@ -1,17 +1,31 @@
 .signUpComponent {
-  width: 436px;
+  width: 311px;
+}
+
+.signUpTitle {
+  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--color-font-main);
 }
 
 .signUpForm {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .signUpLabel {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: var(--color-font-second);
 }
 
 .signUpInput {
@@ -20,16 +34,56 @@
   padding-left: 16px;
   padding-top: 16px;
   padding-bottom: 16px;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.28571;
   letter-spacing: -0.01em;
   color: rgba(47, 47, 47, 0.6);
 }
 
-.signUpTitle {
-  margin-bottom: 32px;
-}
-
 .signUpBtn {
   margin-top: 32px;
+  border-radius: 30px;
+  padding: 16px;
+  width: 311px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-font-main);
+  background-color: var(--color-second-bg);
+  margin-bottom: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .signUpComponent {
+    width: 436px;
+  }
+
+  .signUpTitle {
+    font-size: 36px;
+    line-height: 1.05556;
+  }
+
+  .signUpForm {
+    gap: 20px;
+  }
+
+  .signUpLabel {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .signUpInput {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .signUpBtn {
+    padding: 18px;
+    width: 436px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+  }
 }
