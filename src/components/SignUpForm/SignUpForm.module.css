@@ -1,0 +1,35 @@
+.signUpComponent {
+  width: 436px;
+}
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.signUpLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.signUpInput {
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.signUpTitle {
+  margin-bottom: 32px;
+}
+
+.signUpBtn {
+  margin-top: 32px;
+}
