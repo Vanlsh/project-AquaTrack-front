@@ -1,0 +1,91 @@
+.waterContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  max-width: 343px;
+  height: 415px;
+  background-color: #9be1a0;
+  position: relative;
+  background-image: url(./bottle_for_water-1x.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 262px 335px;
+}
+
+.waterTitle {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 111%;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: #323f47;
+  margin-top: 24px;
+  margin-left: 16px;
+}
+
+.normaContainer {
+  border-radius: 15px;
+  padding: 12px;
+  width: 102px;
+  height: 54px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin-top: 122px;
+  margin-left: 16px;
+  position: absolute;
+}
+
+.normaL {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  color: #323f47;
+}
+
+.normaText {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 100%;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.progressBarContainer {
+  border-radius: 15px;
+  padding: 12px;
+  width: 198px;
+  height: 70px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 225px;
+}
+
+.progressBarTitle {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  color: #323f47;
+}
+
+.btnAdd {
+  border-radius: 30px;
+  padding: 14px 20px;
+  width: 140px;
+  height: 46px;
+  border: none;
+  position: absolute;
+  bottom: 32px;
+  right: 16px;
+  background-color: #323f47;
+}
+
+.btnText {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+}
