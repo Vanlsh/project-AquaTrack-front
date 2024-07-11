@@ -1,12 +1,22 @@
 import { useForm } from "react-hook-form";
 import styles from "./SignUpForm.module.css";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schemaValidation = Yup.object().shape({
+  email: Yup.string().email("Must be a valid email!").required("Required"),
+  password: Yup.string()
+    .min(5, "Too short")
+    .max(25, "Too long")
+    .required("Required"),
+});
 
 const SignUpForm = () => {
   const {
     register,
     handleSubmit,
     // formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(schemaValidation) });
 
   const submitForm = (data) => {
     console.log(data);
