@@ -9,6 +9,10 @@ const schemaValidation = Yup.object().shape({
     .min(5, "Too short")
     .max(25, "Too long")
     .required("Required"),
+  repeatpassword: Yup.string()
+    .min(5, "Too short")
+    .max(25, "Too long")
+    .required("Required"),
 });
 
 const SignUpForm = () => {
@@ -49,7 +53,7 @@ const SignUpForm = () => {
             Repeat password
             <input
               className={styles.signUpInput}
-              {...register("repeat password")}
+              {...register("repeatpassword")}
               placeholder="Repeat password"
             />
           </label>
