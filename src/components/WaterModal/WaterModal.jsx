@@ -3,6 +3,8 @@ import clsx from 'clsx';
 
 import WaterForm from "../WaterForm/WaterForm";
 
+import { useModal } from "../../hooks/useModal.js";
+
 const WaterModal = ({ operationType }) => {
 
     const modalHeader = (operationType) => {
