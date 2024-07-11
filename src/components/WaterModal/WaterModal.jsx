@@ -2,10 +2,19 @@ import css from "./WaterModal.module.css";
 import clsx from 'clsx';
 
 import WaterForm from "../WaterForm/WaterForm";
+import { useState } from "react";
+import { ANIMATION } from "../../constants";
 
-import { useModal } from "../../hooks/useModal.js";
+const WaterModal = ({ operationType, onClose }) => {
+    const [closing, setClosing] = useState(false);
 
-const WaterModal = ({ operationType }) => {
+  const handleClose = () => {
+    setClosing(true);
+    const id = setTimeout(() => {
+      onClose();
+      clearTimeout(id);
+    }, ANIMATION.DURATION);
+  };
 
     const modalHeader = (operationType) => {
             switch (operationType) {
@@ -17,13 +26,13 @@ const WaterModal = ({ operationType }) => {
                     return "Add Water";
             }
         }
-        console.log(modalHeader(operationType));
+
     return (
-        
         <div className={css.WaterModal}>
             <h1 >{modalHeader(operationType)}</h1>
             < WaterForm operationType={operationType}/>
-            
+            <button type="button" onClick={handleClose} className={css.WaterModalCloseBtn}>x
+            </button>
         </div>
     );
 };

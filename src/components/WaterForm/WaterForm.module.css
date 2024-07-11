@@ -48,6 +48,7 @@
   width: 43px;
   height: 43px;
   position: relative;
+  cursor: pointer;
 }
 
 .TapAddWaterIcon {
@@ -145,6 +146,7 @@
   text-align: center;
   color: #323f47;
   border: none;
+  cursor: pointer;
 }
 
 .SaveBtn:hover,

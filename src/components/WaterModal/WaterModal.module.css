@@ -5,6 +5,7 @@
   border-radius: 15px;
   background-color: #fff;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .WaterModal h1 {
@@ -15,6 +16,18 @@
   letter-spacing: -0.01em;
   color: #323f47;
   margin: 0 0 24px 0;
+}
+
+.WaterModalCloseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  border: none;
+  background-image: url("src\assets\icons.svg#icon-x");
+  background-color: transparent;
 }
 
 @media screen and (min-width: 768px) {
