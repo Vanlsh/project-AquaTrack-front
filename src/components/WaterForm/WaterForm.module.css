@@ -73,10 +73,21 @@
   fill: #87d28d;
 }
 
+.TapAddWater[disabled] {
+  opacity: 0.6; 
+  cursor: not-allowed; 
+}
+
+.TapAddWater[disabled]:hover {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .TapAddWaterValue {
   border-radius: 30px;
   padding: 11px 20px;
   height: 43px;
+  width: 104px;
   background: #323f47;
   padding: 11px 20px;
   font-weight: 700;
@@ -161,6 +172,12 @@
 .SaveBtn:focus {
   background-color: #87d28d;
   color: #323f47;
+}
+
+.Error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 
