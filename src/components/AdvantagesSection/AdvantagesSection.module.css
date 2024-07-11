@@ -39,6 +39,19 @@
 .advantagesHabit {
   background-color: var(--color-font-main);
   color: var(--white);
+  padding-left: 19px;
+  position: relative;
+}
+.advantagesHabit::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-second-bg);
+  border-radius: 50%;
 }
 .advantagesStatistics {
   background-color: var(--color-second-bg);
@@ -60,15 +73,17 @@
       width: 242px;
     }
   }
-
-  .advantagesList {
-  }
-
   .advantagesHabit,
   .advantagesStatistics,
   .advantagesSetting {
     padding: 11px 16px;
     font-size: 12px;
+  }
+  .advantagesHabit {
+    padding-left: 26px;
+  }
+  .advantagesHabit::before {
+    left: 16px;
   }
 }
 
@@ -82,5 +97,11 @@
     .advantagesSection {
       background-image: url("../../../public/img/bg/drinking_girl_bg_desk_2x.jpg");
     }
+  }
+  .advantagesHabit {
+    padding-left: 28px;
+  }
+  .advantagesHabit::before {
+    left: 18px;
   }
 }

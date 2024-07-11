@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import clsx from "clsx";
 import Logo from "../Logo/Logo";
 import css from "./WelcomeSection.module.css";
 
@@ -13,7 +12,10 @@ const WelcomeSection = () => {
         </p>
         <h1 className={css.welcomeSectionTitle}>Water consumption tracker</h1>
         <div className={css.welcomeSectionLinks}>
-          <Link to={`/signup`} className={css.welcomeSectionLink}>
+          <Link
+            to={`/signup`}
+            className={`${css.welcomeSectionLink} ${css.welcomeSectionLinkSignup}`}
+          >
             Try tracker
           </Link>
           <Link

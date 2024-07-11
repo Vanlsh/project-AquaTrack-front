@@ -32,9 +32,18 @@
   padding: 14px 19px;
   border-radius: 30px;
 }
+.welcomeSectionLinkSignup:hover,
+.welcomeSectionLinkSignup:focus {
+  background-color: var(--color-second-bg-hover);
+}
 .welcomeSectionLinkSignin {
   border: 1px solid var(--color-font-main);
   background-color: transparent;
+}
+.welcomeSectionLinkSignin:hover,
+.welcomeSectionLinkSignin:focus {
+  border: 1px solid var(--color-second-bg-hover);
+  color: var(--color-second-bg-hover);
 }
 
 @media screen and (min-width: 768px) {
