@@ -6,10 +6,18 @@
   height: 415px;
   background-color: #9be1a0;
   position: relative;
-  background-image: url(./bottle_for_water-1x.png);
+  background-image: url(./img/bottle_for_water_mob_1x.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 262px 335px;
+}
+
+@media (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .waterContainer {
+    background-image: url(./img/bottle_for_water_mob_2x.png);
+  }
 }
 
 .waterTitle {
@@ -88,4 +96,100 @@
   letter-spacing: -0.01em;
   text-align: center;
   color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .waterContainer {
+    max-width: 704px;
+    height: 578px;
+    background-image: url(./img/bottle_for_water_tab_1x.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 374px 477px;
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .waterContainer {
+      background-image: url(./img/bottle_for_water_tab_2x.png);
+    }
+  }
+
+  .waterTitle {
+    font-size: 24px;
+    line-height: 100%;
+    margin-top: 32px;
+    margin-left: 33px;
+  }
+
+  .normaContainer {
+    padding: 14px 18px;
+    width: 129px;
+    height: 78px;
+    margin-top: 157px;
+    margin-left: 32px;
+  }
+
+  .normaL {
+    font-size: 15px;
+    line-height: 149%;
+  }
+
+  .normaText {
+    font-size: 12px;
+    line-height: 187%;
+  }
+
+  .progressBarContainer {
+    margin-top: 322px;
+    padding: 20px;
+    width: 295px;
+    height: 106px;
+  }
+
+  .btnAdd {
+    padding: 18px 30px;
+    width: 178px;
+    height: 60px;
+    bottom: 64px;
+    right: 32px;
+  }
+
+  .btnText {
+    font-size: 16px;
+    line-height: 150%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .waterContainer {
+    min-width: 672px;
+    height: 736px;
+    background-image: url(./img/bottle_for_water_desk_1x.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 474px 604px;
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .waterContainer {
+      background-image: url(./img/bottle_for_water_desk_2x.png);
+    }
+  }
+
+  .normaContainer {
+    margin-left: 64px;
+  }
+
+  .progressBarContainer {
+    margin-top: 450px;
+  }
+
+  .progressBarTitle {
+    font-size: 15px;
+    line-height: 149%;
+  }
 }
