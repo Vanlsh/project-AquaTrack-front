@@ -31,7 +31,10 @@ const WaterModal = ({ operationType, onClose }) => {
         <div className={css.WaterModal}>
             <h1 >{modalHeader(operationType)}</h1>
             < WaterForm operationType={operationType}/>
-            <button type="button" onClick={handleClose} className={css.WaterModalCloseBtn}>x
+            <button type="button" onClick={handleClose} className={css.WaterModalCloseBtn}>
+                <svg>
+                    <use href="src\assets\icons.svg#icon-clear"></use>
+                </svg>
             </button>
         </div>
     );

@@ -19,11 +19,15 @@ const WaterForm = ({ operationType }) => {
             <p className={css.AmountOfWater}>Amount of water</p>
             <div className={css.TapAddWaterWrapper}> 
                  <button type="button" className={css.TapAddWater}>
-                    -
+                 <svg>
+                    <use href="src\assets\icons.svg#icon-remove"></use>
+                </svg>
                  </button>
                  <p className={css.TapAddWaterValue}>50ml</p>
                  <button type="button" className={css.TapAddWater}>
-                    +
+                 <svg>
+                    <use href="src\assets\icons.svg#icon-add"></use>
+                </svg>
                  </button>
             </div>
             
