@@ -20,6 +20,7 @@
 }
 
 .signInFormInput {
+  width: 100%;
   height: 50px;
   border: 1px solid rgba(47, 47, 47, 0.2);
   border-radius: 15px;
@@ -32,4 +33,39 @@
 
 .signInFormInput::placeholder {
   color: rgba(47, 47, 47, 0.6);
+}
+
+.signInFormIconInputWrapper {
+  position: relative;
+}
+
+.signInFormButton {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-second-bg);
+  border: none;
+  border-radius: 30px;
+  color: var(--color-font-main);
+  font-weight: 700;
+}
+
+.signInFormIconButton {
+  position: absolute;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  width: 20px;
+  height: 20px;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.signInFormInputIcon {
+  width: 20px;
+  height: 20px;
+  fill: transparent;
+  stroke: var(--color-font-second);
 }

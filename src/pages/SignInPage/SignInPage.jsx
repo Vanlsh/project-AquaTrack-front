@@ -1,6 +1,6 @@
-import SignInForm from "../../components/SignInForm/SignInForm.jsx";
-import SignFormWrapper from "../../components/SignFromWrapper/SignFormWrapper.jsx";
 import SignFormFooter from "../../components/SignFormFooter/SignFormFooter.jsx";
+import SignFormWrapper from "../../components/SignFromWrapper/SignFormWrapper.jsx";
+import SignInForm from "../../components/SignInForm/SignInForm.jsx";
 
 const SignInPage = () => {
   return (
