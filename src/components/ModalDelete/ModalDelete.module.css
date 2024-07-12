@@ -11,11 +11,11 @@
         align-items: center;
         gap: 24px;
         /*mobile*/
-        border-radius: 15px;
+        /* border-radius: 15px;
             padding: 40px 14px;
             width: 344px;
             height: 267px;
-            gap: 28px;
+            gap: 28px; */
 }
 
 .closeBtn {
@@ -43,11 +43,11 @@
         color: #323f47;
         /* width: 316px; */
         /* mobile */
-            font-weight: 700;
+            /* font-weight: 700;
             font-size: 20px;
             line-height: 120%;
             letter-spacing: -0.01em;
-            text-align: center;
+            text-align: center; */
 }
 
 .modalText {
@@ -60,11 +60,11 @@
         color: #323f47;
         /* width: 436px; */
         /* mobile */
-            font-weight: 400;
+            /* font-weight: 400;
             font-size: 14px;
             line-height: 129%;
             letter-spacing: -0.01em;
-            text-align: center;
+            text-align: center; */
 }
 
 .modalBtnBox {
@@ -75,8 +75,8 @@
             align-items: center;
             gap: 10px;
             /* mobile */
-            width: 304px;
+            /* width: 304px;
                 height: 101px;
                 gap: 9px;
-                flex-direction: column;
+                flex-direction: column; */
 }
