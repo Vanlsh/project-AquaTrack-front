@@ -1,5 +1,11 @@
-const MonthInfo = () => {
-  return <div>MonthInfo</div>;
-};
+import { CalendarPagination } from '../CalendarPagination/CalendarPagination.jsx';
+import { Calendar } from '../Calendar/Calendar.jsx';
 
-export default MonthInfo;
+export const MonthInfo = () => {
+	return (
+		<div>
+			<CalendarPagination />
+			<Calendar />
+		</div>
+	);
+};

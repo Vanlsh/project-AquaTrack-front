@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CalendarItem } from '../CalendarItem/CalendarItem.jsx';
 import { CalendarPagination } from '../CalendarPagination/CalendarPagination';
 import { months } from '../../constants';
 import css from './Calendar.module.css';
@@ -67,6 +68,7 @@ export const Calendar = () => {
 				year={year}
 			/>
 			<div>{calendarDays()}</div>
+			<CalendarItem />
 		</>
 	);
 };
