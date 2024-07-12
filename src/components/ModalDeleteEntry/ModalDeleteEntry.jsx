@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { ANIMATION } from '../../constants.js';
-import css from './ModalDelete.module.css';
+import css from './ModalDeleteEntry.module.css';
+import BtnDelete from '../BtnDelete/BtnDelete.jsx';
 
-const ModalDelete = ({onClose}) => {
+const ModalDeleteEntry = ({onClose}) => {
     const [closing, setClosing] = useState(false);
+    console.log(closing);
 
     const handleClose = () => {
         setClosing(true);
@@ -16,23 +18,23 @@ const ModalDelete = ({onClose}) => {
     return (
         <div className={css.modal}>
             <button type="button" onClick={handleClose} className={css.closeBtn}>
-                <svg>
+                {/* <svg>
                     <use href="src\assets\icons.svg#icon-clear"></use>
-                </svg>
+                </svg> */}
             </button>
             <div className={css.modalTextBox}>
                 <h2 className={css.modalTitle}>Delete entry</h2>
                 <p className={css.modalText}>Are you sure you want to delete the entry?</p>
             </div>
             <div className={css.modalBtnBox}>
-                <BtnDelete />
-                <BtnCancel />  
+                <BtnDelete/>
+                <button type="button" onClick={handleClose} className={css.btnCancel}>Cancel</button> 
             </div>
         </div>
     );
 };
 
-export default ModalDelete;
+export default ModalDeleteEntry;
 
 /* in SomeModalWindowWithoutBackdrop
 
