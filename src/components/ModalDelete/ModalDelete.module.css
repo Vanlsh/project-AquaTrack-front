@@ -1,0 +1,82 @@
+.modal {
+    border-radius: 15px;
+        padding: 40px;
+        width: 516px;
+        height: 244px;
+        box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        /*mobile*/
+        border-radius: 15px;
+            padding: 40px 14px;
+            width: 344px;
+            height: 267px;
+            gap: 28px;
+}
+
+.closeBtn {
+    width: 24px;
+        height: 24px;
+}
+
+.modalTextBox {
+    width: 316px;
+        height: 58px;
+        display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+}
+
+.modalTitle {
+    font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 114%;
+        letter-spacing: -0.01em;
+        text-align: center;
+        color: #323f47;
+        /* width: 316px; */
+        /* mobile */
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 120%;
+            letter-spacing: -0.01em;
+            text-align: center;
+}
+
+.modalText {
+    font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 133%;
+        letter-spacing: -0.01em;
+        text-align: center;
+        color: #323f47;
+        /* width: 436px; */
+        /* mobile */
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 129%;
+            letter-spacing: -0.01em;
+            text-align: center;
+}
+
+.modalBtnBox {
+    width: 356px;
+        height: 60px;
+        display: flex; 
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            /* mobile */
+            width: 304px;
+                height: 101px;
+                gap: 9px;
+                flex-direction: column;
+}
