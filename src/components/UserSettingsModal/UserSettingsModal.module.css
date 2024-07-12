@@ -1,0 +1,38 @@
+.modalSettingContainer {
+  max-height: 90vh;
+  max-width: 90vw;
+  /* height: 996px; */
+  height: auto;
+  width: 920px;
+  padding: 40px;
+  z-index: 101;
+  /* background-color: bisque; */
+  border: 1px solid black;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  /* background-color: white; */
+}
+
+.icon {
+  fill: black;
+  width: 28px;
+  height: 28px;
+  z-index: 1000;
+}
