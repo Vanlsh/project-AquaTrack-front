@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
 import styles from "./SignInForm.module.css";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/operations";
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (d) => {
-    //TODO dispatch(login)
-    console.log(d);
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(logIn(data));
+    // reset();
   };
 
   return (

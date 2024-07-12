@@ -33,3 +33,22 @@
 .signInFormInput::placeholder {
   color: rgba(47, 47, 47, 0.6);
 }
+
+.errorPosition {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: #ef5050;
+
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  width: 100%;
+}
+
+.errorRed {
+  border-color: #ef5050;
+  color: #ef5050;
+}
