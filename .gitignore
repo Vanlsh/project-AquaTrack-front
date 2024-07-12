@@ -23,4 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
+jsonconfig.json
+typings.d.ts
+
 pullrequests-list.txt
