@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createSlice } from "@reduxjs/toolkit";
 import { INITIAL_STATE } from "./initialState";
 import { signUp, logIn, logOut, refreshUser } from "./operations";

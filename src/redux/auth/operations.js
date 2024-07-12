@@ -4,15 +4,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {
-  signUpUser,
-  logInUser,
-  logOutUser,
-  requestRefreshUser,
-  requestUserInfo,
-  updateUserInfo,
-  updateUserPhoto,
-} from "../../api/auth.js";
+// import {
+//   signUpUser,
+//   logInUser,
+//   logOutUser,
+//   requestRefreshUser,
+//   requestUserInfo,
+//   updateUserInfo,
+//   updateUserPhoto,
+// } from "../../api/auth.js";
 
 // axios.defaults.baseURL = "https://...";
 
