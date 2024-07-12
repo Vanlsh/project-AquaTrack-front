@@ -6,6 +6,10 @@
   margin-bottom: 16px;
 }
 
+.signInFormTitle {
+  font-size: 32px;
+}
+
 .signInFormInputWrapper {
   display: flex;
   flex-direction: column;
@@ -28,7 +32,18 @@
   padding: 16px;
   background-color: transparent;
   font-size: 16px;
+  line-height: 1.5;
   color: var(--color-font-main);
+}
+
+.signInFormInputError {
+  color: #ef5050;
+  border-color: #ef5050;
+}
+
+.signInFormInputErrorMessage {
+  color: #ef5050;
+  font-weight: 400;
 }
 
 .signInFormInput::placeholder {
@@ -51,7 +66,13 @@
   font-weight: 700;
 }
 
+.signInFormButton:hover,
+.signInFormButton:focus {
+  background-color: var(--color-second-bg-hover);
+}
+
 .signInFormIconButton {
+  display: none;
   position: absolute;
   padding: 0;
   background-color: transparent;
@@ -68,4 +89,31 @@
   height: 20px;
   fill: transparent;
   stroke: var(--color-font-second);
+}
+
+@media screen and (min-width: 768px) {
+  .signInForm {
+    margin: 0 auto;
+    max-width: 436px;
+    margin-bottom: 16px;
+  }
+  .signInFormTitle {
+    font-size: 36px;
+  }
+  .signInFormLabel {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .signInFormInputErrorMessage {
+    font-size: 14px;
+  }
+  .signInFormIconButton {
+    display: block;
+  }
+  .signInFormInput {
+    padding-right: 45px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
 }

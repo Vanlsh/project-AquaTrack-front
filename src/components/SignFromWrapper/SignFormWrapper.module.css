@@ -10,3 +10,29 @@
   height: calc(100vh - 32px);
   min-height: 420px;
 }
+
+.signFormLogoWrapper {
+  position: absolute;
+  top: 24px;
+  left: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .signFormWrapper {
+    padding: 32px;
+    height: calc(100vh - 64px);
+  }
+
+  .signFormLogoWrapper {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .signFormWrapper {
+    width: 672px;
+    height: 736px;
+  }
+}
