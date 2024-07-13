@@ -1,0 +1,13 @@
+.logo {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 111%;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+  .logo {
+    font-size: 24px;
+    line-height: 100%;
+  }
+}
