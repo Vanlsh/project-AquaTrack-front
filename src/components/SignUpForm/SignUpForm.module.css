@@ -41,9 +41,9 @@
   letter-spacing: -0.01em;
   color: rgba(47, 47, 47, 0.6);
   width: 100%;
+  outline: none;
 }
 
-.signUpInput:hover,
 .signUpInput:focus {
   border: 1px solid rgba(47, 47, 47, 0.4);
 }
