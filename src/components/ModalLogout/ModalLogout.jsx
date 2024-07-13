@@ -1,19 +1,8 @@
-// import { useState } from 'react';
-// import { ANIMATION } from '../../constants.js';
 import css from './ModalLogout.module.css';
+import svg from '../../assets/icons.svg'
 import BtnLogout from '../BtnLogout/BtnLogout.jsx';
 
 const ModalLogout = ({onClose}) => {
-    // const [closing, setClosing] = useState(false);
-    // console.log(closing);
-
-    // const handleClose = () => {
-    //     setClosing(true);
-    //     const id = setTimeout(() => {
-    //         onClose();
-    //         clearTimeout(id);
-    //     }, ANIMATION.DURATION);
-    // };
 
     const handleClose = () => {
         onClose();
@@ -22,9 +11,9 @@ const ModalLogout = ({onClose}) => {
     return (
         <div className={css.modal}>
             <button type="button" aria-label='' onClick={onClose} className={css.closeBtn}>
-                {/* <svg>
-                    <use href="src\assets\icons.svg#icon-clear"></use>
-                </svg> */}
+                <svg className={css.svg}>
+                    <use xlinkHref={svg + '#icon-x'}></use>
+                </svg>
             </button>
             <div className={css.modalTextBox}>
                 <h2 className={css.modalTitle}>Log out</h2>

@@ -16,14 +16,23 @@
 }
 
 .closeBtn {
-    width: 24px;
-    height: 24px;
     position: absolute;
     top: 20px;
     right: 20px;
     border: none;
     background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.svg {
+    width: 24px;
+    height: 24px;
+    position: absolute;
     fill: #323f47;
+    stroke: black;
 }
 
 .modalTextBox {
