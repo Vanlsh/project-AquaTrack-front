@@ -1,0 +1,15 @@
+.userBar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: fit-content;
+}
+
+.userBarTitle {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.userBarTitleName {
+  font-weight: 700;
+}
