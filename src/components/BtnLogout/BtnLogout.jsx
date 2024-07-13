@@ -1,11 +1,11 @@
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import css from './BtnLogout.module.css';
 
 const BtnLogout = ({handleClose}) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const handleLogout = () => {
-        dispatch();
+        // dispatch();
         handleClose();
     };
     
