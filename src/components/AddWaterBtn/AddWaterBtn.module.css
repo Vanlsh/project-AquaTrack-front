@@ -1,0 +1,92 @@
+.addBtnWrap button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	border-radius: 30px;
+	letter-spacing: -0.01em;
+	transition: var(--animation);
+	border: none;
+	outline: none;
+	font: inherit;
+	font-weight: 600;
+}
+
+.btnBig {
+	position: absolute;
+	right: 16px;
+	bottom: 32px;
+	width: 140px;
+	height: 46px;
+	padding: 20px 14px;
+	line-height: 1.29;
+	color: var(--white);
+	background-color: var(--grey);
+
+	&:hover {
+		color: var(--lightGreenHover);
+
+		.iconWhite {
+			stroke: var(--lightGreenHover);
+		}
+	}
+}
+.iconWhite {
+	transition: var(--animation);
+	stroke: var(--white);
+}
+.descSmall {
+	font-size: 14px;
+}
+
+@media screen and (min-width: 768px) {
+	.txtSmall {
+		font-size: 16px;
+	}
+	.btnBig {
+		width: 178px;
+		height: 60px;
+		right: 32px;
+		bottom: 64px;
+		padding: 18px 30px;
+	}
+	.iconWhite {
+		width: 24px;
+		height: 24px;
+	}
+}
+
+/* **************************** */
+/* styles for Small btn */
+/* **************************** */
+
+.btnSmall {
+	color: var(--grey);
+	background-color: transparent;
+	padding: 0px;
+	&:hover {
+		.iconGrey {
+			stroke: var(--white);
+		}
+		.iconWrapper {
+			background-color: var(--grey);
+		}
+	}
+}
+.descBig {
+	font-size: 16px;
+}
+.iconWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	height: 30px;
+	width: 30px;
+	transition: var(--animation);
+	background-color: var(--green);
+}
+.iconGrey {
+	transition: var(--animation);
+	stroke: var(--grey);
+}
