@@ -9,7 +9,7 @@ const WaterProgressBar = () => {
     const mockFetchWaterData = () => {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve({ currentWater: 2000, goal: 2000 });
+          resolve({ currentWater: 1000, goal: 2000 });
         }, 1000);
       });
     };
@@ -43,7 +43,7 @@ const WaterProgressBar = () => {
           className={css.progressBarFill}
           style={{
             width: `${percentage}%`,
-            maxWidth: '174px',
+            
             backgroundColor: currentWater < goal ? '#9be1a0' : '#FABE4A',
           }}
         >
