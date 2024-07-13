@@ -15,7 +15,7 @@ const schemaValidation = Yup.object({
     .max(25, "Password is too long")
     .required("Password is required"),
   repeatpassword: Yup.string()
-    .oneOf([Yup.ref("password")])
+    .oneOf([Yup.ref("password")], "Reapet password must be values of password")
     .required("Repeat password is required"),
 });
 
