@@ -149,6 +149,16 @@
   margin: 0 0 24px 0;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .SaveBtn {
   display: block;
   border-radius: 30px;
