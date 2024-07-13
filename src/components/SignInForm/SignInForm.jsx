@@ -1,8 +1,8 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import clsx from "clsx";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// @ts-ignore
 import svgSprite from "../../assets/icons.svg";
 import styles from "./SignInForm.module.css";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,7 @@ import { logIn } from "../../redux/auth/operations";
 const schema = yup.object({
   email: yup
     .string()
-    .email("Enter a valid email adress!")
+    .email("Enter a valid email address!")
     .required("Email is required"),
   password: yup
     .string()
@@ -48,17 +48,19 @@ const SignInForm = () => {
           Email
           <input
             type="email"
-            className={
-              errors.email?.message
-                ? `${styles.signInFormInput} ${styles.signInFormInputError}`
-                : `${styles.signInFormInput}`
-            }
+            className={clsx(styles.signInFormInput, {
+              [styles.signInFormInputError]: errors.email?.message,
+            })}
             {...register("email")}
             placeholder="Enter you email"
           />
-          <p className={styles.signInFormInputErrorMessage}>
-            {errors.email?.message}
-          </p>
+          {errors.email?.message ? (
+            <p className={styles.signInFormInputErrorMessage}>
+              {errors.email?.message}
+            </p>
+          ) : (
+            ""
+          )}
         </label>
 
         <label className={styles.signInFormLabel}>
@@ -66,11 +68,9 @@ const SignInForm = () => {
           <div className={styles.signInFormIconInputWrapper}>
             <input
               type={showPassword ? "text" : "password"}
-              className={
-                errors.password?.message
-                  ? `${styles.signInFormInput} ${styles.signInFormInputError}`
-                  : `${styles.signInFormInput}`
-              }
+              className={clsx(styles.signInFormInput, {
+                [styles.signInFormInputError]: errors.password?.message,
+              })}
               {...register("password")}
               placeholder="Enter your password"
             />
@@ -92,9 +92,13 @@ const SignInForm = () => {
               )}
             </button>
           </div>
-          <p className={styles.signInFormInputErrorMessage}>
-            {errors.password?.message}
-          </p>
+          {errors.password?.message ? (
+            <p className={styles.signInFormInputErrorMessage}>
+              {errors.password?.message}
+            </p>
+          ) : (
+            ""
+          )}
         </label>
       </div>
       <button className={styles.signInFormButton} type="submit">
