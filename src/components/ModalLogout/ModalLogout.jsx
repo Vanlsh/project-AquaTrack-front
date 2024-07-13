@@ -1,23 +1,27 @@
-import { useState } from 'react';
-import { ANIMATION } from '../../constants.js';
+// import { useState } from 'react';
+// import { ANIMATION } from '../../constants.js';
 import css from './ModalLogout.module.css';
 import BtnLogout from '../BtnLogout/BtnLogout.jsx';
 
 const ModalLogout = ({onClose}) => {
-    const [closing, setClosing] = useState(false);
-    console.log(closing);
+    // const [closing, setClosing] = useState(false);
+    // console.log(closing);
+
+    // const handleClose = () => {
+    //     setClosing(true);
+    //     const id = setTimeout(() => {
+    //         onClose();
+    //         clearTimeout(id);
+    //     }, ANIMATION.DURATION);
+    // };
 
     const handleClose = () => {
-        setClosing(true);
-        const id = setTimeout(() => {
-            onClose();
-            clearTimeout(id);
-        }, ANIMATION.DURATION);
+        onClose();
     };
 
     return (
         <div className={css.modal}>
-            <button type="button" onClick={handleClose} className={css.closeBtn}>
+            <button type="button" aria-label='' onClick={onClose} className={css.closeBtn}>
                 {/* <svg>
                     <use href="src\assets\icons.svg#icon-clear"></use>
                 </svg> */}
@@ -27,8 +31,8 @@ const ModalLogout = ({onClose}) => {
                 <p className={css.modalText}>Do you really want to leave?</p>
             </div>
             <div className={css.modalBtnBox}> 
-                <BtnLogout/>
-                <button type="button" onClick={handleClose} className={css.btnCancel}>Cancel</button> 
+                <BtnLogout handleClose={handleClose} />
+                <button type="button" onClick={onClose} className={css.btnCancel}>Cancel</button> 
             </div>
         </div>
     );
