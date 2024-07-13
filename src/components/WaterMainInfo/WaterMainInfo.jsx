@@ -3,8 +3,25 @@ import { useEffect, useState } from 'react';
 import WaterProgressBar from '../WaterProgressBar/WaterProgressBar';
 import css from './WaterMainInfo.module.css';
 
+import { useModal } from "../../hooks/useModal.js";
+import { useCallback } from 'react';
+import Modal from '../Modal/Modal.jsx'
+
+
+
 const WaterMainInfo = () => {
   const [goal, setGoal] = useState(0);
+
+  const setModal = useModal();
+
+  const closeModal = useCallback(() => {
+    setModal();
+  }, [setModal]);
+
+  const openModal = useCallback(() => {
+    setModal(<Modal onClose={closeModal} />);
+  }, [setModal, closeModal]);
+
 
   // useEffect(() => {
   //   const getGoal = async () => {
@@ -28,7 +45,7 @@ const WaterMainInfo = () => {
         <p className={css.normaText}>My daily norma</p>
       </div>
       <WaterProgressBar/>
-      <button type='button' className={css.btnAdd}>
+      <button type='button' className={css.btnAdd} onClick={openModal}>
         <h2 className={css.btnText}>Add water</h2>
       </button>
     </div>

@@ -1,7 +1,7 @@
 .progressBarContainer {
   border-radius: 15px;
   padding: 12px;
-  width: 198px;
+  width: 203px;
   height: 85px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
@@ -59,7 +59,7 @@
 .percentContainer {
   display: flex;
   justify-content: space-between;
-  width: 174px;
+  width: 186px;
   height: 6px;
 }
 

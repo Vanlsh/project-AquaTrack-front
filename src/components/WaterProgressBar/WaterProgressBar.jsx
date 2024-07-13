@@ -9,7 +9,7 @@ const WaterProgressBar = () => {
     const mockFetchWaterData = () => {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve({ currentWater: 1500, goal: 2000 });
+          resolve({ currentWater: 2000, goal: 2000 });
         }, 1000);
       });
     };
@@ -30,16 +30,10 @@ const WaterProgressBar = () => {
   }, []);
 
   const calculatePercentage = (current, goal) => {
-    return (current % goal) / goal * 100
+    return (current / goal) * 100;
   };
 
-  const cycleCount = Math.floor(currentWater / goal);
   const percentage = calculatePercentage(currentWater, goal);
-
-  const colors = ['#9be1a0', '#323f47'];
-
-    const currentColor = colors[cycleCount % colors.length];
-
 
   return (
     <div className={css.progressBarContainer}>
@@ -47,10 +41,21 @@ const WaterProgressBar = () => {
       <div className={css.progressBar}>
         <div
           className={css.progressBarFill}
-          style={{ width: `${percentage}%`, backgroundColor: currentColor }}
+          style={{
+            width: `${percentage}%`,
+            maxWidth: '174px',
+            backgroundColor: currentWater < goal ? '#9be1a0' : '#FABE4A',
+          }}
         >
-          <p className={css.percentNumber} style={{color: `${currentColor}`}}>{ `${percentage}%` }</p>
-          <div className={css.ball} style={{border: `solid 1px ${currentColor}`}}></div>
+          <p className={css.percentNumber}
+            style={{
+            color: currentWater < goal ? '#9be1a0' : '#FABE4A'
+          }}>
+            {currentWater < goal ? `${percentage}%` : 'done!'}
+          </p>
+          <div className={css.ball} style={{
+            border: currentWater < goal ? 'solid 1px #9be1a0' : 'solid 1px #FABE4A'
+          }}></div>
         </div>
       </div>
       <div className={css.percentContainer}>
