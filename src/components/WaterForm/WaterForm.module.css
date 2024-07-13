@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   font-family: "Poppins", sans-serif;
-  background-color: #fff;
+  background-color: var(--white);
 }
 
 .FormHeader {
@@ -16,7 +16,7 @@
   line-height: 1.25;
   letter-spacing: -0.01em;
   text-align: left;
-  color: #323f47;
+  color: var(--color-font-main);
   margin: 0 0 20px 0;
   background-color: inherit;
 }
@@ -27,7 +27,7 @@
   font-size: 14px;
   line-height: 1.28571;
   letter-spacing: -0.01em;
-  color: #2f2f2f;
+  color: var(--color-font-second);
   margin: 0 0 8px 0;
   background-color: inherit;
 }
@@ -43,7 +43,7 @@
 
 .TapAddWaterWrapper button {
   border-radius: 30px;
-  border: 1.5px solid #323f47;
+  border: 1.5px solid var(--color-font-main);
   background-color: inherit;
   width: 43px;
   height: 43px;
@@ -51,8 +51,8 @@
   cursor: pointer;
   font-style: inherit;
   line-height: 0;
-  color: #323f47;
-  fill: #323f47;
+  color: var(--color-font-main);
+  fill: var(--color-font-main);
   font-size: 25px;
 }
 
@@ -88,7 +88,7 @@
   padding: 11px 20px;
   height: 43px;
   width: 104px;
-  background: #323f47;
+  background: var(--color-font-main);
   padding: 11px 20px;
   font-weight: 700;
   font-size: 15px;
@@ -103,7 +103,7 @@
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: -0.01em;
-  color: #2f2f2f;
+  color: var(--color-font-second);
   background-color: inherit;
 }
 
@@ -119,7 +119,7 @@
   font-size: 16px;
   line-height: 1.28;
   letter-spacing: -0.01em;
-  color: #2f2f2f;
+  color: var(--color-font-second);
   margin: 0 0 24px 0;
 }
 
@@ -130,7 +130,7 @@
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: -0.01em;
-  color: #2f2f2f;
+  color: var(--color-font-second);
 }
 
 .WaterValue {
@@ -145,7 +145,7 @@
   font-size: 16px;
   line-height: 1;
   letter-spacing: -0.01em;
-  color: #2f2f2f;
+  color: var(--color-font-second);
   margin: 0 0 24px 0;
 }
 
@@ -155,14 +155,14 @@
   padding: 18px 50px;
   width: 141px;
   height: 60px;
-  background: #9be1a0;
+  background: var(--color-second-bg);
   font-family: inherit;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: -0.01em;
   text-align: center;
-  color: #323f47;
+  color: var(--color-font-main);
   border: none;
   cursor: pointer;
 }
@@ -170,8 +170,8 @@
 .SaveBtn:hover,
 .SaveBtn:active,
 .SaveBtn:focus {
-  background-color: #87d28d;
-  color: #323f47;
+  background-color: var(--color-second-bg-hover);
+  color: var(--color-font-main);
 }
 
 .Error {
@@ -189,7 +189,7 @@
   .FormHeader {
     font-size: 18px;
     line-height: 1.33;
-    color: #323f47;
+    color: var(--color-font-main);
   }
   
   .AmountOfWater {
