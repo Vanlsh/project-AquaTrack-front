@@ -1,20 +1,19 @@
-import axios from "axios"; //!!!
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// import {
-//   signUpUser,
-//   logInUser,
-//   logOutUser,
-//   requestRefreshUser,
-//   requestUserInfo,
-//   updateUserInfo,
-//   updateUserPhoto,
-// } from "../../api/auth.js";
+import {
+  signUpUser,
+  logInUser,
+  logOutUser,
+  requestRefreshUser,
+  requestUserInfo,
+  updateUserInfo,
+  updateUserPhoto,
+} from "../../api/auth.js";
 
-// axios.defaults.baseURL = "https://...";
+import { setAuthHeader, clearAuthHeader } from "../../axios.js";
 
 //=================== TOAST SETTINGS ==================
 //* create a separate file for configuring the toast
@@ -29,16 +28,6 @@ const toastSettings = {
   progress: undefined,
 };
 
-//=============== SET/CLEAR AUTH HEADER ===============
-
-export const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
-};
-
 //====================== SIGN UP ======================
 
 export const signUp = createAsyncThunk(
@@ -50,12 +39,9 @@ export const signUp = createAsyncThunk(
       return res.data;
     } catch (err) {
       if (err.response?.status === 409) {
-        toast.error(
-          "This email is already in use.",
-          {
-            ...toastSettings,
-          }
-        );
+        toast.error("This email is already in use.", {
+          ...toastSettings,
+        });
       }
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -79,14 +65,17 @@ export const logIn = createAsyncThunk(
 
 //====================== LOG OUT =======================
 
-export const logOut = createAsyncThunk("auth/logout", async (token, thunkAPI) => {
-  try {
-    await logOutUser(token);
-    clearAuthHeader();
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
+export const logOut = createAsyncThunk(
+  "auth/logout",
+  async (token, thunkAPI) => {
+    try {
+      await logOutUser(token);
+      clearAuthHeader();
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
   }
-});
+);
 
 //=================== REFRESH USER =====================
 

@@ -1,11 +1,11 @@
 import { instance } from "../axios.js";
 
-export const signupUser = async (userInfo) => {
+export const signUpUser = async (userInfo) => {
   const data = await instance.post("/user/signup", userInfo);
   return data;
 };
 
-export const loginUser = async (userInfo) => {
+export const logInUser = async (userInfo) => {
   const data = await instance.post("/users/login", userInfo);
   return data;
 };
@@ -14,12 +14,12 @@ export const logOutUser = async (userInfo) => {
   await instance.post("/users/logOut", userInfo);
 };
 
-export const refreshUser = async () => {
+export const requestRefreshUser = async () => {
   const data = await instance.post("/users/refresh");
   return data;
 };
 
-export const getUserInfo = async () => {
+export const requestUserInfo = async () => {
   const data = await instance.get("/users/info");
   return data;
 };
