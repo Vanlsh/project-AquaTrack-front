@@ -113,7 +113,7 @@ const WaterForm = ({ operationType }) => {
                     render={({ field }) => (
                         <input
                             {...field}
-                            type="text"
+                            type="number"
                             value={waterAmount}
                             onChange={(e) => handleWaterAmountChange(Number(e.target.value))}
                             className={css.WaterValue}
