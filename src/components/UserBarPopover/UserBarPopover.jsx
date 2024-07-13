@@ -10,7 +10,6 @@ const UserBarPopover = forwardRef(function UserBarPopover(
 ) {
   const windowHeight = window.innerHeight;
   const scrollPosition = window.scrollY;
-  // const userBarPopoverRef = useRef(null);
   const [userBarPopoverTopPosition, setUserBarPopoverTopPosition] =
     useState(64);
   const setModal = useModal();
@@ -20,6 +19,7 @@ const UserBarPopover = forwardRef(function UserBarPopover(
   }, [setModal]);
 
   const openSettingsModal = useCallback(() => {
+    //TODO
     setModal();
   });
 
