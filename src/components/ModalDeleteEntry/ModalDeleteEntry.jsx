@@ -1,25 +1,19 @@
-import { useState } from 'react';
-import { ANIMATION } from '../../constants.js';
+// import { useState } from 'react';
+// import { ANIMATION } from '../../constants.js';
 import css from './ModalDeleteEntry.module.css';
 import BtnDelete from '../BtnDelete/BtnDelete.jsx';
 
 const ModalDeleteEntry = ({onClose}) => {
-    const [closing, setClosing] = useState(false);
-    console.log(closing);
-
-    const handleClose = () => {
-        setClosing(true);
-        const id = setTimeout(() => {
-            onClose();
-            clearTimeout(id);
-        }, ANIMATION.DURATION);
-    };
+    
+  const handleClose = () => {
+    onClose();
+  };
 
     return (
         <div className={css.modal}>
-            <button type="button" onClick={handleClose} className={css.closeBtn}>
-                {/* <svg>
-                    <use href="src\assets\icons.svg#icon-clear"></use>
+            <button type="button" aria-label='' onClick={onClose} className={css.closeBtn}>
+                {/* <svg className={css.svg}>
+                    <use xlinkHref={svg + '#icon-x'}></use>
                 </svg> */}
             </button>
             <div className={css.modalTextBox}>
@@ -27,8 +21,8 @@ const ModalDeleteEntry = ({onClose}) => {
                 <p className={css.modalText}>Are you sure you want to delete the entry?</p>
             </div>
             <div className={css.modalBtnBox}>
-                <BtnDelete/>
-                <button type="button" onClick={handleClose} className={css.btnCancel}>Cancel</button> 
+          <BtnDelete handleClose={handleClose} />
+                <button type="button" onClick={onClose} className={css.btnCancel}>Cancel</button> 
             </div>
         </div>
     );
