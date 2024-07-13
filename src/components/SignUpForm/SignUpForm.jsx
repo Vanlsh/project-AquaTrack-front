@@ -2,27 +2,51 @@ import { useForm } from "react-hook-form";
 import styles from "./SignUpForm.module.css";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
+import svgSprite from "../../assets/icons.svg";
+// import toast, { Toaster } from "react-hot-toast";
 
-const schemaValidation = Yup.object().shape({
-  email: Yup.string().email("Must be a valid email!").required("Required"),
+const schemaValidation = Yup.object({
+  email: Yup.string()
+    .email("Enter a valid email adress!")
+    .required("Email is required"),
   password: Yup.string()
-    .min(5, "Too short")
-    .max(25, "Too long")
-    .required("Required"),
+    .min(5, "Password is too short")
+    .max(25, "Password is too long")
+    .required("Password is required"),
   repeatpassword: Yup.string()
-    .min(5, "Too short")
-    .max(25, "Too long")
-    .required("Required"),
+    .oneOf([Yup.ref("password")])
+    .required("Repeat password is required"),
 });
 
 const SignUpForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordRepeat, setshowPasswordRepeat] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const togglePasswordRepeatVisibility = () => {
+    setshowPasswordRepeat(!showPasswordRepeat);
+  };
+
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm({ resolver: yupResolver(schemaValidation) });
 
   const submitForm = (data) => {
+    // dispatch()
+    //   .unwrap()
+    //   .then(() => {
+    //     toast.success("Register is successfully");
+    //      })
+    //   .catch((error) => {
+    //     const errorMessage = error.message || "Registration failed";
+    //     toast.error(errorMessage);
+    //   });
     console.log(data);
   };
 
@@ -34,35 +58,87 @@ const SignUpForm = () => {
           <label className={styles.signUpLabel}>
             Email
             <input
-              className={styles.signUpInput}
+              className={
+                errors.email?.message
+                  ? `${styles.signUpInputError}`
+                  : `${styles.signUpInput}`
+              }
               {...register("email")}
               placeholder="Enter you email"
             />
+            <p className={styles.signUpErrorMessage}>{errors.email?.message}</p>
           </label>
 
           <label className={styles.signUpLabel}>
-            Password
-            <input
-              // type="password"
-              className={styles.signUpInput}
-              {...register("password")}
-              placeholder="Enter your password"
-            />
+            <span>Password</span>
+            <span className={styles.signUpPassword}>
+              <input
+                type={showPassword ? "text" : "password"}
+                className={
+                  errors.password?.message
+                    ? `${styles.signUpInputError}`
+                    : `${styles.signUpInput}`
+                }
+                {...register("password")}
+                placeholder="Enter your password"
+              />
+              <button
+                className={styles.passwordIconBtn}
+                type="button"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword === false ? (
+                  <svg className={styles.passwordIcon}>
+                    <use xlinkHref={svgSprite + "#icon-eye-off"} />
+                  </svg>
+                ) : (
+                  <svg className={styles.passwordIcon}>
+                    <use xlinkHref={svgSprite + "#icon-eye"} />
+                  </svg>
+                )}
+              </button>
+            </span>
+            <p className={styles.signUpErrorMessage}>
+              {errors.password?.message}
+            </p>
           </label>
 
           <label className={styles.signUpLabel}>
-            Repeat password
-            <input
-              // type="password"
-              className={styles.signUpInput}
-              {...register("repeatpassword")}
-              placeholder="Repeat password"
-            />
+            <span>Repeat password</span>
+            <span className={styles.signUpPassword}>
+              <input
+                type={showPasswordRepeat ? "text" : "password"}
+                className={
+                  errors.repeatpassword?.message
+                    ? `${styles.signUpInputError}`
+                    : `${styles.signUpInput}`
+                }
+                {...register("repeatpassword")}
+                placeholder="Repeat password"
+              />
+              <button
+                className={styles.passwordIconBtn}
+                type="button"
+                onClick={togglePasswordRepeatVisibility}
+              >
+                {showPasswordRepeat === false ? (
+                  <svg className={styles.passwordIcon}>
+                    <use xlinkHref={svgSprite + "#icon-eye-off"} />
+                  </svg>
+                ) : (
+                  <svg className={styles.passwordIcon}>
+                    <use xlinkHref={svgSprite + "#icon-eye"} />
+                  </svg>
+                )}
+              </button>
+            </span>
+            <p className={styles.signUpErrorMessage}>
+              {errors.repeatpassword?.message}
+            </p>
           </label>
         </div>
         <button className={styles.signUpBtn} type="submit">
-          {" "}
-          Sign Up{" "}
+          Sign Up
         </button>
       </form>
     </div>

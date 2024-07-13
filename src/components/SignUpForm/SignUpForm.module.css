@@ -39,11 +39,60 @@
   line-height: 1.28571;
   letter-spacing: -0.01em;
   color: rgba(47, 47, 47, 0.6);
+  width: 100%;
+}
+
+.signUpInput:hover,
+.signUpInput:focus {
+  border: 1px solid rgba(47, 47, 47, 0.4);
+}
+
+.signUpInputError {
+  border: 1px solid #ef5050;
+  border-radius: 15px;
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #ef5050;
+  width: 100%;
+}
+
+.signUpErrorMessage {
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #ef5050;
+}
+
+.signUpPassword {
+  position: relative;
+}
+
+.passwordIconBtn {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+}
+
+.passwordIcon {
+  width: 20px;
+  height: 20px;
+  fill: transparent;
+  stroke: var(--color-font-second);
 }
 
 .signUpBtn {
   margin-top: 32px;
   border-radius: 30px;
+  border: none;
   padding: 16px;
   width: 311px;
   font-weight: 700;
@@ -54,6 +103,11 @@
   color: var(--color-font-main);
   background-color: var(--color-second-bg);
   margin-bottom: 16px;
+}
+
+.signUpBtn:hover,
+.signUpBtn:focus {
+  background-color: var(--color-second-bg-hover);
 }
 
 @media screen and (min-width: 768px) {
@@ -76,6 +130,16 @@
   }
 
   .signUpInput {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .signUpInputError {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .signUpErrorMessage {
     font-size: 16px;
     line-height: 1.5;
   }
