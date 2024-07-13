@@ -1,0 +1,19 @@
+.signUpPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.signUpPageRight {
+  display: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .signUpPage {
+    flex-direction: row;
+    gap: 32px;
+  }
+  .signUpPageRight {
+    display: block;
+  }
+}
