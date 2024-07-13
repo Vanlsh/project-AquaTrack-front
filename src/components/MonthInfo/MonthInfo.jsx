@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { CalendarPagination } from '../CalendarPagination/CalendarPagination.jsx';
-import { Calendar } from '../Calendar/Calendar.jsx';
+import CalendarPagination from '../CalendarPagination/CalendarPagination.jsx';
+import Calendar from '../Calendar/Calendar.jsx';
 
-export const MonthInfo = () => {
+const MonthInfo = () => {
 	const [year, setYear] = useState(0);
 	const [month, setMonth] = useState(0);
 
@@ -26,3 +26,5 @@ export const MonthInfo = () => {
 		</div>
 	);
 };
+
+export default MonthInfo;

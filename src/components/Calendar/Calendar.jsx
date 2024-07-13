@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { CalendarItem } from '../CalendarItem/CalendarItem.jsx';
+import CalendarItem from '../CalendarItem/CalendarItem.jsx';
 
 import { months } from '../../constants';
 import css from './Calendar.module.css';
 
-export const Calendar = ({ month, year }) => {
+const Calendar = ({ month, year }) => {
 	const [selectedIndex, setSelectedIndex] = useState(null);
 
 	const handleClick = (index) => {
@@ -44,3 +44,5 @@ export const Calendar = ({ month, year }) => {
 		</div>
 	);
 };
+
+export default Calendar;

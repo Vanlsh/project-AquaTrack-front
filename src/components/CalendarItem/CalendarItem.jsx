@@ -2,13 +2,7 @@ import css from './CalendarItem.module.css';
 
 const percents = 50;
 
-export const CalendarItem = ({
-	keyId,
-	index,
-	eachDate,
-	sIndex,
-	handleClick,
-}) => {
+const CalendarItem = ({ keyId, index, eachDate, sIndex, handleClick }) => {
 	return (
 		<div
 			key={keyId}
@@ -23,3 +17,5 @@ export const CalendarItem = ({
 		</div>
 	);
 };
+
+export default CalendarItem;
