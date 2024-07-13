@@ -24,7 +24,7 @@ function App() {
 					element={<SignUpPage />}
 				/>
 				<Route
-					path='/tracker'
+					path='/tracker/:date'
 					element={<TrackerPage />}
 				/>
 			</Routes>
