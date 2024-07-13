@@ -1,6 +1,7 @@
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import svgIcons from "../../assets/icons.svg";
 import { useModal } from "../../hooks/useModal.js";
+import ModalLogout from "../ModalLogout/ModalLogout.jsx";
 import styles from "./UserBarPopover.module.css";
 
 const UserBarPopover = forwardRef(function UserBarPopover(
@@ -21,6 +22,10 @@ const UserBarPopover = forwardRef(function UserBarPopover(
   const openSettingsModal = useCallback(() => {
     setModal();
   });
+
+  const openLogOutModal = useCallback(() => {
+    setModal(<ModalLogout onClose={closeModal} />);
+  }, [setModal, closeModal]);
 
   useEffect(() => {
     const userBarPopoverHeight = ref.current.clientHeight;
@@ -55,6 +60,7 @@ const UserBarPopover = forwardRef(function UserBarPopover(
         </li>
         <li
           className={`${styles.userBarPopoverListItem} ${styles.userBarPopoverListItemLogOut}`}
+          onClick={openLogOutModal}
         >
           <svg className={styles.userBarPopoverIconLogOut}>
             <use xlinkHref={svgIcons + "#icon-log-out"}></use>
