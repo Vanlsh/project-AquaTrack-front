@@ -1,5 +1,5 @@
 .signUpComponent {
-  width: 311px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -32,6 +32,7 @@
 .signUpInput {
   border: 1px solid rgba(47, 47, 47, 0.2);
   border-radius: 15px;
+  background-color: transparent;
   padding-left: 16px;
   padding-top: 16px;
   padding-bottom: 16px;
@@ -50,10 +51,12 @@
 .signUpInputError {
   border: 1px solid #ef5050;
   border-radius: 15px;
+  background-color: transparent;
   padding-left: 16px;
   padding-top: 16px;
   padding-bottom: 16px;
   font-size: 16px;
+  font-weight: 400;
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: #ef5050;
@@ -62,6 +65,7 @@
 
 .signUpErrorMessage {
   font-size: 14px;
+  font-weight: 400;
   line-height: 1.28571;
   letter-spacing: -0.01em;
   color: #ef5050;
@@ -94,7 +98,7 @@
   border-radius: 30px;
   border: none;
   padding: 16px;
-  width: 311px;
+  width: 100%;
   font-weight: 700;
   font-size: 14px;
   line-height: 1.28571;
