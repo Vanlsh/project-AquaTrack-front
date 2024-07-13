@@ -1,7 +1,7 @@
 import { months } from '../../constants';
 import css from './CalendarPagination.module.css';
 
-export const CalendarPagination = ({ setMonth, setYear, month, year }) => {
+export const CalendarPagination = ({ month, year, setMonth, setYear }) => {
 	const selectedMonth = Object.keys(months)[month];
 
 	const Title = ({ title, styles }) => {
@@ -38,7 +38,7 @@ export const CalendarPagination = ({ setMonth, setYear, month, year }) => {
 					&lt;
 				</button>
 				<span className={css.month_year}>
-					{`${selectedMonth}, 
+					{`${selectedMonth},
 					${year}`}
 				</span>
 				<button

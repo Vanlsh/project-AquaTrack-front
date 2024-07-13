@@ -1,5 +1,5 @@
-const WaterMainInfo = () => {
-  return <div>WaterMainInfo</div>;
+export const WaterMainInfo = () => {
+	return <div>WaterMainInfo</div>;
 };
 
-export default WaterMainInfo;
+// export default WaterMainInfo;
