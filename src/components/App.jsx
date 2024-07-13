@@ -25,7 +25,7 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b> Loader... (refreshing user)</b>  //! add Loader
+    <b> Loader... (refreshing user)</b> //! add Loader
   ) : (
     <SharedLayout>
       <Routes>

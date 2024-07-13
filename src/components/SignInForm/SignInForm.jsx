@@ -33,7 +33,6 @@ const SignInForm = () => {
   const onSubmit = (data) => {
     console.log(data);
     dispatch(logIn(data));
-    // reset();
   };
 
   const handleClick = () => {

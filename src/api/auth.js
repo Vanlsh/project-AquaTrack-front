@@ -1,7 +1,7 @@
 import { instance } from "../axios.js";
 
-export const signUpUser = async (userInfo) => {
-  const data = await instance.post("/user/signup", userInfo);
+export const registerUser = async (userInfo) => {
+  const data = await instance.post("/users/register", userInfo);
   return data;
 };
 

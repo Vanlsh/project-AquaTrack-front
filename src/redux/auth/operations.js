@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { toast } from "react-toastify";
+import { toast, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
-  signUpUser,
+  registerUser,
   logInUser,
   logOutUser,
   requestRefreshUser,
@@ -19,22 +19,17 @@ import { setAuthHeader, clearAuthHeader } from "../../axios.js";
 //* create a separate file for configuring the toast
 
 const toastSettings = {
-  position: "top-center",
-  autoClose: 3000,
-  hideProgressBar: false,
-  closeOnClick: true,
   pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
+  transition: Flip,
 };
 
 //====================== SIGN UP ======================
 
 export const signUp = createAsyncThunk(
-  "auth/signUp", // !!!
+  "auth/signUp",
   async (userData, thunkAPI) => {
     try {
-      const res = await signUpUser(userData);
+      const res = await registerUser(userData);
       setAuthHeader(res.data.token);
       return res.data;
     } catch (err) {
@@ -58,6 +53,16 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (err) {
+      switch (err.response?.status) {
+        case 401:
+          toast.error("Email or password is wrong", { ...toastSettings });
+          break;
+        case 404:
+          toast.error("User not found", { ...toastSettings });
+          break;
+        default:
+          toast.error("Login failed", { ...toastSettings });
+      }
       return thunkAPI.rejectWithValue(err.message);
     }
   }
@@ -70,8 +75,10 @@ export const logOut = createAsyncThunk(
   async (token, thunkAPI) => {
     try {
       await logOutUser(token);
+      toast.success("Successfully logout", { ...toastSettings });
       clearAuthHeader();
     } catch (err) {
+       toast.error("Logout failed", { ...toastSettings });
       return thunkAPI.rejectWithValue(err.message);
     }
   }
