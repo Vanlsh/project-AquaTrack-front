@@ -1,5 +1,5 @@
 import css from './ModalLogout.module.css';
-import svg from '../../assets/icons.svg'
+import svg from '../../assets/icons.svg';
 import BtnLogout from '../BtnLogout/BtnLogout.jsx';
 
 const ModalLogout = ({onClose}) => {
@@ -10,7 +10,7 @@ const ModalLogout = ({onClose}) => {
 
     return (
         <div className={css.modal}>
-            <button type="button" aria-label='' onClick={onClose} className={css.closeBtn}>
+            <button type="button" aria-label='Close the log out modal window' onClick={onClose} className={css.closeBtn}>
                 <svg className={css.svg}>
                     <use xlinkHref={svg + '#icon-x'}></use>
                 </svg>
