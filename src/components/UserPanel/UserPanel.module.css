@@ -1,0 +1,42 @@
+.userPanelWrapper {
+  width: fit-content;
+  position: relative;
+}
+
+.userPanel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 30px;
+  border: none;
+  padding: 6px 12px;
+  height: 56px;
+  background-color: #323f47;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.userPanel:hover {
+  color: #9be1a0;
+}
+
+.userPanelAvatar {
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background-color: #87d28d;
+  pointer-events: none;
+}
+
+.userPanelIcon {
+  fill: none;
+  stroke: #fff;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.userPanel:hover .userPanelIcon {
+  stroke: #9be1a0;
+}
