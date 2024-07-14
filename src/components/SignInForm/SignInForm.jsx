@@ -77,8 +77,7 @@ const SignInForm = () => {
             <button
               className={styles.signInFormIconButton}
               type="button"
-              onMouseDown={handleClick}
-              onMouseUp={handleClick}
+              onClick={handleClick}
             >
               {showPassword === false ? (
                 <svg className={styles.signInFormInputIcon}>
