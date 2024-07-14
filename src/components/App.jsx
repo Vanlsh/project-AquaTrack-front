@@ -1,4 +1,4 @@
-import { lazy, useEffect } from "react";
+import { lazy, useEffect, useState  } from "react";
 import { Route, Routes } from "react-router-dom";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,12 +20,19 @@ const NotFoundPage = lazy(() =>
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const [isDelayOver, setIsDelayOver] = useState(false);
 
   useEffect(() => {
     dispatch(refreshUser());
+
+      const timer = setTimeout(() => {
+      setIsDelayOver(true);
+      }, 500);
+    
+      return () => clearTimeout(timer);
   }, [dispatch]);
 
-  return isRefreshing ? (
+  return isRefreshing || !isDelayOver ? (
     <Loader />
   ) : (
     <SharedLayout>
