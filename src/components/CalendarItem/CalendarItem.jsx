@@ -13,11 +13,6 @@ const CalendarItem = ({ index, eachDate, sIndex, handleClick }) => {
 			</div>
 			<div className={css.perc}>{`${percents} %`}</div>
 		</button>
-		// <div
-		// 	// key={keyId}
-		// 	className={css.day}>
-
-		// </div>
 	);
 };
 

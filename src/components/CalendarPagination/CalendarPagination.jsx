@@ -2,28 +2,11 @@ import svg from '../../assets/icons.svg';
 import { months } from '../../constants';
 import css from './CalendarPagination.module.css';
 
-const CalendarPagination = ({ month, year, setMonth, setYear }) => {
+const CalendarPagination = ({ month, year, increment, decrement }) => {
 	const selectedMonth = Object.keys(months)[month];
 
 	const Title = ({ title, styles }) => {
 		return <span className={styles}>{title}</span>;
-	};
-	const increment = () => {
-		if (month === 11) {
-			setMonth(0);
-			setYear(year + 1);
-			return;
-		}
-		setMonth(month + 1);
-	};
-
-	const decrement = () => {
-		if (month === 0) {
-			setMonth(11);
-			setYear(year - 1);
-			return;
-		}
-		setMonth(month - 1);
 	};
 
 	return (

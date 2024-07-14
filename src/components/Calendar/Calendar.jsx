@@ -1,18 +1,9 @@
-import { useState } from 'react';
 import CalendarItem from '../CalendarItem/CalendarItem.jsx';
 
 import { months } from '../../constants';
 import css from './Calendar.module.css';
 
-const Calendar = ({ month, year }) => {
-	const [selectedIndex, setSelectedIndex] = useState(null);
-
-	const handleClick = (index) => {
-		setSelectedIndex(0);
-		setSelectedIndex(index);
-		console.log('click');
-	};
-
+const Calendar = ({ month, year, handleClick, selectedIndex }) => {
 	const monthDays = () => {
 		if (Number.isInteger(year / 4) && month === 1) {
 			return 29;
@@ -22,13 +13,13 @@ const Calendar = ({ month, year }) => {
 
 	const dateArray = [];
 
-	const calendarDate = () => {
+	const calendarDates = () => {
 		for (let i = 1; i <= monthDays(); i++) {
 			dateArray.push(i);
 		}
 	};
 
-	calendarDate();
+	calendarDates();
 
 	return (
 		<div className={css.container}>
@@ -36,7 +27,6 @@ const Calendar = ({ month, year }) => {
 				{dateArray.map((eachDate, index) => (
 					<li key={index}>
 						<CalendarItem
-							// key={index}
 							index={index}
 							eachDate={eachDate}
 							sIndex={selectedIndex}
