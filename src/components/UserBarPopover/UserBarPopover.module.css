@@ -1,0 +1,49 @@
+.userBarPopover {
+  position: absolute;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.49;
+  font-weight: 700;
+}
+
+.userBarPopoverList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.userBarPopoverListItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  color: var(--color-font-main);
+  cursor: pointer;
+}
+
+.userBarPopoverListItemLogOut {
+  color: #323f4766;
+}
+
+.userBarPopoverListItemLogOut:hover {
+  color: var(--color-font-main);
+}
+
+.userBarPopoverIconSettings {
+  width: 16px;
+  height: 16px;
+  fill: none;
+}
+
+.userBarPopoverIconLogOut {
+  width: 16px;
+  height: 16px;
+  stroke: #323f4766;
+  fill: none;
+}
+.userBarPopoverListItemLogOut:hover > .userBarPopoverIconLogOut {
+  stroke: var(--color-font-main);
+}

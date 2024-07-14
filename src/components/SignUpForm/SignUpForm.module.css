@@ -1,0 +1,160 @@
+.signUpComponent {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.signUpTitle {
+  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--color-font-main);
+}
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.signUpLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: var(--color-font-second);
+}
+
+.signUpInput {
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  background-color: transparent;
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--color-font-second);
+  /* color: rgba(47, 47, 47, 0.6); */
+  width: 100%;
+  outline: none;
+}
+
+.signUpInput:focus {
+  border: 1px solid rgba(47, 47, 47, 0.4);
+}
+
+.signUpInputError {
+  border: 1px solid #ef5050;
+  border-radius: 15px;
+  background-color: transparent;
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #ef5050;
+  width: 100%;
+  outline: none;
+}
+
+.signUpErrorMessage {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #ef5050;
+}
+
+.signUpPassword {
+  position: relative;
+}
+
+.passwordIconBtn {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+}
+
+.passwordIcon {
+  width: 20px;
+  height: 20px;
+  fill: transparent;
+  stroke: var(--color-font-second);
+}
+
+.signUpBtn {
+  margin-top: 32px;
+  border-radius: 30px;
+  border: none;
+  padding: 16px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-font-main);
+  background-color: var(--color-second-bg);
+  margin-bottom: 16px;
+}
+
+.signUpBtn:hover,
+.signUpBtn:focus {
+  background-color: var(--color-second-bg-hover);
+}
+
+@media screen and (min-width: 768px) {
+  .signUpComponent {
+    width: 436px;
+  }
+
+  .signUpTitle {
+    font-size: 36px;
+    line-height: 1.05556;
+  }
+
+  .signUpForm {
+    gap: 20px;
+  }
+
+  .signUpLabel {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .signUpInput {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .signUpInputError {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .signUpErrorMessage {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .signUpBtn {
+    padding: 18px;
+    width: 436px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+  }
+}
