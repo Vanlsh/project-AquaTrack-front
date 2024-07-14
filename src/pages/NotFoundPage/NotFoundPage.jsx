@@ -13,9 +13,9 @@ const NotFoundPage = () => {
     return (
         <section className={css.Section404}>
           <div className={css.BackgroundImage404}>
-            <h1 className={css.Slogan404}>404</h1>
+          
           </div>
-
+          <h1 className={css.Slogan404}>404</h1>
           <div className={css.ContantBox404}>
             <p className={css.mesage404}>
             {`Look like you're lost the page!`}

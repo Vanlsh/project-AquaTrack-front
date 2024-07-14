@@ -9,7 +9,7 @@
 
 
 .BackgroundImage404 {
-    background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+    background-image: url(../../../public/img/gif/WaterTap.gif);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -69,3 +69,4 @@ color: #323f47;
 .link404:focus {
     background-color: #87d28d;
 }
+
