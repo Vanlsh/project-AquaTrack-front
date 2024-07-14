@@ -39,20 +39,30 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
 
-        <Route path="/signup" element={<SignUpPage />} />
+        {/* <Route path="/signup" element={<SignUpPage />} /> */}
+
+        <Route
+          path="/signup"
+          element={
+            <RestrictedRoute
+              redirectTo={`/tracker/${Date.now()}`}
+              component={<SignUpPage />}
+            />
+          }
+        />
 
         <Route
           path="/signin"
           element={
             <RestrictedRoute
-              redirectTo="/tracker/:date"
+              redirectTo={`/tracker/${Date.now()}`}
               component={<SignInPage />}
             />
           }
         />
 
         <Route
-          path="/tracker/:date"
+          path={`/tracker/${Date.now()}`}
           element={
             <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
           }

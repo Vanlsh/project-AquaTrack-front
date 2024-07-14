@@ -32,6 +32,12 @@ export const signUp = createAsyncThunk(
       const res = await registerUser(userData);
       setAuthHeader(res.data.token);
       toast.success("Registration successful", toastSettings);
+
+      const { dispatch } = thunkAPI;
+      await dispatch(
+        logIn({ email: userData.email, password: userData.password })
+      );
+
       return res.data;
     } catch (err) {
       if (err.response?.status === 409) {
