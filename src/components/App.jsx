@@ -1,38 +1,32 @@
-import { lazy, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import SharedLayout from "./SharedLayout/SharedLayout.jsx";
+import { lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 
 import { refreshUser } from "../redux/auth/operations.js";
-import { selectIsRefreshing } from "../redux/auth/selectors.js";
-import RestrictedRoute from "./RestrictedRoute.jsx";
-import PrivateRoute from "./PrivateRoute.jsx";
+import { selectIsRefreshing, selectToken } from "../redux/auth/selectors.js";
 import Loader from "./Loader/Loader.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
+import RestrictedRoute from "./RestrictedRoute.jsx";
+import SharedLayout from "./SharedLayout/SharedLayout.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
 const SignUpPage = lazy(() => import("../pages/SignUpPage/SignUpPage.jsx"));
 const TrackerPage = lazy(() => import("../pages/TrackerPage/TrackerPage.jsx"));
 const NotFoundPage = lazy(
-  () => import("../pages/NotFoundPage/NotFoundPage.jsx")
+  () => import("../pages/NotFoundPage/NotFoundPage.jsx"),
 );
 
 function App() {
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
   const isRefreshing = useSelector(selectIsRefreshing);
-  const [isDelayOver, setIsDelayOver] = useState(false);
 
   useEffect(() => {
-    dispatch(refreshUser());
+    dispatch(refreshUser(token));
+  }, [dispatch, token]);
 
-    const timer = setTimeout(() => {
-      setIsDelayOver(true);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [dispatch]);
-
-  return isRefreshing || !isDelayOver ? (
+  return isRefreshing ? (
     <Loader />
   ) : (
     <SharedLayout>

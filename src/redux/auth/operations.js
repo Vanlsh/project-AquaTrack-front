@@ -1,19 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { toast, Flip } from "react-toastify";
+import { Flip, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
-  registerUser,
   logInUser,
   logOutUser,
+  registerUser,
   requestRefreshUser,
   requestUserInfo,
   updateUserInfo,
   updateUserPhoto,
 } from "../../api/auth.js";
 
-import { setAuthHeader, clearAuthHeader } from "../../axios.js";
+import { clearAuthHeader, setAuthHeader } from "../../axios.js";
 
 //=================== TOAST SETTINGS ==================
 //* create a separate file for configuring the toast
@@ -31,23 +31,11 @@ export const signUp = createAsyncThunk(
     try {
       const res = await registerUser(userData);
       setAuthHeader(res.data.token);
-      toast.success("Registration successful", toastSettings);
-
-      const { dispatch } = thunkAPI;
-      await dispatch(
-        logIn({ email: userData.email, password: userData.password })
-      );
-
       return res.data;
     } catch (err) {
-      if (err.response?.status === 409) {
-        toast.error("This email is already in use.", {
-          ...toastSettings,
-        });
-      }
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 //====================== SIGN IN ======================
@@ -73,7 +61,7 @@ export const logIn = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 //====================== LOG OUT =======================
@@ -83,38 +71,33 @@ export const logOut = createAsyncThunk(
   async (token, thunkAPI) => {
     try {
       await logOutUser(token);
-      toast.success("Successfully logout", { ...toastSettings });
       clearAuthHeader();
     } catch (err) {
       toast.error("Logout failed", { ...toastSettings });
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 //=================== REFRESH USER =====================
 
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
-  async (_, thunkAPI) => {
-    // Reading the token from the state via getState()
-    const reduxState = thunkAPI.getState();
-    const savedToken = reduxState.auth.token;
-
-    if (savedToken === null) {
+  async (token, thunkAPI) => {
+    if (!token) {
       // If there is no token, exit without performing any request
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
 
     try {
       // If there is a token, add it to the HTTP header and perform the request
-      setAuthHeader(savedToken);
+      setAuthHeader(token);
       const res = await requestRefreshUser(); //??
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 //================= USER INFORMATION ===================
@@ -128,7 +111,7 @@ export const getUserInfo = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 //================== UPDATE PROFILE ====================
@@ -142,7 +125,7 @@ export const updateUserProfile = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 //=================== UPLOAD PHOTO =====================
@@ -156,7 +139,7 @@ export const uploadUserPhoto = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 //=====================================================

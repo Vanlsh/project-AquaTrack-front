@@ -1,6 +1,6 @@
 export const INITIAL_STATE = {
   user: {
-    name: null,
+    name: "User",
     email: null,
     gender: null,
     photo: null,
@@ -9,8 +9,8 @@ export const INITIAL_STATE = {
     waterRate: 0,
   },
   token: null,
-  refreshToken: null,
   isLoggedIn: false,
   isRefreshing: false,
   isError: false,
+  error: null,
 };
