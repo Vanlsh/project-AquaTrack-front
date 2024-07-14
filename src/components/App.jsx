@@ -7,6 +7,7 @@ import { refreshUser } from "../redux/auth/operations.js";
 import { selectIsRefreshing } from "../redux/auth/selectors.js";
 import RestrictedRoute from "./RestrictedRoute.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
+import Loader from "./Loader/Loader.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
@@ -25,7 +26,7 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b> Loader... (refreshing user)</b> //! add Loader
+    <Loader/>
   ) : (
     <SharedLayout>
       <Routes>
@@ -38,12 +39,16 @@ function App() {
 
         <Route
           path="/signin"
-          redirectTo="/tracker"
-          element={<RestrictedRoute component={<SignInPage />} />}
+          element={
+            <RestrictedRoute
+              redirectTo="/tracker/:date"
+              component={<SignInPage />}
+            />
+          }
         />
 
         <Route
-          path="/tracker"
+          path="/tracker/:date"
           element={
             <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
           }

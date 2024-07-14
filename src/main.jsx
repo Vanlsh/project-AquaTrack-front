@@ -20,6 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               position="bottom-center"
               autoClose={3000}
               hideProgressBar={true}
+              limit={5}
               closeOnClick
               draggable
               stacked

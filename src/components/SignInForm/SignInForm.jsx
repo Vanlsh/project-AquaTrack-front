@@ -31,8 +31,8 @@ const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(logIn(data));
+    //! reset form
   };
 
   const handleClick = () => {

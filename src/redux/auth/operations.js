@@ -31,6 +31,7 @@ export const signUp = createAsyncThunk(
     try {
       const res = await registerUser(userData);
       setAuthHeader(res.data.token);
+      toast.success("Registration successful", toastSettings);
       return res.data;
     } catch (err) {
       if (err.response?.status === 409) {
@@ -51,6 +52,7 @@ export const logIn = createAsyncThunk(
     try {
       const res = await logInUser(userData);
       setAuthHeader(res.data.token);
+      toast.success("Login successful!");
       return res.data;
     } catch (err) {
       switch (err.response?.status) {
@@ -78,7 +80,7 @@ export const logOut = createAsyncThunk(
       toast.success("Successfully logout", { ...toastSettings });
       clearAuthHeader();
     } catch (err) {
-       toast.error("Logout failed", { ...toastSettings });
+      toast.error("Logout failed", { ...toastSettings });
       return thunkAPI.rejectWithValue(err.message);
     }
   }
