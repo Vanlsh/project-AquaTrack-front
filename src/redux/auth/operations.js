@@ -58,7 +58,7 @@ export const logIn = createAsyncThunk(
     try {
       const res = await logInUser(userData);
       setAuthHeader(res.data.token);
-      toast.success("Login successful!");
+      toast.success("Login successful!", toastSettings);
       return res.data;
     } catch (err) {
       switch (err.response?.status) {
