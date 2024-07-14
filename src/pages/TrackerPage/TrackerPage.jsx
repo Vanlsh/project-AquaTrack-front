@@ -1,5 +1,11 @@
+import WaterMainInfo from "../../components/WaterMainInfo/WaterMainInfo";
+
 const TrackerPage = () => {
-  return <div>TrackerPage</div>;
+  return (
+    <>
+      <WaterMainInfo />
+    </>
+  );
 };
 
 export default TrackerPage;

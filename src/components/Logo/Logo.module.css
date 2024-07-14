@@ -3,6 +3,7 @@
   font-size: 18px;
   line-height: 111%;
   text-transform: uppercase;
+  cursor: pointer;
 }
 @media screen and (min-width: 768px) {
   .logo {
