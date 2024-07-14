@@ -26,16 +26,13 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <Loader/>
+    <Loader />
   ) : (
     <SharedLayout>
       <Routes>
         <Route path="/" element={<HomePage />} />
 
-        <Route
-          path="/signup"
-          element={<RestrictedRoute component={<SignUpPage />} />}
-        />
+        <Route path="/signup" element={<SignUpPage />} />
 
         <Route
           path="/signin"
