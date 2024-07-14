@@ -97,6 +97,10 @@
     line-height: 180%;
     bottom: 20%;
   }
+
+  .progressBarFill {
+    height: 8px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
