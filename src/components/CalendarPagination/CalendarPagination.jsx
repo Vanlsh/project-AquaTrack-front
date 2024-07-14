@@ -1,3 +1,4 @@
+import svg from '../../assets/icons.svg';
 import { months } from '../../constants';
 import css from './CalendarPagination.module.css';
 
@@ -35,7 +36,9 @@ const CalendarPagination = ({ month, year, setMonth, setYear }) => {
 				<button
 					onClick={decrement}
 					className={css.btn}>
-					&lt;
+					<svg className={css.svg_arrow_left}>
+						<use xlinkHref={svg + '#icon-arrow'}></use>
+					</svg>
 				</button>
 				<span className={css.month_year}>
 					{`${selectedMonth},
@@ -44,10 +47,14 @@ const CalendarPagination = ({ month, year, setMonth, setYear }) => {
 				<button
 					onClick={increment}
 					className={css.btn}>
-					&gt;
+					<svg className={css.svg_arrow_right}>
+						<use xlinkHref={svg + '#icon-arrow'}></use>
+					</svg>
 				</button>
 				<div className={css.statistic_btn}>
-					<span>O</span>
+					<svg className={css.svg_pie}>
+						<use xlinkHref={svg + '#icon-pie-chart'}></use>
+					</svg>
 				</div>
 			</div>
 		</div>

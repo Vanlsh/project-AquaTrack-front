@@ -32,15 +32,19 @@ const Calendar = ({ month, year }) => {
 
 	return (
 		<div className={css.container}>
-			{dateArray.map((eachDate, index) => (
-				<CalendarItem
-					key={index}
-					index={index}
-					eachDate={eachDate}
-					sIndex={selectedIndex}
-					handleClick={handleClick}
-				/>
-			))}
+			<ul className={css.calendarList}>
+				{dateArray.map((eachDate, index) => (
+					<li key={index}>
+						<CalendarItem
+							// key={index}
+							index={index}
+							eachDate={eachDate}
+							sIndex={selectedIndex}
+							handleClick={handleClick}
+						/>
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 };

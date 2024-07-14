@@ -4,12 +4,14 @@
 	width: 303px;
 	min-height: 100px;
 
+	background-color: var(--color-main-bg);
+}
+
+.calendarList {
 	display: grid;
 	grid-template-columns: repeat(7, 28px);
 	row-gap: 20px;
 	column-gap: 18px;
-
-	background-color: var(--color-main-bg);
 }
 
 @media screen and (min-width: 768px) {
@@ -17,12 +19,14 @@
 		width: 640px;
 		min-height: 100px;
 
+		background-color: var(--color-main-bg);
+	}
+
+	.calendarList {
 		display: grid;
 		grid-template-columns: repeat(8, calc((100% - 301px) / 8));
 		row-gap: 15px;
 		column-gap: 43px;
-
-		background-color: var(--color-main-bg);
 	}
 }
 
@@ -31,11 +35,13 @@
 		width: 608px;
 		height: 305px;
 
+		background-color: var(--color-main-bg);
+	}
+
+	.calendarList {
 		display: grid;
 		grid-template-columns: repeat(8, calc((100% - 301px) / 8));
 		row-gap: 15px;
 		column-gap: 43px;
-
-		background-color: var(--color-main-bg);
 	}
 }
