@@ -3,7 +3,7 @@ import {
   addWater,
   deleteWaterIntakeRecord,
   updateWaterIntakeRecord,
-  // fetchDailyWater,
+  fetchDailyWater,
   // fetchMonthlyWater,
 } from "./operations";
 
@@ -29,13 +29,13 @@ const waterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // fetchDailyWater
-      // .addCase(fetchDailyWater.pending, handlePending)
-      // .addCase(fetchDailyWater.fulfilled, (state, action) => {
-      //   state.items = action.payload;
-      //   state.loading = false;
-      //   state.error = null;
-      // })
-      // .addCase(fetchDailyWater.rejected, handleRejected)
+      .addCase(fetchDailyWater.pending, handlePending)
+      .addCase(fetchDailyWater.fulfilled, (state, action) => {
+        state.waterDaily = action.payload;
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(fetchDailyWater.rejected, handleRejected)
 
       // addWater
       .addCase(addWater.pending, handlePending)

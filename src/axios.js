@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const instance = axios.create({
   baseURL: "https://project-aquatrack-back.onrender.com",
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 export const setAuthHeader = (token) => {
