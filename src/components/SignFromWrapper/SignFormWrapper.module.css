@@ -8,7 +8,7 @@
   background-color: var(--color-main-bg);
   border-radius: 30px;
   height: calc(100vh - 32px);
-  min-height: 420px;
+  min-height: 456px;
 }
 
 .signFormLogoWrapper {
@@ -21,6 +21,7 @@
   .signFormWrapper {
     padding: 32px;
     height: calc(100vh - 64px);
+    min-height: 506px;
   }
 
   .signFormLogoWrapper {
