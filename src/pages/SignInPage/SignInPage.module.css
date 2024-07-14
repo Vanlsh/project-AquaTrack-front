@@ -1,0 +1,20 @@
+.signInPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
+.signInPageRight {
+  display: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .signInPage {
+    flex-direction: row;
+    gap: 32px;
+  }
+  .signInPageRight {
+    display: block;
+  }
+}

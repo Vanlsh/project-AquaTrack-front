@@ -1,20 +1,74 @@
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
+import { useDispatch, useSelector } from "react-redux";
+
+import { refreshUser } from "../redux/auth/operations.js";
+import { selectIsRefreshing } from "../redux/auth/selectors.js";
+import RestrictedRoute from "./RestrictedRoute.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
+import Loader from "./Loader/Loader.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
 const SignUpPage = lazy(() => import("../pages/SignUpPage/SignUpPage.jsx"));
 const TrackerPage = lazy(() => import("../pages/TrackerPage/TrackerPage.jsx"));
+const NotFoundPage = lazy(
+  () => import("../pages/NotFoundPage/NotFoundPage.jsx")
+);
 
 function App() {
-  return (
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const [isDelayOver, setIsDelayOver] = useState(false);
+
+  useEffect(() => {
+    dispatch(refreshUser());
+
+    const timer = setTimeout(() => {
+      setIsDelayOver(true);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [dispatch]);
+
+  return isRefreshing || !isDelayOver ? (
+    <Loader />
+  ) : (
     <SharedLayout>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/tracker" element={<TrackerPage />} />
+
+        {/* <Route path="/signup" element={<SignUpPage />} /> */}
+
+        <Route
+          path="/signup"
+          element={
+            <RestrictedRoute
+              redirectTo={`/tracker/${Date.now()}`}
+              component={<SignUpPage />}
+            />
+          }
+        />
+
+        <Route
+          path="/signin"
+          element={
+            <RestrictedRoute
+              redirectTo={`/tracker/${Date.now()}`}
+              component={<SignInPage />}
+            />
+          }
+        />
+
+        <Route
+          path="/tracker/:date"
+          element={
+            <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
+          }
+        />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </SharedLayout>
   );

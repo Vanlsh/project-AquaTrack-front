@@ -1,0 +1,32 @@
+.userPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: fit-content;
+}
+
+.userPanelTitle {
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.userPanelTitleName {
+  font-weight: 700;
+}
+
+@media screen and (min-width: 768px) {
+  .userPanel {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .userPanelTitle {
+    font-size: 36px;
+    line-height: 1.06;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+}

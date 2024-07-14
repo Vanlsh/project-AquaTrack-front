@@ -1,3 +1,6 @@
+@import url("./styles/variables.css");
+@import url("./styles/reset.css");
+
 body {
   font-family: Poppins, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.29;

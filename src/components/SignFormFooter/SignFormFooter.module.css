@@ -1,0 +1,11 @@
+.signFormFooter {
+  color: rgba(47, 47, 47, 0.5);
+  text-align: center;
+}
+
+.signFormFooterLink {
+  font-weight: 700;
+  text-decoration: underline;
+  color: var(--color-font-main);
+  display: inline-block;
+}
