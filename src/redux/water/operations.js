@@ -32,40 +32,44 @@ export const addWater = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const response = await createWater(formData);
-      return response;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// //=================== UPDATE WATER ====================
+//=================== UPDATE WATER ====================
 
-// export const updateWater = createAsyncThunk(
-//   "water/update",
-//   async (formData, thunkAPI) => {
-//     try {
-//       const response = await updateWaterIntakeRecord(formData);
-//       return response;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const updateWaterIntakeRecord = createAsyncThunk(
+  "water/update",
+  async ({ id, formData }, thunkAPI) => {
+    try {
+      const response = await updateWater(id, formData);
+      console.log(response.data);
 
-// //=================== DELETE WATER ====================
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
-// export const deleteWater = createAsyncThunk(
-//   "water/deleteWater",
-//   async (formData, thunkAPI) => {
-//     try {
-//       const response = await deleteWaterIntakeRecord(formData);
-//       return response;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+//=================== DELETE WATER ====================
+
+export const deleteWaterIntakeRecord = createAsyncThunk(
+  "water/deleteWater",
+  async (id, thunkAPI) => {
+    try {
+      const response = await deleteWater(id);
+      console.log(response);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 // //================= GET MONTHLY WATER =================
 
@@ -81,16 +85,16 @@ export const addWater = createAsyncThunk(
 //   }
 // );
 
-//================== GET DAILY WATER ==================
+// //================== GET DAILY WATER ==================
 
-export const fetchDailyWater = createAsyncThunk(
-  "water/fetchDay",
-  async (formData, thunkAPI) => {
-    try {
-      const response = await getDayWater(formData);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const fetchDailyWater = createAsyncThunk(
+//   "water/fetchDay",
+//   async (formData, thunkAPI) => {
+//     try {
+//       const response = await getDayWater(formData);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
