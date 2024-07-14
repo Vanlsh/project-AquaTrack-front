@@ -73,7 +73,6 @@
 }
 
 .signInFormIconButton {
-  display: none;
   position: absolute;
   padding: 0;
   background-color: transparent;
@@ -107,9 +106,7 @@
   .signInFormInputErrorMessage {
     font-size: 14px;
   }
-  .signInFormIconButton {
-    display: block;
-  }
+
   .signInFormInput {
     padding-right: 45px;
   }
