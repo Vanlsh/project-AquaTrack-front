@@ -10,7 +10,9 @@ export const INITIAL_STATE = {
   },
   token: null,
   isLoggedIn: false,
+  isSuccessfullyLoggedIn: false,
+  isSuccessfullyRegistered: false,
   isRefreshing: false,
-  isError: false,
+  errorMessage: null,
   error: null,
 };

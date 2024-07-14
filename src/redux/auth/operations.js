@@ -1,8 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { Flip, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import {
   logInUser,
   logOutUser,
@@ -14,14 +11,6 @@ import {
 } from "../../api/auth.js";
 
 import { clearAuthHeader, setAuthHeader } from "../../axios.js";
-
-//=================== TOAST SETTINGS ==================
-//* create a separate file for configuring the toast
-
-const toastSettings = {
-  pauseOnHover: true,
-  transition: Flip,
-};
 
 //====================== SIGN UP ======================
 
@@ -46,19 +35,9 @@ export const logIn = createAsyncThunk(
     try {
       const res = await logInUser(userData);
       setAuthHeader(res.data.token);
-      toast.success("Login successful!", toastSettings);
       return res.data;
     } catch (err) {
-      switch (err.response?.status) {
-        case 401:
-          toast.error("Email or password is wrong", { ...toastSettings });
-          break;
-        case 404:
-          toast.error("User not found", { ...toastSettings });
-          break;
-        default:
-          toast.error("Login failed", { ...toastSettings });
-      }
+      //TODO reject with message
       return thunkAPI.rejectWithValue(err.message);
     }
   },
@@ -73,7 +52,6 @@ export const logOut = createAsyncThunk(
       await logOutUser(token);
       clearAuthHeader();
     } catch (err) {
-      toast.error("Logout failed", { ...toastSettings });
       return thunkAPI.rejectWithValue(err.message);
     }
   },
@@ -84,18 +62,14 @@ export const logOut = createAsyncThunk(
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (token, thunkAPI) => {
-    if (!token) {
-      // If there is no token, exit without performing any request
-      return thunkAPI.rejectWithValue("Unable to fetch user");
-    }
-
     try {
-      // If there is a token, add it to the HTTP header and perform the request
-      setAuthHeader(token);
-      const res = await requestRefreshUser(); //??
+      const res = await requestRefreshUser();
       return res.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue({
+        status: err.response?.status,
+        message: err.message,
+      });
     }
   },
 );
