@@ -4,6 +4,7 @@ export const instance = axios.create({
   baseURL: "https://project-aquatrack-back.onrender.com",
 <<<<<<< Updated upstream
 =======
+  // withCredentials: true,
 >>>>>>> Stashed changes
 });
 
