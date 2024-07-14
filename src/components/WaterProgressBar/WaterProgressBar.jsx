@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import css from './WaterProgressBar.module.css';
+import { useState, useEffect } from "react";
+import css from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
   const [currentWater, setCurrentWater] = useState(0);
@@ -22,7 +22,7 @@ const WaterProgressBar = () => {
         // const response = await fetch('');
         // const data = await response.json();
       } catch (error) {
-        console.error('Помилка при отриманні даних:', error);
+        console.error("Помилка при отриманні даних:", error);
       }
     };
 
@@ -43,19 +43,25 @@ const WaterProgressBar = () => {
           className={css.progressBarFill}
           style={{
             width: `${percentage}%`,
-            
-            backgroundColor: currentWater < goal ? '#9be1a0' : '#FABE4A',
+
+            backgroundColor: currentWater < goal ? "#9be1a0" : "#FABE4A",
           }}
         >
-          <p className={css.percentNumber}
+          <p
+            className={css.percentNumber}
             style={{
-            color: currentWater < goal ? '#9be1a0' : '#FABE4A'
-          }}>
-            {currentWater < goal ? `${percentage}%` : 'done!'}
+              color: currentWater < goal ? "#9be1a0" : "#FABE4A",
+            }}
+          >
+            {currentWater < goal ? `${percentage}%` : "done!"}
           </p>
-          <div className={css.ball} style={{
-            border: currentWater < goal ? 'solid 1px #9be1a0' : 'solid 1px #FABE4A'
-          }}></div>
+          <div
+            className={css.ball}
+            style={{
+              border:
+                currentWater < goal ? "solid 1px #9be1a0" : "solid 1px #FABE4A",
+            }}
+          ></div>
         </div>
       </div>
       <div className={css.percentContainer}>

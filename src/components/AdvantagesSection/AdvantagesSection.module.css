@@ -6,9 +6,9 @@
   background-image: url("../../../public/img/bg/drinking_girl_bg_mob.jpg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  aspect-ratio: 16 / 20;
-  flex: 1;
+    background-repeat: no-repeat;
+  /* aspect-ratio: 16 / 16; */
+  height: 353px;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -63,15 +63,16 @@
   .advantagesSection {
     padding: 32px;
     background-image: url("../../../public/img/bg/drinking_girl_bg_tab.jpg");
+    height: 446px;
   }
 
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .advantagesSection {
       background-image: url("../../../public/img/bg/drinking_girl_bg_tab_2x.jpg");
     }
-    .advantagesList {
-      width: 242px;
-    }
+  }
+  .advantagesList {
+    width: 242px;
   }
   .advantagesHabit,
   .advantagesStatistics,
@@ -91,6 +92,8 @@
   .advantagesSection {
     padding: 64px 32px;
     background-image: url("../../../public/img/bg/drinking_girl_bg_desk.jpg");
+    height: 736px;
+    width: 672px;
   }
 
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {

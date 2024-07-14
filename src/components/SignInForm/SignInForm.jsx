@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import svgSprite from "../../assets/icons.svg";
 import styles from "./SignInForm.module.css";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/operations";
 
 const schema = yup.object({
   email: yup
@@ -19,6 +21,7 @@ const schema = yup.object({
 });
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -27,9 +30,9 @@ const SignInForm = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (d) => {
-    //TODO dispatch(login)
-    console.log(d);
+  const onSubmit = (data) => {
+    dispatch(logIn(data));
+    //! reset form
   };
 
   const handleClick = () => {
@@ -74,8 +77,7 @@ const SignInForm = () => {
             <button
               className={styles.signInFormIconButton}
               type="button"
-              onMouseDown={handleClick}
-              onMouseUp={handleClick}
+              onClick={handleClick}
             >
               {showPassword === false ? (
                 <svg className={styles.signInFormInputIcon}>
