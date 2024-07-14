@@ -1,3 +1,3 @@
 export const ANIMATION = {
-  DURATION: 200,
+  DURATION: 50,
 };
