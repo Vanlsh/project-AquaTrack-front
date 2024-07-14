@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import css from "./NotFoundPage.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NotFoundPage = () => {
 
