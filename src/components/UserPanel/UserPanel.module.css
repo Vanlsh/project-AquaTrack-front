@@ -1,42 +1,32 @@
-.userPanelWrapper {
-  width: fit-content;
-  position: relative;
-}
-
 .userPanel {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 30px;
-  border: none;
-  padding: 6px 12px;
-  height: 56px;
-  background-color: #323f47;
-  font-size: 16px;
+  flex-direction: column;
+  gap: 20px;
+  width: fit-content;
+}
+
+.userPanelTitle {
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.userPanelTitleName {
   font-weight: 700;
 }
 
-.userPanel:hover {
-  color: #9be1a0;
+@media screen and (min-width: 768px) {
+  .userPanel {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .userPanelTitle {
+    font-size: 36px;
+    line-height: 1.06;
+  }
 }
 
-.userPanelAvatar {
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  background-color: #87d28d;
-  pointer-events: none;
-}
-
-.userPanelIcon {
-  fill: none;
-  stroke: #fff;
-  width: 20px;
-  height: 20px;
-  pointer-events: none;
-}
-
-.userPanel:hover .userPanelIcon {
-  stroke: #9be1a0;
+@media screen and (min-width: 1440px) {
 }
