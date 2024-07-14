@@ -1,8 +1,11 @@
 .welcomeSection {
+  display: flex;
+  flex-direction: column;
   border-radius: 30px;
   padding: 24px 16px 67px;
   background-color: var(--color-main-bg);
   flex: 1;
+  /* width: 100vh; */
 }
 .welcomeSectionContainer {
   margin: 74px 0 0;
