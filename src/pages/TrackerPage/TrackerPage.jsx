@@ -1,10 +1,10 @@
-import UserBar from "../../components/UserBar/UserBar.jsx";
+import WaterMainInfo from "../../components/WaterMainInfo/WaterMainInfo";
 
 const TrackerPage = () => {
   return (
-    <div>
-      <UserBar />
-    </div>
+    <>
+      <WaterMainInfo />
+    </>
   );
 };
 
