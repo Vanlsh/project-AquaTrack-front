@@ -1,13 +1,13 @@
-import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo.jsx';
-import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo.jsx';
+import WaterDetailedInfo from "../../components/WaterDetailedInfo/WaterDetailedInfo.jsx";
+import WaterMainInfo from "../../components/WaterMainInfo/WaterMainInfo";
 
 const TrackerPage = () => {
-	return (
-		<div>
-			<WaterMainInfo />
-			<WaterDetailedInfo />
-		</div>
-	);
+  return (
+    <>
+      <WaterMainInfo />
+      <WaterDetailedInfo />
+    </>
+  );
 };
 
 export default TrackerPage;
