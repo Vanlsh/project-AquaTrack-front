@@ -27,10 +27,6 @@ function App() {
 					path='/tracker/:date'
 					element={<TrackerPage />}
 				/>
-				<Route
-					path='/tracker'
-					element={<TrackerPage />}
-				/>
 			</Routes>
 		</SharedLayout>
 	);
