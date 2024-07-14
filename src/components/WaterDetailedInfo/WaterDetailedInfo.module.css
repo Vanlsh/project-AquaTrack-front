@@ -1,0 +1,21 @@
+.waterDetailedInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 20px;
+  background: var(--color-main-bg);
+  border-radius: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .waterDetailedInfo {
+    padding: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .waterDetailedInfo {
+    width: 672px;
+    height: 736px;
+  }
+}
