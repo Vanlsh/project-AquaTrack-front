@@ -4,7 +4,8 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import svgSprite from "../../assets/icons.svg";
-// import toast, { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../redux/auth/operations";
 
 const schemaValidation = Yup.object({
   email: Yup.string()
@@ -20,6 +21,7 @@ const schemaValidation = Yup.object({
 });
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRepeat, setshowPasswordRepeat] = useState(false);
 
@@ -38,16 +40,10 @@ const SignUpForm = () => {
   } = useForm({ resolver: yupResolver(schemaValidation) });
 
   const submitForm = (data) => {
-    // dispatch()
-    //   .unwrap()
-    //   .then(() => {
-    //     toast.success("Register is successfully");
-    //      })
-    //   .catch((error) => {
-    //     const errorMessage = error.message || "Registration failed";
-    //     toast.error(errorMessage);
-    //   });
     console.log(data);
+    const { email, password } = data;
+    dispatch(signUp({email, password}));
+    //! reset form
   };
 
   return (
