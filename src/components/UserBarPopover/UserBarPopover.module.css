@@ -1,7 +1,6 @@
 .userBarPopover {
   position: absolute;
   width: 100%;
-  /*top: 50px;*/
   padding: 14px 20px;
   border-radius: 15px;
   background-color: #fff;
@@ -20,11 +19,17 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  width: fit-content;
+  color: var(--color-font-main);
   cursor: pointer;
 }
 
 .userBarPopoverListItemLogOut {
   color: #323f4766;
+}
+
+.userBarPopoverListItemLogOut:hover {
+  color: var(--color-font-main);
 }
 
 .userBarPopoverIconSettings {
@@ -38,4 +43,7 @@
   height: 16px;
   stroke: #323f4766;
   fill: none;
+}
+.userBarPopoverListItemLogOut:hover > .userBarPopoverIconLogOut {
+  stroke: var(--color-font-main);
 }
