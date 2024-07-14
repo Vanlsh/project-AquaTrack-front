@@ -81,16 +81,16 @@ export const addWater = createAsyncThunk(
 //   }
 // );
 
-// //================== GET DAILY WATER ==================
+//================== GET DAILY WATER ==================
 
-// export const fetchDailyWater = createAsyncThunk(
-//   "water/fetchDay",
-//   async (formData, thunkAPI) => {
-//     try {
-//       const response = await getDailyWaterIntake(formData);
-//       return response;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const fetchDailyWater = createAsyncThunk(
+  "water/fetchDay",
+  async (formData, thunkAPI) => {
+    try {
+      const response = await getDayWater(formData);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

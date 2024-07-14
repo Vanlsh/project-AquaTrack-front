@@ -1,27 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  addWater,
-  deleteWater,
-  updateWater,
+  // addWater,
+  // deleteWater,
+  // updateWater,
   fetchDailyWater,
-  fetchMonthlyWater,
+  // fetchMonthlyWater,
 } from "./operations";
 
-const initialState = {
+const INITIAL_STATE = {
   waterDaily: [],
   isLoading: false,
   isError: null,
 };
 
-// const handlePending = (state) => {
-//   state.isLoading = true;
-// };
+const handlePending = (state) => {
+  state.isLoading = true;
+  state.isError = null;
+};
 
-// const handleRejected = (state, action) => {
-//   state.isLoading = false;
-//   state.error = action.payload;
-// };
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.isError = action.payload;
+};
 
-const waterSlice = createSlice({});
+const waterSlice = createSlice({
+  name: "water",
+  initialState: INITIAL_STATE,
+  extraReducers: (builder) => {
+    builder
+      // fetchDailyWater
+      .addCase(fetchDailyWater.pending, handlePending)
+      .addCase(fetchDailyWater.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(fetchDailyWater.rejected, handleRejected);
+    // addWater
+  },
+});
 
 export const waterReducer = waterSlice.reducer;
