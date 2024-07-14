@@ -9,7 +9,6 @@ import {
 
 const initialState = {
   waterDaily: [],
-  waterMonthly: [],
   isLoading: false,
   isError: null,
 };

@@ -3,11 +3,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
-  addDailyWaterIntake,
-  updateWaterIntakeRecord,
-  deleteWaterIntakeRecord,
-  getMonthlyWaterIntake,
-  getDailyWaterIntake,
+  createWater,
+  updateWater,
+  deleteWater,
+  getDayWater,
+  getMonthWater,
 } from "../../api/water.js";
 
 // axios.defaults.baseURL = "https://...";
@@ -31,7 +31,7 @@ export const addWater = createAsyncThunk(
   "water/addWater",
   async (formData, thunkAPI) => {
     try {
-      const response = await addDailyWaterIntake(formData);
+      const response = await createWater(formData);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -39,58 +39,58 @@ export const addWater = createAsyncThunk(
   }
 );
 
-//=================== UPDATE WATER ====================
+// //=================== UPDATE WATER ====================
 
-export const updateWater = createAsyncThunk(
-  "water/update",
-  async (formData, thunkAPI) => {
-    try {
-      const response = await updateWaterIntakeRecord(formData);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const updateWater = createAsyncThunk(
+//   "water/update",
+//   async (formData, thunkAPI) => {
+//     try {
+//       const response = await updateWaterIntakeRecord(formData);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
-//=================== DELETE WATER ====================
+// //=================== DELETE WATER ====================
 
-export const deleteWater = createAsyncThunk(
-  "water/deleteWater",
-  async (formData, thunkAPI) => {
-    try {
-      const response = await deleteWaterIntakeRecord(formData);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const deleteWater = createAsyncThunk(
+//   "water/deleteWater",
+//   async (formData, thunkAPI) => {
+//     try {
+//       const response = await deleteWaterIntakeRecord(formData);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
-//================= GET MONTHLY WATER =================
+// //================= GET MONTHLY WATER =================
 
-export const fetchMonthlyWater = createAsyncThunk(
-  "water/fetchWaters",
-  async (formData, thunkAPI) => {
-    try {
-      const response = await getMonthlyWaterIntake(formData);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const fetchMonthlyWater = createAsyncThunk(
+//   "water/fetchWaters",
+//   async (formData, thunkAPI) => {
+//     try {
+//       const response = await getMonthlyWaterIntake(formData);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
-//================== GET DAILY WATER ==================
+// //================== GET DAILY WATER ==================
 
-export const fetchDailyWater = createAsyncThunk(
-  "water/fetchDay",
-  async (formData, thunkAPI) => {
-    try {
-      const response = await getDailyWaterIntake(formData);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const fetchDailyWater = createAsyncThunk(
+//   "water/fetchDay",
+//   async (formData, thunkAPI) => {
+//     try {
+//       const response = await getDailyWaterIntake(formData);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
