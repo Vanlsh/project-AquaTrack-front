@@ -1,7 +1,6 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
-import SomeComponent from "./WraperWaterModal/WraperWaterModal.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
