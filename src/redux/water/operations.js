@@ -7,10 +7,8 @@ import {
   updateWater,
   deleteWater,
   getDayWater,
-  getMonthWater,
+  // getMonthWater,
 } from "../../api/water.js";
-
-// axios.defaults.baseURL = "https://...";
 
 //=================== TOAST SETTINGS ==================
 //* create a separate file for configuring the toast

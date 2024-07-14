@@ -1,6 +1,4 @@
-// export const select = (state) => state.water.;
-
-/////////
+export const selectWaterDaily = (state) => state.water.waterDaily;
 
 export const selectIsLoading = (state) => state.water.isLoading;
 
