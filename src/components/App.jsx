@@ -1,4 +1,4 @@
-import { lazy, useEffect, useState  } from "react";
+import { lazy, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,8 +13,8 @@ const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
 const SignUpPage = lazy(() => import("../pages/SignUpPage/SignUpPage.jsx"));
 const TrackerPage = lazy(() => import("../pages/TrackerPage/TrackerPage.jsx"));
-const NotFoundPage = lazy(() =>
-  import("../pages/NotFoundPage/NotFoundPage.jsx")
+const NotFoundPage = lazy(
+  () => import("../pages/NotFoundPage/NotFoundPage.jsx")
 );
 
 function App() {
@@ -25,11 +25,11 @@ function App() {
   useEffect(() => {
     dispatch(refreshUser());
 
-      const timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsDelayOver(true);
-      }, 500);
-    
-      return () => clearTimeout(timer);
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [dispatch]);
 
   return isRefreshing || !isDelayOver ? (
@@ -62,7 +62,7 @@ function App() {
         />
 
         <Route
-          path={`/tracker/${Date.now()}`}
+          path="/tracker/:date"
           element={
             <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
           }
