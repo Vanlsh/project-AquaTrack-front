@@ -1,9 +1,9 @@
-import { useEffect, useState, useCallback } from 'react';
-import WaterProgressBar from '../WaterProgressBar/WaterProgressBar';
-import css from './WaterMainInfo.module.css';
+import { useEffect, useState, useCallback } from "react";
+import WaterProgressBar from "../WaterProgressBar/WaterProgressBar";
+import css from "./WaterMainInfo.module.css";
 
 import { useModal } from "../../hooks/useModal.js";
-import Modal from '../Modal/Modal.jsx'
+import Modal from "../Modal/Modal.jsx";
 import svgSprite from "../../assets/icons.svg";
 
 const WaterMainInfo = () => {
