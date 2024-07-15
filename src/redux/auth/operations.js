@@ -18,9 +18,10 @@ export const signUp = createAsyncThunk(
   "auth/signUp",
   async (userData, thunkAPI) => {
     try {
-      const res = await registerUser(userData);
-      setAuthHeader(res.data.token);
-      return res.data;
+      const resSignUp = await registerUser(userData);
+      const resSignIn = await logInUser(userData);
+      setAuthHeader(resSignIn.data.token);
+      return resSignIn.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -38,7 +39,11 @@ export const logIn = createAsyncThunk(
       return res.data;
     } catch (err) {
       //TODO reject with message
-      return thunkAPI.rejectWithValue(err.message);
+      console.log(err);
+      return thunkAPI.rejectWithValue({
+        status: err.response.status,
+        message: err.data.data,
+      });
     }
   },
 );
@@ -59,7 +64,7 @@ export const logOut = createAsyncThunk(
 
 //=================== REFRESH USER =====================
 
-export const refreshUser = createAsyncThunk(
+export const refreshToken = createAsyncThunk(
   "auth/refresh",
   async (token, thunkAPI) => {
     try {
