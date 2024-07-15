@@ -2,6 +2,7 @@ import { lazy, useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import { setToken } from "../redux/auth/slice.js";
 import {
   selectError,
   selectIsRefreshing,
@@ -9,7 +10,6 @@ import {
   selectIsSuccessfullyRegistered,
   selectToken,
 } from "../redux/auth/selectors.js";
-import { setLoggedIn } from "../redux/auth/slice.js";
 import PrivateRoute from "./PrivateRoute.jsx";
 import RestrictedRoute from "./RestrictedRoute.jsx";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     if (token) {
       // dispatch(getUserInfo());
-      dispatch(setLoggedIn(true));
+      // dispatch(setLoggedIn(true));
     }
   }, [token]);
 
