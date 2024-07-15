@@ -32,11 +32,10 @@ const WaterMainInfo = () => {
   // }, [])
 
   return (
-    <div>
       <div className={css.waterContainer}>
         <h1 className={css.waterTitle}>AquaTrack</h1>
         <div className={css.normaContainer}>
-          <h2 className={css.normaL}>{goal === 0 ? "0 L?" : `${goal} L`}</h2>
+          <h2 className={css.normaL}>{goal === 0 ? 'You don’t have a goal yet!' : `${goal} L`}</h2>
           <p className={css.normaText}>My daily norma</p>
         </div>
         <WaterProgressBar />
@@ -47,7 +46,7 @@ const WaterMainInfo = () => {
           <h2 className={css.btnText}>Add water</h2>
         </button>
       </div>
-    </div>
+    
   );
 };
 
