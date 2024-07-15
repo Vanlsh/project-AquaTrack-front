@@ -84,6 +84,7 @@ const waterSlice = createSlice({
       })
       .addCase(updateWaterIntakeRecord.rejected, handleRejected)
 
+      //! Need to fix
       //===================== deleteWater =====================
       .addCase(deleteWaterIntakeRecord.pending, handlePending)
       .addCase(deleteWaterIntakeRecord.fulfilled, (state, action) => {
