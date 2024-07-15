@@ -1,8 +1,7 @@
-import React, { lazy, useEffect } from "react";
+import { lazy, useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import { getUserInfo } from "../redux/auth/operations.js";
 import {
   selectError,
   selectIsRefreshing,
@@ -33,7 +32,7 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      dispatch(getUserInfo());
+      // dispatch(getUserInfo());
       dispatch(setLoggedIn(true));
     }
   }, [token]);

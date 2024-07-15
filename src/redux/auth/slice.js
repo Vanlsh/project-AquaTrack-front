@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { createSlice } from "@reduxjs/toolkit";
 import { INITIAL_STATE } from "./initialState";
+import { logIn, logOut, signUp } from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
