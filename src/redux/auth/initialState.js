@@ -8,6 +8,7 @@ export const INITIAL_STATE = {
     activeTimeSports: 0,
     waterRate: 0,
   },
+  token: null,
   isLoggedIn: false,
   isSuccessfullyLoggedIn: false,
   isSuccessfullyRegistered: false,

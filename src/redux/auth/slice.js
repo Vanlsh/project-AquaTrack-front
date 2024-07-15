@@ -1,14 +1,23 @@
 // @ts-nocheck
 import { createSlice } from "@reduxjs/toolkit";
 import { INITIAL_STATE } from "./initialState";
-import { logIn, logOut, signUp } from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: INITIAL_STATE,
+  reducers: {
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
+    logOutReducer: () => {
+      return INITIAL_STATE;
+    },
+    setLoggedIn: (state, action) => {
+      state.isLoggedIn = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      // SIGNUP
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
@@ -26,10 +35,9 @@ const authSlice = createSlice({
         state.errorMessage = null;
         state.error = null;
       })
-
-      // LOGIN
       .addCase(logIn.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.token = action.payload.token;
         state.user = action.payload.user;
         state.isLoggedIn = true;
         state.isSuccessfullyLoggedIn = true;
@@ -58,22 +66,10 @@ const authSlice = createSlice({
         state.isLoading = true;
       });
 
-    // REFRESH USER
-    // .addCase(refreshToken.pending, (state) => {
-    //   state.isError = false;
-    //   state.error = null;
-    // })
-    // .addCase(refreshToken.fulfilled, (state, action) => {
-    //   state.isLoggedIn = true;
-    // })
-    // .addCase(refreshToken.rejected, (state, action) => {
-    //   state.isLoading = false;
-    //   state.errorMessage = action.payload.message;
-    //   state.error = action.payload.error;
-    // });
     //TODO RequestInfo
     //TODO UpdateUser
   },
 });
 
 export const authReducer = authSlice.reducer;
+export const { setToken, logOutReducer, setLoggedIn } = authSlice.actions;

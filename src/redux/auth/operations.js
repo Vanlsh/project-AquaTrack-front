@@ -4,29 +4,10 @@ import {
   logInUser,
   logOutUser,
   registerUser,
-  requestRefreshUser,
   requestUserInfo,
   updateUserInfo,
   updateUserPhoto,
 } from "../../api/auth.js";
-
-import { clearAuthHeader, setAuthHeader } from "../../axios.js";
-
-//====================== SIGN UP ======================
-
-export const signUp = createAsyncThunk(
-  "auth/signUp",
-  async (userData, thunkAPI) => {
-    try {
-      const resSignUp = await registerUser(userData);
-      const resSignIn = await logInUser(userData);
-      setAuthHeader(resSignIn.data.token);
-      return resSignIn.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
-    }
-  },
-);
 
 //====================== SIGN IN ======================
 
@@ -35,7 +16,6 @@ export const logIn = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const res = await logInUser(userData);
-      setAuthHeader(res.data.token);
       return res.data;
     } catch (err) {
       //TODO reject with message
@@ -48,6 +28,21 @@ export const logIn = createAsyncThunk(
   },
 );
 
+//====================== SIGN UP ======================
+
+export const signUp = createAsyncThunk(
+  "auth/signUp",
+  async (userData, thunkAPI) => {
+    try {
+      const resSignUp = await registerUser(userData);
+      const resSignIn = await logInUser(userData);
+      return resSignIn.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  },
+);
+
 //====================== LOG OUT =======================
 
 export const logOut = createAsyncThunk(
@@ -55,26 +50,8 @@ export const logOut = createAsyncThunk(
   async (token, thunkAPI) => {
     try {
       await logOutUser(token);
-      clearAuthHeader();
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
-    }
-  },
-);
-
-//=================== REFRESH USER =====================
-
-export const refreshToken = createAsyncThunk(
-  "auth/refresh",
-  async (token, thunkAPI) => {
-    try {
-      const res = await requestRefreshUser();
-      return res.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue({
-        status: err.response?.status,
-        message: err.message,
-      });
     }
   },
 );
