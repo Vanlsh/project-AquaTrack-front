@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { createSlice } from "@reduxjs/toolkit";
 import { INITIAL_STATE } from "./initialState";
-import { logIn, logOut, signUp } from "./operations";
+import { getUserInfo, logIn, logOut, signUp } from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
@@ -65,9 +65,13 @@ const authSlice = createSlice({
       })
       .addCase(logOut.pending, (state, action) => {
         state.isLoading = true;
+      })
+
+      //GET USERINFO
+      .addCase(getUserInfo.fulfilled, (state, action) => {
+        state.user = action.payload;
       });
 
-    //TODO RequestInfo
     //TODO UpdateUser
   },
 });

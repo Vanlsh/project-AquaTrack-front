@@ -59,11 +59,11 @@ export const logOut = createAsyncThunk(
 //================= USER INFORMATION ===================
 
 export const getUserInfo = createAsyncThunk(
-  "users/info",
+  "auth/info",
   async (token, thunkAPI) => {
     try {
       const response = await requestUserInfo(token);
-      return response;
+      return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -73,7 +73,7 @@ export const getUserInfo = createAsyncThunk(
 //================== UPDATE PROFILE ====================
 
 export const updateUserProfile = createAsyncThunk(
-  "users/update",
+  "auth/update",
   async (userData, thunkAPI) => {
     try {
       const response = await updateUserInfo(userData);
