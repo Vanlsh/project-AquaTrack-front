@@ -12,7 +12,6 @@ export const INITIAL_STATE = {
   isLoggedIn: false,
   isSuccessfullyLoggedIn: false,
   isSuccessfullyRegistered: false,
-  isRefreshing: false,
   errorMessage: null,
   error: null,
 };

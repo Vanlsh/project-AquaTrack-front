@@ -2,14 +2,13 @@ import { lazy, useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import { setToken } from "../redux/auth/slice.js";
+import { getUserInfo } from "../redux/auth/operations.js";
 import {
-  selectError,
-  selectIsRefreshing,
   selectIsSuccessfullyLoggedIn,
   selectIsSuccessfullyRegistered,
   selectToken,
 } from "../redux/auth/selectors.js";
+import { setLoggedIn } from "../redux/auth/slice.js";
 import PrivateRoute from "./PrivateRoute.jsx";
 import RestrictedRoute from "./RestrictedRoute.jsx";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
@@ -25,17 +24,15 @@ const NotFoundPage = lazy(
 function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const isRefreshing = useSelector(selectIsRefreshing);
   const isSuccessfullyLoggedIn = useSelector(selectIsSuccessfullyLoggedIn);
   const isSuccessfullyRegistered = useSelector(selectIsSuccessfullyRegistered);
-  const error = useSelector(selectError);
 
   useEffect(() => {
     if (token) {
-      // dispatch(getUserInfo());
-      // dispatch(setLoggedIn(true));
+      dispatch(getUserInfo());
+      dispatch(setLoggedIn(true));
     }
-  }, [token]);
+  }, [token, dispatch]);
 
   useEffect(() => {
     if (isSuccessfullyLoggedIn) {

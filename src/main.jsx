@@ -7,7 +7,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import App from "./components/App.jsx";
 import { ModalProvider } from "./context/ModalProvider.jsx";
 import { persistor, store } from "./redux/store.js";
+import { injectStore } from "./axios.js";
 import "./index.css";
+
+injectStore(store);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
