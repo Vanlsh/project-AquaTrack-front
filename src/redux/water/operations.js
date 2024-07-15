@@ -28,8 +28,8 @@ export const updateWaterIntakeRecord = createAsyncThunk(
   "water/update",
   async ({ id, formData }, thunkAPI) => {
     try {
-      const response = await updateWater(id, formData);
-      return response.data;
+      const { data } = await updateWater(id, formData);
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -42,12 +42,7 @@ export const deleteWaterIntakeRecord = createAsyncThunk(
   "water/deleteWater",
   async (id, thunkAPI) => {
     try {
-      const {data} = await deleteWater(id);
-      console.log("=============");
-      console.log(data);
-      console.log(data.data);
-
-      console.log("=============");
+      const { data } = await deleteWater(id);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -62,7 +57,7 @@ export const fetchMonthlyWater = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const { data } = await getMonthWater(formData);
-      return data;
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
