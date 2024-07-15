@@ -4,14 +4,10 @@ import {
   deleteWaterIntakeRecord,
   updateWaterIntakeRecord,
   fetchDailyWater,
-  // fetchMonthlyWater,
+  fetchMonthlyWater,
 } from "./operations";
 
-const INITIAL_STATE = {
-  waterDaily: [],
-  isLoading: false,
-  isError: null,
-};
+import { INITIAL_STATE } from "./initialState";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -28,63 +24,82 @@ const waterSlice = createSlice({
   initialState: INITIAL_STATE,
   extraReducers: (builder) => {
     builder
-      // fetchDailyWater
+      //=================== fetchDailyWater ===================
       .addCase(fetchDailyWater.pending, handlePending)
       .addCase(fetchDailyWater.fulfilled, (state, action) => {
-        state.waterDaily = action.payload;
+        const { dailyAmount, dailyPercentage, data } = action.payload;
+
         state.isLoading = false;
         state.isError = null;
+
+        state.waterDaily.Amount = dailyAmount;
+        state.waterDaily.Percentage = dailyPercentage;
+        state.waterDaily.Record = data;
       })
       .addCase(fetchDailyWater.rejected, handleRejected)
 
-      // addWater
+      //================== fetchMonthlyWater ==================
+      .addCase(fetchMonthlyWater.pending, handlePending)
+      .addCase(fetchMonthlyWater.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = null;
+        state.waterMonthlyRecord = action.payload;
+      })
+      .addCase(fetchMonthlyWater.rejected, handleRejected)
+
+      //======================= addWater ======================
       .addCase(addWater.pending, handlePending)
       .addCase(addWater.fulfilled, (state, action) => {
         const newRecord = action.payload.data;
-
         state.isLoading = false;
 
-        state.waterDaily.push(newRecord);
+        state.waterDaily.Record.push(newRecord);
 
-        state.waterDaily.sort((a, b) => {
+        state.waterDaily.Record.sort((a, b) => {
           return new Date(a.date * 1000) - new Date(b.date * 1000);
         });
 
-        console.log(state.waterDaily);
+        state.waterDaily.Amount += action.payload.data.amount;
+        state.waterDaily.Percentage += action.payload.data.percentage;
+
+        console.log(state.waterDaily.Record);
       })
       .addCase(addWater.rejected, handleRejected)
 
-      //  editWater
+      //====================== editWater ======================
       .addCase(updateWaterIntakeRecord.pending, handlePending)
       .addCase(updateWaterIntakeRecord.fulfilled, (state, action) => {
         const updatedRecord = action.payload;
         state.isLoading = false;
 
-        const index = state.waterDaily.findIndex(
+        const index = state.waterDaily.Record.findIndex(
           (record) => record.id === updatedRecord.id
         );
 
-        console.log(state.waterDaily);
+        console.log(state.waterDaily.Record);
 
         if (index !== -1) {
-          state.waterDaily[index] = updatedRecord;
+          state.waterDaily.Record[index] = updatedRecord;
         }
       })
       .addCase(updateWaterIntakeRecord.rejected, handleRejected)
 
-      // deleteWater
+      //===================== deleteWater =====================
       .addCase(deleteWaterIntakeRecord.pending, handlePending)
       .addCase(deleteWaterIntakeRecord.fulfilled, (state, action) => {
-        const recordId = action.payload;
-        console.log(action.payload);
-
+        const recordId = action.payload.id;
         state.isLoading = false;
 
-        const index = state.waterDaily.findIndex(
-          (record) => record._id === recordId
+        // console.log(state.waterDaily.Record); //!
+
+        const index = state.waterDaily.Record.findIndex(
+          (record) => record.id === recordId
         );
 
-        state.waterDaily.splice(index, 1);
+        state.waterDaily.Record.splice(index, 1);
+
+        state.waterDaily.Amount -= action.payload.amount;
+        state.waterDaily.Percentage -= action.payload.percentage;
       })
       .addCase(deleteWaterIntakeRecord.rejected, handleRejected);
   },

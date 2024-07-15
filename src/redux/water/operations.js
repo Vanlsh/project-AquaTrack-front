@@ -1,27 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import {
   createWater,
   updateWater,
   deleteWater,
   getDayWater,
-  // getMonthWater,
+  getMonthWater,
 } from "../../api/water.js";
-
-//=================== TOAST SETTINGS ==================
-//* create a separate file for configuring the toast
-
-// const toastSettings = {
-//   position: "top-center",
-//   autoClose: 3000,
-//   hideProgressBar: false,
-//   closeOnClick: true,
-//   pauseOnHover: true,
-//   draggable: true,
-//   progress: undefined,
-// };
 
 //===================== ADD WATER =====================
 
@@ -44,8 +29,6 @@ export const updateWaterIntakeRecord = createAsyncThunk(
   async ({ id, formData }, thunkAPI) => {
     try {
       const response = await updateWater(id, formData);
-      console.log(response.data);
-
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -59,29 +42,32 @@ export const deleteWaterIntakeRecord = createAsyncThunk(
   "water/deleteWater",
   async (id, thunkAPI) => {
     try {
-      const response = await deleteWater(id);
-      console.log(response);
-      console.log(response.data);
-      return response.data;
+      const {data} = await deleteWater(id);
+      console.log("=============");
+      console.log(data);
+      console.log(data.data);
+
+      console.log("=============");
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// //================= GET MONTHLY WATER =================
+//================= GET MONTHLY WATER =================
 
-// export const fetchMonthlyWater = createAsyncThunk(
-//   "water/fetchWaters",
-//   async (formData, thunkAPI) => {
-//     try {
-//       const response = await getMonthlyWaterIntake(formData);
-//       return response;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const fetchMonthlyWater = createAsyncThunk(
+  "water/fetchWaters",
+  async (formData, thunkAPI) => {
+    try {
+      const { data } = await getMonthWater(formData);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 //================== GET DAILY WATER ==================
 
@@ -90,7 +76,7 @@ export const fetchDailyWater = createAsyncThunk(
   async (date, thunkAPI) => {
     try {
       const response = await getDayWater(date);
-      return response.data;
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
