@@ -1,5 +1,5 @@
 export const ANIMATION = {
-  DURATION: 200,
+  DURATION: 10,
 };
 
 export const months = {

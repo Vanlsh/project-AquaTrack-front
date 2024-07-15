@@ -21,8 +21,10 @@ const authSlice = createSlice({
     builder
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
         state.isSuccessfullyRegistered = true;
+        state.isLoggedIn = true;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
       })
       .addCase(signUp.rejected, (state, action) => {
         state.isLoading = false;
@@ -70,6 +72,7 @@ const authSlice = createSlice({
       //GET USERINFO
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.isLoggedIn = true;
       });
 
     //TODO UpdateUser
