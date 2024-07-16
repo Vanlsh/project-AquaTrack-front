@@ -7,21 +7,21 @@ import {
   fetchMonthlyWater,
 } from "./operations";
 
-import { INITIAL_STATE } from "./initialState";
+import { WATER_INITIAL_STATE } from "./initialState";
 
 const handlePending = (state) => {
-  state.isLoading = true;
-  state.isError = null;
+  state.waterDaily.isLoading = true;
+  state.waterDaily.isError = null;
 };
 
 const handleRejected = (state, action) => {
-  state.isLoading = false;
-  state.isError = action.payload;
+  state.waterDaily.isLoading = false;
+  state.waterDaily.isError = action.payload;
 };
 
 const waterSlice = createSlice({
   name: "water",
-  initialState: INITIAL_STATE,
+  initialState: WATER_INITIAL_STATE,
   extraReducers: (builder) => {
     builder
       //=================== fetchDailyWater ===================
@@ -29,38 +29,55 @@ const waterSlice = createSlice({
       .addCase(fetchDailyWater.fulfilled, (state, action) => {
         const { dailyAmount, dailyPercentage, data } = action.payload;
 
-        state.isLoading = false;
-        state.isError = null;
+        state.waterDaily.isLoading = false;
+        state.waterDaily.isError = null;
 
-        state.waterDaily.Amount = dailyAmount;
-        state.waterDaily.Percentage = dailyPercentage;
-        state.waterDaily.Record = data;
+        state.waterDaily.amount = dailyAmount;
+        state.waterDaily.percentage = dailyPercentage;
+        state.waterDaily.data = data;
       })
       .addCase(fetchDailyWater.rejected, handleRejected)
 
       //================== fetchMonthlyWater ==================
-      .addCase(fetchMonthlyWater.pending, handlePending)
-      .addCase(fetchMonthlyWater.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isError = null;
-        state.waterMonthlyRecord = action.payload;
+      .addCase(fetchMonthlyWater.pending, (state) => {
+        state.waterMonthly.isLoading = true;
+        state.waterMonthly.isError = null;
       })
-      .addCase(fetchMonthlyWater.rejected, handleRejected)
+      .addCase(fetchMonthlyWater.fulfilled, (state, action) => {
+        state.waterMonthly.isLoading = false;
+        state.waterMonthly.isError = null;
+        state.waterMonthly.data = action.payload;
+      })
+      .addCase(fetchMonthlyWater.rejected, (state, action) => {
+        state.waterMonthly.isLoading = false;
+        state.waterMonthly.isError = action.payload;
+      })
 
       //======================= addWater ======================
       .addCase(addWater.pending, handlePending)
       .addCase(addWater.fulfilled, (state, action) => {
         const newRecord = action.payload.data;
-        state.isLoading = false;
+        state.waterDaily.isLoading = false;
 
-        state.waterDaily.Record.push(newRecord);
+        state.waterDaily.data.push(newRecord);
 
-        state.waterDaily.Record.sort((a, b) => {
+        state.waterDaily.data.sort((a, b) => {
           return new Date(a.date * 1000) - new Date(b.date * 1000);
         });
 
-        state.waterDaily.Amount += action.payload.data.amount;
-        state.waterDaily.Percentage += action.payload.data.percentage;
+        state.waterDaily.amount += newRecord.amount;
+        state.waterDaily.percentage += newRecord.percentage;
+
+        const monthlyRecordIndex = state.waterMonthly.data.findIndex(
+          (record) => record.date === newRecord.date
+        );
+
+        if (monthlyRecordIndex !== -1) {
+          state.waterMonthly.data[monthlyRecordIndex].amount +=
+            newRecord.amount;
+          state.waterMonthly.data[monthlyRecordIndex].percentage +=
+            newRecord.percentage;
+        }
       })
       .addCase(addWater.rejected, handleRejected)
 
@@ -68,26 +85,41 @@ const waterSlice = createSlice({
       .addCase(updateWaterIntakeRecord.pending, handlePending)
       .addCase(updateWaterIntakeRecord.fulfilled, (state, action) => {
         const updatedRecord = action.payload;
-        state.isLoading = false;
+        state.waterDaily.isLoading = false;
 
-        const index = state.waterDaily.Record.findIndex(
+        const dailyIndex = state.waterDaily.data.findIndex(
           (record) => record.id === updatedRecord.id
         );
 
-        if (index !== -1) {
-          state.waterDaily.Record[index] = updatedRecord;
+        if (dailyIndex !== -1) {
+          const oldRecord = state.waterDaily.data[dailyIndex];
 
-          const totalAmount = state.waterDaily.Record.reduce(
+          state.waterDaily.data[dailyIndex] = updatedRecord;
+
+          const totalAmount = state.waterDaily.data.reduce(
             (sum, record) => sum + record.amount,
             0
           );
-          state.waterDaily.Amount = totalAmount;
+          state.waterDaily.amount = totalAmount;
 
-          const totalPercentage = state.waterDaily.Record.reduce(
+          const totalPercentage = state.waterDaily.data.reduce(
             (sum, record) => sum + record.percentage,
             0
           );
-          state.waterDaily.Percentage = totalPercentage;
+          state.waterDaily.percentage = totalPercentage;
+
+          const monthlyIndex = state.waterMonthly.data.findIndex(
+            (record) =>
+              new Date(record.date * 1000).getTime() ===
+              new Date(oldRecord.date * 1000).getTime()
+          );
+
+          if (monthlyIndex !== -1) {
+            state.waterMonthly.data[monthlyIndex].amount +=
+              updatedRecord.amount - oldRecord.amount;
+            state.waterMonthly.data[monthlyIndex].percentage +=
+              updatedRecord.percentage - oldRecord.percentage;
+          }
         }
       })
       .addCase(updateWaterIntakeRecord.rejected, handleRejected)
@@ -96,16 +128,28 @@ const waterSlice = createSlice({
       .addCase(deleteWaterIntakeRecord.pending, handlePending)
       .addCase(deleteWaterIntakeRecord.fulfilled, (state, action) => {
         const recordId = action.payload.id;
-        state.isLoading = false;
+        state.waterDaily.isLoading = false;
 
-        const index = state.waterDaily.Record.findIndex(
+        const dailyIndex = state.waterDaily.data.findIndex(
           (record) => record.id === recordId
         );
 
-        state.waterDaily.Record.splice(index, 1);
+        if (dailyIndex !== -1) {
+          const [removedRecord] = state.waterDaily.data.splice(dailyIndex, 1);
+          state.waterDaily.amount -= removedRecord.amount;
+          state.waterDaily.percentage -= removedRecord.percentage;
 
-        state.waterDaily.Amount -= action.payload.amount;
-        state.waterDaily.Percentage -= action.payload.percentage;
+          const monthlyIndex = state.waterMonthly.data.findIndex(
+            (record) => record.date === removedRecord.date
+          );
+
+          if (monthlyIndex !== -1) {
+            state.waterMonthly.data[monthlyIndex].amount -=
+              removedRecord.amount;
+            state.waterMonthly.data[monthlyIndex].percentage -=
+              removedRecord.percentage;
+          }
+        }
       })
       .addCase(deleteWaterIntakeRecord.rejected, handleRejected);
   },

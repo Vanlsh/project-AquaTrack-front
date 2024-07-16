@@ -1,10 +1,14 @@
-export const INITIAL_STATE = {
-  waterMonthlyRecord: [],
-  waterDaily: {
-    Record: [],
-    Amount: 0,
-    Percentage: 0,
+export const WATER_INITIAL_STATE = {
+  waterMonthly: {
+    data: [],
+    isLoading: false,
+    isError: null,
   },
-  isLoading: false,
-  isError: null,
+  waterDaily: {
+    data: [],
+    amount: 0,
+    percentage: 0,
+    isLoading: false,
+    isError: null,
+  },
 };
