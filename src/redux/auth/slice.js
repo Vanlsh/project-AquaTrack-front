@@ -19,46 +19,44 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      ////////////////////////////////////////////////////
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccessfullyRegistered = true;
         state.isLoggedIn = true;
+        state.successMessage = "Successfully registered";
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
       .addCase(signUp.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccessfullyRegistered = false;
         state.error = action.payload.status;
         state.errorMessage = action.data.message;
       })
       .addCase(signUp.pending, (state, action) => {
         state.isLoading = true;
-        state.isSuccessfullyRegistered = false;
         state.errorMessage = null;
-        state.error = null;
+        state.successMessage = null;
+        state.token = null;
       })
+      ////////////////////////////////////////////////////
       .addCase(logIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.token = action.payload.token;
         state.user = action.payload.user;
         state.isLoggedIn = true;
-        state.isSuccessfullyLoggedIn = true;
+        state.successMessage = "Successfully logged in";
       })
       .addCase(logIn.rejected, (state, action) => {
         state.isLoading = false;
         state.errorMessage = action.payload.message;
-        state.error = action.payload.status;
-        state.isSuccessfullyLoggedIn = false;
       })
       .addCase(logIn.pending, (state, action) => {
         state.isLoading = true;
         state.errorMessage = null;
-        state.error = null;
-        state.isSuccessfullyLoggedIn = false;
+        state.successMessage = null;
+        state.errorMessage = null;
       })
-
-      // LOGOUT
+      ////////////////////////////////////////////////////
       .addCase(logOut.fulfilled, (state) => {
         return INITIAL_STATE;
       })
@@ -67,12 +65,23 @@ const authSlice = createSlice({
       })
       .addCase(logOut.pending, (state, action) => {
         state.isLoading = true;
+        state.errorMessage = null;
+        state.successMessage = null;
       })
 
       //GET USERINFO
       .addCase(getUserInfo.fulfilled, (state, action) => {
+        state.isLoading = true;
         state.user = action.payload;
-        state.isLoggedIn = true;
+      })
+      .addCase(getUserInfo.pending, (state, action) => {
+        state.isLoading = true;
+        state.errorMessage = null;
+        state.successMessage = null;
+      })
+      .addCase(getUserInfo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.errorMessage = "Something went wrong, try again later";
       });
 
     //TODO UpdateUser

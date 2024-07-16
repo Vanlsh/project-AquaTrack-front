@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { getUserInfo } from "../redux/auth/operations.js";
 import {
-  selectIsSuccessfullyLoggedIn,
-  selectIsSuccessfullyRegistered,
+  selectErrorMessage,
+  selectSuccessMessage,
   selectToken,
 } from "../redux/auth/selectors.js";
 import { setLoggedIn } from "../redux/auth/slice.js";
@@ -24,8 +24,8 @@ const NotFoundPage = lazy(
 function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const isSuccessfullyLoggedIn = useSelector(selectIsSuccessfullyLoggedIn);
-  const isSuccessfullyRegistered = useSelector(selectIsSuccessfullyRegistered);
+  const successMessage = useSelector(selectSuccessMessage);
+  const errorMessage = useSelector(selectErrorMessage);
 
   useEffect(() => {
     if (token) {
@@ -35,13 +35,13 @@ function App() {
   }, [token, dispatch]);
 
   useEffect(() => {
-    if (isSuccessfullyLoggedIn) {
-      toast.success("Successfully logged in");
+    if (errorMessage) {
+      toast.error(errorMessage);
     }
-    if (isSuccessfullyRegistered) {
-      toast.success("Successfully registered");
+    if (successMessage) {
+      toast.success(successMessage);
     }
-  }, [isSuccessfullyLoggedIn, isSuccessfullyRegistered]);
+  }, [successMessage, errorMessage]);
 
   return (
     <SharedLayout>
