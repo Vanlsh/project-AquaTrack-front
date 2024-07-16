@@ -1,16 +1,11 @@
-import css from './ModalLogout.module.css';
+import css from './LogOutModal.module.css';
 import svg from '../../assets/icons.svg';
 import BtnLogout from '../BtnLogout/BtnLogout.jsx';
-import { useState } from 'react';
 import { ANIMATION } from '../../constants.js';
 
 const ModalLogout = ({onClose}) => {
-    const [closing, setClosing] = useState(false);
-    console.log(closing);
 
-    const handleClose = () => {
-        setClosing(true);
-        
+    const handleClose = () => {        
         const id = setTimeout(() => {
             onClose();
             clearTimeout(id);
