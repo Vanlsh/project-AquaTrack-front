@@ -42,7 +42,7 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
         console.log({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue, 10) });
         switch (operationType) {
             case "add":
-                dispatch(addWater());
+                dispatch(addWater(FormData));
                break;
             case "edit":
                 dispatch(updateWaterIntakeRecord());
