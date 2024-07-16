@@ -1,0 +1,221 @@
+.WaterForm {
+  margin: 0 auto;
+  max-width: 343px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--white);
+}
+
+.FormHeader {
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: var(--color-font-main);
+  margin: 0 0 20px 0;
+  background-color: inherit;
+}
+
+.AmountOfWater {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: var(--color-font-second);
+  margin: 0 0 8px 0;
+  background-color: inherit;
+}
+
+.TapAddWaterWrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin: 0 0 16px 0;
+  gap: 8px;
+  background-color: inherit;
+}
+
+.TapAddWaterWrapper button {
+  border-radius: 30px;
+  border: 1.5px solid var(--color-font-main);
+  background-color: inherit;
+  width: 43px;
+  height: 43px;
+  position: relative;
+  cursor: pointer;
+  font-style: inherit;
+  line-height: 0;
+  color: var(--color-font-main);
+  fill: var(--color-font-main);
+  font-size: 25px;
+}
+
+.TapAddWaterWrapper button svg {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+
+.TapAddWaterWrapper button:hover {
+  border: 1.5px solid #87d28d;
+  fill: #87d28d;
+}
+
+.TapAddWater[disabled] {
+  opacity: 0.6; 
+  cursor: not-allowed; 
+}
+
+.TapAddWater[disabled]:hover {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.TapAddWaterValue {
+  border-radius: 30px;
+  padding: 11px 20px;
+  height: 43px;
+  width: 104px;
+  background: var(--color-font-main);
+  padding: 11px 20px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.49333;
+  color: #fff;
+}
+
+.RecordingTimeLabel {
+  margin: 0 0 8px 0;
+  display: block;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--color-font-second);
+  background-color: inherit;
+}
+
+.RecordingTime {
+  display: block;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px 16px 16px;
+  height: 56px;
+  max-width: 100%;
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: var(--color-font-second);
+  margin: 0 0 24px 0;
+}
+
+.WaterValueLabel {
+  margin: 0 0 8px 0;
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--color-font-second);
+}
+
+.WaterValue {
+  display: block;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px 16px 16px;
+  height: 56px;
+  max-width: 100%;
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--color-font-second);
+  margin: 0 0 24px 0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.SaveBtn {
+  display: block;
+  border-radius: 30px;
+  padding: 18px 50px;
+  width: 141px;
+  height: 60px;
+  background: var(--color-second-bg);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-font-main);
+  border: none;
+  cursor: pointer;
+}
+
+.SaveBtn:hover,
+.SaveBtn:active,
+.SaveBtn:focus {
+  background-color: var(--color-second-bg-hover);
+  color: var(--color-font-main);
+}
+
+.Error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .WaterForm {
+    max-width: 518px;
+  }
+  
+  .FormHeader {
+    font-size: 18px;
+    line-height: 1.33;
+    color: var(--color-font-main);
+  }
+  
+  .AmountOfWater {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .RecordingTime {
+    line-height: 1.5;
+  }
+  
+  .WaterValueLabel {
+    font-size: 18px;
+  }
+  
+ }
+ 
+ @media screen and (min-width: 1440px) {
+ }
