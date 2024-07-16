@@ -90,7 +90,8 @@ const WaterForm = ({ operationType }) => {
                 </button>
             </div>
             
-            <label className={css.RecordingTimeLabel}>Recording time:
+            <label >
+                <p className={css.RecordingTimeLabel}>Recording time:</p>
                 <Controller
                     name="recordingTime"
                     control={control}
@@ -105,7 +106,8 @@ const WaterForm = ({ operationType }) => {
                 />
                 {errors.recordingTime && <p className={css.Error}>{errors.recordingTime.message}</p>}
             </label>
-            <label className={css.WaterValueLabel}>Enter the value of the water used:
+            <label>
+                <p className={css.WaterValueLabel}>Enter the value of the water used:</p>
                 <Controller
                     name="waterValue"
                     control={control}

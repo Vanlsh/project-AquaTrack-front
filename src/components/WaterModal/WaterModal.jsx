@@ -1,15 +1,15 @@
 import css from "./WaterModal.module.css";
-import clsx from 'clsx';
+// import clsx from 'clsx';
 
 import WaterForm from "../WaterForm/WaterForm";
-import { useState } from "react";
+// import { useState } from "react";
 import { ANIMATION } from "../../constants";
 
 const WaterModal = ({ operationType, onClose }) => {
-    const [closing, setClosing] = useState(false);
+    // const [closing, setClosing] = useState(false);
 
   const handleClose = () => {
-    setClosing(true);
+    // setClosing(true);
     const id = setTimeout(() => {
       onClose();
       clearTimeout(id);
@@ -30,7 +30,7 @@ const WaterModal = ({ operationType, onClose }) => {
     return (
         <div className={css.WaterModal}>
             <h1 >{modalHeader(operationType)}</h1>
-            < WaterForm operationType={operationType}/>
+            <WaterForm operationType={operationType}/>
             <button type="button" onClick={handleClose} className={css.WaterModalCloseBtn}>
                 <svg>
                     <use href="src\assets\icons.svg#icon-clear"></use>

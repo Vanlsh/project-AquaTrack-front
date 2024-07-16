@@ -1,0 +1,300 @@
+/*Mobile view*/
+
+.userAvatar {
+  height: 103px;
+  width: 133px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.userAvatar img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-color: aqua;
+  margin-bottom: 10px;
+}
+.uploadContainer {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.icon {
+  fill: white;
+  stroke: var(--color-font-second);
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+.ordinaryText {
+  font-family: Poppins;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--color-font-second);
+}
+.hideBtn {
+  display: none;
+}
+.userSettingForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  max-height: 297px;
+  overflow-y: scroll;
+}
+.userSettingForm::-webkit-scrollbar {
+  width: 6px;
+}
+
+.userSettingForm::-webkit-scrollbar-thumb {
+  background: var(--color-main-bg);
+  border-radius: 30px;
+  cursor: pointer;
+}
+.boldText {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+.genderContainer {
+  width: 100%;
+  margin-bottom: 24px;
+}
+.radioContainer {
+  margin-top: 14px;
+  display: flex;
+  text-align: center;
+}
+.radioContainer > label:not(:last-child) {
+  margin-right: 20px;
+}
+.radioInput {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-second-bg);
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.radioInput:checked::before {
+  content: "";
+  display: block;
+  width: 8.57px;
+  height: 8.57px;
+  background-color: var(--color-second-bg);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.userPreferences {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.formNameEmail {
+  margin-bottom: 24px;
+}
+
+.formNameEmail,
+.formWeightTime {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.formNameEmail label,
+.formWeightTime label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.formula {
+  margin-top: 10px;
+}
+.inputBox {
+  height: 46px;
+  max-width: 100%;
+  border-radius: 15px;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  padding: 16px 14px;
+  outline: none;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+  color: var(--color-font-second);
+}
+.inputBox:focus {
+  border: 1px solid rgba(47, 47, 47, 0.4);
+}
+.formulaDescription {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.formulaDescription p {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.formulaExpression {
+  color: var(--color-second-bg);
+  font-weight: 700;
+}
+.formulaDescription + .ordinaryText {
+  height: 140px;
+  width: 100%;
+  border-radius: 15px;
+  padding: 16px;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  margin-bottom: 14px;
+}
+.temporarySymbol {
+  color: var(--color-second-bg);
+  font-weight: 700;
+  font-size: 18px;
+  margin-right: 4px;
+  width: 18px;
+  display: inline-block;
+  text-align: center;
+}
+.formulaDescriptionText {
+  color: rgba(47, 47, 47, 0.6);
+}
+.submitBtn {
+  margin-top: 40px;
+  width: 116px;
+  border-radius: 30px;
+  padding: 16px 0px;
+  outline: none;
+  border: none;
+  background-color: var(--color-second-bg);
+}
+.submitBtn:active {
+  background-color: var(--color-second-bg-hover);
+}
+.boldTextBtn {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+}
+.consumeWater {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+.userNorma {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  color: var(--color-second-bg);
+  display: block;
+}
+
+/*TABLET*/
+
+@media screen and (min-width: 768px) {
+  .userAvatar {
+    height: 134px;
+    width: 151px;
+  }
+  .userAvatar img {
+    width: 100px;
+    height: 100px;
+  }
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+  .ordinaryText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .userSettingForm::-webkit-scrollbar {
+    width: 8px;
+  }
+  .boldText {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .inputBox {
+    height: 56px;
+    padding: 16px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .formulaDescription {
+    flex-direction: row;
+    gap: 28px;
+  }
+  .formulaDescription + .ordinaryText {
+    height: 128px;
+  }
+  .temporarySymbol {
+    font-size: 22px;
+    width: 22px;
+  }
+  .submitBtn {
+    width: 141px;
+    padding: 20px 0px;
+  }
+  .boldTextBtn {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .userNorma {
+    font-size: 15px;
+    line-height: 22.4px;
+    display: inline;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .userSettingForm {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .userPreferences {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  .formNameEmail {
+    margin-bottom: 0;
+  }
+
+  .inputBox {
+    width: 400px;
+  }
+
+  .formulaDescription + .ordinaryText {
+    height: 152px;
+    width: 400px;
+  }
+
+  .submitBtn {
+    height: 56px;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .submitBtn:hover {
+    background-color: var(--color-second-bg-hover);
+  }
+}
