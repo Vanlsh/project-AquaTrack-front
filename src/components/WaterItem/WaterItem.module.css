@@ -33,7 +33,9 @@
 	margin-top: 5px;
 	color: var(--color-font-second);
 }
-
+.icon_water_glass {
+	fill: var(--color-font-second);
+}
 .editButton,
 .deleteButton {
 	margin-left: 10px;
