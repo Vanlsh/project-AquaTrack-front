@@ -2,11 +2,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import clsx from "clsx";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import svgSprite from "../../assets/icons.svg";
-import styles from "./SignInForm.module.css";
-import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
+import { selectIsLoading } from "../../redux/auth/selectors.js";
+import styles from "./SignInForm.module.css";
 
 const schema = yup.object({
   email: yup
@@ -22,6 +23,7 @@ const schema = yup.object({
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
   const {
     register,
     handleSubmit,
@@ -100,7 +102,7 @@ const SignInForm = () => {
         </label>
       </div>
       <button className={styles.signInFormButton} type="submit">
-        Sing In
+        {isLoading ? "Loading" : "Sing In"}
       </button>
     </form>
   );
