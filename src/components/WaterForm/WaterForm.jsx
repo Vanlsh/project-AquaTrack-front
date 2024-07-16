@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import css from "./WaterForm.module.css";
 import clsx from 'clsx';
 import svgSprite from "../../assets/icons.svg";
+import { useDispatch } from 'react-redux';
 
 const validationSchema = Yup.object().shape({
     recordingTime: Yup.string().required('Recording time is required').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
@@ -12,6 +13,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => {
+    const dispatch = useDispatch();
+
     const [waterAmount, setWaterAmount] = useState(portionOfWater);
 
     const formatCurrentTime = () => {
@@ -37,7 +40,16 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
     const onSubmit = data => {
         const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
         console.log({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue, 10) });
-        
+        switch (operationType) {
+            case "add":
+                dispatch(addWater({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue, 10) }));
+               break;
+            case "edit":
+                dispatch(editWater({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue, 10) }));
+                break;
+            default:
+                return;
+        }
         handleClose();
     };
 
