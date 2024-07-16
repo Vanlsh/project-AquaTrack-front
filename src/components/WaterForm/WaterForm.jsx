@@ -39,19 +39,26 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
 
     const onSubmit = data => {
         const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
-        console.log(recordingTimeInMillis);
         const formDataaAdd = {      
-            "amount": 50,
+            "amount": data.waterValue,
             "date": `${recordingTimeInMillis}`,
-            "norm": selectWaterDaylyAmount
+           // "norm": selectWaterDailyAmount||1.8
+        }
+
+        const formDataEdit = {
+            "amount": data.waterAmount,
+            "date": `${recordingTimeInMillis}`,
+           // "norm": selectWaterDailyAmount
         }
         
         switch (operationType) {
             case "add":
-                dispatch(addWater(formDataaAdd));
+                console.log(formDataaAdd);
+              //  dispatch(addWater(formDataaAdd));
                break;
             case "edit":
-                dispatch(updateWaterIntakeRecord(formDataEdit));
+                console.log(formDataEdit);
+             //   dispatch(updateWaterIntakeRecord(formDataEdit));
                 break;
             default:
                 return;
