@@ -11,11 +11,12 @@ export const updateWater = async (id, water) => {
 };
 
 export const deleteWater = async (id) => {
-  const data = await instance.delete(`/water/${id}`);  
+  const data = await instance.delete(`/water/${id}`);
   return data;
 };
 
 export const getDayWater = async (date) => {
+  console.log(date);
   const { data } = await instance.get(`/water/day/${date}`);
   return data;
 };
