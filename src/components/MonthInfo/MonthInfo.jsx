@@ -10,7 +10,7 @@ const MonthInfo = () => {
 
 	const navigate = useNavigate();
 	const { date } = useParams();
-	console.log(date);
+	// console.log(date);
 
 	useEffect(() => {
 		setYear(new Date().getFullYear());
