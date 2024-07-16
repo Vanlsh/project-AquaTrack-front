@@ -1,8 +1,11 @@
 .container {
   display: flex;
+  /* align-items: center; */
+    justify-content: center;
+    height: 100vh;
   flex-direction: column;
   gap: 16px;
-  margin: 0 auto;
+  margin: auto;
   max-width: 375px;
   padding: 16px;
 }
@@ -19,5 +22,16 @@
     flex-direction: row;
     gap: 32px;
     max-width: 1440px;
+    align-items: center;
+    justify-content: initial;
   }
+}
+
+.HomePage {
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; */
+  /* margin: auto;
+    width: 50%; */
 }
