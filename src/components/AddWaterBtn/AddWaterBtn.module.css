@@ -1,92 +1,79 @@
-.addBtnWrap button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 10px;
-	border-radius: 30px;
-	letter-spacing: -0.01em;
-	transition: var(--animation);
-	border: none;
-	outline: none;
-	font: inherit;
-	font-weight: 600;
-}
-
-.btnBig {
-	position: absolute;
-	right: 16px;
-	bottom: 32px;
+.btn {
 	width: 140px;
 	height: 46px;
-	padding: 20px 14px;
-	line-height: 1.29;
+	border-radius: 30px;
+	border: none;
 	color: var(--white);
-	background-color: var(--grey);
-
-	&:hover {
-		color: var(--lightGreenHover);
-
-		.iconWhite {
-			stroke: var(--lightGreenHover);
-		}
-	}
+	background-color: var(--color-font-main);
+	cursor: pointer;
+	display: flex;
+	gap: 10px;
+	padding: 14px 20px;
+	align-items: center;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 18px;
+	margin-left: auto;
+	letter-spacing: -0.1px;
 }
-.iconWhite {
-	transition: var(--animation);
+.btn:hover {
+	color: var(--color-second-bg);
+}
+.btnStyle {
+	background-color: transparent;
+	color: var(--color-font-main);
+	font-size: 14px;
+	width: 124px;
+	height: 30px;
+	padding: 0;
+}
+
+.btnStyle:hover {
+	color: var(--color-font-main);
+}
+.btnStyle:hover .iconStyle {
+	background-color: var(--color-font-main);
+}
+.icon {
 	stroke: var(--white);
 }
-.descSmall {
-	font-size: 14px;
+.iconStyle {
+	box-sizing: border-box;
+	background-color: var(--color-second-bg);
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	stroke: var(--color-font-main);
+	padding: 6px;
+}
+.btn:hover .icon {
+	stroke: var(--color-second-bg);
+}
+.btnStyle:hover .iconStyle {
+	stroke: var(--white);
 }
 
 @media screen and (min-width: 768px) {
-	.txtSmall {
-		font-size: 16px;
-	}
-	.btnBig {
+	.btn {
 		width: 178px;
 		height: 60px;
-		right: 32px;
-		bottom: 64px;
 		padding: 18px 30px;
+		font-size: 16px;
+		line-height: 24px;
 	}
-	.iconWhite {
+	.icon {
 		width: 24px;
 		height: 24px;
 	}
-}
-
-/* **************************** */
-/* styles for Small btn */
-/* **************************** */
-
-.btnSmall {
-	color: var(--grey);
-	background-color: transparent;
-	padding: 0px;
-	&:hover {
-		.iconGrey {
-			stroke: var(--white);
-		}
-		.iconWrapper {
-			background-color: var(--grey);
-		}
+	.btnStyle {
+		width: 124px;
+		height: 30px;
+		padding: 0;
 	}
-}
-.descBig {
-	font-size: 16px;
-}
-.iconWrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-	height: 30px;
-	width: 30px;
-	transition: var(--animation);
-	background-color: var(--green);
-}
-.iconGrey {
-	transition: var(--animation);
-	stroke: var(--grey);
+	.iconStyle {
+		background-color: var(--color-second-bg);
+		border-radius: 50%;
+		width: 30px;
+		height: 30px;
+	}
 }
