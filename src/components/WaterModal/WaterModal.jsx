@@ -5,6 +5,8 @@ import WaterForm from "../WaterForm/WaterForm";
 import { useState } from "react";
 import { ANIMATION } from "../../constants";
 
+import svgSprite from "../../assets/icons.svg";
+
 const WaterModal = ({ operationType, onClose }) => {
     const [closing, setClosing] = useState(false);
 
@@ -33,7 +35,7 @@ const WaterModal = ({ operationType, onClose }) => {
             < WaterForm operationType={operationType}/>
             <button type="button" onClick={handleClose} className={css.WaterModalCloseBtn}>
                 <svg>
-                    <use href="src\assets\icons.svg#icon-clear"></use>
+                    <use xlinkHref={svgSprite + "#icon-clear"}></use>
                 </svg>
             </button>
         </div>

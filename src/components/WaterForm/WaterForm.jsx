@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
 import css from "./WaterForm.module.css";
 import clsx from 'clsx';
+import svgSprite from "../../assets/icons.svg";
 
 const validationSchema = Yup.object().shape({
     recordingTime: Yup.string().required('Recording time is required').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
@@ -74,7 +75,7 @@ const WaterForm = ({ operationType }) => {
                     disabled={isMinusButtonDisabled}
                 >
                     <svg>
-                        <use href="src/assets/icons.svg#icon-remove"></use>
+                        <use xlinkHref={svgSprite + "#icon-remove"}></use>
                     </svg>
                 </button>
                 <p className={css.TapAddWaterValue}>{waterAmount} ml</p>
@@ -85,7 +86,7 @@ const WaterForm = ({ operationType }) => {
                     disabled={isPlusButtonDisabled}
                 >
                     <svg>
-                        <use href="src/assets/icons.svg#icon-add"></use>
+                        <use xlinkHref={svgSprite + "#icon-add"}></use>
                     </svg>
                 </button>
             </div>

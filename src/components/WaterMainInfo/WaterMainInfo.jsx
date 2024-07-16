@@ -5,6 +5,7 @@ import css from "./WaterMainInfo.module.css";
 import { useModal } from "../../hooks/useModal.js";
 import Modal from "../Modal/Modal.jsx";
 import svgSprite from "../../assets/icons.svg";
+import WaterModal from "../WaterModal/WaterModal.jsx";
 
 const WaterMainInfo = () => {
   const [goal, setGoal] = useState(0);
@@ -15,7 +16,7 @@ const WaterMainInfo = () => {
   }, [setModal]);
 
   const openModal = useCallback(() => {
-    setModal(<Modal onClose={closeModal} />);
+    setModal(<WaterModal onClose={closeModal} operationType={"add"}/>);
   }, [setModal, closeModal]);
 
   // useEffect(() => {
