@@ -10,6 +10,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 262px 335px;
+  padding-top: 24px;
+  padding-left: 16px;
 }
 
 @media (min-device-pixel-ratio: 2),
@@ -18,17 +20,6 @@
   .waterContainer {
     background-image: url(./img/bottle_for_water_mob_2x.png);
   }
-}
-
-.waterTitle {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 111%;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: #323f47;
-  margin-top: 24px;
-  margin-left: 16px;
 }
 
 .normaContainer {
@@ -71,7 +62,29 @@
   display: flex;
 }
 
+.btnSet {
+  border-radius: 30px;
+  padding: 14px 20px;
+  width: 165px;
+  height: 46px;
+  border: none;
+  position: absolute;
+  bottom: 32px;
+  right: 16px;
+  background-color: #323f47;
+  display: flex;
+}
+
 .btnText {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+}
+
+.btnTextSet {
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
