@@ -17,7 +17,7 @@ export const addWater = createAsyncThunk(
       const response = await createWater(formData);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data || error.message);
     }
   }
 );
@@ -29,9 +29,9 @@ export const updateWaterIntakeRecord = createAsyncThunk(
   async ({ id, formData }, thunkAPI) => {
     try {
       const { data } = await updateWater(id, formData);
-      return data.data;
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data || error.message);
     }
   }
 );
@@ -43,9 +43,9 @@ export const deleteWaterIntakeRecord = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const { data } = await deleteWater(id);
-      return data.data;
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data || error.message);
     }
   }
 );
@@ -57,9 +57,9 @@ export const fetchMonthlyWater = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const { data } = await getMonthWater(formData);
-      return data.data;
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data || error.message);
     }
   }
 );
@@ -73,7 +73,7 @@ export const fetchDailyWater = createAsyncThunk(
       const response = await getDayWater(date);
       return response;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data || error.message);
     }
   }
 );

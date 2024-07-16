@@ -11,7 +11,7 @@ export const updateWater = async (id, water) => {
 };
 
 export const deleteWater = async (id) => {
-  const data = await instance.delete(`/water/${id}`);
+  const data = await instance.delete(`/water/${id}`);  
   return data;
 };
 
