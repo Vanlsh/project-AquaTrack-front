@@ -13,7 +13,7 @@ import Logo from "../Logo/Logo.jsx";
 
 const WaterMainInfo = () => {
   const dispatch = useDispatch();
-  const dailyWaterAmount = useSelector(selectWaterDailyRecord)
+  const dailyWaterAmount = useSelector(selectWaterDailyPercentage)
   const setModal = useModal();
   console.log(dailyWaterAmount);
 
