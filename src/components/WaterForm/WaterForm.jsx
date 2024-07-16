@@ -43,7 +43,7 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
         const formDataaAdd = {      
             "amount": 50,
             "date": `${recordingTimeInMillis}`,
-            "norm": 1.8
+            "norm": selectWaterDaylyAmount
         }
         
         switch (operationType) {
