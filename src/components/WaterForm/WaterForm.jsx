@@ -11,7 +11,7 @@ const validationSchema = Yup.object().shape({
     waterValue: Yup.number().required('Water value is required').min(0, 'Water value must be greater than or equal to 0').max(5000, 'Water value must be less than or equal to 5000'),
 });
 
-const WaterForm = ({ operationType, formTime, portionOfWater }) => {
+const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => {
     const [waterAmount, setWaterAmount] = useState(portionOfWater);
 
     const formatCurrentTime = () => {
@@ -37,6 +37,8 @@ const WaterForm = ({ operationType, formTime, portionOfWater }) => {
     const onSubmit = data => {
         const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
         console.log({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue, 10) });
+        
+        handleClose();
     };
 
     const FormHeader = (operationType) => {
@@ -68,6 +70,7 @@ const WaterForm = ({ operationType, formTime, portionOfWater }) => {
 
     return (
         <form className={css.WaterForm} onSubmit={handleSubmit(onSubmit)}>
+
             {FormHeader(operationType)}
             <p className={css.AmountOfWater}>Amount of water</p>
             <div className={css.TapAddWaterWrapper}>

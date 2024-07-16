@@ -67,7 +67,7 @@ const WaterModal = ({ operationType, onClose, editTime, portionOfDB }) => {
     return (
         <div className={css.WaterModal}>
             <h1>{modalHeader(operationType)}</h1>
-            <WaterForm operationType={operationType} formTime={formTime(operationType)} portionOfWater={portionOfWater} />
+            <WaterForm operationType={operationType} formTime={formTime(operationType)} portionOfWater={portionOfWater} handleClose={handleClose} />
             <button type="button" onClick={handleClose} className={css.WaterModalCloseBtn}>
                 <svg>
                     <use xlinkHref={svgSprite + "#icon-clear"}></use>
