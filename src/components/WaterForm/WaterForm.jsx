@@ -42,10 +42,10 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
         console.log({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue, 10) });
         switch (operationType) {
             case "add":
-                dispatch(addWater({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue, 10) }));
+                dispatch(addWater());
                break;
             case "edit":
-                dispatch(editWater({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue, 10) }));
+                dispatch(updateWaterIntakeRecord());
                 break;
             default:
                 return;
