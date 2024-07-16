@@ -1,36 +1,29 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-  persistStore,
-  persistReducer,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import { authReducer } from "./auth/slice";
 // import { waterReducer } from "./water/slice";
-// import { userReducer } from "./user/slice";
 
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["token", "refreshToken"],
+  whitelist: ["token"],
 };
 
 // const waterPersistConfig = {
 //   key: "water",
 //   storage,
 //   whitelist: [],
-// };
-
-// const userPersistConfig = {
-//   key: "user",
-//   storage,
-//   whitelist: ["token"],
 // };
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);

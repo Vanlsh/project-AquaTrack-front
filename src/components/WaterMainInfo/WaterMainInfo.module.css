@@ -35,7 +35,7 @@
   border-radius: 15px;
   padding: 12px;
   width: 102px;
-  height: 54px;
+  min-height: 54px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
   margin-top: 122px;
@@ -116,7 +116,7 @@
   .normaContainer {
     padding: 14px 18px;
     width: 129px;
-    height: 78px;
+    min-height: 78px;
     margin-top: 157px;
     margin-left: 32px;
   }
