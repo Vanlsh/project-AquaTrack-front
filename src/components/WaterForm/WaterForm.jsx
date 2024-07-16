@@ -11,29 +11,32 @@ const validationSchema = Yup.object().shape({
     waterValue: Yup.number().required('Water value is required').min(0, 'Water value must be greater than or equal to 0').max(5000, 'Water value must be less than or equal to 5000'),
 });
 
-const WaterForm = ({ operationType }) => {
-    const [waterAmount, setWaterAmount] = useState(50);
+const WaterForm = ({ operationType, formTime, portionOfWater }) => {
+    const [waterAmount, setWaterAmount] = useState(portionOfWater);
 
     const formatCurrentTime = () => {
-        const now = new Date();
+        if (!(formTime instanceof Date) || isNaN(formTime.getTime())) {
+            return '00:00';
+        }
+        const now = formTime;
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         return `${hours}:${minutes}`;
     };
 
-    const currentTime = formatCurrentTime(); 
+    const currentTime = formatCurrentTime();
 
     const { control, handleSubmit, setValue, formState: { errors } } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             recordingTime: currentTime,
-            waterValue: waterAmount.toString() 
+            waterValue: waterAmount.toString()
         }
     });
 
     const onSubmit = data => {
-        const recordingTimeInMillis = convertTimeToMillis(data.recordingTime); 
-        console.log({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue) });
+        const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
+        console.log({ ...data, recordingTimeInMillis, waterValue: parseInt(data.waterValue, 10) });
     };
 
     const FormHeader = (operationType) => {
@@ -67,10 +70,10 @@ const WaterForm = ({ operationType }) => {
         <form className={css.WaterForm} onSubmit={handleSubmit(onSubmit)}>
             {FormHeader(operationType)}
             <p className={css.AmountOfWater}>Amount of water</p>
-            <div className={css.TapAddWaterWrapper}> 
-                <button 
-                    type="button" 
-                    className={css.TapAddWater} 
+            <div className={css.TapAddWaterWrapper}>
+                <button
+                    type="button"
+                    className={css.TapAddWater}
                     onClick={() => handleWaterAmountChange(Math.max(waterAmount - 50, 0))}
                     disabled={isMinusButtonDisabled}
                 >
@@ -79,9 +82,9 @@ const WaterForm = ({ operationType }) => {
                     </svg>
                 </button>
                 <p className={css.TapAddWaterValue}>{waterAmount} ml</p>
-                <button 
-                    type="button" 
-                    className={css.TapAddWater} 
+                <button
+                    type="button"
+                    className={css.TapAddWater}
                     onClick={() => handleWaterAmountChange(waterAmount + 50)}
                     disabled={isPlusButtonDisabled}
                 >
@@ -90,17 +93,16 @@ const WaterForm = ({ operationType }) => {
                     </svg>
                 </button>
             </div>
-            
+
             <label className={css.RecordingTimeLabel}>Recording time:
                 <Controller
                     name="recordingTime"
                     control={control}
-                    defaultValue={currentTime}
                     render={({ field }) => (
                         <input
                             {...field}
                             type="text"
-                            className={clsx(css.RecordingTime)} 
+                            className={clsx(css.RecordingTime)}
                         />
                     )}
                 />
@@ -110,7 +112,6 @@ const WaterForm = ({ operationType }) => {
                 <Controller
                     name="waterValue"
                     control={control}
-                    defaultValue={waterAmount.toString()}
                     render={({ field }) => (
                         <input
                             {...field}
