@@ -1,29 +1,22 @@
-// import ModalBackdrop from "../ModalBackdrop/ModalBackdrop.jsx";
-import Modal from "../Modal/Modal.jsx";
 import UserSettingsForm from "../UserSettingsForm/UserSettingsForm.jsx";
 import css from "./UserSettingsModal.module.css";
+import svg from "../../assets/icons.svg";
 
-const UserSettingsModal = ({ isOpen, onClose }) => {
+const UserSettingsModal = ({ onClose }) => {
   return (
-    // isOpen &&
-    // <ModalBackdrop onClose={onClose}>
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <div className={css.modalSettingContainer}>
-        <div className={css.modalHeader}>
-          <h2>Setting</h2>
-          <button className={css.closeBtn} onClick={onClose}>
-            {/* <svg className={css.icon}>
-              <use href="../../assets/icons.svg#icon-x"></use>
-            </svg> */}
-            X
-          </button>
-        </div>
-        <div className="modal-body">
-          <UserSettingsForm />
-        </div>
+    <div className={css.modalSettingContainer}>
+      <div className={css.modalHeader}>
+        <h2>Setting</h2>
+        <button className={css.closeBtn} onClick={onClose}>
+          <svg className={css.icon}>
+            <use xlinkHref={svg + "#icon-x"}></use>
+          </svg>
+        </button>
       </div>
-    </Modal>
-    // </ModalBackdrop>
+      <div className="modal-body">
+        <UserSettingsForm />
+      </div>
+    </div>
   );
 };
 
