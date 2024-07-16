@@ -25,7 +25,7 @@ const AddWaterBtn = ({ isOpen }) => {
 					width='16'
 					height='16'
 				>
-					<use href='src\assets\icons.svg#icon-clear'></use>
+					<use href='../../src/assets/icons.svg#icon-plus'></use>
 				</svg>
 				Add water
 			</button>

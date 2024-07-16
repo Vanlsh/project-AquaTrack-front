@@ -1,0 +1,87 @@
+.list_water_items {
+	display: flex;
+	overflow-x: auto;
+	padding-left: 0;
+	gap: 17px;
+	padding-bottom: 10px;
+}
+
+.water_item {
+	flex: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--white);
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 2px 4px var(--color-font-second);
+}
+
+.water_item_content {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.water_item strong {
+	font-size: 16px;
+	color: var(--color-font-main);
+}
+
+.water_item p {
+	font-size: 12px;
+	margin-top: 5px;
+	color: var(--color-font-second);
+}
+
+.editButton,
+.deleteButton {
+	margin-left: 10px;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.container_buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.icon_edit {
+	fill: none;
+	stroke: var(--color-font-main);
+	stroke-width: 2px;
+}
+
+.icon_delete {
+	fill: none;
+	stroke: var(--color-font-main);
+	stroke-width: 2px;
+}
+
+.icon_water-glass {
+	fill: var(--color-second-bg);
+	stroke: var(--color-second-bg);
+	stroke-width: 0;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--white);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-font-second);
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+	transition: all var(--transition-color);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-font-main);
+	border-radius: 10px;
+}
