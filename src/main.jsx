@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { store, persistor } from "./redux/store.js";
-import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import { ModalProvider } from "./context/ModalProvider.jsx";
-import App from "./components/App.jsx";
-import { ToastContainer } from "react-toastify";
+import { BrowserRouter } from "react-router-dom";
 import "modern-normalize";
+import { PersistGate } from "redux-persist/integration/react";
+import App from "./components/App.jsx";
+import { ModalProvider } from "./context/ModalProvider.jsx";
+import { persistor, store } from "./redux/store.js";
+import { injectStore } from "./axios.js";
 import "./index.css";
+
+injectStore(store);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -16,19 +18,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <ModalProvider>
-            <ToastContainer
-              position="bottom-right"
-              autoClose={3000}
-              hideProgressBar={true}
-              limit={5}
-              closeOnClick
-              draggable
-              stacked
-            />
             <App />
           </ModalProvider>
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

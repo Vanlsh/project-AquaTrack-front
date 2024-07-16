@@ -1,45 +1,52 @@
-import { lazy, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import SharedLayout from "./SharedLayout/SharedLayout.jsx";
+import { lazy, useEffect } from "react";
+import { toast, Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-
-import { refreshUser } from "../redux/auth/operations.js";
-import { selectIsRefreshing } from "../redux/auth/selectors.js";
-import RestrictedRoute from "./RestrictedRoute.jsx";
+import { Route, Routes } from "react-router-dom";
+import { getUserInfo } from "../redux/auth/operations.js";
+import {
+  selectIsSuccessfullyLoggedIn,
+  selectIsSuccessfullyRegistered,
+  selectToken,
+} from "../redux/auth/selectors.js";
+import { setLoggedIn } from "../redux/auth/slice.js";
 import PrivateRoute from "./PrivateRoute.jsx";
-import Loader from "./Loader/Loader.jsx";
+import RestrictedRoute from "./RestrictedRoute.jsx";
+import SharedLayout from "./SharedLayout/SharedLayout.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
 const SignUpPage = lazy(() => import("../pages/SignUpPage/SignUpPage.jsx"));
 const TrackerPage = lazy(() => import("../pages/TrackerPage/TrackerPage.jsx"));
 const NotFoundPage = lazy(
-  () => import("../pages/NotFoundPage/NotFoundPage.jsx")
+  () => import("../pages/NotFoundPage/NotFoundPage.jsx"),
 );
 
 function App() {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsRefreshing);
-  const [isDelayOver, setIsDelayOver] = useState(false);
+  const token = useSelector(selectToken);
+  const isSuccessfullyLoggedIn = useSelector(selectIsSuccessfullyLoggedIn);
+  const isSuccessfullyRegistered = useSelector(selectIsSuccessfullyRegistered);
 
   useEffect(() => {
-    dispatch(refreshUser());
+    if (token) {
+      dispatch(getUserInfo());
+      dispatch(setLoggedIn(true));
+    }
+  }, [token, dispatch]);
 
-    const timer = setTimeout(() => {
-      setIsDelayOver(true);
-    }, 500);
+  useEffect(() => {
+    if (isSuccessfullyLoggedIn) {
+      toast.success("Successfully logged in");
+    }
+    if (isSuccessfullyRegistered) {
+      toast.success("Successfully registered");
+    }
+  }, [isSuccessfullyLoggedIn, isSuccessfullyRegistered]);
 
-    return () => clearTimeout(timer);
-  }, [dispatch]);
-
-  return isRefreshing || !isDelayOver ? (
-    <Loader />
-  ) : (
+  return (
     <SharedLayout>
       <Routes>
         <Route path="/" element={<HomePage />} />
-
-        {/* <Route path="/signup" element={<SignUpPage />} /> */}
 
         <Route
           path="/signup"
@@ -70,6 +77,7 @@ function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Toaster position="top-right" />
     </SharedLayout>
   );
 }
