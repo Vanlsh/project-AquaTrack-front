@@ -34,7 +34,7 @@
 	color: var(--color-font-second);
 }
 .icon_water_glass {
-	fill: var(--color-font-second);
+	fill: var(--color-second-bg-hover);
 }
 .editButton,
 .deleteButton {
