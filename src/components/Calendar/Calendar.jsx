@@ -31,6 +31,8 @@ const Calendar = ({ month, year, handleClick, selectedIndex }) => {
 							eachDate={eachDate}
 							sIndex={selectedIndex}
 							handleClick={handleClick}
+							month={month}
+							year={year}
 						/>
 					</li>
 				))}

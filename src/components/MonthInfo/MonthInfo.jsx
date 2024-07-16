@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import CalendarPagination from '../CalendarPagination/CalendarPagination.jsx';
 import Calendar from '../Calendar/Calendar.jsx';
 
@@ -7,13 +8,18 @@ const MonthInfo = () => {
 	const [month, setMonth] = useState(0);
 	const [selectedIndex, setSelectedIndex] = useState(null);
 
+	const navigate = useNavigate();
+	const { date } = useParams();
+	console.log(date);
+
 	useEffect(() => {
 		setYear(new Date().getFullYear());
 		setMonth(new Date().getMonth());
 	}, []);
 
-	const handleClick = (index) => {
+	const handleClick = (index, newDate) => {
 		setSelectedIndex(index);
+		navigate(`/tracker/${newDate}`);
 	};
 
 	const increment = () => {
