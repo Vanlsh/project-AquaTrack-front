@@ -8,6 +8,7 @@
   background-position: center;
   background-repeat: no-repeat;
   /* aspect-ratio: 16 / 16; */
+  width: 343px;
   height: 353px;
 }
 
@@ -64,6 +65,7 @@
   .advantagesSection {
     padding: 32px;
     background-image: url("../../../public/img/bg/drinking_girl_bg_tab.jpg");
+    width: 704px;
     height: 446px;
   }
 
