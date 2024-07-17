@@ -1,6 +1,7 @@
 .WaterForm {
   margin: 0 auto;
-  max-width: 343px;
+  width: 303px;
+  height: auto;
   padding: 0;
   margin: 0;
   display: flex;
@@ -25,7 +26,7 @@
   display: block;
   font-weight: 400;
   font-size: 14px;
-  line-height: 1.28571;
+  line-height: 1.29;
   letter-spacing: -0.01em;
   color: var(--color-font-second);
   margin: 0 0 8px 0;
@@ -39,14 +40,16 @@
   margin: 0 0 16px 0;
   gap: 8px;
   background-color: inherit;
+  width: 100%;
+  height: 40px;
 }
 
 .TapAddWaterWrapper button {
   border-radius: 30px;
   border: 1.5px solid var(--color-font-main);
   background-color: inherit;
-  width: 43px;
-  height: 43px;
+  width: 40px;
+  height: 40px;
   position: relative;
   cursor: pointer;
   font-style: inherit;
@@ -86,13 +89,14 @@
 .TapAddWaterValue {
   border-radius: 30px;
   padding: 11px 20px;
-  height: 43px;
-  width: 104px;
+  height: 40px;
+  min-width: 81px;
   background: var(--color-font-main);
-  padding: 11px 20px;
   font-weight: 700;
-  font-size: 15px;
-  line-height: 1.49333;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
   color: #fff;
 }
 
@@ -100,8 +104,8 @@
   margin: 0 0 8px 0;
   display: block;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.29;
   letter-spacing: -0.01em;
   color: var(--color-font-second);
   background-color: inherit;
@@ -110,17 +114,22 @@
 .RecordingTime {
   display: block;
   border: 1px solid rgba(47, 47, 47, 0.15);
+  outline: transparent;
   border-radius: 15px;
-  padding: 16px 16px 16px;
-  height: 56px;
-  max-width: 100%;
+  padding: 14px 16px 14px 16px;
+  height: 46px;
+  width: 100%;
   background-color: #fff;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 1.28;
+  font-size: 14px;
+  line-height: 1.29;
   letter-spacing: -0.01em;
   color: var(--color-font-second);
   margin: 0 0 24px 0;
+}
+
+.RecordingTime:focus {
+  border: 1px solid rgba(47, 47, 47, 0.35);
 }
 
 .WaterValueLabel {
@@ -128,7 +137,7 @@
   display: block;
   font-weight: 700;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--color-font-second);
 }
@@ -136,17 +145,22 @@
 .WaterValue {
   display: block;
   border: 1px solid rgba(47, 47, 47, 0.15);
+  outline: transparent;
   border-radius: 15px;
-  padding: 16px 16px 16px;
-  height: 56px;
-  max-width: 100%;
+  padding: 16px 16px 16px 16px;
+  height: 46px;
+  width: 100%;
   background-color: #fff;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 1;
+  font-size: 14px;
+  line-height: 1.29;
   letter-spacing: -0.01em;
   color: var(--color-font-second);
   margin: 0 0 24px 0;
+}
+
+.WaterValue:focus {
+  border: 1px solid rgba(47, 47, 47, 0.35);
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -162,14 +176,14 @@ input[type="number"] {
 .SaveBtn {
   display: block;
   border-radius: 30px;
-  padding: 18px 50px;
-  width: 141px;
-  height: 60px;
+  padding: 14px 40px;
+  width: 116px;
+  height: 46px;
   background: var(--color-second-bg);
   font-family: inherit;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.29;
   letter-spacing: -0.01em;
   text-align: center;
   color: var(--color-font-main);
@@ -193,28 +207,63 @@ input[type="number"] {
 
 @media screen and (min-width: 768px) {
   .WaterForm {
-    max-width: 518px;
+    width: 438px;
   }
   
   .FormHeader {
     font-size: 18px;
     line-height: 1.33;
-    color: var(--color-font-main);
   }
   
   .AmountOfWater {
     font-size: 16px;
     line-height: 1.5;
   }
+
+  .TapAddWaterWrapper {
+    height: 43px;
+  }
+
+  .TapAddWaterWrapper button {
+    width: 43px;
+    height: 43px;
+  }
+
+  .TapAddWaterValue {
+    height: 43px;
+    min-width: 86px;
+  }
+
+  .RecordingTimeLabel {
+    font-size: 16px;
+    line-height: 1.5;
+  }
   
   .RecordingTime {
+    padding: 16px 16px 16px 16px;
+    height: 56px;
+    font-size: 16px;
     line-height: 1.5;
   }
   
   .WaterValueLabel {
     font-size: 18px;
+    line-height: 1.33;
   }
-  
+
+  .WaterValue {
+    height: 56px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .SaveBtn {
+    padding: 18px 50px;
+    width: 141px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
  }
  
  @media screen and (min-width: 1440px) {
