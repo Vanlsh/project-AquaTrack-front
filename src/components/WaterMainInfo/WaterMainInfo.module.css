@@ -10,6 +10,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 262px 335px;
+  padding-top: 24px;
+  padding-left: 16px;
 }
 
 @media (min-device-pixel-ratio: 2),
@@ -20,17 +22,6 @@
   }
 }
 
-.waterTitle {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 111%;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: #323f47;
-  margin-top: 24px;
-  margin-left: 16px;
-}
-
 .normaContainer {
   border-radius: 15px;
   padding: 12px;
@@ -38,8 +29,7 @@
   min-height: 54px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  margin-top: 122px;
-  margin-left: 16px;
+  margin-top: 78px;
   position: absolute;
 }
 
@@ -56,36 +46,6 @@
   font-size: 10px;
   line-height: 100%;
   color: rgba(47, 47, 47, 0.6);
-}
-
-.btnAdd {
-  border-radius: 30px;
-  padding: 14px 20px;
-  width: 140px;
-  height: 46px;
-  border: none;
-  position: absolute;
-  bottom: 32px;
-  right: 16px;
-  background-color: #323f47;
-  display: flex;
-}
-
-.btnText {
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 129%;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: #fff;
-}
-
-.plus {
-  width: 13px;
-  height: 13px;
-  margin-right: 10px;
-  margin-top: 2px;
-  stroke: #fff;
 }
 
 @media screen and (min-width: 768px) {
@@ -117,7 +77,7 @@
     padding: 14px 18px;
     width: 129px;
     min-height: 78px;
-    margin-top: 157px;
+    margin-top: 101px;
     margin-left: 32px;
   }
 
@@ -129,25 +89,6 @@
   .normaText {
     font-size: 12px;
     line-height: 187%;
-  }
-
-  .btnAdd {
-    padding: 18px 30px;
-    width: 178px;
-    height: 60px;
-    bottom: 64px;
-    right: 32px;
-  }
-
-  .btnText {
-    font-size: 16px;
-    line-height: 150%;
-  }
-
-  .plus {
-    height: 15px;
-    width: 15px;
-    margin-top: 4px;
   }
 }
 
@@ -170,6 +111,6 @@
   }
 
   .normaContainer {
-    margin-left: 64px;
+    margin-left: 40px;
   }
 }
