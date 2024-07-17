@@ -18,12 +18,7 @@ export const logIn = createAsyncThunk(
       const res = await logInUser(userData);
       return res.data;
     } catch (err) {
-      //TODO reject with message
-      console.log(err);
-      return thunkAPI.rejectWithValue({
-        status: err.response.status,
-        message: err.data.data,
-      });
+      return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
   },
 );
@@ -38,23 +33,20 @@ export const signUp = createAsyncThunk(
       const resSignIn = await logInUser(userData);
       return resSignIn.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
   },
 );
 
 //====================== LOG OUT =======================
 
-export const logOut = createAsyncThunk(
-  "auth/logout",
-  async (token, thunkAPI) => {
-    try {
-      await logOutUser(token);
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
-    }
-  },
-);
+export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    await logOutUser();
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err);
+  }
+});
 
 //================= USER INFORMATION ===================
 
@@ -65,7 +57,7 @@ export const getUserInfo = createAsyncThunk(
       const response = await requestUserInfo(token);
       return response.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
   },
 );
@@ -79,7 +71,7 @@ export const updateUserProfile = createAsyncThunk(
       const response = await updateUserInfo(userData);
       return response.user;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
   },
 );
@@ -88,12 +80,12 @@ export const updateUserProfile = createAsyncThunk(
 
 export const uploadUserPhoto = createAsyncThunk(
   "users/photo",
-  async (userData, thunkAPI) => {
+  async (photo, thunkAPI) => {
     try {
-      const response = await updateUserPhoto(userData);
+      const response = await updateUserPhoto(photo);
       return response.photo;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
   },
 );
