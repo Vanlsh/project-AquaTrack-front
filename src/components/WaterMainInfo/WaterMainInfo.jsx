@@ -9,7 +9,7 @@ import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
 
 const WaterMainInfo = () => {
   const { t } = useTranslation();
-  const waterRate = useSelector(selectWaterRate)
+  const waterRate = useSelector(selectWaterRate);
 
   return (
     <div className={css.waterContainer}>
