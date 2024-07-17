@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-
 import css from "./CalendarItem.module.css";
+import { useDispatch } from "react-redux";
+import { fetchDailyWater } from "../../redux/water/operations";
 
 const CalendarItem = ({
   index,
@@ -10,13 +11,13 @@ const CalendarItem = ({
   setSelectedIndex,
 }) => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   // Thunk for data for selected month;
 
   const handleClick = (index, calendarDate) => {
     setSelectedIndex(index);
     navigate(`/tracker/${calendarDate}`);
-    // тут не потрібна санка
+    dispatch(fetchDailyWater(calendarDate));
   };
 
   const date = new Date(Number(calendarDate)).getDate();

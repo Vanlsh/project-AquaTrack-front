@@ -16,12 +16,9 @@ const TrackerPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDailyWater(parsedDate));
-  }, [parsedDate, dispatch]);
-
-  useEffect(() => {
     if (isRefreshingPage) {
       dispatch(fetchMonthlyWater(parsedDate));
+      dispatch(fetchDailyWater(parsedDate));
       setIsRefreshingPage(false);
     }
   }, [isRefreshingPage, parsedDate, dispatch]);
