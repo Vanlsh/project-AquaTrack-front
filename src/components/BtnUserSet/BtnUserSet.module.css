@@ -1,7 +1,7 @@
 .btnSet {
   border-radius: 30px;
   padding: 14px 20px;
-  width: 165px;
+  min-width: 165px;
   height: 46px;
   border: none;
   position: absolute;
@@ -31,7 +31,7 @@
 @media screen and (min-width: 768px) {
   .btnSet {
     padding: 18px 30px;
-    width: 200px;
+    min-width: 200px;
     height: 60px;
     bottom: 64px;
     right: 32px;

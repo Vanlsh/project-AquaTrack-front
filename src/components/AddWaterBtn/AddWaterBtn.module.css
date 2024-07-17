@@ -1,7 +1,7 @@
 .btnAdd {
   border-radius: 30px;
   padding: 14px 20px;
-  width: 140px;
+  min-width: 140px;
   height: 46px;
   border: none;
   position: absolute;
@@ -31,7 +31,7 @@
 @media screen and (min-width: 768px) {
   .btnAdd {
     padding: 18px 30px;
-    width: 178px;
+    min-width: 178px;
     height: 60px;
     bottom: 64px;
     right: 32px;
