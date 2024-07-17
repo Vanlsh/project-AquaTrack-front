@@ -25,7 +25,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     Promise.reject(error);
-  },
+  }
 );
 
 instance.interceptors.response.use(
@@ -38,7 +38,11 @@ instance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        const response = await axios.post(`${BASE_URL}` + "/users/refresh");
+        const response = await axios.post(
+          `${BASE_URL}` + "/users/refresh",
+          {},
+          { withCredentials: true }
+        );
         store.dispatch(setToken(response.data.token));
         return instance(originalRequest);
       } catch (error) {
@@ -49,5 +53,5 @@ instance.interceptors.response.use(
       }
     }
     return Promise.reject(error);
-  },
+  }
 );
