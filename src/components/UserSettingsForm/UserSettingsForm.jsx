@@ -176,6 +176,7 @@ const UserSettingsForm = () => {
                 className={css.inputBox}
                 value={weight}
                 onChange={(e) => setWeight(Number(e.target.value))}
+                onFocus={() => setWeight("")}
               />
               {errors.yourWeight && <p>{errors.yourWeight.message}</p>}
             </label>
@@ -189,6 +190,7 @@ const UserSettingsForm = () => {
                 className={css.inputBox}
                 value={exerciseTime}
                 onChange={(e) => setExerciseTime(Number(e.target.value))}
+                onFocus={() => setExerciseTime("")}
               />
               {errors.yourActiveTime && <p>{errors.yourActiveTime.message}</p>}
             </label>

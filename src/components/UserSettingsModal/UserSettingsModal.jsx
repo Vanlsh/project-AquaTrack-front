@@ -13,9 +13,9 @@ const UserSettingsModal = ({ onClose }) => {
           </svg>
         </button>
       </div>
-      <div className="modal-body">
-        <UserSettingsForm />
-      </div>
+      {/* <div className="modal-body"> */}
+      <UserSettingsForm />
+      {/* </div> */}
     </div>
   );
 };
