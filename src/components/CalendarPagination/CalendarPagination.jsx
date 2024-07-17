@@ -9,6 +9,7 @@ import css from "./CalendarPagination.module.css";
 import { fetchMonthlyWater } from "../../redux/water/operations.js";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMonthlyIsLoading } from "../../redux/water/selectors.js";
+import { useTranslation } from "react-i18next";
 
 const CalendarPagination = ({ setSelectedIndex }) => {
   const { dateUrl } = useParams();
@@ -17,7 +18,7 @@ const CalendarPagination = ({ setSelectedIndex }) => {
   const [year, setYear] = useState(new Date(dateMs).getFullYear());
   const [month, setMonth] = useState(new Date(dateMs).getMonth());
   const isLoading = useSelector(selectMonthlyIsLoading);
-  // Thunk for data for selected month
+  const { t } = useTranslation();
 
   const increment = () => {
     setSelectedIndex(null);
@@ -41,11 +42,11 @@ const CalendarPagination = ({ setSelectedIndex }) => {
     dispatch(fetchMonthlyWater(new Date(year, month).getTime()));
   };
 
-  const selectedMonth = monthsName[month];
+  const selectedMonth = t(monthsName[month]);
 
   return (
     <div className={css.calendar_title}>
-      <Title title={"Month"} styles={css.month} />
+      <Title title={t("month")} styles={css.month} />
       <div className={css.month_ind}>
         <button onClick={decrement} className={css.btn} disabled={isLoading}>
           <svg className={css.svg_arrow_left}>
