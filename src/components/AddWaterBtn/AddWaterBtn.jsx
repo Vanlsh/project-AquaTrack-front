@@ -7,8 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const AddWaterBtn = () => {
     const setModal = useModal();
-    
-      const { t } = useTranslation();
+    const { t } = useTranslation();
   
       const closeModal = useCallback(() => {
     setModal();
