@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 30px;
-  max-width: 343px;
+  width: 343px;
   height: 415px;
   background-color: #9be1a0;
   position: relative;
@@ -90,7 +90,7 @@
 
 @media screen and (min-width: 768px) {
   .waterContainer {
-    max-width: 704px;
+    width: 704px;
     height: 578px;
     background-image: url(./img/bottle_for_water_tab_1x.png);
     background-position: center;
@@ -153,7 +153,7 @@
 
 @media screen and (min-width: 1440px) {
   .waterContainer {
-    min-width: 672px;
+    width: 672px;
     height: 736px;
     background-image: url(./img/bottle_for_water_desk_1x.png);
     background-position: center;

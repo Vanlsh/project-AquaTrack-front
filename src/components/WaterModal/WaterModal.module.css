@@ -1,6 +1,7 @@
 .WaterModal {
   margin: 0 auto;
-  max-width: 343px;
+  width: 343px;
+  height: auto;
   padding: 40px 20px;
   border-radius: 15px;
   background-color: #fff;
@@ -23,8 +24,8 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -43,11 +44,17 @@
 @media screen and (min-width: 768px) {
  .WaterModal {
   padding: 40px;
-  max-width: 518px;
+  width: 518px;
  }
 
  .WaterModal h1 {
   font-size: 28px;
+  line-height: 1.14;
+ }
+
+ .WaterModalCloseBtn {
+   width: 28px;
+   height: 28px;
  }
 }
 

@@ -24,15 +24,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-   
+    fill: #323f47;
+    stroke: #323f47;
+}
+
+.closeBtn:hover {
+    stroke: #87d28d;
 }
 
 .svg {
     width: 24px;
     height: 24px;
     position: absolute;
-    fill: #323f47;
-    stroke: black;
 }
 
 .modalTextBox {
@@ -45,11 +48,11 @@
     gap: 16px;
 }
 
-.modalTitle {
+.modalTitle {   
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-size: 20px;
-    line-height: 120%;
+    line-height: 1.2;
     letter-spacing: -0.01em;
     text-align: center;
     color: #323f47;
@@ -59,7 +62,7 @@
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 14px;
-    line-height: 129%;
+    line-height: 1.29;
     letter-spacing: -0.01em;
     text-align: center;
     color: #323f47;
@@ -72,7 +75,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column; 
 }
 
 .btnCancel {
@@ -85,7 +88,7 @@
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-size: 14px;
-    line-height: 129%;
+    line-height: 1.29;
     letter-spacing: -0.01em;
     text-align: center;
     color: rgba(50, 63, 71, 0.3);
@@ -105,25 +108,25 @@
         gap: 24px;
     }
 
-    .closeBtn {
+    .svg {
         width: 28px;
         height: 28px;
     }
 
     .modalTextBox {
         width: auto;
-        height: auto;
+        height: auto;            
         gap: 24px;
     }
 
     .modalTitle {
         font-size: 28px;
-        line-height: 114%;
+        line-height: 1.14;
     }
 
     .modalText {
         font-size: 18px;
-        line-height: 133%;
+        line-height: 1.33;
     }
 
     .modalBtnBox {

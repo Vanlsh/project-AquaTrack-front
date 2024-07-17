@@ -16,11 +16,12 @@ export const deleteWater = async (id) => {
 };
 
 export const getDayWater = async (date) => {
-  const data = await instance.get(`/water/day`, { params: { date } });
+  console.log(date);
+  const { data } = await instance.get(`/water/day/${date}`);
   return data;
 };
 
 export const getMonthWater = async (date) => {
-  const data = await instance.get(`/water/month`, { params: { date } });
+  const data = await instance.get(`/water/month/${date}`);
   return data;
 };
