@@ -3,7 +3,7 @@ import CalendarItem from '../CalendarItem/CalendarItem.jsx';
 // import { months } from '../../constants';
 import css from './Calendar.module.css';
 
-const Calendar = ({ month, year, handleClick, selectedIndex }) => {
+const Calendar = ({ handleClick, selectedIndex }) => {
 	// const monthDays = () => {
 	// 	if (Number.isInteger(year / 4) && month === 1) {
 	// 		return 29;
@@ -225,8 +225,8 @@ const Calendar = ({ month, year, handleClick, selectedIndex }) => {
 							percent={eachDate.percent}
 							sIndex={selectedIndex}
 							handleClick={handleClick}
-							month={month}
-							year={year}
+							// month={month}
+							// year={year}
 						/>
 					</li>
 				))}

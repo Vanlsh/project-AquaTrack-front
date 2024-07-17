@@ -1,13 +1,44 @@
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { Title } from '../Title/Title.jsx';
+import { parseDateTime } from '../../helpers/parseDate.js';
 import svg from '../../assets/icons.svg';
-import { months } from '../../constants';
+import { monthsName } from '../../constants';
 import css from './CalendarPagination.module.css';
 
-const CalendarPagination = ({ month, year, increment, decrement }) => {
-	const selectedMonth = Object.keys(months)[month];
+const CalendarPagination = ({ setSelectedIndex }) => {
+	const { dateUrl } = useParams();
+	const dateMs = parseDateTime(dateUrl);
 
-	const Title = ({ title, styles }) => {
-		return <span className={styles}>{title}</span>;
+	const [year, setYear] = useState(new Date(dateMs).getFullYear());
+	const [month, setMonth] = useState(new Date(dateMs).getMonth());
+
+	// Thunk for data for selected month
+
+	const increment = () => {
+		setSelectedIndex(null);
+		if (month === 11) {
+			setMonth(0);
+			setYear(year + 1);
+			return;
+		}
+		setMonth(month + 1);
+		// Thunk
 	};
+
+	const decrement = () => {
+		setSelectedIndex(null);
+		if (month === 0) {
+			setMonth(11);
+			setYear(year - 1);
+			return;
+		}
+		setMonth(month - 1);
+		// Thunk
+	};
+
+	const selectedMonth = monthsName[month];
 
 	return (
 		<div className={css.calendar_title}>
