@@ -13,8 +13,9 @@ const UserSettingsForm = () => {
   const { t } = useTranslation();
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [weight, setWeight] = useState(0);
+  const [exerciseTime, setExerciseTime] = useState(0);
+
   const user = useSelector(selectUser);
-  const [exerciseTime, setExerciseTime] = useState("0");
 
   const schema = yup.object({
     avatar: yup.mixed().required(t("avatarRequired")),
@@ -30,7 +31,8 @@ const UserSettingsForm = () => {
 
   useEffect(() => {
     setWeight(user.weight);
-  }, [user.weight]);
+    setExerciseTime(user.activeTimeSports);
+  }, [user.weight, user.activeTimeSports]);
 
   const {
     register,
@@ -174,7 +176,6 @@ const UserSettingsForm = () => {
               </p>
               <p className={css.ordinaryText}>
                 <span className={css.temporarySymbol}>!&nbsp;</span>
-                {/*Put svg ion*/}
                 {t("activeTime")}
               </p>
             </div>
@@ -200,6 +201,11 @@ const UserSettingsForm = () => {
                     e.target.value = "";
                   }
                 }}
+                onBlur={(e) => {
+                  if (e.target.value === "") {
+                    e.target.value = 0;
+                  }
+                }}
               />
               {errors.yourWeight && (
                 <p className={css.errorMessage}>{errors.yourWeight.message}</p>
@@ -212,7 +218,24 @@ const UserSettingsForm = () => {
                 {...register("yourActiveTime")}
                 className={css.inputBox}
                 value={exerciseTime}
-                onChange={(e) => setExerciseTime(e.target.value)}
+                onChange={(e) => {
+                  if (Number(e.target.value)) {
+                    setExerciseTime(Number(e.target.value));
+                  }
+                  if (e.target.value === "") {
+                    setExerciseTime(0);
+                  }
+                }}
+                onFocus={(e) => {
+                  if (exerciseTime === 0) {
+                    e.target.value = "";
+                  }
+                }}
+                onBlur={(e) => {
+                  if (e.target.value === "") {
+                    e.target.value = 0;
+                  }
+                }}
               />
 
               {errors.yourActiveTime && (
@@ -226,7 +249,7 @@ const UserSettingsForm = () => {
               <p className={css.ordinaryText}>
                 {t("requiredWaterAmount")}&nbsp;
                 <span className={css.userNorma}>
-                  {calculateWaterIntake(user.weight, exerciseTime)} L
+                  {calculateWaterIntake(weight, exerciseTime)}&nbsp;L
                 </span>
               </p>
 
