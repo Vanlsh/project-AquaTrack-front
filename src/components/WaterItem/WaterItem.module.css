@@ -6,33 +6,12 @@
 	padding-bottom: 10px;
 }
 
-.water_item {
-	flex: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: var(--white);
-	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 0 2px 4px var(--color-font-second);
-}
-
 .water_item_content {
 	display: flex;
 	gap: 20px;
 	align-items: center;
 }
 
-.water_item strong {
-	font-size: 16px;
-	color: var(--color-font-main);
-}
-
-.water_item p {
-	font-size: 12px;
-	margin-top: 5px;
-	color: var(--color-font-second);
-}
 .icon_water_glass {
 	fill: var(--color-second-bg-hover);
 }
