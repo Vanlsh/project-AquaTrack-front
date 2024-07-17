@@ -69,7 +69,7 @@ const WaterModal = ({ operationType, onClose, editTime, portionOfDB }) => {
 
 
     return (
-        <div className={css.WaterModal}/>
+        <div className={css.WaterModal}>
 
             <h1>{modalHeader(operationType)}</h1>
             <WaterForm operationType={operationType} formTime={formTime(operationType)} portionOfWater={portionOfWater} handleClose={handleClose} />
