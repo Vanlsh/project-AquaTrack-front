@@ -1,13 +1,13 @@
 .container {
   display: flex;
-  /* align-items: center; */
-    justify-content: center;
-    height: 100vh;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  max-width: 375px;
   flex-direction: column;
   gap: 16px;
   margin: auto;
-  max-width: 375px;
-  padding: 16px;
+  padding: 16px;  
 }
 
 @media screen and (min-width: 768px) {
@@ -22,16 +22,6 @@
     flex-direction: row;
     gap: 32px;
     max-width: 1440px;
-    align-items: center;
-    justify-content: initial;
   }
 }
 
-.HomePage {
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; */
-  /* margin: auto;
-    width: 50%; */
-}
