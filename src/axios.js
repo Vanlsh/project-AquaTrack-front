@@ -39,14 +39,13 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const response = await axios.post(`${BASE_URL}` + "/users/refresh");
-        // axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token ;
         store.dispatch(setToken(response.data.token));
         return instance(originalRequest);
       } catch (error) {
         if (error.response.status === 401) {
           store.dispatch(logOutReducer());
         }
-        return Promise.reject(error);
+        // return Promise.reject(error);
       }
     }
     return Promise.reject(error);
