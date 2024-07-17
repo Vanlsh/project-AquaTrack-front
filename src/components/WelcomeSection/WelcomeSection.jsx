@@ -21,7 +21,7 @@ const WelcomeSection = () => {
         <div className={css.welcomeSectionLinks}>
           {isLoggedIn ? (
             <Link
-              to={`/tracker`}
+              to={`/tracker/${Date.now()}`}
               className={`${css.welcomeSectionLink} ${css.welcomeSectionLinkSignup}`}
             >
               {t("checkTracker")}
