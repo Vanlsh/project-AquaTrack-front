@@ -10,8 +10,8 @@ export const logInUser = async (userInfo) => {
   return data;
 };
 
-export const logOutUser = async (userInfo) => {
-  await instance.post("/users/logOut", userInfo);
+export const logOutUser = async () => {
+  await instance.post("/users/logOut");
 };
 
 export const requestRefreshUser = async () => {

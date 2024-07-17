@@ -35,6 +35,7 @@ function App() {
   }, [token, dispatch]);
 
   useEffect(() => {
+    console.log(errorMessage);
     if (errorMessage) {
       toast.error(errorMessage);
     }
