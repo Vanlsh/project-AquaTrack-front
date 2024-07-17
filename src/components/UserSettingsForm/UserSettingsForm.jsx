@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSelector } from "react-redux";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { selectUser } from "../../redux/auth/selectors.js";
 import css from "./UserSettingsForm.module.css";
 import svg from "../../assets/icons.svg";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
@@ -11,29 +13,24 @@ const UserSettingsForm = () => {
   const { t } = useTranslation();
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [weight, setWeight] = useState(0);
-  const [exerciseTime, setExerciseTime] = useState(0);
+  const user = useSelector(selectUser);
+  const [exerciseTime, setExerciseTime] = useState("0");
 
-  const schema = yup.object().shape({
+  const schema = yup.object({
     avatar: yup.mixed().required(t("avatarRequired")),
     gender: yup.string().required(t("genderRequired")),
     yourName: yup.string().required(t("nameRequired")),
-    yourEmail: yup
-      .string()
-      .email(t("invalidEmail"))
-      .required(t("emailRequired")),
-    yourWeight: yup
-      .number()
-      .positive(t("positiveWeight"))
-      .required(t("weightRequired")),
-    yourActiveTime: yup
-      .number()
-      .positive(t("positiveActiveTime"))
-      .required(t("activeTimeRequired")),
+    yourWeight: yup.number().min(0).typeError("Has to be a number"),
+    yourActiveTime: yup.number().min(0).typeError("Has to be a number"),
     yourDayWaterConsumption: yup
       .number()
-      .positive(t("positiveWaterConsumption"))
-      .required(t("waterConsumptionRequired")),
+      .typeError("Has to be a number")
+      .min(0, "Value has to be greater than 0"),
   });
+
+  useEffect(() => {
+    setWeight(user.weight);
+  }, [user.weight]);
 
   const {
     register,
@@ -128,6 +125,7 @@ const UserSettingsForm = () => {
             <label>
               <span className={css.boldText}>{t("yourName")}</span>
               <input
+                value={user.name}
                 {...register("yourName")}
                 className={css.inputBox}
                 placeholder="Enter your name"
@@ -141,6 +139,8 @@ const UserSettingsForm = () => {
             <label>
               <span className={css.boldText}>{t("email")}</span>
               <input
+                disabled
+                value={user.email}
                 {...register("yourEmail")}
                 className={css.inputBox}
                 placeholder="Enterer your email"
@@ -187,9 +187,19 @@ const UserSettingsForm = () => {
                 {...register("yourWeight")}
                 className={css.inputBox}
                 value={weight}
-                onChange={(e) => setWeight(Number(e.target.value))}
-                onFocus={() => setWeight(weight === 0 ? "" : weight)}
-                onBlur={() => setWeight(weight === "" ? 0 : weight)}
+                onChange={(e) => {
+                  if (Number(e.target.value)) {
+                    setWeight(Number(e.target.value));
+                  }
+                  if (e.target.value === "") {
+                    setWeight(0);
+                  }
+                }}
+                onFocus={(e) => {
+                  if (weight === 0) {
+                    e.target.value = "";
+                  }
+                }}
               />
               {errors.yourWeight && (
                 <p className={css.errorMessage}>{errors.yourWeight.message}</p>
@@ -202,13 +212,7 @@ const UserSettingsForm = () => {
                 {...register("yourActiveTime")}
                 className={css.inputBox}
                 value={exerciseTime}
-                onChange={(e) => setExerciseTime(Number(e.target.value))}
-                onFocus={() =>
-                  setExerciseTime(exerciseTime === 0 ? "" : exerciseTime)
-                }
-                onBlur={() =>
-                  setExerciseTime(exerciseTime === "" ? 0 : exerciseTime)
-                }
+                onChange={(e) => setExerciseTime(e.target.value)}
               />
 
               {errors.yourActiveTime && (
@@ -222,7 +226,7 @@ const UserSettingsForm = () => {
               <p className={css.ordinaryText}>
                 {t("requiredWaterAmount")}&nbsp;
                 <span className={css.userNorma}>
-                  {calculateWaterIntake(weight, exerciseTime)} L
+                  {calculateWaterIntake(user.weight, exerciseTime)} L
                 </span>
               </p>
 
