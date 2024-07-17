@@ -10,3 +10,4 @@ export const selectIsSuccessfullyRegistered = (state) =>
   state.auth.isSuccessfullyRegistered;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectError = (state) => state.auth.error;
+export const selectWaterRate = (state) => state.auth.user.dailyWaterConsumption;

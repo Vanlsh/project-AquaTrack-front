@@ -1,7 +1,7 @@
-.btnAdd {
+.btnSet {
   border-radius: 30px;
   padding: 14px 20px;
-  width: 140px;
+  width: 165px;
   height: 46px;
   border: none;
   position: absolute;
@@ -11,7 +11,7 @@
   display: flex;
 }
 
-.btnText {
+.btnTextSet {
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
@@ -29,15 +29,15 @@
 }
 
 @media screen and (min-width: 768px) {
-  .btnAdd {
+  .btnSet {
     padding: 18px 30px;
-    width: 178px;
+    width: 200px;
     height: 60px;
     bottom: 64px;
     right: 32px;
   }
 
-  .btnText {
+  .btnTextSet {
     font-size: 16px;
     line-height: 150%;
   }

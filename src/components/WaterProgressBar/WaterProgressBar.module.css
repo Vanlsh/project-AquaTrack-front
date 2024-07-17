@@ -8,7 +8,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 225px;
+  margin-top: 181px;
 }
 
 .progressBarTitle {
@@ -73,7 +73,7 @@
 
 @media screen and (min-width: 768px) {
   .progressBarContainer {
-    margin-top: 322px;
+    margin-top: 266px;
     padding: 20px;
     width: 295px;
     height: 106px;
@@ -105,7 +105,7 @@
 
 @media screen and (min-width: 1440px) {
   .progressBarContainer {
-    margin-top: 450px;
+    margin-top: 400px;
     height: 110px;
   }
 
