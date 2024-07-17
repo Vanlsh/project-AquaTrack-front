@@ -8,7 +8,11 @@
   /* width: 100vh; */
 }
 .welcomeSectionContainer {
-  margin: 74px 0 0;
+  margin: 61px 0 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
 }
 .welcomeSectionDescribe {
   font-size: 14px;
@@ -20,6 +24,7 @@
   font-weight: 700;
   font-size: 38px;
   line-height: 100%;
+  width: 311px;
   margin-bottom: 32px;
 }
 .welcomeSectionLinks {
@@ -63,6 +68,7 @@
   .welcomeSectionTitle {
     font-size: 64px;
     line-height: 109%;
+    width: 547px;
   }
   .welcomeSectionLinks {
     gap: 16px;
