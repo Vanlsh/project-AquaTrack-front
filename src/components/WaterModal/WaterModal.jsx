@@ -1,9 +1,12 @@
 import css from "./WaterModal.module.css";
+
+import clsx from 'clsx';
 import WaterForm from "../WaterForm/WaterForm";
-import { useState } from "react";
+// import { useState } from "react";
 import { ANIMATION } from "../../constants";
 import svgSprite from "../../assets/icons.svg";
 import { useLocation } from 'react-router-dom';
+
 
 const WaterModal = ({ operationType, onClose, editTime, portionOfDB }) => {
     const [closing, setClosing] = useState(false);
@@ -18,6 +21,7 @@ const WaterModal = ({ operationType, onClose, editTime, portionOfDB }) => {
             clearTimeout(id);
         }, ANIMATION.DURATION);
     };
+
 
     const modalHeader = (operationType) => {
         switch (operationType) {
@@ -65,9 +69,13 @@ const WaterModal = ({ operationType, onClose, editTime, portionOfDB }) => {
 
 
     return (
-        <div className={css.WaterModal}>
+        <div className={css.WaterModal}/>
+
             <h1>{modalHeader(operationType)}</h1>
             <WaterForm operationType={operationType} formTime={formTime(operationType)} portionOfWater={portionOfWater} handleClose={handleClose} />
+
+            <h1 >{modalHeader(operationType)}</h1>
+            <WaterForm operationType={operationType}/>
             <button type="button" onClick={handleClose} className={css.WaterModalCloseBtn}>
                 <svg>
                     <use xlinkHref={svgSprite + "#icon-clear"}></use>

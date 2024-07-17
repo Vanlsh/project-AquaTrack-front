@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import css from "./WaterProgressBar.module.css";
 
 const WaterProgressBar = () => {
+  const { t } = useTranslation();
   const [currentWater, setCurrentWater] = useState(0);
   const [goal, setGoal] = useState(2000);
 
@@ -37,7 +39,7 @@ const WaterProgressBar = () => {
 
   return (
     <div className={css.progressBarContainer}>
-      <h2 className={css.progressBarTitle}>Today</h2>
+      <h2 className={css.progressBarTitle}>{t("today")}</h2>
       <div className={css.progressBar}>
         <div
           className={css.progressBarFill}

@@ -42,7 +42,7 @@ const SignUpForm = () => {
   const submitForm = (data) => {
     console.log(data);
     const { email, password } = data;
-    dispatch(signUp({email, password}));
+    dispatch(signUp({ email, password }));
     //! reset form
   };
 
