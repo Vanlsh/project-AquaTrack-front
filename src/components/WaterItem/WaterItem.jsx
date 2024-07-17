@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import WaterModal from "../../components/WaterModal/WaterModal";
 import css from "../WaterItem/WaterItem.module.css";
-import ModalDeleteEntry from "../ModalDeleteEntry/ModalDeleteEntry";
+import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal.jsx";
 import { formatTime } from "../../helpers/formatTime.js";
 import { convertToLiters } from "../../helpers/convertToLiters.js";
 import { useModal } from "../../hooks/useModal.js";
@@ -14,7 +14,7 @@ const WaterItem = ({ water }) => {
   }, [setModal]);
 
   const openModalDelete = useCallback(() => {
-    setModal(<ModalDeleteEntry id={water.id} onClose={closeModal} />);
+    setModal(<DeleteWaterModal id={water.id} onClose={closeModal} />);
   }, [setModal, closeModal, water]);
 
   const openModalEdit = useCallback(() => {
