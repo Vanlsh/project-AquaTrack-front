@@ -1,8 +1,14 @@
+// import { useSelector } from 'react-redux';
+// import { Provider } from 'react-redux';
+// import store from './store';
+
 import CalendarItem from '../CalendarItem/CalendarItem.jsx';
 
 import css from './Calendar.module.css';
 
 const Calendar = ({ selectedIndex, setSelectedIndex }) => {
+	// const dateArray = useSelector((state) => state.month);
+
 	const dateArray = [
 		{
 			date: 1719781200000,

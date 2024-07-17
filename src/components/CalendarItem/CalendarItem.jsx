@@ -11,9 +11,12 @@ const CalendarItem = ({
 }) => {
 	const navigate = useNavigate();
 
+	// Thunk for data for selected month;
+
 	const handleClick = (index, calendarDate) => {
 		setSelectedIndex(index);
 		navigate(`/tracker/${calendarDate}`);
+		// Thunk for data for selected date;
 	};
 
 	const date = new Date(calendarDate).getDate();
