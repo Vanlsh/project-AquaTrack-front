@@ -40,16 +40,13 @@ export const signUp = createAsyncThunk(
 
 //====================== LOG OUT =======================
 
-export const logOut = createAsyncThunk(
-  "auth/logout",
-  async (token, thunkAPI) => {
-    try {
-      await logOutUser();
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err);
-    }
-  },
-);
+export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    await logOutUser();
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err);
+  }
+});
 
 //================= USER INFORMATION ===================
 
@@ -83,9 +80,9 @@ export const updateUserProfile = createAsyncThunk(
 
 export const uploadUserPhoto = createAsyncThunk(
   "users/photo",
-  async (userData, thunkAPI) => {
+  async (photo, thunkAPI) => {
     try {
-      const response = await updateUserPhoto(userData);
+      const response = await updateUserPhoto(photo);
       return response.photo;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.data.message);
