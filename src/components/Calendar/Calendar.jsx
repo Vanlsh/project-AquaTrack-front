@@ -1,15 +1,15 @@
 import CalendarItem from '../CalendarItem/CalendarItem.jsx';
 
-import { months } from '../../constants';
+// import { months } from '../../constants';
 import css from './Calendar.module.css';
 
 const Calendar = ({ month, year, handleClick, selectedIndex }) => {
-	const monthDays = () => {
-		if (Number.isInteger(year / 4) && month === 1) {
-			return 29;
-		}
-		return Object.values(months)[month];
-	};
+	// const monthDays = () => {
+	// 	if (Number.isInteger(year / 4) && month === 1) {
+	// 		return 29;
+	// 	}
+	// 	return Object.values(months)[month];
+	// };
 
 	// const dateArray = [];
 
@@ -17,19 +17,19 @@ const Calendar = ({ month, year, handleClick, selectedIndex }) => {
 		{
 			date: 1719781200000,
 			amount: 0,
-			percent: 1,
+			percent: 0,
 			norm: 0,
 		},
 		{
 			date: 1719867600000,
 			amount: 0,
-			percent: 2,
+			percent: 0,
 			norm: 0,
 		},
 		{
 			date: 1719954000000,
 			amount: 0,
-			percent: 3,
+			percent: 0,
 			norm: 0,
 		},
 		{
@@ -205,13 +205,14 @@ const Calendar = ({ month, year, handleClick, selectedIndex }) => {
 	// const x = new Date('2024', '06', '30').getTime();
 	// console.log(x);
 
-	const calendarDates = () => {
-		for (let i = 1; i <= monthDays(); i++) {
-			dateArray.push(i);
-		}
-	};
-
-	calendarDates();
+	// const calendarDates = () => {
+	// 	for (let i = 1; i <= monthDays(); i++) {
+	// 		dateArray.push(i);
+	// 	}
+	// };
+	// const calendarDates = dateArray.length + 1;
+	// dateArray;
+	// calendarDates();
 
 	return (
 		<div className={css.container}>
@@ -220,7 +221,8 @@ const Calendar = ({ month, year, handleClick, selectedIndex }) => {
 					<li key={index}>
 						<CalendarItem
 							index={index}
-							eachDate={eachDate}
+							dateMs={eachDate.date}
+							percent={eachDate.percent}
 							sIndex={selectedIndex}
 							handleClick={handleClick}
 							month={month}

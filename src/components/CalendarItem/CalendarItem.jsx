@@ -1,16 +1,16 @@
 import css from './CalendarItem.module.css';
 
-const percents = 50;
-
 const CalendarItem = ({
 	index,
-	eachDate,
+	dateMs,
+	percent,
 	sIndex,
 	handleClick,
 	month,
 	year,
 }) => {
-	const dateUnix = new Date(year, month, eachDate).getTime();
+	const date = new Date(dateMs).getDate();
+	const dateUnix = new Date(year, month, date).getTime();
 	const dateNow = Date.now();
 	const isDisabled = dateUnix > dateNow;
 
@@ -21,10 +21,10 @@ const CalendarItem = ({
 			<div
 				onClick={() => handleClick(index, dateUnix)}
 				className={`${css.date} 							
-					${percents > 0 ? css.perc_filled : ''} ${sIndex === index ? css.active : ''}`}>
-				{eachDate}
+					${percent > 0 ? css.perc_filled : ''} ${sIndex === index ? css.active : ''}`}>
+				{date}
 			</div>
-			<div className={css.perc}>{`${percents} %`}</div>
+			<div className={css.perc}>{`${percent} %`}</div>
 		</button>
 	);
 };
