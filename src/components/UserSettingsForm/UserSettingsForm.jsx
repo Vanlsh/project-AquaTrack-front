@@ -29,6 +29,7 @@ const UserSettingsForm = () => {
 
   const [weight, setWeight] = useState(0);
   const [exerciseTime, setExerciseTime] = useState(0);
+
   const {
     register,
     handleSubmit,
@@ -51,9 +52,10 @@ const UserSettingsForm = () => {
     }
   };
 
-  const calculateWaterIntake = (weight, activeTime) => {
+  const calculateWaterIntake = (weight, exerciseTime) => {
     // Formula
-    return (weight * 0.03 + activeTime * 0.5).toFixed(2);
+    const waterIntake = weight * 0.03 + exerciseTime * 0.5;
+    return Math.min(waterIntake, 15).toFixed(2);
   };
 
   return (
@@ -176,7 +178,8 @@ const UserSettingsForm = () => {
                 className={css.inputBox}
                 value={weight}
                 onChange={(e) => setWeight(Number(e.target.value))}
-                onFocus={() => setWeight("")}
+                onFocus={() => setWeight(weight === 0 ? "" : weight)}
+                onBlur={() => setWeight(weight === "" ? 0 : weight)}
               />
               {errors.yourWeight && <p>{errors.yourWeight.message}</p>}
             </label>
@@ -190,7 +193,12 @@ const UserSettingsForm = () => {
                 className={css.inputBox}
                 value={exerciseTime}
                 onChange={(e) => setExerciseTime(Number(e.target.value))}
-                onFocus={() => setExerciseTime("")}
+                onFocus={() =>
+                  setExerciseTime(exerciseTime === 0 ? "" : exerciseTime)
+                }
+                onBlur={() =>
+                  setExerciseTime(exerciseTime === "" ? 0 : exerciseTime)
+                }
               />
               {errors.yourActiveTime && <p>{errors.yourActiveTime.message}</p>}
             </label>
@@ -199,7 +207,7 @@ const UserSettingsForm = () => {
               <p className={css.ordinaryText}>
                 The required amount of water in liters per day:&nbsp;
                 <span className={css.userNorma}>
-                  {calculateWaterIntake(86, 1)} L
+                  {calculateWaterIntake(weight, exerciseTime)} L
                 </span>
                 {/*Should automatically receive value from*/}
               </p>
