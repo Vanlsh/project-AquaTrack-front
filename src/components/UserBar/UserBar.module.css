@@ -15,6 +15,7 @@
   background-color: #323f47;
   font-size: 14px;
   font-weight: 700;
+  color: var(--white);
 }
 
 .userBar:hover {

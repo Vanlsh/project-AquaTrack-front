@@ -1,0 +1,30 @@
+.languageSwitcher {
+  width: fit-content;
+  position: relative;
+}
+
+.currentLanguage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px 10px;
+  background-color: #323f47;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.icon {
+  fill: none;
+  stroke: #fff;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+.icon.isOpen {
+  transform: rotate(180deg);
+}

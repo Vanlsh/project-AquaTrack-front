@@ -1,5 +1,5 @@
 export const DailyInfo = () => {
-	return <div>DailyInfo</div>;
+  return <div>DailyInfo</div>;
 };
 
 export default DailyInfo;
