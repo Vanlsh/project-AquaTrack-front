@@ -58,7 +58,6 @@ const UserSettingsForm = () => {
   };
 
   const calculateWaterIntake = (weight, exerciseTime) => {
-    // Formula
     const waterIntake = weight * 0.03 + exerciseTime * 0.5;
     return Math.min(waterIntake, 15).toFixed(2);
   };
@@ -86,7 +85,7 @@ const UserSettingsForm = () => {
           {errors.avatar && <p>{errors.avatar.message}</p>}
         </label>
       </div>
-      <div>
+      <div className={css.langButton}>
         <p>{t("changeLanguage")}</p>
         <LanguageSwitcher />
       </div>
@@ -118,7 +117,9 @@ const UserSettingsForm = () => {
                 {t("men")}
               </label>
             </div>
-            {errors.gender && <p>{errors.gender.message}</p>}
+            {errors.gender && (
+              <p className={css.errorMessage}>{errors.gender.message}</p>
+            )}
           </label>
         </div>
 
@@ -132,7 +133,9 @@ const UserSettingsForm = () => {
                 placeholder="Enter your name"
               />
 
-              {errors.yourName && <p>{errors.yourName.message}</p>}
+              {errors.yourName && (
+                <p className={css.errorMessage}>{errors.yourName.message}</p>
+              )}
             </label>
 
             <label>
@@ -142,7 +145,9 @@ const UserSettingsForm = () => {
                 className={css.inputBox}
                 placeholder="Enterer your email"
               />
-              {errors.yourEmail && <p>{errors.yourEmail.message}</p>}
+              {errors.yourEmail && (
+                <p className={css.errorMessage}>{errors.yourEmail.message}</p>
+              )}
             </label>
 
             <div className={css.formula}>
@@ -186,7 +191,9 @@ const UserSettingsForm = () => {
                 onFocus={() => setWeight(weight === 0 ? "" : weight)}
                 onBlur={() => setWeight(weight === "" ? 0 : weight)}
               />
-              {errors.yourWeight && <p>{errors.yourWeight.message}</p>}
+              {errors.yourWeight && (
+                <p className={css.errorMessage}>{errors.yourWeight.message}</p>
+              )}
             </label>
 
             <label>
@@ -204,7 +211,11 @@ const UserSettingsForm = () => {
                 }
               />
 
-              {errors.yourActiveTime && <p>{errors.yourActiveTime.message}</p>}
+              {errors.yourActiveTime && (
+                <p className={css.errorMessage}>
+                  {errors.yourActiveTime.message}
+                </p>
+              )}
             </label>
 
             <div className={css.consumeWater}>
@@ -224,7 +235,9 @@ const UserSettingsForm = () => {
                   className={css.inputBox}
                 />
                 {errors.yourDayWaterConsumption && (
-                  <p>{errors.yourDayWaterConsumption.message}</p>
+                  <p className={css.errorMessage}>
+                    {errors.yourDayWaterConsumption.message}
+                  </p>
                 )}
               </label>
             </div>

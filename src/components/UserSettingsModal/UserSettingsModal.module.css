@@ -3,29 +3,33 @@
 .modalSettingContainer {
   display: flex;
   flex-direction: column;
-  max-height: 90vh;
-  max-width: 90vw;
-  padding: 40px 20px;
+  max-height: 95vh;
+  max-width: 343px;
   z-index: 101;
   background-color: white;
   border-radius: 15px;
-  position: absolute;
+  position: relative;
   top: auto;
   bottom: auto;
 }
+
 .modalHeader {
   display: flex;
+  padding: 40px 20px 0;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
+
 .modalHeader h2 {
-  font-family: Poppins;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: -0.01em;
 }
+
 .closeBtn {
+  position: absolute;
   background: none;
   border: none;
   cursor: pointer;
@@ -33,10 +37,15 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+  top: 20px;
+  right: 20px;
   width: 24px;
   height: 24px;
 }
+
 .icon {
+  height: 24px;
+  width: 24px;
   fill: white;
   stroke: black;
 }
@@ -44,8 +53,15 @@
 /*Tablet view*/
 @media screen and (min-width: 768px) {
   .modalSettingContainer {
-    padding: 40px;
+    max-width: 648px;
   }
+
+  .modalHeader {
+    /*flex-direction: row;*/
+    padding: 40px 40px 0;
+    align-items: center;
+  }
+
   .modalHeader h2 {
     font-size: 28px;
     line-height: 32px;
@@ -53,7 +69,21 @@
   }
 
   .closeBtn {
+    position: static;
+    top: 40px;
+    right: 40px;
     width: 28px;
     height: 28px;
+  }
+
+  .icon {
+    height: 28px;
+    width: 28px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .modalSettingContainer {
+    max-width: 920px;
   }
 }
