@@ -125,27 +125,23 @@ const UserSettingsForm = () => {
         <div className={css.userPreferences}>
           <div className={css.formNameEmail}>
             <label>
-              <span className={css.boldText}>Your name</span>
+              <span className={css.boldText}>{t("yourName")}</span>
               <input
                 {...register("yourName")}
                 className={css.inputBox}
                 placeholder="Enter your name"
               />
-              <span className={css.boldText}>{t("yourName")}</span>
-              <input {...register("yourName")} className={css.inputBox} />
 
               {errors.yourName && <p>{errors.yourName.message}</p>}
             </label>
 
             <label>
-              <span className={css.boldText}>Email</span>
+              <span className={css.boldText}>{t("email")}</span>
               <input
                 {...register("yourEmail")}
                 className={css.inputBox}
                 placeholder="Enterer your email"
               />
-              <span className={css.boldText}>{t("email")}</span>
-              <input {...register("yourEmail")} className={css.inputBox} />
               {errors.yourEmail && <p>{errors.yourEmail.message}</p>}
             </label>
 
@@ -159,20 +155,20 @@ const UserSettingsForm = () => {
                   </span>
                 </p>
                 <p className={css.ordinaryText}>
-                  <span>{t("forMan")} </span>{" "}
+                  <span>{t("forMan")} </span>
                   <span className={css.formulaExpression}>
                     V=(M*0,04) + (T*0,6)
                   </span>
                 </p>
               </div>
               <p className={css.ordinaryText}>
-                <span className={css.formulaExpression}>*</span>{" "}
+                <span className={css.formulaExpression}>*&nbsp;</span>
                 <span className={css.formulaDescriptionText}>
                   {t("formulaExplanation")}
                 </span>
               </p>
               <p className={css.ordinaryText}>
-                <span className={css.temporarySymbol}>! </span>{" "}
+                <span className={css.temporarySymbol}>!&nbsp;</span>
                 {/*Put svg ion*/}
                 {t("activeTime")}
               </p>
@@ -181,9 +177,7 @@ const UserSettingsForm = () => {
 
           <div className={css.formWeightTime}>
             <label>
-              <span className={css.ordinaryText}>
-                Your weight in kilograms:
-              </span>
+              <span className={css.ordinaryText}>{t("yourWeight")}</span>
               <input
                 {...register("yourWeight")}
                 className={css.inputBox}
@@ -192,15 +186,11 @@ const UserSettingsForm = () => {
                 onFocus={() => setWeight(weight === 0 ? "" : weight)}
                 onBlur={() => setWeight(weight === "" ? 0 : weight)}
               />
-              <span className={css.ordinaryText}>{t("yourWeight")}</span>
-              <input {...register("yourWeight")} className={css.inputBox} />
               {errors.yourWeight && <p>{errors.yourWeight.message}</p>}
             </label>
 
             <label>
-              <span className={css.ordinaryText}>
-                The time of active participation in sports:
-              </span>
+              <span className={css.ordinaryText}>{t("activeSportsTime")}</span>
               <input
                 {...register("yourActiveTime")}
                 className={css.inputBox}
@@ -213,8 +203,6 @@ const UserSettingsForm = () => {
                   setExerciseTime(exerciseTime === "" ? 0 : exerciseTime)
                 }
               />
-              <span className={css.ordinaryText}>{t("activeSportsTime")}</span>
-              <input {...register("yourActiveTime")} className={css.inputBox} />
 
               {errors.yourActiveTime && <p>{errors.yourActiveTime.message}</p>}
             </label>
@@ -225,11 +213,12 @@ const UserSettingsForm = () => {
                 <span className={css.userNorma}>
                   {calculateWaterIntake(weight, exerciseTime)} L
                 </span>
-                {/*Should automatically receive value from*/}
               </p>
 
               <label>
-                <span className={css.boldText}>{t("recordWaterIntake")}</span>
+                <span className={css.boldText}>
+                  {t("Write down how much water you will drink:")}
+                </span>
                 <input
                   {...register("yourDayWaterConsumption")}
                   className={css.inputBox}
