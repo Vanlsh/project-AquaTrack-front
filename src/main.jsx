@@ -9,6 +9,7 @@ import { ModalProvider } from "./context/ModalProvider.jsx";
 import { persistor, store } from "./redux/store.js";
 import { injectStore } from "./axios.js";
 import "./index.css";
+import "./i18n/index.js";
 
 injectStore(store);
 

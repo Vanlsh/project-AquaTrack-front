@@ -2,31 +2,36 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import css from "./UserSettingsForm.module.css";
 import svg from "../../assets/icons.svg";
-
-const schema = yup.object().shape({
-  avatar: yup.mixed().required("Avatar is required"),
-  gender: yup.string().required("Gender is required"),
-  yourName: yup.string().required("Name is required"),
-  yourEmail: yup.string().email("Invalid email").required("Email is required"),
-  yourWeight: yup
-    .number()
-    .positive("Weight must be positive")
-    .required("Weight is required"),
-  yourActiveTime: yup
-    .number()
-    .positive("Active time must be positive")
-    .required("Active time is required"),
-  yourDayWaterConsumption: yup
-    .number()
-    .positive("Water consumption must be positive")
-    .required("Water consumption is required"),
-});
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
 const UserSettingsForm = () => {
+  const { t } = useTranslation();
   const [avatarPreview, setAvatarPreview] = useState(null);
 
+  const schema = yup.object().shape({
+    avatar: yup.mixed().required(t("avatarRequired")),
+    gender: yup.string().required(t("genderRequired")),
+    yourName: yup.string().required(t("nameRequired")),
+    yourEmail: yup
+      .string()
+      .email(t("invalidEmail"))
+      .required(t("emailRequired")),
+    yourWeight: yup
+      .number()
+      .positive(t("positiveWeight"))
+      .required(t("weightRequired")),
+    yourActiveTime: yup
+      .number()
+      .positive(t("positiveActiveTime"))
+      .required(t("activeTimeRequired")),
+    yourDayWaterConsumption: yup
+      .number()
+      .positive(t("positiveWaterConsumption"))
+      .required(t("waterConsumptionRequired")),
+  });
   const {
     register,
     handleSubmit,
@@ -63,7 +68,7 @@ const UserSettingsForm = () => {
             <svg className={css.icon}>
               <use xlinkHref={svg + "#icon-upload"}></use>
             </svg>
-            <span className={css.ordinaryText}>Upload a photo</span>
+            <span className={css.ordinaryText}>{t("Upload a photo")}</span>
           </div>
           <input
             className={css.hideBtn}
@@ -74,10 +79,14 @@ const UserSettingsForm = () => {
           {errors.avatar && <p>{errors.avatar.message}</p>}
         </label>
       </div>
+      <div>
+        <p>{t("changeLanguage")}</p>
+        <LanguageSwitcher />
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className={css.userSettingForm}>
         <div className={css.genderContainer}>
           <label className={css.genderIdentity}>
-            <span className={css.boldText}>Your gender identity</span>
+            <span className={css.boldText}>{t("genderIdentity")}</span>
             <div className={css.radioContainer}>
               <input
                 type="radio"
@@ -88,7 +97,7 @@ const UserSettingsForm = () => {
                 defaultChecked
               />
               <label htmlFor="women" className={css.ordinaryText}>
-                Women
+                {t("women")}
               </label>
 
               <input
@@ -99,7 +108,7 @@ const UserSettingsForm = () => {
                 value="men"
               />
               <label htmlFor="men" className={css.ordinaryText}>
-                Men
+                {t("men")}
               </label>
             </div>
             {errors.gender && <p>{errors.gender.message}</p>}
@@ -109,28 +118,28 @@ const UserSettingsForm = () => {
         <div className={css.userPreferences}>
           <div className={css.formNameEmail}>
             <label>
-              <span className={css.boldText}>Your name</span>
+              <span className={css.boldText}>{t("yourName")}</span>
               <input {...register("yourName")} className={css.inputBox} />
               {errors.yourName && <p>{errors.yourName.message}</p>}
             </label>
 
             <label>
-              <span className={css.boldText}>Email</span>
+              <span className={css.boldText}>{t("email")}</span>
               <input {...register("yourEmail")} className={css.inputBox} />
               {errors.yourEmail && <p>{errors.yourEmail.message}</p>}
             </label>
 
             <div className={css.formula}>
-              <p className={css.boldText}>My daily norma</p>
+              <p className={css.boldText}>{t("dailyNorm")}</p>
               <div className={css.formulaDescription}>
                 <p className={css.ordinaryText}>
-                  <span>For woman: </span>
+                  <span>{t("forWoman")} </span>
                   <span className={css.formulaExpression}>
                     V=(M*0,03) + (T*0,4)
                   </span>
                 </p>
                 <p className={css.ordinaryText}>
-                  <span>For man: </span>{" "}
+                  <span>{t("forMan")} </span>{" "}
                   <span className={css.formulaExpression}>
                     V=(M*0,04) + (T*0,6)
                   </span>
@@ -139,40 +148,33 @@ const UserSettingsForm = () => {
               <p className={css.ordinaryText}>
                 <span className={css.formulaExpression}>*</span>{" "}
                 <span className={css.formulaDescriptionText}>
-                  V is the volume of the water norm in liters per day, M is your
-                  body weight, T is the time of active sports, or another type
-                  of activity commensurate in terms of loads (in the absence of
-                  these, you must set 0)
+                  {t("formulaExplanation")}
                 </span>
               </p>
               <p className={css.ordinaryText}>
                 <span className={css.temporarySymbol}>! </span>{" "}
                 {/*Put svg ion*/}
-                Active time in hours
+                {t("activeTime")}
               </p>
             </div>
           </div>
 
           <div className={css.formWeightTime}>
             <label>
-              <span className={css.ordinaryText}>
-                Your weight in kilograms:
-              </span>
+              <span className={css.ordinaryText}>{t("yourWeight")}</span>
               <input {...register("yourWeight")} className={css.inputBox} />
               {errors.yourWeight && <p>{errors.yourWeight.message}</p>}
             </label>
 
             <label>
-              <span className={css.ordinaryText}>
-                The time of active participation in sports:
-              </span>
+              <span className={css.ordinaryText}>{t("activeSportsTime")}</span>
               <input {...register("yourActiveTime")} className={css.inputBox} />
               {errors.yourActiveTime && <p>{errors.yourActiveTime.message}</p>}
             </label>
 
             <div className={css.consumeWater}>
               <p className={css.ordinaryText}>
-                The required amount of water in liters per day:&nbsp;
+                {t("requiredWaterAmount")}&nbsp;
                 <span className={css.userNorma}>
                   {calculateWaterIntake(86, 1)} L
                 </span>
@@ -180,9 +182,7 @@ const UserSettingsForm = () => {
               </p>
 
               <label>
-                <span className={css.boldText}>
-                  Write down how much water you will drink:
-                </span>
+                <span className={css.boldText}>{t("recordWaterIntake")}</span>
                 <input
                   {...register("yourDayWaterConsumption")}
                   className={css.inputBox}
@@ -195,7 +195,7 @@ const UserSettingsForm = () => {
           </div>
         </div>
         <button type="submit" className={`${css.submitBtn} ${css.boldTextBtn}`}>
-          Save
+          {t("save")}
         </button>
       </form>
     </>

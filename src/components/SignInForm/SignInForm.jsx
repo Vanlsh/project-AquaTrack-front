@@ -8,22 +8,23 @@ import svgSprite from "../../assets/icons.svg";
 import { logIn } from "../../redux/auth/operations";
 import { selectIsLoading } from "../../redux/auth/selectors.js";
 import styles from "./SignInForm.module.css";
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .email("Enter a valid email address!")
-    .required("Email is required"),
-  password: yup
-    .string()
-    .min(5, "Password is too short")
-    .max(25, "Password is too long")
-    .required("Password is required"),
-});
+import { useTranslation } from "react-i18next";
 
 const SignInForm = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email(t("enterValidEmail"))
+      .required(t("emailRequired")),
+    password: yup
+      .string()
+      .min(5, t("passwordTooShort"))
+      .max(25, t("passwordTooLong"))
+      .required(t("passwordRequired")),
+  });
   const {
     register,
     handleSubmit,
@@ -43,17 +44,17 @@ const SignInForm = () => {
 
   return (
     <form className={styles.signInForm} onSubmit={handleSubmit(onSubmit)}>
-      <h1 className={styles.signInFormTitle}>Sign In</h1>
+      <h1 className={styles.signInFormTitle}>{t("signInTitle")}</h1>
       <div className={styles.signInFormInputWrapper}>
         <label className={styles.signInFormLabel}>
-          Email
+          {t("email")}
           <input
             type="email"
             className={clsx(styles.signInFormInput, {
               [styles.signInFormInputError]: errors.email?.message,
             })}
             {...register("email")}
-            placeholder="Enter you email"
+            placeholder={t("enterEmail")}
           />
           {errors.email?.message ? (
             <p className={styles.signInFormInputErrorMessage}>
@@ -65,7 +66,7 @@ const SignInForm = () => {
         </label>
 
         <label className={styles.signInFormLabel}>
-          Password
+          {t("password")}
           <div className={styles.signInFormIconInputWrapper}>
             <input
               type={showPassword ? "text" : "password"}
@@ -73,7 +74,7 @@ const SignInForm = () => {
                 [styles.signInFormInputError]: errors.password?.message,
               })}
               {...register("password")}
-              placeholder="Enter your password"
+              placeholder={t("enterPassword")}
             />
 
             <button
@@ -102,7 +103,7 @@ const SignInForm = () => {
         </label>
       </div>
       <button className={styles.signInFormButton} type="submit">
-        {isLoading ? "Loading" : "Sing In"}
+        {isLoading ? "Loading" : t("signIn")}
       </button>
     </form>
   );
