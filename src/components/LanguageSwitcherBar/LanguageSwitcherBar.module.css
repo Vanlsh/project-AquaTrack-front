@@ -1,0 +1,33 @@
+.barPopover {
+  position: absolute;
+  width: 100%;
+  padding: 10px 5px;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.49;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  top: 43px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.button {
+  width: 100%;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--color-font-main);
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.3 ease;
+}
+.button:hover {
+  opacity: 0.7;
+}
