@@ -27,6 +27,8 @@ const schema = yup.object().shape({
 const UserSettingsForm = () => {
   const [avatarPreview, setAvatarPreview] = useState(null);
 
+  const [weight, setWeight] = useState(0);
+  const [exerciseTime, setExerciseTime] = useState(0);
   const {
     register,
     handleSubmit,
@@ -57,7 +59,10 @@ const UserSettingsForm = () => {
   return (
     <>
       <div className={css.userAvatar}>
-        <img src={avatarPreview || "#"} alt="User's photo" />
+        <img
+          src={avatarPreview || "/img/avatar-placeholder.jpg"}
+          alt="User's photo"
+        />
         <label>
           <div className={css.uploadContainer}>
             <svg className={css.icon}>
@@ -110,13 +115,21 @@ const UserSettingsForm = () => {
           <div className={css.formNameEmail}>
             <label>
               <span className={css.boldText}>Your name</span>
-              <input {...register("yourName")} className={css.inputBox} />
+              <input
+                {...register("yourName")}
+                className={css.inputBox}
+                placeholder="Enter your name"
+              />
               {errors.yourName && <p>{errors.yourName.message}</p>}
             </label>
 
             <label>
               <span className={css.boldText}>Email</span>
-              <input {...register("yourEmail")} className={css.inputBox} />
+              <input
+                {...register("yourEmail")}
+                className={css.inputBox}
+                placeholder="Enterer your email"
+              />
               {errors.yourEmail && <p>{errors.yourEmail.message}</p>}
             </label>
 
@@ -158,7 +171,12 @@ const UserSettingsForm = () => {
               <span className={css.ordinaryText}>
                 Your weight in kilograms:
               </span>
-              <input {...register("yourWeight")} className={css.inputBox} />
+              <input
+                {...register("yourWeight")}
+                className={css.inputBox}
+                value={weight}
+                onChange={(e) => setWeight(Number(e.target.value))}
+              />
               {errors.yourWeight && <p>{errors.yourWeight.message}</p>}
             </label>
 
@@ -166,7 +184,12 @@ const UserSettingsForm = () => {
               <span className={css.ordinaryText}>
                 The time of active participation in sports:
               </span>
-              <input {...register("yourActiveTime")} className={css.inputBox} />
+              <input
+                {...register("yourActiveTime")}
+                className={css.inputBox}
+                value={exerciseTime}
+                onChange={(e) => setExerciseTime(Number(e.target.value))}
+              />
               {errors.yourActiveTime && <p>{errors.yourActiveTime.message}</p>}
             </label>
 
