@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import WaterProgressBar from "../WaterProgressBar/WaterProgressBar";
 import css from "./WaterMainInfo.module.css";
 import { useSelector } from "react-redux";
@@ -7,7 +8,7 @@ import BtnUserSet from "../BtnUserSet/BtnUserSet.jsx";
 import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
 
 const WaterMainInfo = () => {
-
+  const { t } = useTranslation();
   const waterRate = useSelector(selectWaterRate)
 
   return (
@@ -18,7 +19,7 @@ const WaterMainInfo = () => {
       ) : (
         <div className={css.normaContainer}>
             <h2 className={css.normaL}>{`${waterRate} L`}</h2>
-          <p className={css.normaText}>My daily norma</p>
+          <p className={css.normaText}>{t("dailyNorm")}</p>
         </div>)}
         {waterRate === 0 ? (''):(<WaterProgressBar />)}
         {waterRate === 0 ? (<BtnUserSet/>):(<AddWaterBtn/>)}

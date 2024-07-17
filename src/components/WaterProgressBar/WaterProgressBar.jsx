@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import css from "./WaterProgressBar.module.css";
 // import { useParams } from "react-router-dom";
 // import { parseDateTime } from "../../helpers/parseDate";
@@ -6,6 +7,7 @@ import { selectWaterRate } from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
 
 const WaterProgressBar = () => {
+  const { t } = useTranslation();
     // const { date } = useParams();
     const currentWater = useSelector(selectWaterDailyPercentage);
     const goal = useSelector(selectWaterRate);
@@ -16,7 +18,7 @@ const WaterProgressBar = () => {
 
     return (
         <div className={css.progressBarContainer}>
-            <h2 className={css.progressBarTitle}>Today</h2>
+            <h2 className={css.progressBarTitle}>{t("today")}</h2>
             <div className={css.progressBar}>
                 <div
                     className={css.progressBarFill}

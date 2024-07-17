@@ -25,7 +25,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     Promise.reject(error);
-  },
+  }
 );
 
 instance.interceptors.response.use(
@@ -38,17 +38,20 @@ instance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        const response = await axios.post(`${BASE_URL}` + "/users/refresh");
-        // axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token ;
+        const response = await axios.post(
+          `${BASE_URL}` + "/users/refresh",
+          {},
+          { withCredentials: true }
+        );
         store.dispatch(setToken(response.data.token));
         return instance(originalRequest);
       } catch (error) {
         if (error.response.status === 401) {
           store.dispatch(logOutReducer());
         }
-        return Promise.reject(error);
+        // return Promise.reject(error);
       }
     }
     return Promise.reject(error);
-  },
+  }
 );

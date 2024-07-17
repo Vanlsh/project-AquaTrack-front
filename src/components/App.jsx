@@ -4,11 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { getUserInfo } from "../redux/auth/operations.js";
 import {
-  selectIsSuccessfullyLoggedIn,
-  selectIsSuccessfullyRegistered,
+  selectAuthErrorMessage,
+  selectAuthSuccessMessage,
   selectToken,
 } from "../redux/auth/selectors.js";
 import { setLoggedIn } from "../redux/auth/slice.js";
+import {
+  selectDailyErrorMessage,
+  selectDailySuccessMessage,
+  selectMonthlyErrorMessage,
+  selectMonthlySuccessMessage,
+} from "../redux/water/selectors.js";
 import PrivateRoute from "./PrivateRoute.jsx";
 import RestrictedRoute from "./RestrictedRoute.jsx";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
@@ -24,24 +30,49 @@ const NotFoundPage = lazy(
 function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const isSuccessfullyLoggedIn = useSelector(selectIsSuccessfullyLoggedIn);
-  const isSuccessfullyRegistered = useSelector(selectIsSuccessfullyRegistered);
+  const authSuccessMessage = useSelector(selectAuthSuccessMessage);
+  const authErrorMessage = useSelector(selectAuthErrorMessage);
+  const waterDailyErrorMessage = useSelector(selectDailyErrorMessage);
+  const waterDailySuccessMessage = useSelector(selectDailySuccessMessage);
+  const waterMonthlyErrorMessage = useSelector(selectMonthlyErrorMessage);
+  const waterMonthlySuccessMessage = useSelector(selectMonthlySuccessMessage);
 
   useEffect(() => {
     if (token) {
-      dispatch(getUserInfo());
+      dispatch(getUserInfo(token));
       dispatch(setLoggedIn(true));
     }
   }, [token, dispatch]);
 
+  //AUTH TOAST
   useEffect(() => {
-    if (isSuccessfullyLoggedIn) {
-      toast.success("Successfully logged in");
+    if (authErrorMessage) {
+      toast.error(authErrorMessage);
     }
-    if (isSuccessfullyRegistered) {
-      toast.success("Successfully registered");
+    if (authSuccessMessage) {
+      toast.success(authSuccessMessage);
     }
-  }, [isSuccessfullyLoggedIn, isSuccessfullyRegistered]);
+  }, [authSuccessMessage, authErrorMessage]);
+
+  //WATER DAILY TOAST
+  useEffect(() => {
+    if (waterDailyErrorMessage) {
+      toast.error(waterDailyErrorMessage);
+    }
+    if (waterDailySuccessMessage) {
+      toast.success(waterDailySuccessMessage);
+    }
+  }, [waterDailySuccessMessage, waterDailySuccessMessage]);
+
+  //WATER MONTHLY TOAST
+  useEffect(() => {
+    // if (waterMonthlyErrorMessage) {
+    //   toast.error(waterMonthlyErrorMessage);
+    // }
+    if (waterMonthlySuccessMessage) {
+      toast.success(waterMonthlySuccessMessage);
+    }
+  }, [waterMonthlySuccessMessage, waterMonthlyErrorMessage]);
 
   return (
     <SharedLayout>
@@ -77,7 +108,30 @@ function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <Toaster position="top-right" />
+      <Toaster
+        toastOptions={{
+          style: {
+            padding: "16px",
+            fontWeight: "700",
+            color: "white",
+            borderRadius: "15px",
+            backgroundColor: "#323F47",
+          },
+          success: {
+            iconTheme: {
+              primary: "#9BE1A0",
+              secondary: "#FFF",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#EF5050",
+              secondary: "#F0EFF4",
+            },
+          },
+        }}
+        position="top-right"
+      />
     </SharedLayout>
   );
 }

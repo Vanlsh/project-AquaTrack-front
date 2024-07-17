@@ -1,13 +1,16 @@
 import { forwardRef, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import svgIcons from "../../assets/icons.svg";
 import { useModal } from "../../hooks/useModal.js";
 import LogOutModal from "../LogOutModal/LogOutModal.jsx";
+import UserSettingsModal from "../UserSettingsModal/UserSettingsModal.jsx";
 import styles from "./UserBarPopover.module.css";
 
 const UserBarPopover = forwardRef(function UserBarPopover(
   { handleOutsideClick },
-  ref,
+  ref
 ) {
+  const { t } = useTranslation();
   const windowHeight = window.innerHeight;
   const scrollPosition = window.scrollY;
   const [userBarPopoverTopPosition, setUserBarPopoverTopPosition] =
@@ -20,7 +23,8 @@ const UserBarPopover = forwardRef(function UserBarPopover(
 
   const openSettingsModal = useCallback(() => {
     //TODO
-    setModal();
+    setModal(<UserSettingsModal onClose={closeModal} />),
+      [setModal, closeModal];
   });
 
   const openLogOutModal = useCallback(() => {
@@ -56,7 +60,7 @@ const UserBarPopover = forwardRef(function UserBarPopover(
           <svg className={styles.userBarPopoverIconSettings}>
             <use xlinkHref={svgIcons + "#icon-settings"}></use>
           </svg>
-          Settings
+          {t("settings")}
         </li>
         <li
           className={`${styles.userBarPopoverListItem} ${styles.userBarPopoverListItemLogOut}`}
@@ -65,7 +69,7 @@ const UserBarPopover = forwardRef(function UserBarPopover(
           <svg className={styles.userBarPopoverIconLogOut}>
             <use xlinkHref={svgIcons + "#icon-log-out"}></use>
           </svg>
-          Log Out
+          {t("logout")}
         </li>
       </ul>
     </div>
