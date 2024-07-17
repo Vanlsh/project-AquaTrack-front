@@ -1,18 +1,8 @@
 import CalendarItem from '../CalendarItem/CalendarItem.jsx';
 
-// import { months } from '../../constants';
 import css from './Calendar.module.css';
 
-const Calendar = ({ handleClick, selectedIndex }) => {
-	// const monthDays = () => {
-	// 	if (Number.isInteger(year / 4) && month === 1) {
-	// 		return 29;
-	// 	}
-	// 	return Object.values(months)[month];
-	// };
-
-	// const dateArray = [];
-
+const Calendar = ({ selectedIndex, setSelectedIndex }) => {
 	const dateArray = [
 		{
 			date: 1719781200000,
@@ -202,18 +192,6 @@ const Calendar = ({ handleClick, selectedIndex }) => {
 		},
 	];
 
-	// const x = new Date('2024', '06', '30').getTime();
-	// console.log(x);
-
-	// const calendarDates = () => {
-	// 	for (let i = 1; i <= monthDays(); i++) {
-	// 		dateArray.push(i);
-	// 	}
-	// };
-	// const calendarDates = dateArray.length + 1;
-	// dateArray;
-	// calendarDates();
-
 	return (
 		<div className={css.container}>
 			<ul className={css.calendarList}>
@@ -221,12 +199,10 @@ const Calendar = ({ handleClick, selectedIndex }) => {
 					<li key={index}>
 						<CalendarItem
 							index={index}
-							dateMs={eachDate.date}
+							calendarDate={eachDate.date}
 							percent={eachDate.percent}
-							sIndex={selectedIndex}
-							handleClick={handleClick}
-							// month={month}
-							// year={year}
+							selectedIndex={selectedIndex}
+							setSelectedIndex={setSelectedIndex}
 						/>
 					</li>
 				))}
