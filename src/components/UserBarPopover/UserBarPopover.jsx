@@ -2,6 +2,7 @@ import { forwardRef, useCallback, useEffect, useState } from "react";
 import svgIcons from "../../assets/icons.svg";
 import { useModal } from "../../hooks/useModal.js";
 import LogOutModal from "../LogOutModal/LogOutModal.jsx";
+import UserSettingsModal from "../UserSettingsModal/UserSettingsModal.jsx";
 import styles from "./UserBarPopover.module.css";
 
 const UserBarPopover = forwardRef(function UserBarPopover(
@@ -20,7 +21,8 @@ const UserBarPopover = forwardRef(function UserBarPopover(
 
   const openSettingsModal = useCallback(() => {
     //TODO
-    setModal();
+    setModal(<UserSettingsModal onClose={closeModal} />),
+      [setModal, closeModal];
   });
 
   const openLogOutModal = useCallback(() => {
