@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { logOut } from "../../redux/auth/operations";
 import css from "./BtnLogout.module.css";
 
 const BtnLogout = ({ handleClose }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -12,7 +14,7 @@ const BtnLogout = ({ handleClose }) => {
 
   return (
     <button type="button" onClick={handleLogout} className={css.btnLogout}>
-      Log out
+      {t("logout")}
     </button>
   );
 };
