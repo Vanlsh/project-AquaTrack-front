@@ -1,81 +1,45 @@
-.icon {
-	stroke: var(--white);
-}
 .iconStyle {
-	box-sizing: border-box;
-	background-color: var(--color-second-bg);
-	border-radius: 50%;
-	width: 30px;
-	height: 30px;
-	stroke: var(--color-font-main);
-	padding: 6px;
+  box-sizing: border-box;
+  background-color: var(--color-second-bg);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  stroke: var(--color-font-main);
+  padding: 6px;
 }
 
-.btn {
-	width: 140px;
-	height: 46px;
-	border-radius: 30px;
-	border: none;
-	color: var(--white);
-	background-color: var(--color-font-main);
-	cursor: pointer;
-	display: flex;
-	gap: 10px;
-	padding: 14px 20px;
-	align-items: center;
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 18px;
-	margin-left: auto;
-	letter-spacing: -0.1px;
-}
-.btn:hover {
-	color: var(--color-second-bg);
-}
 .btnStyle {
-	background-color: transparent;
-	color: var(--color-font-main);
-	font-size: 14px;
-	width: 124px;
-	height: 30px;
-	padding: 0;
+  width: fit-content;
+  height: 30px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  align-items: center;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-left: auto;
+  letter-spacing: inherit;
+  background-color: transparent;
+  color: var(--color-font-main);
 }
 
-.btnStyle:hover {
-	color: var(--color-font-main);
-}
 .btnStyle:hover .iconStyle {
-	background-color: var(--color-font-main);
+  background-color: var(--color-font-main);
 }
 
-.btn:hover .icon {
-	stroke: var(--color-second-bg);
-}
 .btnStyle:hover .iconStyle {
-	stroke: var(--white);
+  stroke: var(--white);
 }
 
 @media screen and (min-width: 768px) {
-	.btn {
-		width: 178px;
-		height: 60px;
-		padding: 18px 30px;
-		font-size: 16px;
-		line-height: 24px;
-	}
-	.iconStyle {
-		background-color: var(--color-second-bg);
-		border-radius: 50%;
-		width: 30px;
-		height: 30px;
-	}
-	.icon {
-		width: 24px;
-		height: 24px;
-	}
-	.btnStyle {
-		width: 124px;
-		height: 30px;
-		padding: 0;
-	}
+  .iconStyle {
+    background-color: var(--color-second-bg);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
 }

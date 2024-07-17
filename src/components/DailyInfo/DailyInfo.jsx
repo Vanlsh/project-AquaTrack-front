@@ -1,20 +1,18 @@
-import WaterList from '../WaterList/WaterList';
-import css from './DailyInfo.module.css';
-import AddWaterBtn from '../AddWaterBtn/AddWaterBtn';
-import ChooseDate from '../ChooseDate/ChooseDate';
+import WaterList from "../WaterList/WaterList";
+import css from "./DailyInfo.module.css";
+import AddWaterBtn from "../AddWaterBtn/AddWaterBtn";
+import ChooseDate from "../ChooseDate/ChooseDate";
 
 const DailyInfo = () => {
-	return (
-		<div className={css.info}>
-			<div className={css.header}>
-				<ChooseDate />
-				<AddWaterBtn />
-			</div>
-			<div className={css.content}>
-				<WaterList />
-			</div>
-		</div>
-	);
+  return (
+    <div className={css.info}>
+      <div className={css.header}>
+        <ChooseDate />
+        <AddWaterBtn />
+      </div>
+      <WaterList />
+    </div>
+  );
 };
 
 export default DailyInfo;

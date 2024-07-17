@@ -1,29 +1,49 @@
-import css from '../WaterItem/WaterItem.module.css';
+import { useCallback } from "react";
+import WaterModal from "../../components/WaterModal/WaterModal";
+import css from "../WaterItem/WaterItem.module.css";
+import ModalDeleteEntry from "../ModalDeleteEntry/ModalDeleteEntry";
+import { formatTime } from "../../helpers/formatTime.js";
+import { convertToLiters } from "../../helpers/convertToLiters.js";
+import { useModal } from "../../hooks/useModal.js";
 
-const WaterItem = ({ amount, date }) => {
-	return (
-		<div className={css.water_item_content}>
-			<svg className={css.icon_water_glass} width='44' height='45'>
-				<use href='../../src/assets/icons.svg#icon-water-glass'></use>
-			</svg>
-			<div>
-				<strong>{amount} ml</strong>
-				<p>{date} AM</p>
-			</div>
-			<div className={css.container_buttons}>
-				<button className={css.editButton}>
-					<svg className={css.icon_edit} width='16' height='16'>
-						<use href='../../src/assets/icons.svg#icon-edit'></use>
-					</svg>
-				</button>
-				<button className={css.deleteButton}>
-					<svg className={css.icon_edit} width='16' height='16'>
-						<use href='../../src/assets/icons.svg#icon-trash'></use>
-					</svg>
-				</button>
-			</div>
-		</div>
-	);
+const WaterItem = ({ water }) => {
+  const setModal = useModal();
+
+  const closeModal = useCallback(() => {
+    setModal();
+  }, [setModal]);
+
+  const openModalDelete = useCallback(() => {
+    setModal(<ModalDeleteEntry id={water.id} onClose={closeModal} />);
+  }, [setModal, closeModal, water]);
+
+  const openModalEdit = useCallback(() => {
+    setModal(<WaterModal water={water} onClose={closeModal} />);
+  }, [setModal, closeModal, water]);
+
+  return (
+    <div className={css.water_item_content}>
+      <svg className={css.icon_water_glass} width="44" height="45">
+        <use href="../../src/assets/icons.svg#icon-water-glass"></use>
+      </svg>
+      <div className={css.water_info}>
+        <p className={css.water_amount}>{convertToLiters(water.amount)} </p>
+        <p className={css.water_date}>{formatTime(water.date)}</p>
+      </div>
+      <div className={css.container_buttons}>
+        <button className={css.editButton} onClick={openModalEdit}>
+          <svg className={css.icon_action} width="14" height="14">
+            <use href="../../src/assets/icons.svg#icon-edit"></use>
+          </svg>
+        </button>
+        <button className={css.deleteButton} onClick={openModalDelete}>
+          <svg className={css.icon_action} width="14" height="14">
+            <use href="../../src/assets/icons.svg#icon-trash"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default WaterItem;

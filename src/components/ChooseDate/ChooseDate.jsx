@@ -1,26 +1,15 @@
-import css from './ChooseDate.module.css';
-import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
+import css from "./ChooseDate.module.css";
+import { parseDateTime } from "../../helpers/parseDate.js";
+import { getDateMonthString } from "../../helpers/getDateMonthString.js";
 
 const ChooseDate = () => {
-	const [date, setDate] = useState("");
+  const { date } = useParams();
+  const currentDate = parseDateTime(date);
 
-  useEffect(() => {
-
-    const today = new Date().toDateString();
-
-
-    if (today === new Date().toDateString()) {
-      setDate(`Today`);
-    }
-
-  },[]);
-	return (
-		<div className={css.wrap}>
-			<h3 className={css.selectedDate}>
-				{date}
-			</h3>
-		</div>
-	);
+  return (
+    <h3 className={css.selectedDate}>{getDateMonthString(currentDate)}</h3>
+  );
 };
 
 export default ChooseDate;
