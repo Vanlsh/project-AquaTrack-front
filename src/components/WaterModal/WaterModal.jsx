@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import css from "./WaterModal.module.css";
 
 import clsx from 'clsx';
@@ -83,3 +85,4 @@ const WaterModal = ({ operationType, onClose, editTime, portionOfDB }) => {
 };
 
 export default WaterModal;
+
