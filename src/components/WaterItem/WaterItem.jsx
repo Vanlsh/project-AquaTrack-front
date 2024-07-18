@@ -1,14 +1,15 @@
-import { useCallback, useTransition } from "react";
+import { useCallback } from "react";
 import WaterModal from "../../components/WaterModal/WaterModal";
 import css from "../WaterItem/WaterItem.module.css";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal.jsx";
 import { formatTime } from "../../helpers/formatTime.js";
 import { convertToLiters } from "../../helpers/convertToLiters.js";
 import { useModal } from "../../hooks/useModal.js";
+import { useTranslation } from "react-i18next";
 
 const WaterItem = ({ water }) => {
   const setModal = useModal();
-  const { t } = useTransition();
+  const { t } = useTranslation();
   const closeModal = useCallback(() => {
     setModal();
   }, [setModal]);
