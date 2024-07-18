@@ -8,6 +8,7 @@ import { selectUser } from "../../redux/auth/selectors.js";
 import css from "./UserSettingsForm.module.css";
 import svg from "../../assets/icons.svg";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
+import Input from "../Input/InputController.jsx";
 
 const UserSettingsForm = () => {
   const { t } = useTranslation();
@@ -25,8 +26,7 @@ const UserSettingsForm = () => {
   const schema = yup.object({
     // avatar: yup.mixed().required(t("avatarRequired")),
     gender: yup.string().required(t("genderRequired")),
-    // yourName: yup.string().required(t("nameRequired")),
-    // yourName: yup.string().required(),
+    yourName: yup.string().required(t("nameRequired")),
     yourWeight: yup.number().min(0).typeError("Has to be a number"),
     yourActiveTime: yup.number().min(0).typeError("Has to be a number"),
     yourDayWaterConsumption: yup
@@ -63,6 +63,7 @@ const UserSettingsForm = () => {
   }, [weight, exerciseTime, genderIndentity]);
 
   const {
+    control,
     register,
     handleSubmit,
     // reset,
@@ -79,6 +80,15 @@ const UserSettingsForm = () => {
     },
     mode: "onChange",
   });
+
+  useEffect(() => {
+    console.log(control);
+  });
+
+  // const { field, fieldState } = useController({
+  //   name: "FirstName",
+  //   control: control,
+  // });
 
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
@@ -110,7 +120,6 @@ const UserSettingsForm = () => {
           <input
             className={css.hideBtn}
             type="file"
-            {...register("avatar")}
             onChange={handleAvatarChange}
           />
           {errors.avatar && <p>{errors.avatar.message}</p>}
@@ -168,7 +177,7 @@ const UserSettingsForm = () => {
           <div className={css.formNameEmail}>
             <label>
               <span className={css.boldText}>{t("yourName")}</span>
-              <input
+              {/* <input
                 {...register("yourName")}
                 value={userName}
                 className={css.inputBox}
@@ -188,7 +197,14 @@ const UserSettingsForm = () => {
                     e.target.value = user.name;
                   }
                 }}
+              /> */}
+              <Input
+                control={control}
+                name="yourName"
+                placeholder="Enter your name"
+                className={css.inputBox}
               />
+
               {errors.yourName && (
                 <p className={css.errorMessage}>{errors.yourName.message}</p>
               )}
