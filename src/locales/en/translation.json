@@ -84,5 +84,6 @@
   "delete": "Delete",
   "cancel": "Cancel",
   "logout": "Log out",
-  "confirmLogout": "Do you really want to leave?"
+  "confirmLogout": "Do you really want to leave?",
+  "noWaterAdded": "Water has not been added yet"
 }

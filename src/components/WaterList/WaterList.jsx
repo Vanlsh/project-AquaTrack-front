@@ -5,8 +5,10 @@ import {
   selectWaterDailyRecord,
   selectDailyIsLoading,
 } from "../../redux/water/selectors.js";
+import { useTranslation } from "react-i18next";
 
 const WaterList = () => {
+  const { t } = useTranslation();
   const data = useSelector(selectWaterDailyRecord);
   const isLoading = useSelector(selectDailyIsLoading);
 
@@ -22,7 +24,7 @@ const WaterList = () => {
   if (!data.length) {
     return (
       <div className={css.messageContainer}>
-        <h2 className={css.noWater}>No water added jet</h2>
+        <h2 className={css.noWater}>{t("noWaterAdded")}</h2>
       </div>
     );
   }
