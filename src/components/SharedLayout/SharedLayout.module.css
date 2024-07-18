@@ -1,10 +1,13 @@
 .container {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  max-width: 375px;
   flex-direction: column;
   gap: 16px;
-  margin: 0 auto;
-  max-width: 375px;
-  padding: 16px;
+  margin: auto;
+  padding: 16px;  
 }
 
 @media screen and (min-width: 768px) {
@@ -21,3 +24,4 @@
     max-width: 1440px;
   }
 }
+

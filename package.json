@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "push": "git add . && git commit -m 'update' && git push"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -26,6 +27,7 @@
     "react-redux": "^9.1.2",
     "react-router-dom": "^6.24.1",
     "react-toastify": "^10.0.5",
+    "recharts": "^2.12.7",
     "redux-persist": "^6.0.0",
     "yup": "^1.4.0"
   },

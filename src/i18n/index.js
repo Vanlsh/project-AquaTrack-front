@@ -3,9 +3,9 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import { LOCALS } from "./constants";
 
-import translationEN from "../../public/locales/en/translation.json";
-import translationDE from "../../public/locales/de/translation.json";
-import translationUK from "../../public/locales/uk/translation.json";
+import translationEN from "/src/locales/en/translation.json";
+import translationDE from "/src/locales/de/translation.json";
+import translationUK from "/src/locales/uk/translation.json";
 
 const resources = {
   [LOCALS.EN]: {

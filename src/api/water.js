@@ -16,7 +16,6 @@ export const deleteWater = async (id) => {
 };
 
 export const getDayWater = async (date) => {
-  console.log(date);
   const { data } = await instance.get(`/water/day/${date}`);
   return data;
 };
