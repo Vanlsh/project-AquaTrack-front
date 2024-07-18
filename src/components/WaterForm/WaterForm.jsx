@@ -10,7 +10,7 @@ import svgSprite from "../../assets/icons.svg";
 const validationSchema = Yup.object().shape({
   recordingTime: Yup.string()
     .required("Recording time is required")
-    .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format"),
+    .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format, use HH:MM"),
   waterValue: Yup.number()
     .required("Water value is required")
     .min(50, "Water value must be greater than or equal to 50")
@@ -116,7 +116,7 @@ const WaterForm = ({ operationType }) => {
           control={control}
           defaultValue={currentTime}
           render={({ field }) => (
-            <input {...field} type="text" className={clsx(css.RecordingTime)} />
+            <input {...field} type="text" className={clsx(css.RecordingTime)} placeholder="HH:MM"/>
           )}
         />
         {errors.recordingTime && (

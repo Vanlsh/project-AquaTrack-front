@@ -14,7 +14,7 @@ const AddWaterBtn = () => {
   }, [setModal]);
 
   const openModal = useCallback(() => {
-    setModal(<WaterModal onClose={closeModal} />);
+    setModal(<WaterModal onClose={closeModal} operationType={"add"}/>);
   }, [setModal, closeModal]);
     
     
