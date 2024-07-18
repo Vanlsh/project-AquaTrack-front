@@ -5,16 +5,12 @@ import {
   selectWaterDailyRecord,
   selectDailyIsLoading,
 } from "../../redux/water/selectors.js";
-import { useEffect } from "react";
 
 const WaterList = () => {
   const data = useSelector(selectWaterDailyRecord);
   const isLoading = useSelector(selectDailyIsLoading);
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className={css.waterList}>
         {[1, 2, 3].map((item) => (
@@ -22,6 +18,14 @@ const WaterList = () => {
         ))}
       </div>
     );
+  }
+  if (!data.length) {
+    return (
+      <div className={css.messageContainer}>
+        <h2 className={css.noWater}>No water added jet</h2>
+      </div>
+    );
+  }
   return (
     <ul className={css.waterList}>
       {data.map((item) => (
