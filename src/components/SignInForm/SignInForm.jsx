@@ -7,6 +7,7 @@ import * as yup from "yup";
 import svgSprite from "../../assets/icons.svg";
 import { logIn } from "../../redux/auth/operations";
 import { selectIsLoading } from "../../redux/auth/selectors.js";
+import LoaderComponent from "../LoaderComponent/LoaderComponent.jsx";
 import styles from "./SignInForm.module.css";
 import { useTranslation } from "react-i18next";
 
@@ -102,8 +103,16 @@ const SignInForm = () => {
           )}
         </label>
       </div>
-      <button className={styles.signInFormButton} type="submit">
-        {isLoading ? "Loading" : t("signIn")}
+      <button
+        disabled={isLoading && true}
+        className={
+          !isLoading
+            ? `${styles.signInFormButton}`
+            : `${styles.signInFormButtonDisabled}`
+        }
+        type="submit"
+      >
+        {isLoading ? <LoaderComponent height={44} width={44} /> : t("signIn")}
       </button>
     </form>
   );

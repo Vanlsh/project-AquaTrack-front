@@ -70,6 +70,19 @@
   font-weight: 700;
 }
 
+.signInFormButtonDisabled {
+  border: none;
+  background-color: transparent;
+}
+
+.signInFormButtonDisabled:hover {
+  background-color: transparent;
+}
+
+.signInFormButton:hover + .signInFormButtonDisabled {
+  background-color: transparent;
+}
+
 .signInFormButton:hover,
 .signInFormButton:focus {
   background-color: var(--color-second-bg-hover);
@@ -99,13 +112,16 @@
     max-width: 436px;
     margin: 0 auto 16px;
   }
+
   .signInFormTitle {
     font-size: 36px;
   }
+
   .signInFormLabel {
     font-size: 16px;
     line-height: 1.5;
   }
+
   .signInFormInputErrorMessage {
     font-size: 14px;
   }
