@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useTransition } from "react";
 import WaterModal from "../../components/WaterModal/WaterModal";
 import css from "../WaterItem/WaterItem.module.css";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal.jsx";
@@ -8,7 +8,7 @@ import { useModal } from "../../hooks/useModal.js";
 
 const WaterItem = ({ water }) => {
   const setModal = useModal();
-
+  const { t } = useTransition();
   const closeModal = useCallback(() => {
     setModal();
   }, [setModal]);
@@ -21,13 +21,16 @@ const WaterItem = ({ water }) => {
     setModal(<WaterModal water={water} onClose={closeModal} />);
   }, [setModal, closeModal, water]);
 
+  const volume = convertToLiters(water.amount);
   return (
     <div className={css.water_item_content}>
       <svg className={css.icon_water_glass} width="44" height="45">
         <use href="../../src/assets/icons.svg#icon-water-glass"></use>
       </svg>
       <div className={css.water_info}>
-        <p className={css.water_amount}>{convertToLiters(water.amount)} </p>
+        <p className={css.water_amount}>
+          {`${volume.value} ${t(volume.text)}`}
+        </p>
         <p className={css.water_date}>{formatTime(water.date)}</p>
       </div>
       <div className={css.container_buttons}>
