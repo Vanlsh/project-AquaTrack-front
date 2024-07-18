@@ -109,8 +109,8 @@ const WaterForm = ({ operationType }) => {
         </button>
       </div>
 
-      <label>
-        <p className={css.RecordingTimeLabel}>{t("recordTime")}</p>
+      <label className={css.RecordingTimeLabel}>
+        {t("recordTime")}
         <Controller
           name="recordingTime"
           control={control}
@@ -123,8 +123,8 @@ const WaterForm = ({ operationType }) => {
           <p className={css.Error}>{errors.recordingTime.message}</p>
         )}
       </label>
-      <label>
-        <p className={css.WaterValueLabel}>{t("enterWaterValue")}</p>
+      <label className={css.WaterValueLabel}>
+        {t("enterWaterValue")}
         <Controller
           name="waterValue"
           control={control}

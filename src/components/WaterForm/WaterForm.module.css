@@ -70,15 +70,14 @@
   margin: auto;
 }
 
-
 .TapAddWaterWrapper button:hover {
   border: 1.5px solid #87d28d;
   fill: #87d28d;
 }
 
 .TapAddWater[disabled] {
-  opacity: 0.6; 
-  cursor: not-allowed; 
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .TapAddWater[disabled]:hover {
@@ -101,7 +100,7 @@
 }
 
 .RecordingTimeLabel {
-  margin: 0 0 8px 0;
+  margin: 0 0 0 0;
   display: block;
   font-weight: 400;
   font-size: 14px;
@@ -125,7 +124,7 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: var(--color-font-second);
-  margin: 0 0 24px 0;
+  margin: 8px 0 24px 0;
 }
 
 .RecordingTime:focus {
@@ -133,7 +132,6 @@
 }
 
 .WaterValueLabel {
-  margin: 0 0 8px 0;
   display: block;
   font-weight: 700;
   font-size: 16px;
@@ -156,7 +154,7 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: var(--color-font-second);
-  margin: 0 0 24px 0;
+  margin: 8px 0 24px 0;
 }
 
 .WaterValue:focus {
@@ -204,17 +202,16 @@ input[type="number"] {
   margin-top: 5px;
 }
 
-
 @media screen and (min-width: 768px) {
   .WaterForm {
     width: 438px;
   }
-  
+
   .FormHeader {
     font-size: 18px;
     line-height: 1.33;
   }
-  
+
   .AmountOfWater {
     font-size: 16px;
     line-height: 1.5;
@@ -238,14 +235,14 @@ input[type="number"] {
     font-size: 16px;
     line-height: 1.5;
   }
-  
+
   .RecordingTime {
     padding: 16px 16px 16px 16px;
     height: 56px;
     font-size: 16px;
     line-height: 1.5;
   }
-  
+
   .WaterValueLabel {
     font-size: 18px;
     line-height: 1.33;
@@ -264,7 +261,7 @@ input[type="number"] {
     font-size: 16px;
     line-height: 1.5;
   }
- }
- 
- @media screen and (min-width: 1440px) {
- }
+}
+
+@media screen and (min-width: 1440px) {
+}
