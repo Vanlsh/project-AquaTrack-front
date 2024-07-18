@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
-import { useTranslation } from "react-i18next";
 import css from "./WaterForm.module.css";
 import clsx from 'clsx';
 import svgSprite from "../../assets/icons.svg";
@@ -10,18 +9,13 @@ import { useDispatch } from 'react-redux';
 import { addWater, updateWaterIntakeRecord } from "../../redux/water/operations"
 
 const validationSchema = Yup.object().shape({
-  recordingTime: Yup.string()
-    .required("Recording time is required")
-    .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format"),
-  waterValue: Yup.number()
-    .required("Water value is required")
-    .min(0, "Water value must be greater than or equal to 0")
-    .max(5000, "Water value must be less than or equal to 5000"),
+    recordingTime: Yup.string().required('Recording time is required').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
+    waterValue: Yup.number().required('Water value is required').min(0, 'Water value must be greater than or equal to 0').max(5000, 'Water value must be less than or equal to 5000'),
 });
 
 const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => {
     const dispatch = useDispatch();
- const { t } = useTranslation();
+
     const [waterAmount, setWaterAmount] = useState(portionOfWater);
 
     const formatCurrentTime = () => {
@@ -79,27 +73,27 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
         }
     };
 
-  const handleWaterAmountChange = (amount) => {
-    setWaterAmount(amount);
-    setValue("waterValue", amount.toString());
-  };
+    const handleWaterAmountChange = (amount) => {
+        setWaterAmount(amount);
+        setValue('waterValue', amount.toString());
+    };
 
-  const convertTimeToMillis = (timeString) => {
-    const [hours, minutes] = timeString.split(":").map(Number);
-    const date = new Date();
-    date.setHours(hours);
-    date.setMinutes(minutes);
-    return date.getTime();
-  };
+    const convertTimeToMillis = (timeString) => {
+        const [hours, minutes] = timeString.split(':').map(Number);
+        const date = new Date();
+        date.setHours(hours);
+        date.setMinutes(minutes);
+        return date.getTime();
+    };
 
-  const isMinusButtonDisabled = waterAmount === 0;
-  const isPlusButtonDisabled = waterAmount === 5000;
+    const isMinusButtonDisabled = waterAmount === 0;
+    const isPlusButtonDisabled = waterAmount === 5000;
 
     return (
         <form className={css.WaterForm} onSubmit={handleSubmit(onSubmit)}>
 
             {FormHeader(operationType)}
-            <p className={css.AmountOfWater}>{t("waterAmount")}</p>
+            <p className={css.AmountOfWater}>Amount of water</p>
             <div className={css.TapAddWaterWrapper}>
                 <button
                     type="button"
@@ -111,7 +105,7 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
                         <use xlinkHref={svgSprite + "#icon-remove"}></use>
                     </svg>
                 </button>
-                <p className={css.TapAddWaterValue}>{waterAmount} {t("ml")}</p>
+                <p className={css.TapAddWaterValue}>{waterAmount} ml</p>
                 <button
                     type="button"
                     className={css.TapAddWater}
@@ -125,7 +119,7 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
             </div>
             
             <label >
-                <p className={css.RecordingTimeLabel}>{t("recordTime")}:</p>
+                <p className={css.RecordingTimeLabel}>Recording time:</p>
                 <Controller
                     name="recordingTime"
                     control={control}
@@ -140,7 +134,7 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
                 {errors.recordingTime && <p className={css.Error}>{errors.recordingTime.message}</p>}
             </label>
             <label>
-                <p className={css.WaterValueLabel}>{t("enterWaterValue")}:</p>
+                <p className={css.WaterValueLabel}>Enter the value of the water used:</p>
                 <Controller
                     name="waterValue"
                     control={control}
@@ -156,7 +150,7 @@ const WaterForm = ({ operationType, formTime, portionOfWater, handleClose }) => 
                 />
                 {errors.waterValue && <p className={css.Error}>{errors.waterValue.message}</p>}
             </label>
-            <button type="submit" className={css.SaveBtn}>{t("save")}</button>
+            <button type="submit" className={css.SaveBtn}>Save</button>
         </form>
     );
 };
