@@ -10,8 +10,6 @@ import { useLocation } from "react-router-dom";
 const WaterModal = ({ operationType, onClose, water={}}) => {
   const { t } = useTranslation();
   const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const timestamp = searchParams.get('time');
   const [closing, setClosing] = useState(false);
 
   const handleClose = () => {
@@ -33,10 +31,9 @@ const WaterModal = ({ operationType, onClose, water={}}) => {
     }
   };
 
-  const curentTimestamp = timestamp ? new Date(parseInt(timestamp, 10)) : new Date();
+  const curentTimestamp = Number(location.pathname.split("/")[2]); 
   const recordTimestamp = Number(water.date);
 
-  console.log(curentTimestamp);
 
   const editTime = (operationType) => {
     switch (operationType) {
