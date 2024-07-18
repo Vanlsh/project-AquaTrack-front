@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import css from './BtnUserSet.module.css'
 import { useModal } from '../../hooks/useModal';
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal';

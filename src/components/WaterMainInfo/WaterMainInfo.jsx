@@ -15,14 +15,13 @@ const WaterMainInfo = () => {
     <div className={css.waterContainer}>
       <Logo className={css.waterTitle}/>
       
-      {waterRate === 0 ? (<div className={css.normaContainer} style={{ display: 'none' }} />
-      ) : (
+      {waterRate === 0 ? ('') : (
         <div className={css.normaContainer}>
             <h2 className={css.normaL}>{`${waterRate} L`}</h2>
           <p className={css.normaText}>{t("dailyNorm")}</p>
         </div>)}
         {waterRate === 0 ? (''):(<WaterProgressBar />)}
-        {waterRate === 0 ? (<BtnUserSet/>):(<AddWaterBtn/>)}
+        {waterRate === 0 ? (<BtnUserSet />):(<AddWaterBtn />)}
       </div>
     
   );
