@@ -5,11 +5,13 @@ import WaterForm from "../WaterForm/WaterForm";
 import { useState } from "react";
 import { ANIMATION } from "../../constants";
 import svgSprite from "../../assets/icons.svg";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const WaterModal = ({ operationType, onClose, water={}}) => {
   const { t } = useTranslation();
-  const { date } = useParams(); // Отримуємо параметр date з URL
+  const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const timestamp = searchParams.get('time');
   const [closing, setClosing] = useState(false);
 
   const handleClose = () => {
@@ -31,7 +33,7 @@ const WaterModal = ({ operationType, onClose, water={}}) => {
     }
   };
 
-  const curentTimestamp = Number(date);
+  const curentTimestamp = timestamp ? new Date(parseInt(timestamp, 10)) : new Date();
   const recordTimestamp = Number(water.date);
 
   console.log(curentTimestamp);
