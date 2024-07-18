@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next";
-
 import css from "./WaterModal.module.css";
 import clsx from 'clsx';
-
 import WaterForm from "../WaterForm/WaterForm";
 import { useState } from "react";
 import { ANIMATION } from "../../constants";
@@ -12,6 +10,7 @@ const WaterModal = ({ operationType, onClose, water }) => {
   const { t } = useTranslation();
   const [closing, setClosing] = useState(false);
 
+  
   const handleClose = () => {
     setClosing(true);
     const id = setTimeout(() => {
@@ -31,14 +30,22 @@ const WaterModal = ({ operationType, onClose, water }) => {
     }
   };
 
+  const getTimestampFromUrl = () => {
+    const url = new URL(window.location.href);
+    const timestamp = url.pathname.split('/').pop();
+    return Number(timestamp);  // Перетворюємо на число
+  }
+
+  const curentTimestamp = getTimestampFromUrl();
+
   const editTime = (operationType) => {
     switch (operationType) {
       case "add":
-        return new Date();
+        return curentTimestamp;
       case "edit":
         return water.date;
       default:
-        return new Date();
+        return null;
     }
   };
 
@@ -53,25 +60,27 @@ const WaterModal = ({ operationType, onClose, water }) => {
     }
   };
 
-    const waterID = (operationType) => {
+  const waterID = (operationType) => {
     switch (operationType) {
       case "add":
-        return;
+        return null;
       case "edit":
         return water.id;
       default:
-        return;
+        return null;
     }
   };
-
-
-
-
 
   return (
     <div className={css.WaterModal}>
       <h1>{modalHeader(operationType)}</h1>
-      <WaterForm operationType={operationType} editTime={editTime} waterPortion={waterPortion} waterID={waterID} handleClose={handleClose}/>
+      <WaterForm 
+        operationType={operationType}
+        editTime={editTime(operationType)} // Передаємо мілісекунди
+        waterPortion={waterPortion(operationType)} // Передаємо порцію води
+        waterID={waterID(operationType)} // Передаємо ID води
+        handleClose={handleClose}
+      />
       <button
         type="button"
         onClick={handleClose}
@@ -84,4 +93,5 @@ const WaterModal = ({ operationType, onClose, water }) => {
     </div>
   );
 };
+
 export default WaterModal;
