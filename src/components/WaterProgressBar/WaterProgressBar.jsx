@@ -1,18 +1,13 @@
 import { useTranslation } from "react-i18next";
 import css from "./WaterProgressBar.module.css";
-// import { useParams } from "react-router-dom";
-// import { parseDateTime } from "../../helpers/parseDate";
 import { selectWaterDailyPercentage } from "../../redux/water/selectors";
 import { selectWaterRate } from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
 
 const WaterProgressBar = () => {
-  const { t } = useTranslation();
-    // const { date } = useParams();
+    const { t } = useTranslation();
     const currentWater = useSelector(selectWaterDailyPercentage);
     const goal = useSelector(selectWaterRate);
-
-    // const currentDate = parseDateTime(date);
 
     const percentage = (currentWater / goal) * 100;
 

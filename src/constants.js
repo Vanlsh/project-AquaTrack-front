@@ -17,3 +17,18 @@ export const months = {
   December: 31,
   DURATION: 50,
 };
+
+export const monthsName = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+];

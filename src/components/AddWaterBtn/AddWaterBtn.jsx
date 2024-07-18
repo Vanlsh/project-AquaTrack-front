@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import css from './AddWaterBtn.module.css'
 import { useModal } from '../../hooks/useModal';
 import svgSprite from "../../assets/icons.svg";

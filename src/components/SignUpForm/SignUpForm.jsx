@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import styles from "./SignUpForm.module.css";
 import * as Yup from "yup";
@@ -25,11 +26,24 @@ const schemaValidation = Yup.object({
 });
 
 const SignUpForm = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRepeat, setshowPasswordRepeat] = useState(false);
 
+  const schemaValidation = Yup.object({
+    email: Yup.string()
+      .email(t("enterValidEmail"))
+      .required(t("emailRequired")),
+    password: Yup.string()
+      .min(5, t("passwordTooShort"))
+      .max(25, t("passwordTooLong"))
+      .required(t("passwordRequired")),
+    repeatpassword: Yup.string()
+      .oneOf([Yup.ref("password")], t("repeatPasswordMustMatch"))
+      .required(t("repeatPasswordRequired")),
+  });
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -45,7 +59,6 @@ const SignUpForm = () => {
   } = useForm({ resolver: yupResolver(schemaValidation) });
 
   const submitForm = (data) => {
-    console.log(data);
     const { email, password } = data;
     dispatch(signUp({ email, password }));
     //! reset form
@@ -54,10 +67,10 @@ const SignUpForm = () => {
   return (
     <div className={styles.signUpComponent}>
       <form onSubmit={handleSubmit(submitForm)}>
-        <h2 className={styles.signUpTitle}>Sign Up</h2>
+        <h2 className={styles.signUpTitle}>{t("signUpTitle")}</h2>
         <div className={styles.signUpForm}>
           <label className={styles.signUpLabel}>
-            Email
+            {t("email")}
             <input
               className={
                 errors.email?.message
@@ -65,7 +78,7 @@ const SignUpForm = () => {
                   : `${styles.signUpInput}`
               }
               {...register("email")}
-              placeholder="Enter you email"
+              placeholder={t("enterEmail")}
             />
             {errors.email?.message ? (
               <p className={styles.signUpErrorMessage}>
@@ -77,7 +90,7 @@ const SignUpForm = () => {
           </label>
 
           <label className={styles.signUpLabel}>
-            <span>Password</span>
+            <span>{t("password")}</span>
             <span className={styles.signUpPassword}>
               <input
                 type={showPassword ? "text" : "password"}
@@ -87,7 +100,7 @@ const SignUpForm = () => {
                     : `${styles.signUpInput}`
                 }
                 {...register("password")}
-                placeholder="Enter your password"
+                placeholder={t("enterPassword")}
               />
               <button
                 className={styles.passwordIconBtn}
@@ -115,7 +128,7 @@ const SignUpForm = () => {
           </label>
 
           <label className={styles.signUpLabel}>
-            <span>Repeat password</span>
+            <span>{t("repeatPassword")}</span>
             <span className={styles.signUpPassword}>
               <input
                 type={showPasswordRepeat ? "text" : "password"}
@@ -125,7 +138,7 @@ const SignUpForm = () => {
                     : `${styles.signUpInput}`
                 }
                 {...register("repeatpassword")}
-                placeholder="Repeat password"
+                placeholder={t("repeatPassword")}
               />
               <button
                 className={styles.passwordIconBtn}
@@ -153,7 +166,7 @@ const SignUpForm = () => {
           </label>
         </div>
         <button className={styles.signUpBtn} type="submit">
-          {isLoading ? "Loading" : "Sign Up"}
+          {isLoading ? "Loading" : t("signUp")}
         </button>
       </form>
     </div>

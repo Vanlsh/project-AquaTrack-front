@@ -1,0 +1,99 @@
+.water_item_content {
+  display: flex;
+  width: 149px;
+  height: 74px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 14px;
+  gap: 3px;
+}
+.water_info {
+  width: fit-content;
+}
+.water_amount {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.water_date {
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.icon_water_glass {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  fill: var(--color-second-bg-hover);
+}
+
+.editButton,
+.deleteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.container_buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.icon_action {
+  fill: none;
+  stroke: var(--color-font-main);
+}
+
+.icon_action {
+  fill: none;
+  stroke: var(--color-font-main);
+}
+
+.icon_action {
+  transition: opacity 0.3s ease;
+}
+
+.icon_action:hover {
+  opacity: 0.8;
+}
+.icon_water-glass {
+  fill: var(--color-second-bg);
+  stroke: var(--color-second-bg);
+  stroke-width: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .water_item_content {
+    width: 191px;
+    height: 86px;
+    padding: 0 20px;
+  }
+  .icon_water_glass {
+    width: 44px;
+    height: 45px;
+  }
+  .water_info {
+    width: fit-content;
+  }
+  .water_amount {
+    font-size: 15px;
+    line-height: 1.49;
+    margin-bottom: 0;
+  }
+  .water_date {
+    line-height: 1.87;
+  }
+  .icon_action {
+    width: 16px;
+    height: 16px;
+  }
+}
