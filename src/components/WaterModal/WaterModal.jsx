@@ -8,7 +8,7 @@ import { useState } from "react";
 import { ANIMATION } from "../../constants";
 import svgSprite from "../../assets/icons.svg";
 
-const WaterModal = ({ operationType, onClose }) => {
+const WaterModal = ({ operationType, onClose, water }) => {
   const { t } = useTranslation();
   const [closing, setClosing] = useState(false);
 
@@ -31,10 +31,47 @@ const WaterModal = ({ operationType, onClose }) => {
     }
   };
 
+  const editTime = (operationType) => {
+    switch (operationType) {
+      case "add":
+        return new Date();
+      case "edit":
+        return water.date;
+      default:
+        return new Date();
+    }
+  };
+
+  const waterPortion = (operationType) => {
+    switch (operationType) {
+      case "add":
+        return 50;
+      case "edit":
+        return water.amount;
+      default:
+        return 50;
+    }
+  };
+
+    const waterID = (operationType) => {
+    switch (operationType) {
+      case "add":
+        return;
+      case "edit":
+        return water.id;
+      default:
+        return;
+    }
+  };
+
+
+
+
+
   return (
     <div className={css.WaterModal}>
       <h1>{modalHeader(operationType)}</h1>
-      <WaterForm operationType={operationType} />
+      <WaterForm operationType={operationType} editTime={editTime} waterPortion={waterPortion} waterID={waterID} handleClose={handleClose}/>
       <button
         type="button"
         onClick={handleClose}

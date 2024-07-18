@@ -21,8 +21,6 @@ const WaterItem = ({ water }) => {
     setModal(<WaterModal water={water} onClose={closeModal} operationType={"edit"}/>);
   }, [setModal, closeModal, water]);
 
-console.log(water)
-
   return (
     <div className={css.water_item_content}>
       <svg className={css.icon_water_glass} width="44" height="45">
