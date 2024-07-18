@@ -9,12 +9,12 @@ import {
   selectToken,
 } from "../redux/auth/selectors.js";
 import { setLoggedIn } from "../redux/auth/slice.js";
-import {
-  selectDailyErrorMessage,
-  selectDailySuccessMessage,
-  selectMonthlyErrorMessage,
-  selectMonthlySuccessMessage,
-} from "../redux/water/selectors.js";
+// import {
+//   selectDailyErrorMessage,
+//   selectDailySuccessMessage,
+//   selectMonthlyErrorMessage,
+//   selectMonthlySuccessMessage,
+// } from "../redux/water/selectors.js";
 import PrivateRoute from "./PrivateRoute.jsx";
 import RestrictedRoute from "./RestrictedRoute.jsx";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
@@ -32,10 +32,10 @@ function App() {
   const token = useSelector(selectToken);
   const authSuccessMessage = useSelector(selectAuthSuccessMessage);
   const authErrorMessage = useSelector(selectAuthErrorMessage);
-  const waterDailyErrorMessage = useSelector(selectDailyErrorMessage);
-  const waterDailySuccessMessage = useSelector(selectDailySuccessMessage);
-  const waterMonthlyErrorMessage = useSelector(selectMonthlyErrorMessage);
-  const waterMonthlySuccessMessage = useSelector(selectMonthlySuccessMessage);
+  // const waterDailyErrorMessage = useSelector(selectDailyErrorMessage);
+  // const waterDailySuccessMessage = useSelector(selectDailySuccessMessage);
+  // const waterMonthlyErrorMessage = useSelector(selectMonthlyErrorMessage);
+  // const waterMonthlySuccessMessage = useSelector(selectMonthlySuccessMessage);
 
   useEffect(() => {
     if (token) {
@@ -55,24 +55,24 @@ function App() {
   }, [authSuccessMessage, authErrorMessage]);
 
   //WATER DAILY TOAST
-  useEffect(() => {
-    if (waterDailyErrorMessage) {
-      toast.error(waterDailyErrorMessage);
-    }
-    if (waterDailySuccessMessage) {
-      toast.success(waterDailySuccessMessage);
-    }
-  }, [waterDailySuccessMessage, waterDailySuccessMessage]);
-
-  //WATER MONTHLY TOAST
-  useEffect(() => {
-    // if (waterMonthlyErrorMessage) {
-    //   toast.error(waterMonthlyErrorMessage);
-    // }
-    if (waterMonthlySuccessMessage) {
-      toast.success(waterMonthlySuccessMessage);
-    }
-  }, [waterMonthlySuccessMessage, waterMonthlyErrorMessage]);
+  // useEffect(() => {
+  //   if (waterDailyErrorMessage) {
+  //     toast.error(waterDailyErrorMessage);
+  //   }
+  //   if (waterDailySuccessMessage) {
+  //     toast.success(waterDailySuccessMessage);
+  //   }
+  // }, [waterDailySuccessMessage, waterDailySuccessMessage]);
+  //
+  // //WATER MONTHLY TOAST
+  // useEffect(() => {
+  //   // if (waterMonthlyErrorMessage) {
+  //   //   toast.error(waterMonthlyErrorMessage);
+  //   // }
+  //   if (waterMonthlySuccessMessage) {
+  //     toast.success(waterMonthlySuccessMessage);
+  //   }
+  // }, [waterMonthlySuccessMessage, waterMonthlyErrorMessage]);
 
   return (
     <SharedLayout>
