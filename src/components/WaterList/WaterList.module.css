@@ -1,15 +1,17 @@
 .waterList {
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 32px;
+  padding-bottom: 24px;
   display: flex;
   gap: 8px;
   padding-left: 0;
+  height: 106px;
 }
 
 @media screen and (min-width: 768px) {
   .waterList {
     gap: 32px;
+    height: 118px;
   }
 }
 
@@ -20,8 +22,8 @@
 }
 
 .waterList::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   transition: all var(--transition-color);
 }
 
@@ -37,4 +39,46 @@
 
 .waterList::-webkit-scrollbar-thumb:hover {
   background-color: #454f56;
+}
+/* skeleton */
+.skeleton {
+  position: relative;
+  width: 149px;
+  height: 74px;
+  border-radius: 10px;
+  background-color: #fff;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton::before {
+  content: "";
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, #fff 0%, #e7e7e7 50%, #fff 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+.waterList .skeleton:last-child {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .skeleton {
+    width: 192px;
+    height: 86px;
+  }
+  .waterList .skeleton:last-child {
+    display: block;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -149px 0;
+  }
+  100% {
+    background-position: 149px 0;
+  }
 }
