@@ -37,7 +37,6 @@ const CalendarPagination = () => {
       dispatch(fetchMonthlyWater(new Date(year - 1, 11, 3).getTime()));
       setMonth(11);
       setYear(year - 1);
-
       return;
     }
     dispatch(fetchMonthlyWater(new Date(year, month - 1, 3).getTime()));
