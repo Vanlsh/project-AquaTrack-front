@@ -1,18 +1,4 @@
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-  "DURATION",
-];
+import { monthsName } from "../constants.js";
 
 export const getDateMonthString = (date) => {
   const dateNow = new Date();
@@ -20,9 +6,5 @@ export const getDateMonthString = (date) => {
     dateNow.getFullYear() === date.getFullYear() &&
     dateNow.getMonth() === date.getMonth() &&
     dateNow.getDate() === date.getDate();
-  if (isToday) {
-    return "Today";
-  } else {
-    return `${date.getDate()}, ${months[date.getMonth()]}`;
-  }
+  return { isToday, day: date.getDate(), month: monthsName[date.getMonth()] };
 };
