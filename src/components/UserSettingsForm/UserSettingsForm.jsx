@@ -23,7 +23,7 @@ const UserSettingsForm = () => {
   const user = useSelector(selectUser);
 
   const schema = yup.object({
-    avatar: yup.mixed().required(t("avatarRequired")),
+    // avatar: yup.mixed().required(t("avatarRequired")),
     gender: yup.string().required(t("genderRequired")),
     // yourName: yup.string().required(t("nameRequired")),
     // yourName: yup.string().required(),
@@ -69,6 +69,15 @@ const UserSettingsForm = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      avatar: user.photo,
+      gender: user.gender,
+      yourName: user.name,
+      yourWeight: user.weight,
+      yourActiveTime: user.dailyActiveTime,
+      yourDayWaterConsumption: user.dailyWaterConsumption,
+    },
+    mode: "onChange",
   });
 
   const onSubmit = (data) => {
