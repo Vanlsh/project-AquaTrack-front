@@ -8,6 +8,18 @@
 	padding: 0;
 }
 
+.disabled {
+	opacity: 0.5;
+}
+
+/* .pointer_disabled {
+	cursor: auto;
+}
+
+.pointer_enabled {
+	cursor: pointer;
+} */
+
 .date {
 	display: flex;
 	justify-content: center;
@@ -19,15 +31,10 @@
 	font-size: 14px;
 	font-weight: bold;
 	color: var(--color-font-main);
-	background-color: var(--white);
+	background-color: rgba(50, 63, 71, 0.2);
+	/* background-color: var(--white); */
 
 	border-radius: 50%;
-
-	cursor: pointer;
-}
-
-.disabled {
-	opacity: 0.5;
 }
 
 .perc {
@@ -39,10 +46,11 @@
 	height: 16px;
 	font-size: 10px;
 	color: #2f2f2f99;
+	background-color: var(--color-main-bg);
 }
 
 .perc_filled {
-	background-color: rgba(50, 63, 71, 0.2);
+	background-color: var(--white);
 }
 
 .active {
@@ -73,8 +81,6 @@
 		background-color: var(--white);
 
 		border-radius: 50%;
-
-		cursor: pointer;
 	}
 
 	.perc {
@@ -121,8 +127,6 @@
 		background-color: #ffffff;
 
 		border-radius: 50%;
-
-		cursor: pointer;
 	}
 
 	.perc {
