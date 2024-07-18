@@ -43,6 +43,7 @@
   /* color: rgba(47, 47, 47, 0.6); */
   width: 100%;
   outline: none;
+  height: 55px;
 }
 
 .signUpInput:focus {
@@ -109,6 +110,7 @@
   color: var(--color-font-main);
   background-color: var(--color-second-bg);
   margin-bottom: 16px;
+  height: 55px;
 }
 
 .signUpBtn:hover,

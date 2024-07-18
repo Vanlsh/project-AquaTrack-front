@@ -152,7 +152,7 @@ const SignUpForm = () => {
           </label>
         </div>
         <button className={styles.signUpBtn} type="submit">
-          {isLoading ? "Loading" : "Sign Up"}
+          {isLoading ? "Loading..." : "Sign Up"}
         </button>
       </form>
     </div>

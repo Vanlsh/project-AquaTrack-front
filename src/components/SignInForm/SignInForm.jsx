@@ -9,6 +9,7 @@ import { logIn } from "../../redux/auth/operations";
 import { selectIsLoading } from "../../redux/auth/selectors.js";
 import styles from "./SignInForm.module.css";
 import { useTranslation } from "react-i18next";
+import SignInWithGoogleBtn from "../SignInWithGoogleBtn/SignInWithGoogleBtn.jsx";
 
 const SignInForm = () => {
   const { t } = useTranslation();
@@ -103,8 +104,9 @@ const SignInForm = () => {
         </label>
       </div>
       <button className={styles.signInFormButton} type="submit">
-        {isLoading ? "Loading" : t("signIn")}
+        {isLoading ? "Loading..." : t("signIn")}
       </button>
+      <SignInWithGoogleBtn/>
     </form>
   );
 };

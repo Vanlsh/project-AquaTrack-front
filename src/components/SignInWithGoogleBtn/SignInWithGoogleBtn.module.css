@@ -1,0 +1,48 @@
+.line {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background-color: #2f2f2f33;
+}
+
+.line::before {
+  content: "Or";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-main-bg);
+  color: rgba(47, 47, 47, 0.5);
+  padding: 0 15px;
+}
+
+.googleBtnText {
+  margin-left: 15px;
+}
+
+.loginWithGoogleBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #2f2f2f33;
+  border-radius: 30px;
+  color: rgba(47, 47, 47, 0.5);
+  background-color: inherit;
+  height: 55px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: all 0.1s ease;
+}
+
+.loginWithGoogleBtn:hover,
+.loginWithGoogleBtn:active,
+.loginWithGoogleBtn:focus {
+  background-color: rgba(47, 47, 47, 0.05);
+  border-color: #2f2f2f66;
+}
+
+.loginWithGoogleBtn:hover .googleBtnText,
+.loginWithGoogleBtn:active .googleBtnText,
+.loginWithGoogleBtn:focus .googleBtnText {
+  color: rgba(47, 47, 47, 0.8);
+}
