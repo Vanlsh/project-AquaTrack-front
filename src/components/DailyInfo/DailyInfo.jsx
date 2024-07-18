@@ -1,6 +1,6 @@
 import WaterList from "../WaterList/WaterList";
 import css from "./DailyInfo.module.css";
-import AddWaterBtn from "../AddWaterBtn/AddWaterBtn";
+import AddWaterBtn from "../AddWaterSecond/AddWaterSecond";
 import ChooseDate from "../ChooseDate/ChooseDate";
 
 const DailyInfo = () => {
