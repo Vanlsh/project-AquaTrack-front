@@ -11,7 +11,7 @@ import { selectIsLoading } from "../../redux/auth/selectors.js";
 
 const schemaValidation = Yup.object({
   email: Yup.string()
-    .email("Enter a valid email adress!")
+    .email("Enter a valid email address!")
     .required("Email is required"),
   password: Yup.string()
     .min(5, "Must be at least 5 characters long")
@@ -20,7 +20,7 @@ const schemaValidation = Yup.object({
   repeatpassword: Yup.string()
     .oneOf(
       [Yup.ref("password")],
-      "There must be the same value as in the password field"
+      "There must be the same value as in the password field",
     )
     .required("Repeat password is required"),
 });
