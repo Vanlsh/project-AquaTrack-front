@@ -7,7 +7,8 @@ import { ANIMATION } from "../../constants";
 import svgSprite from "../../assets/icons.svg";
 import { useLocation } from "react-router-dom";
 
-const WaterModal = ({ operationType, onClose, water={}}) => {
+const WaterModal = ({ operationType, onClose, water = {} }) => {
+  // operationType: "add" | "edit", onClose: () => void, water: {id: 'string', amount: number, date: "string"}
   const { t } = useTranslation();
   const location = useLocation();
   const [closing, setClosing] = useState(false);
