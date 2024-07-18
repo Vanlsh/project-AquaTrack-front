@@ -1,18 +1,19 @@
 import { useTranslation } from "react-i18next";
 
 import css from "./WaterModal.module.css";
-// import clsx from 'clsx';
+import clsx from 'clsx';
 
 import WaterForm from "../WaterForm/WaterForm";
-// import { useState } from "react";
+import { useState } from "react";
 import { ANIMATION } from "../../constants";
+import svgSprite from "../../assets/icons.svg";
 
 const WaterModal = ({ operationType, onClose }) => {
   const { t } = useTranslation();
-  // const [closing, setClosing] = useState(false);
+  const [closing, setClosing] = useState(false);
 
   const handleClose = () => {
-    // setClosing(true);
+    setClosing(true);
     const id = setTimeout(() => {
       onClose();
       clearTimeout(id);
@@ -40,7 +41,7 @@ const WaterModal = ({ operationType, onClose }) => {
         className={css.WaterModalCloseBtn}
       >
         <svg>
-          <use href="src\assets\icons.svg#icon-clear"></use>
+          <use xlinkHref={svgSprite + "#icon-clear"}></use>
         </svg>
       </button>
     </div>

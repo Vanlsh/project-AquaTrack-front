@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import css from "./WaterForm.module.css";
 import clsx from "clsx";
+import svgSprite from "../../assets/icons.svg";
 
 const validationSchema = Yup.object().shape({
   recordingTime: Yup.string()
@@ -12,7 +13,7 @@ const validationSchema = Yup.object().shape({
     .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format"),
   waterValue: Yup.number()
     .required("Water value is required")
-    .min(0, "Water value must be greater than or equal to 0")
+    .min(50, "Water value must be greater than or equal to 50")
     .max(5000, "Water value must be less than or equal to 5000"),
 });
 
@@ -75,7 +76,7 @@ const WaterForm = ({ operationType }) => {
     return date.getTime();
   };
 
-  const isMinusButtonDisabled = waterAmount === 0;
+  const isMinusButtonDisabled = waterAmount === 50;
   const isPlusButtonDisabled = waterAmount === 5000;
 
   return (
@@ -90,7 +91,7 @@ const WaterForm = ({ operationType }) => {
           disabled={isMinusButtonDisabled}
         >
           <svg>
-            <use href="src/assets/icons.svg#icon-remove"></use>
+            <use xlinkHref={svgSprite + "#icon-remove"}></use>
           </svg>
         </button>
         <p className={css.TapAddWaterValue}>
@@ -103,7 +104,7 @@ const WaterForm = ({ operationType }) => {
           disabled={isPlusButtonDisabled}
         >
           <svg>
-            <use href="src/assets/icons.svg#icon-add"></use>
+            <use xlinkHref={svgSprite + "#icon-add"}></use>
           </svg>
         </button>
       </div>
