@@ -1,7 +1,7 @@
 export const convertToLiters = (ml) => {
   if (ml >= 1000) {
-    return ml / 1000 + " L";
+    return { value: ml / 1000, text: "l" };
   } else {
-    return ml + " ml";
+    return { value: ml, text: "ml" };
   }
 };
