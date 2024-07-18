@@ -18,19 +18,21 @@ const UserSettingsForm = () => {
   const [exerciseTime, setExerciseTime] = useState(0);
   const [waterIntake, setWaterIntake] = useState(0);
   const [genderIndentity, setGenderIndentity] = useState("");
+  const [waterConsumption, setWaterConsumption] = useState(0);
 
   const user = useSelector(selectUser);
 
   const schema = yup.object({
     avatar: yup.mixed().required(t("avatarRequired")),
     gender: yup.string().required(t("genderRequired")),
-    yourName: yup.string().required(t("nameRequired")),
+    // yourName: yup.string().required(t("nameRequired")),
+    // yourName: yup.string().required(),
     yourWeight: yup.number().min(0).typeError("Has to be a number"),
     yourActiveTime: yup.number().min(0).typeError("Has to be a number"),
     yourDayWaterConsumption: yup
       .number()
-      .typeError("Has to be a number")
-      .min(0, "Value has to be greater than 0"),
+      .min(0, "Value has to be greater than 0")
+      .typeError("Has to be a number"),
   });
 
   useEffect(() => {
@@ -40,7 +42,15 @@ const UserSettingsForm = () => {
     setWeight(user.weight);
     setExerciseTime(user.dailyActiveTime);
     setGenderIndentity(user.gender);
-  }, [user.weight, user.dailyActiveTime, user.gender, user.photo, user.name]);
+    setWaterConsumption(user.dailyWaterConsumption);
+  }, [
+    user.weight,
+    user.dailyActiveTime,
+    user.gender,
+    user.photo,
+    user.name,
+    user.dailyWaterConsumption,
+  ]);
 
   useEffect(() => {
     let calcWaterIntake;
@@ -150,12 +160,12 @@ const UserSettingsForm = () => {
             <label>
               <span className={css.boldText}>{t("yourName")}</span>
               <input
-                value={userName}
                 {...register("yourName")}
+                value={userName}
                 className={css.inputBox}
                 placeholder="Enter your name"
                 onChange={(e) => {
-                  let value = String(e.target.value);
+                  let value = e.target.value;
                   const regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ]*$/;
                   if (regex.test(value)) {
                     setUserName(value);
@@ -170,7 +180,6 @@ const UserSettingsForm = () => {
                   }
                 }}
               />
-
               {errors.yourName && (
                 <p className={css.errorMessage}>{errors.yourName.message}</p>
               )}
@@ -183,7 +192,7 @@ const UserSettingsForm = () => {
                 value={user.email}
                 {...register("yourEmail")}
                 className={css.inputBox}
-                placeholder="Enterer your email"
+                placeholder="Enter your email"
               />
               {errors.yourEmail && (
                 <p className={css.errorMessage}>{errors.yourEmail.message}</p>
@@ -294,8 +303,28 @@ const UserSettingsForm = () => {
                   {t("Write down how much water you will drink:")}
                 </span>
                 <input
+                  value={waterConsumption}
                   {...register("yourDayWaterConsumption")}
                   className={css.inputBox}
+                  onChange={(e) => {
+                    let value = e.target.value;
+                    if (Number(value)) {
+                      setWaterConsumption(Number(value));
+                    }
+                    if (value === "") {
+                      setWaterConsumption(0);
+                    }
+                  }}
+                  onFocus={(e) => {
+                    if (waterConsumption === 0) {
+                      e.target.value = "";
+                    }
+                  }}
+                  onBlur={(e) => {
+                    if (e.target.value === "") {
+                      e.target.value = user.dailyWaterConsumption;
+                    }
+                  }}
                 />
                 {errors.yourDayWaterConsumption && (
                   <p className={css.errorMessage}>
