@@ -9,12 +9,6 @@ import {
   selectToken,
 } from "../redux/auth/selectors.js";
 import { setLoggedIn } from "../redux/auth/slice.js";
-// import {
-//   selectDailyErrorMessage,
-//   selectDailySuccessMessage,
-//   selectMonthlyErrorMessage,
-//   selectMonthlySuccessMessage,
-// } from "../redux/water/selectors.js";
 import PrivateRoute from "./PrivateRoute.jsx";
 import RestrictedRoute from "./RestrictedRoute.jsx";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
@@ -28,21 +22,17 @@ const NotFoundPage = lazy(
 );
 
 function App() {
-  const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const authSuccessMessage = useSelector(selectAuthSuccessMessage);
+  const dispatch = useDispatch();
   const authErrorMessage = useSelector(selectAuthErrorMessage);
-  // const waterDailyErrorMessage = useSelector(selectDailyErrorMessage);
-  // const waterDailySuccessMessage = useSelector(selectDailySuccessMessage);
-  // const waterMonthlyErrorMessage = useSelector(selectMonthlyErrorMessage);
-  // const waterMonthlySuccessMessage = useSelector(selectMonthlySuccessMessage);
+  const authSuccessMessage = useSelector(selectAuthSuccessMessage);
 
   useEffect(() => {
     if (token) {
-      dispatch(getUserInfo(token));
+      dispatch(getUserInfo());
       dispatch(setLoggedIn(true));
     }
-  }, [token, dispatch]);
+  }, []);
 
   //AUTH TOAST
   useEffect(() => {
@@ -53,26 +43,6 @@ function App() {
       toast.success(authSuccessMessage);
     }
   }, [authSuccessMessage, authErrorMessage]);
-
-  //WATER DAILY TOAST
-  // useEffect(() => {
-  //   if (waterDailyErrorMessage) {
-  //     toast.error(waterDailyErrorMessage);
-  //   }
-  //   if (waterDailySuccessMessage) {
-  //     toast.success(waterDailySuccessMessage);
-  //   }
-  // }, [waterDailySuccessMessage, waterDailySuccessMessage]);
-  //
-  // //WATER MONTHLY TOAST
-  // useEffect(() => {
-  //   // if (waterMonthlyErrorMessage) {
-  //   //   toast.error(waterMonthlyErrorMessage);
-  //   // }
-  //   if (waterMonthlySuccessMessage) {
-  //     toast.success(waterMonthlySuccessMessage);
-  //   }
-  // }, [waterMonthlySuccessMessage, waterMonthlyErrorMessage]);
 
   return (
     <SharedLayout>
