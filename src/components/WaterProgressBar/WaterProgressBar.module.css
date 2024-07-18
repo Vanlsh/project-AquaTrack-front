@@ -8,7 +8,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 225px;
+  margin-top: 181px;
 }
 
 .progressBarTitle {
@@ -41,7 +41,7 @@
   background-color: #fff;
   position: absolute;
   top: 50%;
-  right: 0;
+  right: -5px;
   transform: translate(50%, -50%);
 }
 
@@ -49,10 +49,9 @@
   font-weight: 400;
   font-size: 8px;
   line-height: 100%;
-
   position: absolute;
   bottom: 130%;
-  right: 0;
+  right: -6px;
   transform: translate(50%, -50%);
 }
 
@@ -68,12 +67,12 @@
   font-size: 10px;
   line-height: 100%;
   color: rgba(47, 47, 47, 0.6);
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 @media screen and (min-width: 768px) {
   .progressBarContainer {
-    margin-top: 322px;
+    margin-top: 266px;
     padding: 20px;
     width: 295px;
     height: 106px;
@@ -90,6 +89,7 @@
   .percent {
     font-size: 12px;
     line-height: 187%;
+    margin-top: 6px;
   }
 
   .percentNumber {
@@ -105,8 +105,8 @@
 
 @media screen and (min-width: 1440px) {
   .progressBarContainer {
-    margin-top: 450px;
-    height: 110px;
+    margin-top: 400px;
+    height: 115px;
   }
 
   .progressBarTitle {

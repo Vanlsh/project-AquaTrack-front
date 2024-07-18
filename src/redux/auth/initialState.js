@@ -6,7 +6,7 @@ export const INITIAL_STATE = {
     photo: null,
     weight: 0,
     dailyActiveTime: 0,
-    waterRate: 0,
+    dailyWaterConsumption: 0,
   },
   token: null,
   isLoggedIn: false,

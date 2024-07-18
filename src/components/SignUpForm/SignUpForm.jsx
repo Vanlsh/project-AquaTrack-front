@@ -4,24 +4,29 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import svgSprite from "../../assets/icons.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../redux/auth/operations";
+import { selectIsLoading } from "../../redux/auth/selectors.js";
 
 const schemaValidation = Yup.object({
   email: Yup.string()
     .email("Enter a valid email adress!")
     .required("Email is required"),
   password: Yup.string()
-    .min(5, "Password is too short")
-    .max(25, "Password is too long")
+    .min(5, "Must be at least 5 characters long")
+    .max(25, "Must be no more than 25 characters")
     .required("Password is required"),
   repeatpassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Reapet password must be values of password")
+    .oneOf(
+      [Yup.ref("password")],
+      "There must be the same value as in the password field"
+    )
     .required("Repeat password is required"),
 });
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRepeat, setshowPasswordRepeat] = useState(false);
 
@@ -62,7 +67,13 @@ const SignUpForm = () => {
               {...register("email")}
               placeholder="Enter you email"
             />
-            <p className={styles.signUpErrorMessage}>{errors.email?.message}</p>
+            {errors.email?.message ? (
+              <p className={styles.signUpErrorMessage}>
+                {errors.email?.message}
+              </p>
+            ) : (
+              ""
+            )}
           </label>
 
           <label className={styles.signUpLabel}>
@@ -94,9 +105,13 @@ const SignUpForm = () => {
                 )}
               </button>
             </span>
-            <p className={styles.signUpErrorMessage}>
-              {errors.password?.message}
-            </p>
+            {errors.password?.message ? (
+              <p className={styles.signUpErrorMessage}>
+                {errors.password?.message}
+              </p>
+            ) : (
+              ""
+            )}
           </label>
 
           <label className={styles.signUpLabel}>
@@ -128,13 +143,17 @@ const SignUpForm = () => {
                 )}
               </button>
             </span>
-            <p className={styles.signUpErrorMessage}>
-              {errors.repeatpassword?.message}
-            </p>
+            {errors.repeatpassword?.message ? (
+              <p className={styles.signUpErrorMessage}>
+                {errors.repeatpassword?.message}
+              </p>
+            ) : (
+              ""
+            )}
           </label>
         </div>
         <button className={styles.signUpBtn} type="submit">
-          Sign Up
+          {isLoading ? "Loading" : "Sign Up"}
         </button>
       </form>
     </div>

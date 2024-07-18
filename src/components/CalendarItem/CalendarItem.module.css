@@ -1,8 +1,6 @@
 @import '../../styles/variables.css';
 
 .day {
-	/* flex: 1 0 14.28%;
-	justify-content: space-between; */
 	width: 28px;
 	height: 44px;
 	border: none;
@@ -26,6 +24,10 @@
 	border-radius: 50%;
 
 	cursor: pointer;
+}
+
+.disabled {
+	opacity: 0.5;
 }
 
 .perc {
