@@ -2,20 +2,28 @@ import { useNavigate } from "react-router-dom";
 import css from "./CalendarItem.module.css";
 import { useDispatch } from "react-redux";
 import { fetchDailyWater } from "../../redux/water/operations";
+import { useParams } from "react-router-dom";
+import { parseDateTime } from "../../helpers/parseDate.js";
+import clsx from "clsx";
 
-const CalendarItem = ({
-  index,
-  calendarDate,
-  percent,
-  selectedIndex,
-  setSelectedIndex,
-}) => {
+const isDaySame = (firstDay, secondDay) => {
+  const first = new Date(Number(firstDay));
+  const second = new Date(Number(secondDay));
+  return (
+    first.getFullYear() === second.getFullYear() &&
+    first.getMonth() === second.getMonth() &&
+    first.getDate() === second.getDate()
+  );
+};
+
+const CalendarItem = ({ calendarDate, percent }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // Thunk for data for selected month;
 
-  const handleClick = (index, calendarDate) => {
-    setSelectedIndex(index);
+  const { date: paramsDate } = useParams();
+  const currentDate = parseDateTime(paramsDate);
+
+  const handleClick = (calendarDate) => {
     navigate(`/tracker/${calendarDate}`);
     dispatch(fetchDailyWater(calendarDate));
   };
@@ -23,20 +31,25 @@ const CalendarItem = ({
   const date = new Date(Number(calendarDate)).getDate();
   const dateNow = Date.now();
   const isDisabled = Number(calendarDate) > dateNow;
-
+  const isDane = Math.round(percent) < 100;
+  const isActive = isDaySame(currentDate, calendarDate);
   return (
     <button
-      className={`${css.day} ${isDisabled ? css.disabled : ""}`}
+      className={clsx(css.day, {
+        [css.disabled]: isDisabled,
+      })}
       disabled={isDisabled}
+      onClick={() => handleClick(calendarDate)}
     >
       <div
-        onClick={() => handleClick(index, calendarDate)}
-        className={`${css.date} 							
-					${percent > 0 ? css.perc_filled : ""} ${selectedIndex === index ? css.active : ""}`}
+        className={clsx(css.date, {
+          [css.perc_filled]: isDane,
+          [css.active]: isActive,
+        })}
       >
         {date}
       </div>
-      <div className={css.perc}>{`${percent}%`}</div>
+      <div className={css.perc}>{`${Math.round(percent)}%`}</div>
     </button>
   );
 };

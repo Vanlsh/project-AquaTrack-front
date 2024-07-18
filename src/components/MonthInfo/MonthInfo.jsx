@@ -1,19 +1,13 @@
-import { useState } from 'react';
-import CalendarPagination from '../CalendarPagination/CalendarPagination.jsx';
-import Calendar from '../Calendar/Calendar.jsx';
+import CalendarPagination from "../CalendarPagination/CalendarPagination.jsx";
+import Calendar from "../Calendar/Calendar.jsx";
 
 const MonthInfo = () => {
-	const [selectedIndex, setSelectedIndex] = useState(null);
-
-	return (
-		<div>
-			<CalendarPagination setSelectedIndex={setSelectedIndex} />
-			<Calendar
-				setSelectedIndex={setSelectedIndex}
-				selectedIndex={selectedIndex}
-			/>
-		</div>
-	);
+  return (
+    <div>
+      <CalendarPagination />
+      <Calendar />
+    </div>
+  );
 };
 
 export default MonthInfo;

@@ -11,8 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectMonthlyIsLoading } from "../../redux/water/selectors.js";
 import { useTranslation } from "react-i18next";
 
-const CalendarPagination = ({ setSelectedIndex }) => {
-  const { dateUrl } = useParams();
+const CalendarPagination = () => {
+  const { date: dateUrl } = useParams();
   const dateMs = parseDateTime(dateUrl);
   const dispatch = useDispatch();
   const [year, setYear] = useState(new Date(dateMs).getFullYear());
@@ -21,28 +21,34 @@ const CalendarPagination = ({ setSelectedIndex }) => {
   const { t } = useTranslation();
 
   const increment = () => {
-    setSelectedIndex(null);
     if (month === 11) {
+      dispatch(fetchMonthlyWater(new Date(year + 1, 0, 3).getTime()));
       setMonth(0);
       setYear(year + 1);
+
       return;
     }
+    dispatch(fetchMonthlyWater(new Date(year, month + 1, 3).getTime()));
     setMonth(month + 1);
-    dispatch(fetchMonthlyWater(new Date(year, month).getTime()));
   };
 
   const decrement = () => {
-    setSelectedIndex(null);
     if (month === 0) {
+      dispatch(fetchMonthlyWater(new Date(year - 1, 11, 3).getTime()));
       setMonth(11);
       setYear(year - 1);
       return;
     }
+    dispatch(fetchMonthlyWater(new Date(year, month - 1, 3).getTime()));
     setMonth(month - 1);
-    dispatch(fetchMonthlyWater(new Date(year, month).getTime()));
   };
 
   const selectedMonth = t(monthsName[month]);
+
+  const yearNow = new Date(Date.now()).getFullYear();
+  const monthNow = new Date(Date.now()).getMonth();
+  const incrementDisabled =
+    new Date(yearNow, monthNow) <= new Date(year, month);
 
   return (
     <div className={css.calendar_title}>
@@ -57,7 +63,11 @@ const CalendarPagination = ({ setSelectedIndex }) => {
           {`${selectedMonth},
 					${year}`}
         </span>
-        <button onClick={increment} className={css.btn} disabled={isLoading}>
+        <button
+          onClick={increment}
+          className={`${css.btn} ${incrementDisabled ? css.btn_disabled : ""} `}
+          disabled={isLoading || incrementDisabled}
+        >
           <svg className={css.svg_arrow_right}>
             <use xlinkHref={svg + "#icon-arrow"}></use>
           </svg>
