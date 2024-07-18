@@ -17,31 +17,31 @@ const validationSchema = Yup.object().shape({
     .max(5000, "Water value must be less than or equal to 5000"),
 });
 
-const WaterForm = ({ operationType }) => {
+const WaterForm = ({ operationType, editTime, waterPortion, waterID, handleClose }) => {
   const { t } = useTranslation();
   const [waterAmount, setWaterAmount] = useState(50);
 
-  const formatCurrentTime = () => {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    return `${hours}:${minutes}`;
-  };
+const currentTime = () => {
+  const date = new Date();
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
 
-  const currentTime = formatCurrentTime();
 
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validationSchema),
-    defaultValues: {
-      recordingTime: currentTime,
-      waterValue: waterAmount.toString(),
-    },
-  });
+const {
+  control,
+  handleSubmit,
+  setValue,
+  formState: { errors },
+} = useForm({
+  resolver: yupResolver(validationSchema),
+  defaultValues: {
+    recordingTime: currentTime(),
+    waterValue: waterAmount.toString(),
+  },
+});
+
 
   const onSubmit = (data) => {
     const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
