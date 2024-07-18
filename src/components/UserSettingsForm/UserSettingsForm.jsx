@@ -12,9 +12,12 @@ import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 const UserSettingsForm = () => {
   const { t } = useTranslation();
   const [avatarPreview, setAvatarPreview] = useState(null);
+  const [userName, setUserName] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
   const [weight, setWeight] = useState(0);
   const [exerciseTime, setExerciseTime] = useState(0);
   const [waterIntake, setWaterIntake] = useState(0);
+  const [genderIndentity, setGenderIndentity] = useState("");
 
   const user = useSelector(selectUser);
 
@@ -31,19 +34,28 @@ const UserSettingsForm = () => {
   });
 
   useEffect(() => {
+    setAvatarPreview(user.photo);
+    setUserName(user.name);
+    // setUserEmail(user.email);
     setWeight(user.weight);
     setExerciseTime(user.dailyActiveTime);
-  }, [user.weight, user.dailyActiveTime]);
+    setGenderIndentity(user.gender);
+  }, [user.weight, user.dailyActiveTime, user.gender, user.photo, user.name]);
 
   useEffect(() => {
-    const calcWaterIntake = weight * 0.03 + exerciseTime * 0.5;
+    let calcWaterIntake;
+    if (genderIndentity === "women") {
+      calcWaterIntake = weight * 0.03 + exerciseTime * 0.4;
+    } else if (genderIndentity === "men") {
+      calcWaterIntake = weight * 0.04 + exerciseTime * 0.6;
+    }
     setWaterIntake(Math.min(calcWaterIntake, 15).toFixed(2));
-  }, [weight, exerciseTime]);
+  }, [weight, exerciseTime, genderIndentity]);
 
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -51,8 +63,8 @@ const UserSettingsForm = () => {
 
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
-    reset();
-    setAvatarPreview(null);
+    // reset();
+    // setAvatarPreview(null);
   };
 
   const handleAvatarChange = (e) => {
@@ -61,11 +73,6 @@ const UserSettingsForm = () => {
       setAvatarPreview(URL.createObjectURL(file));
     }
   };
-
-  // const calculateWaterIntake = (weight, exerciseTime) => {
-  //   const waterIntake = weight * 0.03 + exerciseTime * 0.5;
-  //   return Math.min(waterIntake, 15).toFixed(2);
-  // };
 
   return (
     <>
@@ -79,7 +86,7 @@ const UserSettingsForm = () => {
             <svg className={css.icon}>
               <use xlinkHref={svg + "#icon-upload"}></use>
             </svg>
-            <span className={css.ordinaryText}>{t("Upload a photo")}</span>
+            <span className={css.ordinaryText}>{t("uploadPhoto")}</span>
           </div>
           <input
             className={css.hideBtn}
@@ -106,6 +113,11 @@ const UserSettingsForm = () => {
                 {...register("gender")}
                 value="women"
                 defaultChecked
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setGenderIndentity(e.target.value);
+                  }
+                }}
               />
               <label htmlFor="women" className={css.ordinaryText}>
                 {t("women")}
@@ -117,6 +129,11 @@ const UserSettingsForm = () => {
                 className={css.radioInput}
                 {...register("gender")}
                 value="men"
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setGenderIndentity(e.target.value);
+                  }
+                }}
               />
               <label htmlFor="men" className={css.ordinaryText}>
                 {t("men")}
@@ -133,10 +150,25 @@ const UserSettingsForm = () => {
             <label>
               <span className={css.boldText}>{t("yourName")}</span>
               <input
-                value={user.name}
+                value={userName}
                 {...register("yourName")}
                 className={css.inputBox}
                 placeholder="Enter your name"
+                onChange={(e) => {
+                  let value = String(e.target.value);
+                  const regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ]*$/;
+                  if (regex.test(value)) {
+                    setUserName(value);
+                  }
+                  if (value === "") {
+                    setUserName("");
+                  }
+                }}
+                onBlur={(e) => {
+                  if (e.target.value === "") {
+                    e.target.value = user.name;
+                  }
+                }}
               />
 
               {errors.yourName && (
