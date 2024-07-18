@@ -5,12 +5,13 @@ import WaterForm from "../WaterForm/WaterForm";
 import { useState } from "react";
 import { ANIMATION } from "../../constants";
 import svgSprite from "../../assets/icons.svg";
+import { useParams } from "react-router-dom";
 
-const WaterModal = ({ operationType, onClose, water }) => {
+const WaterModal = ({ operationType, onClose, water={}}) => {
   const { t } = useTranslation();
+  const { date } = useParams(); // Отримуємо параметр date з URL
   const [closing, setClosing] = useState(false);
 
-  
   const handleClose = () => {
     setClosing(true);
     const id = setTimeout(() => {
@@ -30,22 +31,17 @@ const WaterModal = ({ operationType, onClose, water }) => {
     }
   };
 
-  const getTimestampFromUrl = () => {
-    const url = new URL(window.location.href);
-    const timestamp = url.pathname.split('/').pop();
-    return Number(timestamp);  // Перетворюємо на число
-  }
+  const curentTimestamp = Number(date);
+  const recordTimestamp = Number(water.date);
 
-  const curentTimestamp = getTimestampFromUrl();
+  console.log(curentTimestamp);
 
   const editTime = (operationType) => {
     switch (operationType) {
       case "add":
         return curentTimestamp;
       case "edit":
-        return water.date;
-      default:
-        return null;
+        return recordTimestamp;
     }
   };
 
