@@ -5,7 +5,7 @@ export const INITIAL_STATE = {
     gender: null,
     photo: null,
     weight: 0,
-    activeTimeSports: 0,
+    dailyActiveTime: 0,
     waterRate: 0,
   },
   token: null,

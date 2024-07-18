@@ -14,6 +14,7 @@ const UserSettingsForm = () => {
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [weight, setWeight] = useState(0);
   const [exerciseTime, setExerciseTime] = useState(0);
+  const [waterIntake, setWaterIntake] = useState(0);
 
   const user = useSelector(selectUser);
 
@@ -31,8 +32,13 @@ const UserSettingsForm = () => {
 
   useEffect(() => {
     setWeight(user.weight);
-    setExerciseTime(user.activeTimeSports);
-  }, [user.weight, user.activeTimeSports]);
+    setExerciseTime(user.dailyActiveTime);
+  }, [user.weight, user.dailyActiveTime]);
+
+  useEffect(() => {
+    const calcWaterIntake = weight * 0.03 + exerciseTime * 0.5;
+    setWaterIntake(Math.min(calcWaterIntake, 15).toFixed(2));
+  }, [weight, exerciseTime]);
 
   const {
     register,
@@ -56,10 +62,10 @@ const UserSettingsForm = () => {
     }
   };
 
-  const calculateWaterIntake = (weight, exerciseTime) => {
-    const waterIntake = weight * 0.03 + exerciseTime * 0.5;
-    return Math.min(waterIntake, 15).toFixed(2);
-  };
+  // const calculateWaterIntake = (weight, exerciseTime) => {
+  //   const waterIntake = weight * 0.03 + exerciseTime * 0.5;
+  //   return Math.min(waterIntake, 15).toFixed(2);
+  // };
 
   return (
     <>
@@ -248,9 +254,7 @@ const UserSettingsForm = () => {
             <div className={css.consumeWater}>
               <p className={css.ordinaryText}>
                 {t("requiredWaterAmount")}&nbsp;
-                <span className={css.userNorma}>
-                  {calculateWaterIntake(weight, exerciseTime)}&nbsp;L
-                </span>
+                <span className={css.userNorma}>{waterIntake}&nbsp;L</span>
               </p>
 
               <label>
