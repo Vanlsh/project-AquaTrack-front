@@ -6,3 +6,4 @@ export const selectToken = (state) => state.auth.token;
 export const selectAuthErrorMessage = (state) => state.auth.errorMessage;
 export const selectAuthSuccessMessage = (state) => state.auth.successMessage;
 export const selectIsLoading = (state) => state.auth.isLoading;
+export const selectWaterRate = (state) => state.auth.user.dailyWaterConsumption;
