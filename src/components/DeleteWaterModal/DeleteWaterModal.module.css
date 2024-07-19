@@ -79,6 +79,9 @@
 }
 
 .btnCancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 30px;
     border: none;
     padding: 14px 129px;
@@ -90,7 +93,6 @@
     font-size: 14px;
     line-height: 1.29;
     letter-spacing: -0.01em;
-    text-align: center;
     color: rgba(50, 63, 71, 0.3);
 }
 
