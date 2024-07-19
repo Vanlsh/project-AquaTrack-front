@@ -6,11 +6,14 @@ import { useTranslation } from "react-i18next";
 import css from "./WaterForm.module.css";
 import clsx from "clsx";
 import svgSprite from "../../assets/icons.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addWater,
   updateWaterIntakeRecord,
 } from "../../redux/water/operations";
+import LoaderComponent from "../LoaderComponent/LoaderComponent";
+import { selectIsLoading } from "../../redux/auth/selectors";
+
 
 const validationSchema = Yup.object().shape({
   recordingTime: Yup.string()
@@ -35,6 +38,7 @@ const WaterForm = ({
   const { t } = useTranslation();
   const [waterAmount, setWaterAmount] = useState(waterPortion);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false); 
 
   const formatTimeFromMillis = (millis) => {
     const date = new Date(millis);
@@ -72,6 +76,8 @@ const WaterForm = ({
       date: `${recordingTimeInMillis}`,
     };
 
+    setIsLoading(true);
+
     switch (operationType) {
       case "add":
         dispatch(addWater(addWaterValue));
@@ -82,8 +88,10 @@ const WaterForm = ({
         );
         break;
     }
+    
+    
 
-    handleClose();
+    setIsLoading(false);
   };
 
   const FormHeader = (operationType) => {
@@ -182,8 +190,8 @@ const WaterForm = ({
           <p className={css.Error}>{errors.waterValue.message}</p>
         )}
       </label>
-      <button type="submit" className={css.SaveBtn}>
-        {t("save")}
+       <button  type="submit" className={css.SaveBtn} disabled={isLoading && true}>
+       {isLoading ? <LoaderComponent height={44} width={44} /> : t("save")}
       </button>
     </form>
   );
