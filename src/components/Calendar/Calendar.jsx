@@ -21,7 +21,7 @@ const Calendar = () => {
             <CalendarItem
               index={index}
               calendarDate={eachDate.date}
-              percent={eachDate.percentage}
+              amount={eachDate.amount}
             />
           </li>
         ))}
