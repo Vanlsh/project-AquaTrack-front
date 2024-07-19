@@ -19,7 +19,7 @@ const WaterItem = ({ water }) => {
   }, [setModal, closeModal, water]);
 
   const openModalEdit = useCallback(() => {
-    setModal(<WaterModal water={water} onClose={closeModal} />);
+    setModal(<WaterModal water={water} onClose={closeModal} operationType={"edit"}/>);
   }, [setModal, closeModal, water]);
 
   const volume = convertToLiters(water.amount);
