@@ -14,7 +14,3 @@ export const selectDailySuccessMessage = (state) =>
 
 export const selectMonthlyIsLoading = (state) =>
   state.water.waterMonthly.isLoading;
-export const selectMonthlyErrorMessage = (state) =>
-  state.water.waterMonthly.errorMessage;
-export const selectMonthlySuccessMessage = (state) =>
-  state.water.waterMonthly.successMessage;
