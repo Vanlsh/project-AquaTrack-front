@@ -7,19 +7,31 @@ import css from "./WaterForm.module.css";
 import clsx from "clsx";
 import svgSprite from "../../assets/icons.svg";
 import { useDispatch } from "react-redux";
-import { addWater, updateWaterIntakeRecord } from "../../redux/water/operations";
+import {
+  addWater,
+  updateWaterIntakeRecord,
+} from "../../redux/water/operations";
 
 const validationSchema = Yup.object().shape({
   recordingTime: Yup.string()
     .required("Recording time is required")
-    .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format, use HH:MM"),
+    .matches(
+      /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
+      "Invalid time format, use HH:MM"
+    ),
   waterValue: Yup.number()
     .required("Water value is required")
     .min(50, "Water value must be greater than or equal to 50")
     .max(5000, "Water value must be less than or equal to 5000"),
 });
 
-const WaterForm = ({ operationType, editTime, waterPortion, waterID, handleClose }) => {
+const WaterForm = ({
+  operationType = "add",
+  editTime,
+  waterPortion,
+  waterID,
+  handleClose,
+}) => {
   const { t } = useTranslation();
   const [waterAmount, setWaterAmount] = useState(waterPortion);
   const dispatch = useDispatch();
@@ -48,28 +60,25 @@ const WaterForm = ({ operationType, editTime, waterPortion, waterID, handleClose
 
   const onSubmit = (data) => {
     const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
-    console.log({
-      ...data,
-      recordingTimeInMillis,
-      waterValue: parseInt(data.waterValue),
-    });
-
+    // Для оновлення також потрібно передавати час
     const addWaterValue = {
-        "amount": waterAmount,
-        "date": `${recordingTimeInMillis}`,
-    }
+      amount: waterAmount,
+      date: `${recordingTimeInMillis}`,
+    };
 
     const editWaterValue = {
-      waterID,
-      "amount": waterAmount,
-    }
+      amount: waterAmount,
+      date: `${recordingTimeInMillis}`,
+    };
 
     switch (operationType) {
       case "add":
         dispatch(addWater(addWaterValue));
         break;
       case "edit":
-        dispatch(updateWaterIntakeRecord(editWaterValue));
+        dispatch(
+          updateWaterIntakeRecord({ id: waterID, formData: editWaterValue })
+        );
         break;
     }
 
@@ -140,7 +149,12 @@ const WaterForm = ({ operationType, editTime, waterPortion, waterID, handleClose
           control={control}
           defaultValue={formattedTime}
           render={({ field }) => (
-            <input {...field} type="text" className={clsx(css.RecordingTime)} placeholder="HH:MM"/>
+            <input
+              {...field}
+              type="text"
+              className={clsx(css.RecordingTime)}
+              placeholder="HH:MM"
+            />
           )}
         />
         {errors.recordingTime && (
