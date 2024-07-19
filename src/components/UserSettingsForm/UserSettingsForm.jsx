@@ -13,7 +13,7 @@ import css from "./UserSettingsForm.module.css";
 import svg from "../../assets/icons.svg";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
-const UserSettingsForm = () => {
+const UserSettingsForm = ({ handleClose }) => {
   const { t } = useTranslation();
   const [waterIntake, setWaterIntake] = useState(0);
   const dispatch = useDispatch();
@@ -25,6 +25,7 @@ const UserSettingsForm = () => {
   // const [waterConsumption, setWaterConsumption] = useState(0);
 
   const user = useSelector(selectUser);
+  const avatar = useSelector(selectUserPhoto);
 
   const schema = yup.object({
     name: yup.string().required(t("nameRequired")),
@@ -75,7 +76,12 @@ const UserSettingsForm = () => {
 
   const onSubmit = (data) => {
     const { email, ...payload } = data;
-    dispatch(updateUserProfile(payload));
+    dispatch(updateUserProfile(payload)).then(({ error }) => {
+      if (!error) {
+        handleClose();
+      }
+    });
+    console.log(payload);
   };
 
   const handleAvatarChange = (e) => {
@@ -88,10 +94,7 @@ const UserSettingsForm = () => {
   return (
     <>
       <div className={css.userAvatar}>
-        <img
-          src={user.photo || "/img/avatar-placeholder.jpg"}
-          alt="User's photo"
-        />
+        <img src={avatar || "/img/avatar-placeholder.jpg"} alt="User's photo" />
         <label>
           <div className={css.uploadContainer}>
             <svg className={css.icon}>
@@ -125,8 +128,7 @@ const UserSettingsForm = () => {
                 checked={watchGender === "woman"}
               />
               <label htmlFor="woman" className={css.ordinaryText}>
-                {/*{t("women")}*/}
-                Woman
+                {t("woman")}
               </label>
 
               <input
@@ -138,8 +140,7 @@ const UserSettingsForm = () => {
                 checked={watchGender === "man"}
               />
               <label htmlFor="man" className={css.ordinaryText}>
-                {/*{t("men")}*/}
-                Man
+                {t("man")}
               </label>
             </div>
             {errors.gender && (
