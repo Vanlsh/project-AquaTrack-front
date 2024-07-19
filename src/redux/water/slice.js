@@ -21,6 +21,13 @@ const handleDailyRejected = (state, action) => {
 
 const roundToTwoDecimals = (num) => parseFloat(num.toFixed(2));
 
+const findDate = (oldDate) => {
+  return ({ date }) => {
+    const firstDate = Math.floor(Number(date) / 1000 / 60 / 60 / 24);
+    const secondDate = Math.floor(Number(oldDate) / 1000 / 60 / 60 / 24);
+    return firstDate === secondDate;
+  };
+};
 const waterSlice = createSlice({
   name: "water",
   initialState: WATER_INITIAL_STATE,
@@ -41,6 +48,7 @@ const waterSlice = createSlice({
         state.waterDaily.amount = dailyAmount;
         state.waterDaily.percentage = dailyPercentage;
         state.waterDaily.data = data;
+        state.waterDaily.data.sort((a, b) => Number(a.date) - Number(b.date));
       })
       .addCase(fetchDailyWater.rejected, (state, action) => {
         state.waterDaily.isLoading = false;
@@ -70,18 +78,14 @@ const waterSlice = createSlice({
         state.waterDaily.successMessage = action.payload.message;
 
         state.waterDaily.data.push(newRecord);
-
-        state.waterDaily.data.sort((a, b) => {
-          return new Date(a.date * 1000) - new Date(b.date * 1000);
-        });
-
+        state.waterDaily.data.sort((a, b) => Number(a.date) - Number(b.date));
         state.waterDaily.amount += newRecord.amount;
         state.waterDaily.percentage = roundToTwoDecimals(
           state.waterDaily.percentage + newRecord.percentage
         );
 
         const monthlyRecordIndex = state.waterMonthly.data.findIndex(
-          (record) => record.date === newRecord.date
+          findDate(newRecord.date)
         );
 
         if (monthlyRecordIndex !== -1) {
@@ -111,7 +115,7 @@ const waterSlice = createSlice({
           const oldRecord = state.waterDaily.data[dailyIndex];
 
           state.waterDaily.data[dailyIndex] = updatedRecord;
-
+          state.waterDaily.data.sort((a, b) => Number(a.date) - Number(b.date));
           const totalAmount = state.waterDaily.data.reduce(
             (sum, record) => sum + record.amount,
             0
@@ -123,11 +127,8 @@ const waterSlice = createSlice({
             0
           );
           state.waterDaily.percentage = roundToTwoDecimals(totalPercentage);
-
           const monthlyIndex = state.waterMonthly.data.findIndex(
-            (record) =>
-              new Date(record.date * 1000).getTime() ===
-              new Date(oldRecord.date * 1000).getTime()
+            findDate(oldRecord.date)
           );
 
           if (monthlyIndex !== -1) {
@@ -159,7 +160,7 @@ const waterSlice = createSlice({
           state.waterDaily.percentage -= removedRecord.percentage;
 
           const monthlyIndex = state.waterMonthly.data.findIndex(
-            (record) => record.date === removedRecord.date
+            findDate(removedRecord.date)
           );
 
           if (monthlyIndex !== -1) {
