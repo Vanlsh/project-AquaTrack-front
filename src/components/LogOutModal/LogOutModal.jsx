@@ -35,14 +35,20 @@ const ModalLogout = ({ onClose }) => {
         <p className={css.modalText}>{t("confirmLogout")}</p>
       </div>
       <div className={css.modalBtnBox}>
-        {isLoading ? <LoaderComponent height={80} width={80} /> : (<><BtnLogout handleClose={handleClose} />
-        <button type="button" onClick={handleClose} className={css.btnCancel}>
-          {t("cancel")}
-        </button></>)}
-        {/* <BtnLogout handleClose={handleClose} />
-        <button type="button" onClick={handleClose} className={css.btnCancel}>
-          {t("cancel")}
-        </button> */}
+        {isLoading ? (
+          <LoaderComponent height={80} width={80} />
+        ) : (
+          <>
+            <BtnLogout handleClose={handleClose} />
+            <button
+              type="button"
+              onClick={handleClose}
+              className={css.btnCancel}
+            >
+              {t("cancel")}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

@@ -10,12 +10,12 @@ const BtnLogout = ({ handleClose }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logOut()).then(({error}) => {
+    dispatch(logOut()).then(({ error }) => {
       if (!error) {
+        navigate("/");
         handleClose();
-        navigate('/');
       }
-    }); 
+    });
   };
 
   return (
