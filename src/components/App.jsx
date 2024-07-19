@@ -32,6 +32,7 @@ function App() {
   const authSuccessMessage = useSelector(selectAuthSuccessMessage);
   const waterErrorMessage = useSelector(selectDailyErrorMessage);
   const waterSuccessMessage = useSelector(selectDailySuccessMessage);
+
   useEffect(() => {
     if (token) {
       dispatch(getUserInfo());
