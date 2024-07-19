@@ -7,6 +7,16 @@ import { parseDateTime } from "../../helpers/parseDate.js";
 import clsx from "clsx";
 import { selectWaterRate } from "../../redux/auth/selectors.js";
 
+const isFuture = (date) => {
+  const dateNow = new Date();
+  const currentDate = new Date(Number(date));
+  const isBigger =
+    dateNow.getFullYear() < currentDate.getFullYear() ||
+    dateNow.getMonth() < currentDate.getMonth() ||
+    dateNow.getDate() < currentDate.getDate();
+  return isBigger;
+};
+
 const isDaySame = (firstDay, secondDay) => {
   const first = new Date(Number(firstDay));
   const second = new Date(Number(secondDay));
@@ -30,10 +40,9 @@ const CalendarItem = ({ calendarDate, amount }) => {
   };
 
   const date = new Date(Number(calendarDate)).getDate();
-  const dateNow = Date.now();
-  const isDisabled = Number(calendarDate) > dateNow;
 
   const percent = Math.round((amount / (goal * 1000)) * 100);
+  const isDisabled = isFuture(calendarDate);
   const isDane = Math.round(percent) < 100;
   const isActive = isDaySame(currentDate, calendarDate);
   const percentString =
