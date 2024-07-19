@@ -200,7 +200,6 @@ const UserSettingsForm = () => {
               <span className={css.boldText}>{t("email")}</span>
               <input
                 disabled
-                value={user.email}
                 {...register("email")}
                 className={css.inputBox}
                 placeholder="Enter your email"
