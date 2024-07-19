@@ -33,6 +33,8 @@ const CalendarItem = ({ calendarDate, percent }) => {
   const isDisabled = Number(calendarDate) > dateNow;
   const isDane = Math.round(percent) < 100;
   const isActive = isDaySame(currentDate, calendarDate);
+  const percentString =
+    Math.round(percent) >= 100 ? "100%" : `${Math.round(percent)}%`;
   return (
     <button
       className={clsx(css.day, {
@@ -49,7 +51,7 @@ const CalendarItem = ({ calendarDate, percent }) => {
       >
         {date}
       </div>
-      <div className={css.perc}>{`${Math.round(percent)}%`}</div>
+      <div className={css.perc}>{percentString}</div>
     </button>
   );
 };
