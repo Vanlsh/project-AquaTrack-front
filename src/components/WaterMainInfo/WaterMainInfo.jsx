@@ -11,6 +11,8 @@ const WaterMainInfo = () => {
   const { t } = useTranslation();
   const waterRate = useSelector(selectWaterRate);
 
+  const waterRateString =
+    waterRate < 1 ? `${waterRate * 1000} ${t("ml")}` : `${waterRate} ${t("l")}`;
   return (
     <div className={css.waterContainer}>
       <Logo className={css.waterTitle} />
@@ -19,7 +21,7 @@ const WaterMainInfo = () => {
         ""
       ) : (
         <div className={css.normaContainer}>
-          <h2 className={css.normaL}>{`${waterRate} ${t("l")}`}</h2>
+          <h2 className={css.normaL}>{waterRateString}</h2>
           <p className={css.normaText}>{t("dailyNorm")}</p>
         </div>
       )}
