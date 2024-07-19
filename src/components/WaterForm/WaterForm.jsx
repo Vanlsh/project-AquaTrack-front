@@ -61,7 +61,7 @@ const WaterForm = ({
   const onSubmit = (data) => {
     const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
     const addWaterValue = {
-      amount: waterAmount,
+      amount:waterAmount,
       date: `${recordingTimeInMillis}`,
     };
 
@@ -75,21 +75,21 @@ const WaterForm = ({
     switch (operationType) {
       case "add":
         dispatch(addWater(addWaterValue))
-          .then(() => {
-            setIsLoading(false);
-            handleClose();
-          })
-          .catch((error) => {
+          .then(({error}) => {
+            if (!error) {
+              setIsLoading(false);
+              handleClose();
+            }
             setIsLoading(false);
           });
         break;
       case "edit":
         dispatch(updateWaterIntakeRecord({ id: waterID, formData: editWaterValue }))
-          .then(() => {
-            setIsLoading(false);
-            handleClose();
-          })
-          .catch((error) => {
+          .then(({error}) => {
+            if (!error) {
+              setIsLoading(false);
+              handleClose();
+            }
             setIsLoading(false);
           });
         break;
