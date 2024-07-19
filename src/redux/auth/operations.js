@@ -20,7 +20,7 @@ export const logIn = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
-  },
+  }
 );
 
 //====================== SIGN UP ======================
@@ -35,7 +35,7 @@ export const signUp = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
-  },
+  }
 );
 
 //====================== LOG OUT =======================
@@ -52,14 +52,14 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 
 export const getUserInfo = createAsyncThunk(
   "auth/info",
-  async (token, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
-      const response = await requestUserInfo(token);
+      const response = await requestUserInfo();
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
-  },
+  }
 );
 
 //================== UPDATE PROFILE ====================
@@ -73,7 +73,7 @@ export const updateUserProfile = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
-  },
+  }
 );
 
 //=================== UPLOAD PHOTO =====================
@@ -87,7 +87,7 @@ export const uploadUserPhoto = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
-  },
+  }
 );
 
 //=====================================================

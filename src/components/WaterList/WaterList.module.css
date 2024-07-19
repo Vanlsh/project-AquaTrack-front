@@ -1,0 +1,103 @@
+.waterList {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 24px;
+  display: flex;
+  gap: 8px;
+  padding-left: 0;
+  height: 106px;
+}
+.messageContainer {
+  padding-bottom: 24px;
+  width: 100%;
+  height: 106px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.noWater {
+  width: fit-content;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 0 10px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #989c9d;
+}
+@media screen and (min-width: 768px) {
+  .waterList {
+    gap: 32px;
+    height: 118px;
+  }
+  .messageContainer {
+    height: 118px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .waterList {
+    gap: 16px;
+  }
+}
+
+.waterList::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  transition: all var(--transition-color);
+}
+
+.waterList::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.waterList::-webkit-scrollbar-thumb {
+  background-color: var(--color-font-main);
+  border-radius: 5px;
+}
+
+.waterList::-webkit-scrollbar-thumb:hover {
+  background-color: #454f56;
+}
+/* skeleton */
+.skeleton {
+  position: relative;
+  width: 149px;
+  height: 74px;
+  border-radius: 10px;
+  background-color: #fff;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton::before {
+  content: "";
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, #fff 0%, #f3f0f0 50%, #fff 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+.waterList .skeleton:last-child {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .skeleton {
+    width: 192px;
+    height: 86px;
+  }
+  .waterList .skeleton:last-child {
+    display: block;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -149px 0;
+  }
+  100% {
+    background-position: 149px 0;
+  }
+}

@@ -8,7 +8,7 @@ import Loader from "../Loader/Loader.jsx";
 
 import css from "./Calendar.module.css";
 
-const Calendar = ({ selectedIndex, setSelectedIndex }) => {
+const Calendar = () => {
   const dateArray = useSelector(selectWaterMonthlyRecord);
   const isLoading = useSelector(selectMonthlyIsLoading);
 
@@ -22,8 +22,6 @@ const Calendar = ({ selectedIndex, setSelectedIndex }) => {
               index={index}
               calendarDate={eachDate.date}
               percent={eachDate.percentage}
-              selectedIndex={selectedIndex}
-              setSelectedIndex={setSelectedIndex}
             />
           </li>
         ))}

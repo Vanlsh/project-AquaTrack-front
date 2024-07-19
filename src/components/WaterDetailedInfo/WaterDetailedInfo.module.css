@@ -5,8 +5,8 @@
   padding: 40px 20px;
   background: var(--color-main-bg);
   border-radius: 30px;
-  width: 343px;
-  height: 770px;
+  width: 100%;
+  height: fit-content;
 }
 
 @media screen and (min-width: 768px) {
