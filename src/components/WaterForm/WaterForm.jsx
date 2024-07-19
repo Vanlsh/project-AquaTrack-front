@@ -80,18 +80,24 @@ const WaterForm = ({
 
     switch (operationType) {
       case "add":
-        dispatch(addWater(addWaterValue));
+        dispatch(addWater(addWaterValue)).then(() => {
+                handleClose();
+            })
+            .catch((error) => {
+               setIsLoading(false);
+            });
         break;
       case "edit":
         dispatch(
           updateWaterIntakeRecord({ id: waterID, formData: editWaterValue })
-        );
+        ).then(() => {
+                handleClose();
+            })
+            .catch((error) => {
+               setIsLoading(false);
+            });
         break;
     }
-    
-    
-
-    setIsLoading(false);
   };
 
   const FormHeader = (operationType) => {
