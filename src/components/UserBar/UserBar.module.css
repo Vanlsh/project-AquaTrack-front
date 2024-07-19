@@ -26,8 +26,10 @@
   border-radius: 50%;
   width: 44px;
   height: 44px;
-  background-color: #87d28d;
+  background-color: transparent;
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   pointer-events: none;
   overflow: hidden;
 }
