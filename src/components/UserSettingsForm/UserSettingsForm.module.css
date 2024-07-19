@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   cursor: pointer;
-  width: fit-content;
+  width: max-content;
 }
 
 .icon {
@@ -152,6 +152,11 @@
   background-color: transparent;
 }
 
+.inputBox:disabled {
+  color: #989c9d;
+  background-color: #f0eff4;
+}
+
 .inputBox:focus {
   border: 1px solid rgba(47, 47, 47, 0.4);
 }
@@ -200,6 +205,7 @@
 }
 
 .submitBtn {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -221,9 +227,13 @@
 .submitBtn:disabled {
   background-color: transparent;
 }
-/* .submitFormBtnDisabled {
-  background-color: transparent;
-} */
+
+.loaderWrapper {
+  top: 0;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
 
 .boldTextBtn {
   font-size: 14px;
@@ -333,8 +343,7 @@
   }
 
   .submitBtn {
-    width: 141px;
-    padding: 20px 0px;
+    min-height: 56px;
   }
 
   .boldTextBtn {
@@ -374,20 +383,29 @@
     height: fit-content;
     width: 400px;
   }
+
   .ordinaryText {
     max-width: 400px;
   }
+
   .boldText {
     max-width: 400px;
   }
 
   .submitBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 56px;
-    margin-top: 0;
-    padding: 0;
+    /*margin-top: 0;*/
+    /*padding: 0;*/
   }
 
   .submitBtn:hover {
     background-color: var(--color-second-bg-hover);
+  }
+
+  .submitBtn:disabled {
+    background-color: transparent;
   }
 }
