@@ -8,21 +8,22 @@ import {
   updateUserProfile,
   uploadUserPhoto,
 } from "../../redux/auth/operations.js";
-import { selectUser, selectUserPhoto } from "../../redux/auth/selectors.js";
+import {
+  selectIsLoading,
+  selectUser,
+  selectUserPhoto,
+} from "../../redux/auth/selectors.js";
 import css from "./UserSettingsForm.module.css";
 import svg from "../../assets/icons.svg";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
+import LoaderComponent from "../LoaderComponent/LoaderComponent.jsx";
 
 const UserSettingsForm = ({ handleClose }) => {
   const { t } = useTranslation();
   const [waterIntake, setWaterIntake] = useState(0);
   const dispatch = useDispatch();
-  // const [userName, setUserName] = useState("");
-  // const [userEmail, setUserEmail] = useState("");
-  // const [weight, setWeight] = useState(0);
-  // const [exerciseTime, setExerciseTime] = useState(0);
-  // const [genderIndentity, setGenderIndentity] = useState("");
-  // const [waterConsumption, setWaterConsumption] = useState(0);
+  const isLoading = useSelector(selectIsLoading);
+  const isLoadingBtn = useSelector(selectIsLoading);
 
   const user = useSelector(selectUser);
   const avatar = useSelector(selectUserPhoto);
@@ -93,7 +94,14 @@ const UserSettingsForm = ({ handleClose }) => {
   return (
     <>
       <div className={css.userAvatar}>
-        <img src={avatar || "/img/avatar-placeholder.jpg"} alt="User's photo" />
+        {!isLoading ? (
+          <img
+            src={avatar || "/img/avatar-placeholder.jpg"}
+            alt="User's photo"
+          />
+        ) : (
+          <LoaderComponent width={110} height={110} />
+        )}
         <label>
           <div className={css.uploadContainer}>
             <svg className={css.icon}>
@@ -157,7 +165,7 @@ const UserSettingsForm = ({ handleClose }) => {
                   <input
                     {...field}
                     className={css.inputBox}
-                    placeholder="Enter your name"
+                    placeholder={t("placeholderName")}
                     onChange={(e) => {
                       let value = e.target.value;
                       const regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ]*$/;
@@ -171,27 +179,6 @@ const UserSettingsForm = ({ handleClose }) => {
                 control={control}
               />
 
-              {/*<input*/}
-              {/*  className={css.inputBox}*/}
-              {/*  {...register("name")}*/}
-              {/*  placeholder="Enter your name"*/}
-              {/*  onChange={(e) => {*/}
-              {/*    let value = e.target.value;*/}
-              {/*    const regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ]*$/;*/}
-              {/*    if (regex.test(value)) {*/}
-              {/*      setUserName(value);*/}
-              {/*      setValue("youName", e.target.value);*/}
-              {/*    }*/}
-              {/*    if (value === "") {*/}
-              {/*      setUserName("");*/}
-              {/*    }*/}
-              {/*  }}*/}
-              {/*  onBlur={(e) => {*/}
-              {/*    if (e.target.value === "") {*/}
-              {/*      e.target.value = user.name;*/}
-              {/*    }*/}
-              {/*  }}*/}
-              {/*/>*/}
               {errors.name && (
                 <p className={css.errorMessage}>{errors.name.message}</p>
               )}
@@ -203,11 +190,8 @@ const UserSettingsForm = ({ handleClose }) => {
                 disabled
                 {...register("email")}
                 className={css.inputBox}
-                placeholder="Enter your email"
+                placeholder={t("placeholderEmail")}
               />
-              {/*{errors.email && (*/}
-              {/*  <p className={css.errorMessage}>{errors.email.message}</p>*/}
-              {/*)}*/}
             </label>
 
             <div className={css.formula}>
@@ -324,32 +308,10 @@ const UserSettingsForm = ({ handleClose }) => {
                     <input
                       {...field}
                       className={css.inputBox}
-                      // onChange={(e) => {
-                      //   let value = e.target.value;
-                      //   const regex = /^\d+(\.\d{0,2})?$/;
-                      //   if (regex.test(value)) {
-                      //     field.onChange(value);
-                      //   }
-                      //   if (value === "") {
-                      //     field.onChange(0);
-                      //   }
-                      // }}
-                      // onFocus={() => {
-                      //   if (field.value === 0) {
-                      //     field.onChange("");
-                      //   }
-                      // }}
-                      // onBlur={() => {
-                      //   if (field.value === "") {
-                      //     field.onChange(0);
-                      //   }
-                      // }}
-
                       onChange={(e) => {
                         let value = e.target.value;
                         const regex = /^\d+(\.\d{0,2})?$/;
 
-                        // Перевірка регулярним виразом
                         if (value === "" || regex.test(value)) {
                           field.onChange(value);
                         }
@@ -364,25 +326,6 @@ const UserSettingsForm = ({ handleClose }) => {
                           field.onChange(0);
                         }
                       }}
-                      // onChange={(e) => {
-                      //   let value = e.target.value;
-                      //   if (Number(value)) {
-                      //     setWaterConsumption(Number(value));
-                      //   }
-                      //   if (value === "") {
-                      //     setWaterConsumption(0);
-                      //   }
-                      // }}
-                      // onFocus={(e) => {
-                      //   if (waterConsumption === 0) {
-                      //     e.target.value = "";
-                      //   }
-                      // }}
-                      // onBlur={(e) => {
-                      //   if (e.target.value === "") {
-                      //     e.target.value = user.dailyWaterConsumption;
-                      //   }
-                      // }}
                     />
                   )}
                 />
@@ -395,8 +338,18 @@ const UserSettingsForm = ({ handleClose }) => {
             </div>
           </div>
         </div>
-        <button type="submit" className={`${css.submitBtn} ${css.boldTextBtn}`}>
-          {t("save")}
+
+        <button
+          disabled={isLoading}
+          type="submit"
+          // className={
+          //   isLoading
+          //     ? `${css.submitFormBtnDisabled}`
+          //     : `${css.submitBtn} ${css.boldTextBtn}`
+          // }
+          className={`${css.submitBtn} ${css.boldTextBtn}`}
+        >
+          {!isLoading ? t("save") : <LoaderComponent height={56} width={56} />}
         </button>
       </form>
     </>

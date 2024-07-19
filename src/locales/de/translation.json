@@ -62,6 +62,8 @@
   "woman": "Weiblich",
   "man": "Männlich",
   "yourName": "Ihr Name",
+  "placeholderName": "Geben Sie Ihren Namen ein",
+  "placeholderEmail": "E-Mail eingeben",
   "forWoman": "Für Frau:",
   "forMan": "Für Mann:",
   "formulaExplanation": "V ist das Volumen der Wasser-Norm in Litern pro Tag, M ist Ihr Körpergewicht, T ist die Zeit des aktiven Sports oder eine andere Art von Aktivität im Verhältnis zur Belastung (falls diese nicht vorhanden sind, müssen Sie 0 setzen)",

@@ -14,14 +14,16 @@
   width: 75px;
   height: 75px;
   border-radius: 50%;
-  background-color: aqua;
+  background-color: transparent;
   margin-bottom: 10px;
+  object-fit: cover;
 }
 
 .uploadContainer {
   display: flex;
   justify-content: center;
   cursor: pointer;
+  width: fit-content;
 }
 
 .icon {
@@ -198,9 +200,15 @@
 }
 
 .submitBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 40px;
   border-radius: 30px;
-  padding: 16px 0px;
+  padding: 0 40px;
+  min-height: 46px;
+  font-weight: 700;
+  width: fit-content;
   outline: none;
   border: none;
   background-color: var(--color-second-bg);
@@ -209,6 +217,13 @@
 .submitBtn:active {
   background-color: var(--color-second-bg-hover);
 }
+
+.submitBtn:disabled {
+  background-color: transparent;
+}
+/* .submitFormBtnDisabled {
+  background-color: transparent;
+} */
 
 .boldTextBtn {
   font-size: 14px;
@@ -356,8 +371,14 @@
   }
 
   .formulaDescription + .ordinaryText {
-    height: 152px;
+    height: fit-content;
     width: 400px;
+  }
+  .ordinaryText {
+    max-width: 400px;
+  }
+  .boldText {
+    max-width: 400px;
   }
 
   .submitBtn {
