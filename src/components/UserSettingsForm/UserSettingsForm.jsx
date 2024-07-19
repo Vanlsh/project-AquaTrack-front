@@ -23,7 +23,6 @@ const UserSettingsForm = ({ handleClose }) => {
   const [waterIntake, setWaterIntake] = useState(0);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-  const isLoadingBtn = useSelector(selectIsLoading);
 
   const user = useSelector(selectUser);
   const avatar = useSelector(selectUserPhoto);
