@@ -5,7 +5,8 @@ import WaterForm from "../WaterForm/WaterForm";
 import { useState } from "react";
 import { ANIMATION } from "../../constants";
 import svgSprite from "../../assets/icons.svg";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { parseDateTime } from "../../helpers/parseDate.js";
 
 const WaterModal = ({ operationType, onClose, water = {} }) => {
   // operationType: "add" | "edit", onClose: () => void, water: {id: 'string', amount: number, date: "string"}
@@ -33,11 +34,13 @@ const WaterModal = ({ operationType, onClose, water = {} }) => {
   };
 
 
-  let timestampFromUrl = Number(location.pathname.split("/")[2]);
+  const { date: dateUrl } = useParams();
+  const timestampFromUrl = parseDateTime(dateUrl);
   let currentTimestamp = Date.now();
   let combinedTimestamp = Math.max(timestampFromUrl, currentTimestamp);
   let combinedTimestampString = combinedTimestamp.toString();
   
+
   const curentTimestamp = Number(combinedTimestampString); 
   const recordTimestamp = Number(water.date);
 
