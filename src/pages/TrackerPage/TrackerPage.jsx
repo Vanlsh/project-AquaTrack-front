@@ -12,8 +12,8 @@ import { parseDateTime } from "../../helpers/parseDate.js";
 const TrackerPage = () => {
   const { date } = useParams();
   const parsedDate = parseDateTime(date).getTime();
-  const [isRefreshingPage, setIsRefreshingPage] = useState(true);
   const dispatch = useDispatch();
+  const [isRefreshingPage, setIsRefreshingPage] = useState(true);
 
   useEffect(() => {
     if (isRefreshingPage) {

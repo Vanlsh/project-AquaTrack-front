@@ -10,7 +10,6 @@ export const WATER_INITIAL_STATE = {
     amount: 0,
     percentage: 0,
     isLoading: false,
-    errorMessage: null,
-    successMessage: null,
+    isError: null,
   },
 };
