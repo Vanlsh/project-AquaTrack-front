@@ -29,7 +29,9 @@ export const updateUserInfo = async (userInfo) => {
   return data;
 };
 
-export const updateUserPhoto = async (photo) => {
-  const data = await instance.patch("/users/photo", photo);
+export const updateUserPhoto = async (formData) => {
+  const data = await instance.patch("/users/photo", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   return data;
 };

@@ -6,6 +6,7 @@ import { formatTime } from "../../helpers/formatTime.js";
 import { convertToLiters } from "../../helpers/convertToLiters.js";
 import { useModal } from "../../hooks/useModal.js";
 import { useTranslation } from "react-i18next";
+import svg from "../../assets/icons.svg";
 
 const WaterItem = ({ water }) => {
   const setModal = useModal();
@@ -19,14 +20,16 @@ const WaterItem = ({ water }) => {
   }, [setModal, closeModal, water]);
 
   const openModalEdit = useCallback(() => {
-    setModal(<WaterModal water={water} onClose={closeModal} operationType={"edit"}/>);
+    setModal(
+      <WaterModal water={water} onClose={closeModal} operationType={"edit"} />,
+    );
   }, [setModal, closeModal, water]);
 
   const volume = convertToLiters(water.amount);
   return (
     <div className={css.water_item_content}>
       <svg className={css.icon_water_glass} width="44" height="45">
-        <use href="../../src/assets/icons.svg#icon-water-glass"></use>
+        <use xlinkHref={svg + "#icon-water-glass"}></use>
       </svg>
       <div className={css.water_info}>
         <p className={css.water_amount}>
@@ -37,12 +40,12 @@ const WaterItem = ({ water }) => {
       <div className={css.container_buttons}>
         <button className={css.editButton} onClick={openModalEdit}>
           <svg className={css.icon_action} width="14" height="14">
-            <use href="../../src/assets/icons.svg#icon-edit"></use>
+            <use xlinkHref={svg + "#icon-edit"}></use>
           </svg>
         </button>
         <button className={css.deleteButton} onClick={openModalDelete}>
           <svg className={css.icon_action} width="14" height="14">
-            <use href="../../src/assets/icons.svg#icon-trash"></use>
+            <use xlinkHref={svg + "#icon-trash"}></use>
           </svg>
         </button>
       </div>
