@@ -73,10 +73,7 @@ const UserSettingsForm = () => {
   }, [watchActiveTime, watchName, watchGender, watchWeight]);
 
   const onSubmit = (data) => {
-    // alert(JSON.stringify(data));
-    // setAvatarPreview(null);
     const { email, ...payload } = data;
-    console.log(payload);
     dispatch(updateUserProfile(payload));
   };
 
