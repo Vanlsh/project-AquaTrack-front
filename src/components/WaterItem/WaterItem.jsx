@@ -5,10 +5,11 @@ import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal.jsx";
 import { formatTime } from "../../helpers/formatTime.js";
 import { convertToLiters } from "../../helpers/convertToLiters.js";
 import { useModal } from "../../hooks/useModal.js";
+import { useTranslation } from "react-i18next";
 
 const WaterItem = ({ water }) => {
   const setModal = useModal();
-
+  const { t } = useTranslation();
   const closeModal = useCallback(() => {
     setModal();
   }, [setModal]);
@@ -21,13 +22,16 @@ const WaterItem = ({ water }) => {
     setModal(<WaterModal water={water} onClose={closeModal} operationType={"edit"}/>);
   }, [setModal, closeModal, water]);
 
+  const volume = convertToLiters(water.amount);
   return (
     <div className={css.water_item_content}>
       <svg className={css.icon_water_glass} width="44" height="45">
         <use href="../../src/assets/icons.svg#icon-water-glass"></use>
       </svg>
       <div className={css.water_info}>
-        <p className={css.water_amount}>{convertToLiters(water.amount)} </p>
+        <p className={css.water_amount}>
+          {`${volume.value} ${t(volume.text)}`}
+        </p>
         <p className={css.water_date}>{formatTime(water.date)}</p>
       </div>
       <div className={css.container_buttons}>

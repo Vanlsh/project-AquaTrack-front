@@ -6,6 +6,7 @@
   height: 30px;
   stroke: var(--color-font-main);
   padding: 6px;
+  transition: background-color 0.2s ease;
 }
 
 .btnStyle {

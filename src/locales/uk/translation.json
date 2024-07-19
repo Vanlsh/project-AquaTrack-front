@@ -85,5 +85,6 @@
   "delete": "Видалити",
   "cancel": "Скасувати",
   "logout": "Вийти",
-  "confirmLogout": "Ви дійсно хочете вийти?"
+  "confirmLogout": "Ви дійсно хочете вийти?",
+  "noWaterAdded": "Вода ще не додана"
 }
