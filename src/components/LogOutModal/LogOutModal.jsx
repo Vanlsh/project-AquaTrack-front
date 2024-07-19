@@ -3,9 +3,14 @@ import css from "./LogOutModal.module.css";
 import svg from "../../assets/icons.svg";
 import BtnLogout from "../BtnLogout/BtnLogout.jsx";
 import { ANIMATION } from "../../constants.js";
+import { useSelector } from "react-redux";
+import { selectIsLoading } from "../../redux/auth/selectors.js";
+import LoaderComponent from "../LoaderComponent/LoaderComponent.jsx";
 
 const ModalLogout = ({ onClose }) => {
   const { t } = useTranslation();
+  const isLoading = useSelector(selectIsLoading);
+
   const handleClose = () => {
     const id = setTimeout(() => {
       onClose();
@@ -30,10 +35,14 @@ const ModalLogout = ({ onClose }) => {
         <p className={css.modalText}>{t("confirmLogout")}</p>
       </div>
       <div className={css.modalBtnBox}>
-        <BtnLogout handleClose={handleClose} />
+        {isLoading ? <LoaderComponent height={80} width={80} /> : (<><BtnLogout handleClose={handleClose} />
         <button type="button" onClick={handleClose} className={css.btnCancel}>
           {t("cancel")}
-        </button>
+        </button></>)}
+        {/* <BtnLogout handleClose={handleClose} />
+        <button type="button" onClick={handleClose} className={css.btnCancel}>
+          {t("cancel")}
+        </button> */}
       </div>
     </div>
   );
