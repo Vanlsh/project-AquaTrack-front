@@ -32,7 +32,13 @@ const WaterModal = ({ operationType, onClose, water = {} }) => {
     }
   };
 
-  const curentTimestamp = Number(location.pathname.split("/")[2]); 
+
+  let timestampFromUrl = Number(location.pathname.split("/")[2]);
+  let currentTimestamp = Date.now();
+  let combinedTimestamp = Math.max(timestampFromUrl, currentTimestamp);
+  let combinedTimestampString = combinedTimestamp.toString();
+  
+  const curentTimestamp = Number(combinedTimestampString); 
   const recordTimestamp = Number(water.date);
 
 
