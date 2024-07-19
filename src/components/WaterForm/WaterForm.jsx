@@ -61,12 +61,12 @@ const WaterForm = ({
   const onSubmit = (data) => {
     const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
     const addWaterValue = {
-      amount: (waterAmount / 1000),
+      amount: waterAmount,
       date: `${recordingTimeInMillis}`,
     };
 
     const editWaterValue = {
-      amount: (waterAmount / 1000),
+      amount: waterAmount,
       date: `${recordingTimeInMillis}`,
     };
 
