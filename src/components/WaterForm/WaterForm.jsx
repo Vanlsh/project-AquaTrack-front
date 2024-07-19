@@ -157,7 +157,7 @@ const WaterForm = ({ operationType, editTime, waterPortion, waterID, handleClose
             <input
               {...field}
               type="number"
-              value={waterAmount}
+              value={waterAmount || ""}
               onChange={(e) => handleWaterAmountChange(Number(e.target.value))}
               className={css.WaterValue}
             />
