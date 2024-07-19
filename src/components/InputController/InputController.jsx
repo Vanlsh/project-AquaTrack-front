@@ -1,6 +1,6 @@
 import { useController } from "react-hook-form";
 
-const Input = (props) => {
+const InputController = (props) => {
   const { field } = useController(props);
   return (
     <div>
@@ -9,4 +9,4 @@ const Input = (props) => {
   );
 };
 
-export default Input;
+export default InputController;

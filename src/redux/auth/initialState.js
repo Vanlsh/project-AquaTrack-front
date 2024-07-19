@@ -1,6 +1,6 @@
 export const INITIAL_STATE = {
   user: {
-    name: "User",
+    name: "",
     email: null,
     gender: null,
     photo: null,

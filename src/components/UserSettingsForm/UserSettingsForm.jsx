@@ -1,113 +1,97 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { selectUser } from "../../redux/auth/selectors.js";
+import {
+  updateUserProfile,
+  uploadUserPhoto,
+} from "../../redux/auth/operations.js";
+import { selectUser, selectUserPhoto } from "../../redux/auth/selectors.js";
 import css from "./UserSettingsForm.module.css";
 import svg from "../../assets/icons.svg";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
-import Input from "../Input/InputController.jsx";
 
 const UserSettingsForm = () => {
   const { t } = useTranslation();
-  const [avatarPreview, setAvatarPreview] = useState(null);
-  const [userName, setUserName] = useState("");
-  // const [userEmail, setUserEmail] = useState("");
-  const [weight, setWeight] = useState(0);
-  const [exerciseTime, setExerciseTime] = useState(0);
   const [waterIntake, setWaterIntake] = useState(0);
-  const [genderIndentity, setGenderIndentity] = useState("");
-  const [waterConsumption, setWaterConsumption] = useState(0);
+  const dispatch = useDispatch();
+  // const [userName, setUserName] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
+  // const [weight, setWeight] = useState(0);
+  // const [exerciseTime, setExerciseTime] = useState(0);
+  // const [genderIndentity, setGenderIndentity] = useState("");
+  // const [waterConsumption, setWaterConsumption] = useState(0);
 
   const user = useSelector(selectUser);
 
   const schema = yup.object({
-    // avatar: yup.mixed().required(t("avatarRequired")),
-    gender: yup.string().required(t("genderRequired")),
-    yourName: yup.string().required(t("nameRequired")),
-    yourWeight: yup.number().min(0).typeError("Has to be a number"),
-    yourActiveTime: yup.number().min(0).typeError("Has to be a number"),
-    yourDayWaterConsumption: yup
+    name: yup.string().required(t("nameRequired")),
+    weight: yup.number().min(0).typeError("Has to be a number"),
+    dailyActiveTime: yup.number().min(0).typeError("Has to be a number"),
+    dailyWaterConsumption: yup
       .number()
       .min(0, "Value has to be greater than 0")
       .typeError("Has to be a number"),
   });
 
-  useEffect(() => {
-    setAvatarPreview(user.photo);
-    setUserName(user.name);
-    // setUserEmail(user.email);
-    setWeight(user.weight);
-    setExerciseTime(user.dailyActiveTime);
-    setGenderIndentity(user.gender);
-    setWaterConsumption(user.dailyWaterConsumption);
-  }, [
-    user.weight,
-    user.dailyActiveTime,
-    user.gender,
-    user.photo,
-    user.name,
-    user.dailyWaterConsumption,
-  ]);
-
-  useEffect(() => {
-    let calcWaterIntake;
-    if (genderIndentity === "women") {
-      calcWaterIntake = weight * 0.03 + exerciseTime * 0.4;
-    } else if (genderIndentity === "men") {
-      calcWaterIntake = weight * 0.04 + exerciseTime * 0.6;
-    }
-    setWaterIntake(Math.min(calcWaterIntake, 15).toFixed(2));
-  }, [weight, exerciseTime, genderIndentity]);
-
   const {
     control,
     register,
     handleSubmit,
-    // reset,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      avatar: user.photo,
+      email: user.email,
       gender: user.gender,
-      yourName: user.name,
-      yourWeight: user.weight,
-      yourActiveTime: user.dailyActiveTime,
-      yourDayWaterConsumption: user.dailyWaterConsumption,
+      name: user.name,
+      weight: user.weight,
+      dailyActiveTime: user.dailyActiveTime,
+      dailyWaterConsumption: user.dailyWaterConsumption,
     },
     mode: "onChange",
   });
 
-  useEffect(() => {
-    console.log(control);
-  });
+  const watchWeight = watch("weight");
+  const watchName = watch("name");
+  const watchGender = watch("gender");
+  const watchActiveTime = watch("dailyActiveTime");
 
-  // const { field, fieldState } = useController({
-  //   name: "FirstName",
-  //   control: control,
-  // });
+  useEffect(() => {
+    let calcWaterIntake;
+    if (watchGender === "woman") {
+      calcWaterIntake =
+        parseInt(watchWeight) * 0.03 + parseInt(watchActiveTime) * 0.4;
+    } else {
+      calcWaterIntake =
+        parseInt(watchWeight) * 0.04 + parseInt(watchActiveTime) * 0.6;
+    }
+    setWaterIntake(Math.min(parseFloat(calcWaterIntake), 15).toFixed(2));
+  }, [watchActiveTime, watchName, watchGender, watchWeight]);
 
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
-    // reset();
+    // alert(JSON.stringify(data));
     // setAvatarPreview(null);
+    const { email, ...payload } = data;
+    console.log(payload);
+    dispatch(updateUserProfile(payload));
   };
 
   const handleAvatarChange = (e) => {
+    const formData = new FormData();
     const file = e.target.files[0];
-    if (file) {
-      setAvatarPreview(URL.createObjectURL(file));
-    }
+    formData.append("avatar", file);
+    dispatch(uploadUserPhoto(formData));
   };
 
   return (
     <>
       <div className={css.userAvatar}>
         <img
-          src={avatarPreview || "/img/avatar-placeholder.jpg"}
+          src={user.photo || "/img/avatar-placeholder.jpg"}
           alt="User's photo"
         />
         <label>
@@ -136,35 +120,26 @@ const UserSettingsForm = () => {
             <div className={css.radioContainer}>
               <input
                 type="radio"
-                id="women"
+                id="woman"
                 className={css.radioInput}
                 {...register("gender")}
-                value="women"
-                defaultChecked
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setGenderIndentity(e.target.value);
-                  }
-                }}
+                value="woman"
               />
-              <label htmlFor="women" className={css.ordinaryText}>
-                {t("women")}
+              <label htmlFor="woman" className={css.ordinaryText}>
+                {/*{t("women")}*/}
+                Woman
               </label>
 
               <input
                 type="radio"
-                id="men"
+                id="man"
                 className={css.radioInput}
                 {...register("gender")}
-                value="men"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setGenderIndentity(e.target.value);
-                  }
-                }}
+                value="man"
               />
-              <label htmlFor="men" className={css.ordinaryText}>
-                {t("men")}
+              <label htmlFor="man" className={css.ordinaryText}>
+                {/*{t("men")}*/}
+                Man
               </label>
             </div>
             {errors.gender && (
@@ -177,36 +152,50 @@ const UserSettingsForm = () => {
           <div className={css.formNameEmail}>
             <label>
               <span className={css.boldText}>{t("yourName")}</span>
-              {/* <input
-                {...register("yourName")}
-                value={userName}
-                className={css.inputBox}
-                placeholder="Enter your name"
-                onChange={(e) => {
-                  let value = e.target.value;
-                  const regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ]*$/;
-                  if (regex.test(value)) {
-                    setUserName(value);
-                  }
-                  if (value === "") {
-                    setUserName("");
-                  }
-                }}
-                onBlur={(e) => {
-                  if (e.target.value === "") {
-                    e.target.value = user.name;
-                  }
-                }}
-              /> */}
-              <Input
+              <Controller
+                render={({ field }) => (
+                  <input {...field} className={css.inputBox} />
+                )}
+                name="name"
                 control={control}
-                name="yourName"
-                placeholder="Enter your name"
-                className={css.inputBox}
               />
 
-              {errors.yourName && (
-                <p className={css.errorMessage}>{errors.yourName.message}</p>
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/**/}
+              {/*<input*/}
+              {/*  className={css.inputBox}*/}
+              {/*  {...register("name")}*/}
+              {/*  placeholder="Enter your name"*/}
+              {/*  onChange={(e) => {*/}
+              {/*    let value = e.target.value;*/}
+              {/*    const regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ]*$/;*/}
+              {/*    if (regex.test(value)) {*/}
+              {/*      setUserName(value);*/}
+              {/*      setValue("youName", e.target.value);*/}
+              {/*    }*/}
+              {/*    if (value === "") {*/}
+              {/*      setUserName("");*/}
+              {/*    }*/}
+              {/*  }}*/}
+              {/*  onBlur={(e) => {*/}
+              {/*    if (e.target.value === "") {*/}
+              {/*      e.target.value = user.name;*/}
+              {/*    }*/}
+              {/*  }}*/}
+              {/*/>*/}
+              {errors.name && (
+                <p className={css.errorMessage}>{errors.name.message}</p>
               )}
             </label>
 
@@ -215,13 +204,13 @@ const UserSettingsForm = () => {
               <input
                 disabled
                 value={user.email}
-                {...register("yourEmail")}
+                {...register("email")}
                 className={css.inputBox}
                 placeholder="Enter your email"
               />
-              {errors.yourEmail && (
-                <p className={css.errorMessage}>{errors.yourEmail.message}</p>
-              )}
+              {/*{errors.email && (*/}
+              {/*  <p className={css.errorMessage}>{errors.email.message}</p>*/}
+              {/*)}*/}
             </label>
 
             <div className={css.formula}>
@@ -256,63 +245,73 @@ const UserSettingsForm = () => {
           <div className={css.formWeightTime}>
             <label>
               <span className={css.ordinaryText}>{t("yourWeight")}</span>
-              <input
-                {...register("yourWeight")}
-                className={css.inputBox}
-                value={weight}
-                onChange={(e) => {
-                  if (Number(e.target.value)) {
-                    setWeight(Number(e.target.value));
-                  }
-                  if (e.target.value === "") {
-                    setWeight(0);
-                  }
-                }}
-                onFocus={(e) => {
-                  if (weight === 0) {
-                    e.target.value = "";
-                  }
-                }}
-                onBlur={(e) => {
-                  if (e.target.value === "") {
-                    e.target.value = 0;
-                  }
-                }}
+              <Controller
+                name="weight"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    {...field}
+                    className={css.inputBox}
+                    onChange={(e) => {
+                      if (Number(e.target.value)) {
+                        field.onChange(Number(e.target.value));
+                      }
+                      if (e.target.value === "") {
+                        field.onChange(0);
+                      }
+                    }}
+                    onFocus={() => {
+                      if (field.value === 0) {
+                        field.onChange("");
+                      }
+                    }}
+                    onBlur={() => {
+                      if (field.value === "") {
+                        field.onChange(0);
+                      }
+                    }}
+                  />
+                )}
               />
-              {errors.yourWeight && (
-                <p className={css.errorMessage}>{errors.yourWeight.message}</p>
+              {errors.weight && (
+                <p className={css.errorMessage}>{errors.weight.message}</p>
               )}
             </label>
 
             <label>
               <span className={css.ordinaryText}>{t("activeSportsTime")}</span>
-              <input
-                {...register("yourActiveTime")}
-                className={css.inputBox}
-                value={exerciseTime}
-                onChange={(e) => {
-                  if (Number(e.target.value)) {
-                    setExerciseTime(Number(e.target.value));
-                  }
-                  if (e.target.value === "") {
-                    setExerciseTime(0);
-                  }
-                }}
-                onFocus={(e) => {
-                  if (exerciseTime === 0) {
-                    e.target.value = "";
-                  }
-                }}
-                onBlur={(e) => {
-                  if (e.target.value === "") {
-                    e.target.value = 0;
-                  }
-                }}
+              <Controller
+                name="dailyActiveTime"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    {...field}
+                    className={css.inputBox}
+                    onChange={(e) => {
+                      if (Number(e.target.value)) {
+                        field.onChange(Number(e.target.value));
+                      }
+                      if (e.target.value === "") {
+                        field.onChange(0);
+                      }
+                    }}
+                    onFocus={() => {
+                      if (field.value === 0) {
+                        field.onChange("");
+                      }
+                    }}
+                    onBlur={() => {
+                      if (field.value === "") {
+                        field.onChange(0);
+                      }
+                    }}
+                  />
+                )}
               />
 
-              {errors.yourActiveTime && (
+              {errors.dailyActiveTime && (
                 <p className={css.errorMessage}>
-                  {errors.yourActiveTime.message}
+                  {errors.dailyActiveTime.message}
                 </p>
               )}
             </label>
@@ -327,33 +326,38 @@ const UserSettingsForm = () => {
                 <span className={css.boldText}>
                   {t("Write down how much water you will drink:")}
                 </span>
-                <input
-                  value={waterConsumption}
-                  {...register("yourDayWaterConsumption")}
-                  className={css.inputBox}
-                  onChange={(e) => {
-                    let value = e.target.value;
-                    if (Number(value)) {
-                      setWaterConsumption(Number(value));
-                    }
-                    if (value === "") {
-                      setWaterConsumption(0);
-                    }
-                  }}
-                  onFocus={(e) => {
-                    if (waterConsumption === 0) {
-                      e.target.value = "";
-                    }
-                  }}
-                  onBlur={(e) => {
-                    if (e.target.value === "") {
-                      e.target.value = user.dailyWaterConsumption;
-                    }
-                  }}
+                <Controller
+                  name="dailyWaterConsumption"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      className={css.inputBox}
+                      // onChange={(e) => {
+                      //   let value = e.target.value;
+                      //   if (Number(value)) {
+                      //     setWaterConsumption(Number(value));
+                      //   }
+                      //   if (value === "") {
+                      //     setWaterConsumption(0);
+                      //   }
+                      // }}
+                      // onFocus={(e) => {
+                      //   if (waterConsumption === 0) {
+                      //     e.target.value = "";
+                      //   }
+                      // }}
+                      // onBlur={(e) => {
+                      //   if (e.target.value === "") {
+                      //     e.target.value = user.dailyWaterConsumption;
+                      //   }
+                      // }}
+                    />
+                  )}
                 />
-                {errors.yourDayWaterConsumption && (
+                {errors.dailyWaterConsumption && (
                   <p className={css.errorMessage}>
-                    {errors.yourDayWaterConsumption.message}
+                    {errors.dailyWaterConsumption.message}
                   </p>
                 )}
               </label>
