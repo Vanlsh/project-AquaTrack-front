@@ -62,14 +62,15 @@ const UserSettingsForm = () => {
 
   useEffect(() => {
     let calcWaterIntake;
+    const weight = parseInt(watchWeight || 0);
+    const activeTime = parseInt(watchActiveTime || 0);
     if (watchGender === "woman") {
-      calcWaterIntake =
-        parseInt(watchWeight) * 0.03 + parseInt(watchActiveTime) * 0.4;
+      calcWaterIntake = weight * 0.03 + activeTime * 0.4;
     } else {
-      calcWaterIntake =
-        parseInt(watchWeight) * 0.04 + parseInt(watchActiveTime) * 0.6;
+      calcWaterIntake = weight * 0.04 + activeTime * 0.6;
     }
     setWaterIntake(Math.min(parseFloat(calcWaterIntake), 15).toFixed(2));
+    console.log(calcWaterIntake);
   }, [watchActiveTime, watchName, watchGender, watchWeight]);
 
   const onSubmit = (data) => {
@@ -121,6 +122,7 @@ const UserSettingsForm = () => {
                 className={css.radioInput}
                 {...register("gender")}
                 value="woman"
+                checked={watchGender === "woman"}
               />
               <label htmlFor="woman" className={css.ordinaryText}>
                 {/*{t("women")}*/}
@@ -133,6 +135,7 @@ const UserSettingsForm = () => {
                 className={css.radioInput}
                 {...register("gender")}
                 value="man"
+                checked={watchGender === "man"}
               />
               <label htmlFor="man" className={css.ordinaryText}>
                 {/*{t("men")}*/}
@@ -151,25 +154,23 @@ const UserSettingsForm = () => {
               <span className={css.boldText}>{t("yourName")}</span>
               <Controller
                 render={({ field }) => (
-                  <input {...field} className={css.inputBox} />
+                  <input
+                    {...field}
+                    className={css.inputBox}
+                    placeholder="Enter your name"
+                    onChange={(e) => {
+                      let value = e.target.value;
+                      const regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ]*$/;
+                      if (regex.test(value)) {
+                        field.onChange(value);
+                      }
+                    }}
+                  />
                 )}
                 name="name"
                 control={control}
               />
 
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
-              {/**/}
               {/*<input*/}
               {/*  className={css.inputBox}*/}
               {/*  {...register("name")}*/}
@@ -249,11 +250,9 @@ const UserSettingsForm = () => {
                     {...field}
                     className={css.inputBox}
                     onChange={(e) => {
-                      if (Number(e.target.value)) {
-                        field.onChange(Number(e.target.value));
-                      }
-                      if (e.target.value === "") {
-                        field.onChange(0);
+                      let value = e.target.value;
+                      if (value === "" || Number(value)) {
+                        field.onChange(value);
                       }
                     }}
                     onFocus={() => {
@@ -284,11 +283,9 @@ const UserSettingsForm = () => {
                     {...field}
                     className={css.inputBox}
                     onChange={(e) => {
-                      if (Number(e.target.value)) {
-                        field.onChange(Number(e.target.value));
-                      }
-                      if (e.target.value === "") {
-                        field.onChange(0);
+                      let value = e.target.value;
+                      if (value === "" || Number(value)) {
+                        field.onChange(value);
                       }
                     }}
                     onFocus={() => {
@@ -329,6 +326,46 @@ const UserSettingsForm = () => {
                     <input
                       {...field}
                       className={css.inputBox}
+                      // onChange={(e) => {
+                      //   let value = e.target.value;
+                      //   const regex = /^\d+(\.\d{0,2})?$/;
+                      //   if (regex.test(value)) {
+                      //     field.onChange(value);
+                      //   }
+                      //   if (value === "") {
+                      //     field.onChange(0);
+                      //   }
+                      // }}
+                      // onFocus={() => {
+                      //   if (field.value === 0) {
+                      //     field.onChange("");
+                      //   }
+                      // }}
+                      // onBlur={() => {
+                      //   if (field.value === "") {
+                      //     field.onChange(0);
+                      //   }
+                      // }}
+
+                      onChange={(e) => {
+                        let value = e.target.value;
+                        const regex = /^\d+(\.\d{0,2})?$/;
+
+                        // Перевірка регулярним виразом
+                        if (value === "" || regex.test(value)) {
+                          field.onChange(value);
+                        }
+                      }}
+                      onFocus={() => {
+                        if (field.value === 0 || field.value === "0") {
+                          field.onChange("");
+                        }
+                      }}
+                      onBlur={() => {
+                        if (field.value === "" || field.value === "0") {
+                          field.onChange(0);
+                        }
+                      }}
                       // onChange={(e) => {
                       //   let value = e.target.value;
                       //   if (Number(value)) {
