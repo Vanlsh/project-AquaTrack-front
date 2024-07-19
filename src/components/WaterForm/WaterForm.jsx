@@ -7,13 +7,9 @@ import css from "./WaterForm.module.css";
 import clsx from "clsx";
 import svgSprite from "../../assets/icons.svg";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addWater,
-  updateWaterIntakeRecord,
-} from "../../redux/water/operations";
+import { addWater, updateWaterIntakeRecord } from "../../redux/water/operations";
 import LoaderComponent from "../LoaderComponent/LoaderComponent";
 import { selectIsLoading } from "../../redux/auth/selectors";
-
 
 const validationSchema = Yup.object().shape({
   recordingTime: Yup.string()
@@ -47,7 +43,6 @@ const WaterForm = ({
     return `${hours}:${minutes}`;
   };
 
-
   const formattedTime = formatTimeFromMillis(editTime);
 
   const {
@@ -65,14 +60,13 @@ const WaterForm = ({
 
   const onSubmit = (data) => {
     const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
-    // Для оновлення також потрібно передавати час
     const addWaterValue = {
-      amount: waterAmount,
+      amount: (waterAmount / 1000),
       date: `${recordingTimeInMillis}`,
     };
 
     const editWaterValue = {
-      amount: waterAmount,
+      amount: (waterAmount / 1000),
       date: `${recordingTimeInMillis}`,
     };
 
@@ -80,22 +74,27 @@ const WaterForm = ({
 
     switch (operationType) {
       case "add":
-        dispatch(addWater(addWaterValue)).then(() => {
-                handleClose();
-            })
-            .catch((error) => {
-               setIsLoading(false);
-            });
+        dispatch(addWater(addWaterValue))
+          .then(() => {
+            setIsLoading(false);
+            handleClose();
+          })
+          .catch((error) => {
+            setIsLoading(false);
+          });
         break;
       case "edit":
-        dispatch(
-          updateWaterIntakeRecord({ id: waterID, formData: editWaterValue })
-        ).then(() => {
-                handleClose();
-            })
-            .catch((error) => {
-               setIsLoading(false);
-            });
+        dispatch(updateWaterIntakeRecord({ id: waterID, formData: editWaterValue }))
+          .then(() => {
+            setIsLoading(false);
+            handleClose();
+          })
+          .catch((error) => {
+            setIsLoading(false);
+          });
+        break;
+      default:
+        setIsLoading(false);
         break;
     }
   };
@@ -196,8 +195,8 @@ const WaterForm = ({
           <p className={css.Error}>{errors.waterValue.message}</p>
         )}
       </label>
-       <button  type="submit" className={css.SaveBtn} disabled={isLoading && true}>
-       {isLoading ? <LoaderComponent height={44} width={44} /> : t("save")}
+      <button type="submit" className={css.SaveBtn} disabled={isLoading}>
+        {isLoading ? <LoaderComponent height={44} width={44} /> : t("save")}
       </button>
     </form>
   );
