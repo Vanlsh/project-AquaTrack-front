@@ -12,13 +12,17 @@ import { setLoggedIn } from "../redux/auth/slice.js";
 import PrivateRoute from "./PrivateRoute.jsx";
 import RestrictedRoute from "./RestrictedRoute.jsx";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
+import {
+  selectDailyErrorMessage,
+  selectDailySuccessMessage,
+} from "../redux/water/selectors.js";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
 const SignUpPage = lazy(() => import("../pages/SignUpPage/SignUpPage.jsx"));
 const TrackerPage = lazy(() => import("../pages/TrackerPage/TrackerPage.jsx"));
 const NotFoundPage = lazy(
-  () => import("../pages/NotFoundPage/NotFoundPage.jsx"),
+  () => import("../pages/NotFoundPage/NotFoundPage.jsx")
 );
 
 function App() {
@@ -26,6 +30,8 @@ function App() {
   const dispatch = useDispatch();
   const authErrorMessage = useSelector(selectAuthErrorMessage);
   const authSuccessMessage = useSelector(selectAuthSuccessMessage);
+  const waterErrorMessage = useSelector(selectDailyErrorMessage);
+  const waterSuccessMessage = useSelector(selectDailySuccessMessage);
 
   useEffect(() => {
     if (token) {
@@ -43,6 +49,16 @@ function App() {
       toast.success(authSuccessMessage);
     }
   }, [authSuccessMessage, authErrorMessage]);
+
+  //WATER TOAST
+  useEffect(() => {
+    if (waterErrorMessage) {
+      toast.error(waterErrorMessage);
+    }
+    if (waterSuccessMessage) {
+      toast.success(waterSuccessMessage);
+    }
+  }, [waterErrorMessage, waterSuccessMessage]);
 
   return (
     <SharedLayout>
