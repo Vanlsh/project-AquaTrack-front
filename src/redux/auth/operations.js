@@ -69,7 +69,7 @@ export const updateUserProfile = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await updateUserInfo(userData);
-      return response.user;
+      return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
@@ -80,10 +80,10 @@ export const updateUserProfile = createAsyncThunk(
 
 export const uploadUserPhoto = createAsyncThunk(
   "users/photo",
-  async (photo, thunkAPI) => {
+  async (formData, thunkAPI) => {
     try {
-      const response = await updateUserPhoto(photo);
-      return response.photo;
+      const response = await updateUserPhoto(formData);
+      return response.data.photo;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.data.message);
     }
