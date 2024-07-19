@@ -41,7 +41,7 @@
   background-color: #fff;
   position: absolute;
   top: 50%;
-  right: -5px;
+  right: 0;
   transform: translate(50%, -50%);
 }
 
@@ -51,7 +51,7 @@
   line-height: 100%;
   position: absolute;
   bottom: 130%;
-  right: -6px;
+  right: 0;
   transform: translate(50%, -50%);
 }
 
