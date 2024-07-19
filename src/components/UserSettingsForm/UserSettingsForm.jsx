@@ -71,7 +71,6 @@ const UserSettingsForm = ({ handleClose }) => {
       calcWaterIntake = weight * 0.04 + activeTime * 0.6;
     }
     setWaterIntake(Math.min(parseFloat(calcWaterIntake), 15).toFixed(2));
-    console.log(calcWaterIntake);
   }, [watchActiveTime, watchName, watchGender, watchWeight]);
 
   const onSubmit = (data) => {
@@ -317,9 +316,7 @@ const UserSettingsForm = ({ handleClose }) => {
               </p>
 
               <label>
-                <span className={css.boldText}>
-                  {t("Write down how much water you will drink:")}
-                </span>
+                <span className={css.boldText}>{t("recordWaterIntake")}</span>
                 <Controller
                   name="dailyWaterConsumption"
                   control={control}
