@@ -111,6 +111,15 @@
   margin-bottom: 16px;
 }
 
+.signUpLoader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
 .signUpBtn:hover,
 .signUpBtn:focus {
   background-color: var(--color-second-bg-hover);
