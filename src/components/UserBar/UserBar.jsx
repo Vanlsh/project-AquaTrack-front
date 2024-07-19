@@ -10,7 +10,6 @@ const UserBar = ({ name }) => {
   const userBarPopoverRef = useRef(null);
 
   const userAvatar = useSelector(selectUserPhoto);
-  console.log(userAvatar);
   const avatarPlaceholder = "/img/avatar-placeholder.jpg";
 
   const handleOutsideClick = (e) => {
