@@ -94,5 +94,6 @@
   "cancel": "Скасувати",
   "logout": "Вийти",
   "confirmLogout": "Ви дійсно хочете вийти?",
-  "noWaterAdded": "Вода ще не додана"
+  "noWaterAdded": "Вода ще не додана",
+  "waterMonthErrorMessage": "Щось пішло не так. Будь ласка, перезавантажте сторінку"
 }
