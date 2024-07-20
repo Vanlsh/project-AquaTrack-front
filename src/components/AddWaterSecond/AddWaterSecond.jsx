@@ -17,8 +17,14 @@ const AddWaterBtn = () => {
   const timestampFromUrl = parseDateTime(dateUrl).getTime();
 
   const openModal = useCallback(() => {
-    setModal(<WaterModal onClose={closeModal} operationType={"add"} timestampFromUrl={timestampFromUrl}/>);
-  }, [setModal, closeModal]);
+    setModal(
+      <WaterModal
+        onClose={closeModal}
+        operationType={"add"}
+        timestampFromUrl={timestampFromUrl}
+      />
+    );
+  }, [setModal, closeModal, timestampFromUrl]);
 
   return (
     <button className={css.btnStyle} type="button" onClick={openModal}>

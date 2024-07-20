@@ -1,19 +1,19 @@
 import { useTranslation } from "react-i18next";
 import css from "./WaterModal.module.css";
 import WaterForm from "../WaterForm/WaterForm";
-import { useState } from "react";
 import { ANIMATION } from "../../constants";
 import svgSprite from "../../assets/icons.svg";
 
-
-
-const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl= '' }) => {
+const WaterModal = ({
+  operationType,
+  onClose,
+  water = {},
+  timestampFromUrl = "",
+}) => {
   // operationType: "add" | "edit", onClose: () => void, water: {id: 'string', amount: number, date: "string"}
   const { t } = useTranslation();
-  const [closing, setClosing] = useState(false);
 
   const handleClose = () => {
-    setClosing(true);
     const id = setTimeout(() => {
       onClose();
       clearTimeout(id);
@@ -31,10 +31,8 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl= '' }
     }
   };
 
-  
-  const curentTimestamp = Number(timestampFromUrl); 
+  const curentTimestamp = Number(timestampFromUrl);
   const recordTimestamp = Number(water.date);
-
 
   const editTime = (operationType) => {
     switch (operationType) {
@@ -70,13 +68,12 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl= '' }
   return (
     <div className={css.WaterModal}>
       <h1>{modalHeader(operationType)}</h1>
-      <WaterForm 
+      <WaterForm
         operationType={operationType}
         editTime={editTime(operationType)} // Передаємо мілісекунди
         waterPortion={waterPortion(operationType)} // Передаємо порцію води
         waterID={waterID(operationType)} // Передаємо ID води
         handleClose={handleClose}
-        
       />
       <button
         type="button"
