@@ -5,6 +5,7 @@ import {
   getUserInfo,
   logIn,
   logOut,
+  refreshToken,
   signUp,
   updateUserProfile,
   uploadUserPhoto,
@@ -123,7 +124,17 @@ const authSlice = createSlice({
       .addCase(uploadUserPhoto.rejected, (state, action) => {
         state.isLoadingPhoto = false;
         state.errorMessage = "Something went wrong, try again later";
-      });
+      })
+      //////
+      .addCase(refreshToken.pending, (state) => {
+        state.isLoggedIn = false;
+      })
+      .addCase(refreshToken.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        console.log(action.payload);
+        state.token = action.payload;
+      })
+      .addCase(refreshToken.rejected, () => INITIAL_STATE);
   },
 });
 
