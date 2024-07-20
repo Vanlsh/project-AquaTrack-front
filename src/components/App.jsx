@@ -95,7 +95,6 @@ function App() {
         >
           <Route path="calendar" element={<MonthInfo />} />
           <Route path="schedule" element={<WaterIntakeChart />} />
-          <Route index element={<Navigate to="calendar" replace />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

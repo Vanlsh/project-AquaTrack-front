@@ -6,28 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectWaterWeeklyData } from '../../redux/water/selectors';
 import { fetchWeeklyWater } from '../../redux/water/operations';
 
-// const formatDate = (rawDate) => {
-//   const year = rawDate.substring(0, 4);
-//   const month = rawDate.substring(4, 6);
-//   const day = rawDate.substring(6, 8);
-//   return `${day}`;
-// };
-
-// const rawData = [
-//   { date: '20240501', amount: 1.5 },
-//   { date: '20240502', amount: 2.0 },
-//   { date: '20240503', amount: 1.8 },
-//   { date: '20240504', amount: 2.5 },
-//   { date: '20240505', amount: 2.2 },
-//   { date: '20240506', amount: 1.9 },
-//   { date: '20240507', amount: 2.3 },
-// ];
-
-// const formattedData = rawData.map(item => ({
-//   date: formatDate(item.date),
-//   amount: item.amount
-// }));
-
 const formatDate = (timestamp) => {
   const timestampNum = parseInt(timestamp, 10);
   if (isNaN(timestampNum)) {
@@ -37,17 +15,21 @@ const formatDate = (timestamp) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
-
   return `${day}`;
 };
+const convertMlToL = (ml) => {
+  return (ml / 1000).toFixed(1);
+};
+
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
+    const valueInMl = payload[0].payload.originalAmount;
     return (
       <div className={css.customTooltip}>
         <svg className={css.waterDropImg} width="53" height="39">
           <use xlinkHref={`${svg}#icon-water-drop`} />
           <text className={css.textHint} x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" fontSize="10" fill="black">
-            {`${payload[0].value} ml`}
+          {`${valueInMl} ml`}
           </text>
         </svg>
       </div>
@@ -73,8 +55,10 @@ const WaterIntakeChart = () => {
 
   const formattedData = waterWeeklyData.slice(0, 7).map(item => ({
     date: formatDate(item.date),
-    amount: item.amount
+    amount: convertMlToL(item.amount),
+    originalAmount: item.amount
   }));
+
   return (
     <div className={css.graphContainer}>
     <ResponsiveContainer width="100%" height="100%">
@@ -93,28 +77,20 @@ const WaterIntakeChart = () => {
         <XAxis dataKey="date" tickLine={false} tickMargin={21}/>
         <YAxis
           tickCount={6}
-          domain={[0, 2.5]}
-        //   domain={['auto', 'auto']}
-          ticks={[0, 0.5, 1, 1.5, 2, 2.5]}
+          // domain={[0, 2.5]}
+          domain={['auto', 'auto']}
+          // ticks={[0, 0.5, 1, 1.5, 2, 2.5, 3]}
           label={{ angle: -90, position: 'insideLeft' }}
           tickLine={false} 
           tickMargin={53}
           tick={{ textAnchor: 'start' }}
+          tickFormatter={(value) => `${value} L`}
         />
          <Tooltip
             cursor={false}
             position={{ y: -30 }}
             // position={calculateTooltipPosition}
             content={<CustomTooltip />}
-            // contentStyle={{
-            //   borderRadius: '10px',
-            //   border: '1px solid #87D28D',
-            //   backgroundColor: '#fff',
-            //   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-            //   padding: '8px 12px',
-            // }}
-            // labelFormatter={() => ''}
-            // formatter={(value) => [`${value} L`]}
           />
         <Area
           type="monotone"
