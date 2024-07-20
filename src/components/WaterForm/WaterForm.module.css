@@ -156,7 +156,7 @@
   line-height: 1.3;
   letter-spacing: -0.01em;
   color: var(--color-font-second);
-  margin: 8px 0 24px 0;
+  margin: 8px 0 0;
 }
 
 .WaterValue:focus {
@@ -193,6 +193,7 @@ input[type="number"] {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 24px;
 }
 
 .SaveBtn:disabled {
@@ -212,6 +213,7 @@ input[type="number"] {
   color: red;
   font-size: 12px;
   margin-top: 0px;
+  font-weight: 400;
 }
 
 @media screen and (min-width: 768px) {
