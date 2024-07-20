@@ -1,13 +1,15 @@
 export const INITIAL_STATE = {
   user: {
-    name: "User",
+    name: "",
     email: null,
     gender: null,
     photo: null,
     weight: 0,
-    activeTimeSports: 0,
+    dailyActiveTime: 0,
     dailyWaterConsumption: 0,
   },
+  isLoading: null,
+  isLoadingPhoto: null,
   token: null,
   isLoggedIn: false,
   errorMessage: null,

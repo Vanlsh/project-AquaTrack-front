@@ -9,18 +9,23 @@
   justify-content: center;
   align-items: center;
 }
+
 .userAvatar img {
   width: 75px;
   height: 75px;
   border-radius: 50%;
-  background-color: aqua;
+  background-color: transparent;
   margin-bottom: 10px;
+  object-fit: cover;
 }
+
 .uploadContainer {
   display: flex;
   justify-content: center;
   cursor: pointer;
+  width: max-content;
 }
+
 .icon {
   fill: white;
   stroke: var(--color-font-second);
@@ -30,48 +35,55 @@
 }
 
 .ordinaryText {
-  font-family: Poppins;
   font-size: 14px;
   line-height: 18px;
   color: var(--color-font-second);
 }
+
 .hideBtn {
   display: none;
 }
+
 .userSettingForm {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
-  max-height: 297px;
   overflow-y: scroll;
+  padding: 0 2px 40px 20px;
 }
+
 .userSettingForm::-webkit-scrollbar {
-  width: 6px;
+  width: 20px;
 }
 
 .userSettingForm::-webkit-scrollbar-thumb {
   background: var(--color-main-bg);
   border-radius: 30px;
   cursor: pointer;
+  border: 7px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
 }
+
 .boldText {
-  font-family: Poppins;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
 }
+
 .genderContainer {
   width: 100%;
   margin-bottom: 24px;
 }
+
 .radioContainer {
   margin-top: 14px;
   display: flex;
-  text-align: center;
+  align-items: center;
 }
+
 .radioContainer > label:not(:last-child) {
   margin-right: 20px;
 }
+
 .radioInput {
   appearance: none;
   width: 20px;
@@ -83,11 +95,12 @@
   margin-right: 10px;
   cursor: pointer;
 }
+
 .radioInput:checked::before {
   content: "";
   display: block;
-  width: 8.57px;
-  height: 8.57px;
+  width: 8px;
+  height: 8px;
   background-color: var(--color-second-bg);
   border-radius: 50%;
   position: absolute;
@@ -95,11 +108,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .userPreferences {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
+
 .formNameEmail {
   margin-bottom: 24px;
 }
@@ -110,15 +125,18 @@
   flex-direction: column;
   gap: 14px;
 }
+
 .formNameEmail label,
 .formWeightTime label {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .formula {
   margin-top: 10px;
 }
+
 .inputBox {
   height: 46px;
   max-width: 100%;
@@ -126,16 +144,23 @@
   border: 1px solid rgba(47, 47, 47, 0.15);
   padding: 16px 14px;
   outline: none;
-  font-family: Poppins;
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
   letter-spacing: -0.01em;
   color: var(--color-font-second);
+  background-color: transparent;
 }
+
+.inputBox:disabled {
+  color: #989c9d;
+  background-color: #f0eff4;
+}
+
 .inputBox:focus {
   border: 1px solid rgba(47, 47, 47, 0.4);
 }
+
 .formulaDescription {
   display: flex;
   flex-direction: column;
@@ -143,15 +168,18 @@
   gap: 12px;
   margin-bottom: 14px;
 }
+
 .formulaDescription p {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
+
 .formulaExpression {
   color: var(--color-second-bg);
   font-weight: 700;
 }
+
 .formulaDescription + .ordinaryText {
   height: 140px;
   width: 100%;
@@ -160,6 +188,7 @@
   border: 1px solid rgba(47, 47, 47, 0.15);
   margin-bottom: 14px;
 }
+
 .temporarySymbol {
   color: var(--color-second-bg);
   font-weight: 700;
@@ -169,36 +198,57 @@
   display: inline-block;
   text-align: center;
 }
+
 .formulaDescriptionText {
   color: rgba(47, 47, 47, 0.6);
 }
+
 .submitBtn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 40px;
-  width: 116px;
   border-radius: 30px;
-  padding: 16px 0px;
+  padding: 0 40px;
+  min-height: 46px;
+  font-weight: 700;
+  width: fit-content;
   outline: none;
   border: none;
   background-color: var(--color-second-bg);
 }
+
 .submitBtn:active {
   background-color: var(--color-second-bg-hover);
 }
+
+.submitBtn:disabled {
+  background-color: transparent;
+}
+
+.loaderWrapper {
+  top: 0;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
 .boldTextBtn {
-  font-family: Poppins;
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -0.01em;
 }
+
 .consumeWater {
   display: flex;
   flex-direction: column;
   gap: 14px;
   margin-top: 10px;
 }
+
 .userNorma {
-  font-family: Poppins;
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
@@ -206,66 +256,111 @@
   display: block;
 }
 
+.langButton {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.errorMessage {
+  font-size: 14px;
+  color: #ef5050;
+  max-width: 400px;
+}
+
 /*TABLET*/
 
 @media screen and (min-width: 768px) {
+  .langButton {
+    font-size: 18px;
+  }
+
+  .userSettingForm {
+    padding: 0 0 40px 40px;
+  }
+
   .userAvatar {
     height: 134px;
     width: 151px;
   }
+
   .userAvatar img {
     width: 100px;
     height: 100px;
   }
+
   .icon {
     width: 20px;
     height: 20px;
   }
+
   .ordinaryText {
     font-size: 16px;
     line-height: 24px;
   }
+
   .userSettingForm::-webkit-scrollbar {
-    width: 8px;
+    width: 40px;
   }
+
+  .userSettingForm::-webkit-scrollbar-thumb {
+    background: var(--color-main-bg);
+    border-radius: 30px;
+    cursor: pointer;
+    border: 16px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+  }
+
   .boldText {
     font-size: 18px;
     line-height: 24px;
   }
+
   .inputBox {
     height: 56px;
     padding: 16px;
     font-size: 16px;
     line-height: 24px;
   }
+
   .formulaDescription {
     flex-direction: row;
     gap: 28px;
   }
+
   .formulaDescription + .ordinaryText {
     height: 128px;
   }
+
   .temporarySymbol {
     font-size: 22px;
     width: 22px;
   }
+
   .submitBtn {
-    width: 141px;
-    padding: 20px 0px;
+    min-height: 56px;
   }
+
   .boldTextBtn {
     font-size: 16px;
     line-height: 24px;
   }
+
   .userNorma {
     font-size: 15px;
-    line-height: 22.4px;
+    line-height: 22px;
     display: inline;
   }
 }
 
+/*Desktop*/
 @media screen and (min-width: 1440px) {
   .userSettingForm {
+    padding: 0 0 40px 40px;
     flex-direction: row;
     flex-wrap: wrap;
   }
@@ -273,8 +368,8 @@
   .userPreferences {
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 40px;
   }
+
   .formNameEmail {
     margin-bottom: 0;
   }
@@ -284,17 +379,30 @@
   }
 
   .formulaDescription + .ordinaryText {
-    height: 152px;
+    height: fit-content;
     width: 400px;
   }
 
+  .ordinaryText {
+    max-width: 400px;
+  }
+
+  .boldText {
+    max-width: 400px;
+  }
+
   .submitBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 56px;
-    margin-top: 0;
-    padding: 0;
   }
 
   .submitBtn:hover {
     background-color: var(--color-second-bg-hover);
+  }
+
+  .submitBtn:disabled {
+    background-color: transparent;
   }
 }

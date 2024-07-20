@@ -9,40 +9,36 @@ import {
   selectToken,
 } from "../redux/auth/selectors.js";
 import { setLoggedIn } from "../redux/auth/slice.js";
-// import {
-//   selectDailyErrorMessage,
-//   selectDailySuccessMessage,
-//   selectMonthlyErrorMessage,
-//   selectMonthlySuccessMessage,
-// } from "../redux/water/selectors.js";
 import PrivateRoute from "./PrivateRoute.jsx";
 import RestrictedRoute from "./RestrictedRoute.jsx";
 import SharedLayout from "./SharedLayout/SharedLayout.jsx";
+import {
+  selectDailyErrorMessage,
+  selectDailySuccessMessage,
+} from "../redux/water/selectors.js";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
 const SignUpPage = lazy(() => import("../pages/SignUpPage/SignUpPage.jsx"));
 const TrackerPage = lazy(() => import("../pages/TrackerPage/TrackerPage.jsx"));
 const NotFoundPage = lazy(
-  () => import("../pages/NotFoundPage/NotFoundPage.jsx"),
+  () => import("../pages/NotFoundPage/NotFoundPage.jsx")
 );
 
 function App() {
-  const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const authSuccessMessage = useSelector(selectAuthSuccessMessage);
+  const dispatch = useDispatch();
   const authErrorMessage = useSelector(selectAuthErrorMessage);
-  // const waterDailyErrorMessage = useSelector(selectDailyErrorMessage);
-  // const waterDailySuccessMessage = useSelector(selectDailySuccessMessage);
-  // const waterMonthlyErrorMessage = useSelector(selectMonthlyErrorMessage);
-  // const waterMonthlySuccessMessage = useSelector(selectMonthlySuccessMessage);
+  const authSuccessMessage = useSelector(selectAuthSuccessMessage);
+  const waterErrorMessage = useSelector(selectDailyErrorMessage);
+  const waterSuccessMessage = useSelector(selectDailySuccessMessage);
 
   useEffect(() => {
     if (token) {
-      dispatch(getUserInfo(token));
+      dispatch(getUserInfo());
       dispatch(setLoggedIn(true));
     }
-  }, [token, dispatch]);
+  }, []);
 
   //AUTH TOAST
   useEffect(() => {
@@ -54,25 +50,15 @@ function App() {
     }
   }, [authSuccessMessage, authErrorMessage]);
 
-  //WATER DAILY TOAST
-  // useEffect(() => {
-  //   if (waterDailyErrorMessage) {
-  //     toast.error(waterDailyErrorMessage);
-  //   }
-  //   if (waterDailySuccessMessage) {
-  //     toast.success(waterDailySuccessMessage);
-  //   }
-  // }, [waterDailySuccessMessage, waterDailySuccessMessage]);
-  //
-  // //WATER MONTHLY TOAST
-  // useEffect(() => {
-  //   // if (waterMonthlyErrorMessage) {
-  //   //   toast.error(waterMonthlyErrorMessage);
-  //   // }
-  //   if (waterMonthlySuccessMessage) {
-  //     toast.success(waterMonthlySuccessMessage);
-  //   }
-  // }, [waterMonthlySuccessMessage, waterMonthlyErrorMessage]);
+  //WATER TOAST
+  useEffect(() => {
+    if (waterErrorMessage) {
+      toast.error(waterErrorMessage);
+    }
+    if (waterSuccessMessage) {
+      toast.success(waterSuccessMessage);
+    }
+  }, [waterErrorMessage, waterSuccessMessage]);
 
   return (
     <SharedLayout>

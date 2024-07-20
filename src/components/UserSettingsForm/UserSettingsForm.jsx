@@ -1,85 +1,144 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  updateUserProfile,
+  uploadUserPhoto,
+} from "../../redux/auth/operations.js";
+import {
+  selectIsLoading,
+  selectIsLoadingPhoto,
+  selectUser,
+  selectUserPhoto,
+} from "../../redux/auth/selectors.js";
 import css from "./UserSettingsForm.module.css";
 import svg from "../../assets/icons.svg";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
+import LoaderComponent from "../LoaderComponent/LoaderComponent.jsx";
 
-const UserSettingsForm = () => {
+const UserSettingsForm = ({ handleClose }) => {
   const { t } = useTranslation();
-  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [waterIntake, setWaterIntake] = useState(0);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const isLoadingPhoto = useSelector(selectIsLoadingPhoto);
+  const user = useSelector(selectUser);
+  const avatar = useSelector(selectUserPhoto);
 
-  const schema = yup.object().shape({
-    avatar: yup.mixed().required(t("avatarRequired")),
-    gender: yup.string().required(t("genderRequired")),
-    yourName: yup.string().required(t("nameRequired")),
-    yourEmail: yup
-      .string()
-      .email(t("invalidEmail"))
-      .required(t("emailRequired")),
-    yourWeight: yup
+  const schema = yup.object({
+    name: yup.string().required(t("nameRequired")),
+    weight: yup.number().min(0).typeError(t("hasToBeANumber")),
+    dailyActiveTime: yup.number().min(0).typeError(t("hasToBeANumber")),
+    dailyWaterConsumption: yup
       .number()
-      .positive(t("positiveWeight"))
-      .required(t("weightRequired")),
-    yourActiveTime: yup
-      .number()
-      .positive(t("positiveActiveTime"))
-      .required(t("activeTimeRequired")),
-    yourDayWaterConsumption: yup
-      .number()
-      .positive(t("positiveWaterConsumption"))
-      .required(t("waterConsumptionRequired")),
+      .min(0, "Value has to be greater than 0")
+      .typeError(t("hasToBeANumber")),
   });
+
   const {
+    control,
     register,
     handleSubmit,
-    reset,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      email: user.email,
+      gender: user.gender,
+      name: user.name,
+      weight: user.weight,
+      dailyActiveTime: user.dailyActiveTime,
+      dailyWaterConsumption: user.dailyWaterConsumption,
+    },
+    mode: "onChange",
   });
 
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
-    reset();
-    setAvatarPreview(null);
-  };
+  const watchWeight = watch("weight");
+  const watchName = watch("name");
+  const watchGender = watch("gender");
+  const watchActiveTime = watch("dailyActiveTime");
 
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAvatarPreview(URL.createObjectURL(file));
+  useEffect(() => {
+    let calcWaterIntake;
+    const weight = parseInt(watchWeight || 0);
+    const activeTime = parseInt(watchActiveTime || 0);
+    if (watchGender === "woman") {
+      calcWaterIntake = weight * 0.03 + activeTime * 0.4;
+    } else {
+      calcWaterIntake = weight * 0.04 + activeTime * 0.6;
+    }
+    setWaterIntake(Math.min(parseFloat(calcWaterIntake), 15).toFixed(2));
+  }, [watchActiveTime, watchName, watchGender, watchWeight]);
+
+  const onSubmit = (data) => {
+    // eslint-disable-next-line no-unused-vars
+    const { photo, ...compareUser } = user;
+
+    const compareUserOrdered = Object.keys(compareUser)
+      .sort()
+      .reduce((obj, key) => {
+        obj[key] = compareUser[key];
+        return obj;
+      }, {});
+
+    const dataOrdered = Object.keys(data)
+      .sort()
+      .reduce((obj, key) => {
+        obj[key] = data[key];
+        return obj;
+      }, {});
+
+    if (JSON.stringify(compareUserOrdered) !== JSON.stringify(dataOrdered)) {
+      // eslint-disable-next-line no-unused-vars
+      const { email, ...payload } = data;
+      dispatch(updateUserProfile(payload)).then(({ error }) => {
+        if (!error) {
+          handleClose();
+        }
+      });
+    } else {
+      handleClose();
     }
   };
 
-  const calculateWaterIntake = (weight, activeTime) => {
-    // Formula
-    return (weight * 0.03 + activeTime * 0.5).toFixed(2);
+  const handleAvatarChange = (e) => {
+    const formData = new FormData();
+    const file = e.target.files[0];
+    formData.append("avatar", file);
+    dispatch(uploadUserPhoto(formData));
   };
 
   return (
     <>
       <div className={css.userAvatar}>
-        <img src={avatarPreview || "#"} alt="User's photo" />
+        {!isLoadingPhoto ? (
+          <img
+            src={avatar || "/img/avatar-placeholder.jpg"}
+            alt="User's photo"
+          />
+        ) : (
+          <LoaderComponent width={110} height={110} />
+        )}
         <label>
           <div className={css.uploadContainer}>
             <svg className={css.icon}>
               <use xlinkHref={svg + "#icon-upload"}></use>
             </svg>
-            <span className={css.ordinaryText}>{t("Upload a photo")}</span>
+            <span className={css.ordinaryText}>{t("uploadPhoto")}</span>
           </div>
           <input
             className={css.hideBtn}
             type="file"
-            {...register("avatar")}
             onChange={handleAvatarChange}
           />
           {errors.avatar && <p>{errors.avatar.message}</p>}
         </label>
       </div>
-      <div>
+      <div className={css.langButton}>
         <p>{t("changeLanguage")}</p>
         <LanguageSwitcher />
       </div>
@@ -90,28 +149,31 @@ const UserSettingsForm = () => {
             <div className={css.radioContainer}>
               <input
                 type="radio"
-                id="women"
+                id="woman"
                 className={css.radioInput}
                 {...register("gender")}
-                value="women"
-                defaultChecked
+                value="woman"
+                checked={watchGender === "woman"}
               />
-              <label htmlFor="women" className={css.ordinaryText}>
-                {t("women")}
+              <label htmlFor="woman" className={css.ordinaryText}>
+                {t("woman")}
               </label>
 
               <input
                 type="radio"
-                id="men"
+                id="man"
                 className={css.radioInput}
                 {...register("gender")}
-                value="men"
+                value="man"
+                checked={watchGender === "man"}
               />
-              <label htmlFor="men" className={css.ordinaryText}>
-                {t("men")}
+              <label htmlFor="man" className={css.ordinaryText}>
+                {t("man")}
               </label>
             </div>
-            {errors.gender && <p>{errors.gender.message}</p>}
+            {errors.gender && (
+              <p className={css.errorMessage}>{errors.gender.message}</p>
+            )}
           </label>
         </div>
 
@@ -119,14 +181,38 @@ const UserSettingsForm = () => {
           <div className={css.formNameEmail}>
             <label>
               <span className={css.boldText}>{t("yourName")}</span>
-              <input {...register("yourName")} className={css.inputBox} />
-              {errors.yourName && <p>{errors.yourName.message}</p>}
+              <Controller
+                render={({ field }) => (
+                  <input
+                    {...field}
+                    className={css.inputBox}
+                    placeholder={t("placeholderName")}
+                    onChange={(e) => {
+                      let value = e.target.value;
+                      const regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ]*$/;
+                      if (regex.test(value)) {
+                        field.onChange(value);
+                      }
+                    }}
+                  />
+                )}
+                name="name"
+                control={control}
+              />
+
+              {errors.name && (
+                <p className={css.errorMessage}>{errors.name.message}</p>
+              )}
             </label>
 
             <label>
               <span className={css.boldText}>{t("email")}</span>
-              <input {...register("yourEmail")} className={css.inputBox} />
-              {errors.yourEmail && <p>{errors.yourEmail.message}</p>}
+              <input
+                disabled
+                {...register("email")}
+                className={css.inputBox}
+                placeholder={t("placeholderEmail")}
+              />
             </label>
 
             <div className={css.formula}>
@@ -139,21 +225,20 @@ const UserSettingsForm = () => {
                   </span>
                 </p>
                 <p className={css.ordinaryText}>
-                  <span>{t("forMan")} </span>{" "}
+                  <span>{t("forMan")} </span>
                   <span className={css.formulaExpression}>
                     V=(M*0,04) + (T*0,6)
                   </span>
                 </p>
               </div>
               <p className={css.ordinaryText}>
-                <span className={css.formulaExpression}>*</span>{" "}
+                <span className={css.formulaExpression}>*&nbsp;</span>
                 <span className={css.formulaDescriptionText}>
                   {t("formulaExplanation")}
                 </span>
               </p>
               <p className={css.ordinaryText}>
-                <span className={css.temporarySymbol}>! </span>{" "}
-                {/*Put svg ion*/}
+                <span className={css.temporarySymbol}>!&nbsp;</span>
                 {t("activeTime")}
               </p>
             </div>
@@ -162,40 +247,132 @@ const UserSettingsForm = () => {
           <div className={css.formWeightTime}>
             <label>
               <span className={css.ordinaryText}>{t("yourWeight")}</span>
-              <input {...register("yourWeight")} className={css.inputBox} />
-              {errors.yourWeight && <p>{errors.yourWeight.message}</p>}
+              <Controller
+                name="weight"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    {...field}
+                    className={css.inputBox}
+                    onChange={(e) => {
+                      let value = e.target.value;
+                      const regex = /^\d+(\.\d{0,3})?$/;
+                      if (value === "" || regex.test(value)) {
+                        field.onChange(value);
+                      }
+                    }}
+                    onFocus={() => {
+                      if (field.value === 0) {
+                        field.onChange("");
+                      }
+                    }}
+                    onBlur={() => {
+                      if (field.value === "") {
+                        field.onChange(0);
+                      }
+                    }}
+                  />
+                )}
+              />
+              {errors.weight && (
+                <p className={css.errorMessage}>{errors.weight.message}</p>
+              )}
             </label>
 
             <label>
               <span className={css.ordinaryText}>{t("activeSportsTime")}</span>
-              <input {...register("yourActiveTime")} className={css.inputBox} />
-              {errors.yourActiveTime && <p>{errors.yourActiveTime.message}</p>}
+              <Controller
+                name="dailyActiveTime"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    {...field}
+                    className={css.inputBox}
+                    onChange={(e) => {
+                      let value = e.target.value;
+                      const regex = /^\d+(\.\d{0,3})?$/;
+                      if (value === "" || regex.test(value)) {
+                        field.onChange(value);
+                      }
+                    }}
+                    onFocus={() => {
+                      if (field.value === 0) {
+                        field.onChange("");
+                      }
+                    }}
+                    onBlur={() => {
+                      if (field.value === "") {
+                        field.onChange(0);
+                      }
+                    }}
+                  />
+                )}
+              />
+
+              {errors.dailyActiveTime && (
+                <p className={css.errorMessage}>
+                  {errors.dailyActiveTime.message}
+                </p>
+              )}
             </label>
 
             <div className={css.consumeWater}>
               <p className={css.ordinaryText}>
                 {t("requiredWaterAmount")}&nbsp;
-                <span className={css.userNorma}>
-                  {calculateWaterIntake(86, 1)} L
-                </span>
-                {/*Should automatically receive value from*/}
+                <span className={css.userNorma}>{waterIntake}&nbsp;L</span>
               </p>
 
               <label>
                 <span className={css.boldText}>{t("recordWaterIntake")}</span>
-                <input
-                  {...register("yourDayWaterConsumption")}
-                  className={css.inputBox}
+                <Controller
+                  name="dailyWaterConsumption"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      className={css.inputBox}
+                      onChange={(e) => {
+                        let value = e.target.value;
+                        const regex = /^\d+(\.\d{0,3})?$/;
+
+                        if (value === "" || regex.test(value)) {
+                          field.onChange(value);
+                        }
+                      }}
+                      onFocus={() => {
+                        if (field.value === 0) {
+                          field.onChange("");
+                        }
+                      }}
+                      onBlur={() => {
+                        if (field.value === "") {
+                          field.onChange(0);
+                        }
+                      }}
+                    />
+                  )}
                 />
-                {errors.yourDayWaterConsumption && (
-                  <p>{errors.yourDayWaterConsumption.message}</p>
+                {errors.dailyWaterConsumption && (
+                  <p className={css.errorMessage}>
+                    {errors.dailyWaterConsumption.message}
+                  </p>
                 )}
               </label>
             </div>
           </div>
         </div>
-        <button type="submit" className={`${css.submitBtn} ${css.boldTextBtn}`}>
+
+        <button
+          disabled={isLoading}
+          type="submit"
+          className={`${css.submitBtn} ${css.boldTextBtn}`}
+        >
           {t("save")}
+          {isLoading && (
+            <div className={css.loaderWrapper}>
+              <LoaderComponent height={56} width={56} />
+            </div>
+          )}
         </button>
       </form>
     </>

@@ -8,22 +8,23 @@ import svgSprite from "../../assets/icons.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../redux/auth/operations";
 import { selectIsLoading } from "../../redux/auth/selectors.js";
+import LoaderComponent from "../LoaderComponent/LoaderComponent.jsx";
 
-const schemaValidation = Yup.object({
-  email: Yup.string()
-    .email("Enter a valid email address!")
-    .required("Email is required"),
-  password: Yup.string()
-    .min(5, "Must be at least 5 characters long")
-    .max(25, "Must be no more than 25 characters")
-    .required("Password is required"),
-  repeatpassword: Yup.string()
-    .oneOf(
-      [Yup.ref("password")],
-      "There must be the same value as in the password field",
-    )
-    .required("Repeat password is required"),
-});
+// const schemaValidation = Yup.object({
+//   email: Yup.string()
+//     .email("Enter a valid email address!")
+//     .required("Email is required"),
+//   password: Yup.string()
+//     .min(5, "Must be at least 5 characters long")
+//     .max(25, "Must be no more than 25 characters")
+//     .required("Password is required"),
+//   repeatpassword: Yup.string()
+//     .oneOf(
+//       [Yup.ref("password")],
+//       "There must be the same value as in the password field",
+//     )
+//     .required("Repeat password is required"),
+// });
 
 const SignUpForm = () => {
   const { t } = useTranslation();
@@ -165,9 +166,19 @@ const SignUpForm = () => {
             )}
           </label>
         </div>
-        <button className={styles.signUpBtn} type="submit">
-          {isLoading ? "Loading" : t("signUp")}
-        </button>
+        {isLoading ? (
+          <div className={styles.signUpLoader}>
+            <LoaderComponent height={44} width={44} />
+          </div>
+        ) : (
+          <button
+            disabled={isLoading && true}
+            className={styles.signUpBtn}
+            type="submit"
+          >
+            {t("signUp")}
+          </button>
+        )}
       </form>
     </div>
   );

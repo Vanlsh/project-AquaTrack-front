@@ -6,19 +6,21 @@ import { useDispatch } from "react-redux";
 import {
   fetchDailyWater,
   fetchMonthlyWater,
+  fetchTodayWater,
 } from "../../redux/water/operations.js";
 import { parseDateTime } from "../../helpers/parseDate.js";
 
 const TrackerPage = () => {
   const { date } = useParams();
   const parsedDate = parseDateTime(date).getTime();
-  const [isRefreshingPage, setIsRefreshingPage] = useState(true);
   const dispatch = useDispatch();
+  const [isRefreshingPage, setIsRefreshingPage] = useState(true);
 
   useEffect(() => {
     if (isRefreshingPage) {
       dispatch(fetchMonthlyWater(parsedDate));
       dispatch(fetchDailyWater(parsedDate));
+      dispatch(fetchTodayWater());
       setIsRefreshingPage(false);
     }
   }, [isRefreshingPage, parsedDate, dispatch]);

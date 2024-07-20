@@ -1,10 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import css from "./CalendarItem.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchDailyWater } from "../../redux/water/operations";
 import { useParams } from "react-router-dom";
 import { parseDateTime } from "../../helpers/parseDate.js";
 import clsx from "clsx";
+import { selectWaterRate } from "../../redux/auth/selectors.js";
+
+const isFuture = (date) => {
+  const dateNow = new Date();
+  const currentDate = new Date(Number(date));
+  const isBigger =
+    dateNow.getFullYear() < currentDate.getFullYear() ||
+    dateNow.getMonth() < currentDate.getMonth() ||
+    dateNow.getDate() < currentDate.getDate();
+  return isBigger;
+};
 
 const isDaySame = (firstDay, secondDay) => {
   const first = new Date(Number(firstDay));
@@ -16,10 +27,10 @@ const isDaySame = (firstDay, secondDay) => {
   );
 };
 
-const CalendarItem = ({ calendarDate, percent }) => {
+const CalendarItem = ({ calendarDate, amount }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const goal = useSelector(selectWaterRate);
   const { date: paramsDate } = useParams();
   const currentDate = parseDateTime(paramsDate);
 
@@ -29,10 +40,14 @@ const CalendarItem = ({ calendarDate, percent }) => {
   };
 
   const date = new Date(Number(calendarDate)).getDate();
-  const dateNow = Date.now();
-  const isDisabled = Number(calendarDate) > dateNow;
+
+  const percent =
+    goal > 0 ? Math.round((amount / (goal * 1000)) * 100) : amount;
+  const isDisabled = isFuture(calendarDate);
   const isDane = Math.round(percent) < 100;
   const isActive = isDaySame(currentDate, calendarDate);
+  const percentString = Math.round(percent) >= 100 ? "100%" : `${percent}%`;
+
   return (
     <button
       className={clsx(css.day, {
@@ -49,7 +64,7 @@ const CalendarItem = ({ calendarDate, percent }) => {
       >
         {date}
       </div>
-      <div className={css.perc}>{`${Math.round(percent)}%`}</div>
+      <div className={css.perc}>{percentString}</div>
     </button>
   );
 };

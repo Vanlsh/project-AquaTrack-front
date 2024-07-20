@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import svgIcons from "../../assets/icons.svg";
+import { selectUserPhoto } from "../../redux/auth/selectors.js";
 import UserBarPopover from "../UserBarPopover/UserBarPopover.jsx";
 import styles from "./UserBar.module.css";
 
@@ -7,8 +9,8 @@ const UserBar = ({ name }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const userBarPopoverRef = useRef(null);
 
-  //TODO const userAvatar = useSelector((state) => state.user.avatar);
-  const userAvatar = "/img/avatar-placeholder.jpg";
+  const userAvatar = useSelector(selectUserPhoto);
+  const avatarPlaceholder = "/img/avatar-placeholder.jpg";
 
   const handleOutsideClick = (e) => {
     if (e.target.name === "openPopover" && isPopoverOpen === true) {
@@ -42,7 +44,7 @@ const UserBar = ({ name }) => {
         {name}
         <div
           className={styles.userBarAvatar}
-          style={{ backgroundImage: `url(${userAvatar})` }}
+          style={{ backgroundImage: `url(${userAvatar || avatarPlaceholder})` }}
         ></div>
         {isPopoverOpen ? (
           <svg className={styles.userBarIcon}>
