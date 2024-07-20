@@ -190,6 +190,15 @@ input[type="number"] {
   color: var(--color-font-main);
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SaveBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #e6e6e6;
 }
 
 .SaveBtn:hover,
