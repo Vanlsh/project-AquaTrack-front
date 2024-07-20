@@ -2,9 +2,11 @@ import svg from '../../assets/icons.svg';
 import css from './DeleteWaterModal.module.css';
 import BtnDelete from '../BtnDelete/BtnDelete.jsx';
 import { ANIMATION } from '../../constants.js';
+import { useTranslation } from 'react-i18next';
 
-const ModalDeleteEntry = ({onClose, id}) => {
-    
+const ModalDeleteEntry = ({id, onClose}) => {
+  const { t } = useTranslation(); 
+  
   const handleClose = () => {
     const id = setTimeout(() => {
       onClose();
@@ -20,12 +22,12 @@ const ModalDeleteEntry = ({onClose, id}) => {
           </svg>
       </button>
       <div className={css.modalTextBox}>
-          <h2 className={css.modalTitle}>Delete entry</h2>
-          <p className={css.modalText}>Are you sure you want to delete the entry?</p>
+          <h2 className={css.modalTitle}>{t("deleteEntry")}</h2>
+          <p className={css.modalText}>{t("confirmDeleteEntry")}</p>
       </div>
       <div className={css.modalBtnBox}>
           <BtnDelete handleClose={handleClose} id={id} />
-          <button type="button" onClick={handleClose} className={css.btnCancel}>Cancel</button> 
+          <button type="button" onClick={handleClose} className={css.btnCancel}>{t("cancel")}</button> 
       </div>
     </div>
   );
