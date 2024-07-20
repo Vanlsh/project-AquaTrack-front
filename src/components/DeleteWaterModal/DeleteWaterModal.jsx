@@ -3,9 +3,15 @@ import css from './DeleteWaterModal.module.css';
 import BtnDelete from '../BtnDelete/BtnDelete.jsx';
 import { ANIMATION } from '../../constants.js';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteWaterIntakeRecord } from '../../redux/water/operations.js';
+import LoaderComponent from '../LoaderComponent/LoaderComponent.jsx';
 
 const ModalDeleteEntry = ({id, onClose}) => {
   const { t } = useTranslation(); 
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   
   const handleClose = () => {
     const id = setTimeout(() => {
@@ -13,6 +19,17 @@ const ModalDeleteEntry = ({id, onClose}) => {
       clearTimeout(id);
     }, ANIMATION.DURATION);
   };
+    
+    const handleDelete = () => {
+        setIsLoading(() => true);
+        dispatch(deleteWaterIntakeRecord(id)).then(({ error }) => {
+            if (!error) {
+              handleClose();
+             console.log('handleClose'); 
+          }
+          setIsLoading(false);
+        }); 
+    };
 
   return (
     <div className={css.modal}>
@@ -26,43 +43,23 @@ const ModalDeleteEntry = ({id, onClose}) => {
           <p className={css.modalText}>{t("confirmDeleteEntry")}</p>
       </div>
       <div className={css.modalBtnBox}>
-          <BtnDelete handleClose={handleClose} id={id} />
-          <button type="button" onClick={handleClose} className={css.btnCancel}>{t("cancel")}</button> 
+        {isLoading ? (
+          <LoaderComponent height={80} width={80} />
+        ) : (
+          <>
+            <BtnDelete handleDelete={handleDelete} id={id} />
+            <button
+              type="button"
+              onClick={handleClose}
+              className={css.btnCancel}
+            >
+              {t("cancel")}
+            </button>
+          </>
+        )} 
       </div>
     </div>
   );
 };
 
 export default ModalDeleteEntry;
-
-/* in SomeModalWindowWithoutBackdrop
-
-import { useState } from 'react';
-import { ANIMATION } from "../../constants.js";
-
-const SomeModalWindowWithoutBackdrop = ({ onClose }) => {
-  const [closing, setClosing] = useState(false);
-
-  const handleClose = () => {
-    setClosing(true);
-    const id = setTimeout(() => {
-      onClose();
-      clearTimeout(id);
-    }, ANIMATION.DURATION);
-  };
-
-  return (
-    <div>
-      <h2>Component Title</h2>
-      <p>Some component content</p>
-
-      <button type="button" onClick={handleClose}>
-        CloseModal
-      </button>
-    </div>
-  );
-};
-
-export default SomeModalWindowWithoutBackdrop;
-
-*/
