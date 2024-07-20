@@ -13,19 +13,6 @@ import {
 } from "../../redux/water/operations";
 import LoaderComponent from "../LoaderComponent/LoaderComponent";
 
-const validationSchema = Yup.object().shape({
-  recordingTime: Yup.string()
-    .required("Recording time is required")
-    .matches(
-      /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
-      "Invalid time format, use HH:MM"
-    ),
-  waterValue: Yup.number()
-    .required("Water value is required")
-    .min(50, "Water value must be greater than or equal to 50")
-    .max(5000, "Water value must be less than or equal to 5000"),
-});
-
 const WaterForm = ({
   operationType = "add",
   editTime,
@@ -50,6 +37,16 @@ const WaterForm = ({
 
   const [formHours, setFormHours] = useState(hours);
   const [formMinutes, setFormMinutes] = useState(minutes);
+
+  const validationSchema = Yup.object().shape({
+    recordingTime: Yup.string()
+      .required(t("recordTimeRequired"))
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, t("invalidTimeFormat")),
+    waterValue: Yup.number()
+      .required(t("waterValueRequired"))
+      .min(50, t("waterValueGreater"))
+      .max(5000, t("waterValueLess")),
+  });
 
   const {
     control,
