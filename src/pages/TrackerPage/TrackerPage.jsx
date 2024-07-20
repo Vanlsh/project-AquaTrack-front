@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import WaterDetailedInfo from "../../components/WaterDetailedInfo/WaterDetailedInfo.jsx";
 import WaterMainInfo from "../../components/WaterMainInfo/WaterMainInfo";
 import { useEffect, useState } from "react";
@@ -29,6 +29,7 @@ const TrackerPage = () => {
     <>
       <WaterMainInfo />
       <WaterDetailedInfo />
+      <Outlet />
     </>
   );
 };

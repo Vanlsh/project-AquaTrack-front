@@ -24,3 +24,10 @@ export const selectTodayAmountIsLoading = (state) => {
 export const selectTodayAmountIsError = (state) => {
   state.water.todayAmount.isError;
 };
+export const selectMonthlyErrorMessage = (state) =>
+  state.water.waterMonthly.errorMessage;
+export const selectMonthlySuccessMessage = (state) =>
+  state.water.waterMonthly.successMessage;
+
+export const selectWaterWeeklyData = (state) =>
+  state.water.waterWeekly.data;

@@ -3,12 +3,14 @@ import {
   selectWaterMonthlyRecord,
   selectMonthlyIsLoading,
 } from "../../redux/water/selectors.js";
-import CalendarItem from "../CalendarItem/CalendarItem.jsx";
+// import CalendarItem from "../CalendarItem/CalendarItem.jsx";
 import Loader from "../Loader/Loader.jsx";
 
 import css from "./Calendar.module.css";
+import CalendarItem from "../CalendarItem/CalendarItem.jsx";
 
-const Calendar = () => {
+
+const Calendar = ({ selectedIndex, setSelectedIndex }) => {
   const dateArray = useSelector(selectWaterMonthlyRecord);
   const isLoading = useSelector(selectMonthlyIsLoading);
 
@@ -21,7 +23,13 @@ const Calendar = () => {
             <CalendarItem
               index={index}
               calendarDate={eachDate.date}
+<<<<<<< Updated upstream
               amount={eachDate.amount}
+=======
+              percent={eachDate.percentage}
+              selectedIndex={selectedIndex}
+              setSelectedIndex={setSelectedIndex}
+>>>>>>> Stashed changes
             />
           </li>
         ))}

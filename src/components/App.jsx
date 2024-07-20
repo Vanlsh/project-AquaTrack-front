@@ -1,7 +1,7 @@
 import { lazy, useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { getUserInfo } from "../redux/auth/operations.js";
 import {
   selectAuthErrorMessage,
@@ -16,6 +16,8 @@ import {
   selectDailyErrorMessage,
   selectDailySuccessMessage,
 } from "../redux/water/selectors.js";
+import MonthInfo from "./MonthInfo/MonthInfo.jsx";
+import WaterIntakeChart from "./WaterIntakeChart/WaterIntakeChart.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
@@ -90,7 +92,11 @@ function App() {
           element={
             <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
           }
-        />
+        >
+          <Route path="calendar" element={<MonthInfo />} />
+          <Route path="schedule" element={<WaterIntakeChart />} />
+          <Route index element={<Navigate to="calendar" replace />} />
+        </Route>
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
