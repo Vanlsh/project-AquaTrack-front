@@ -52,6 +52,7 @@ const waterSlice = createSlice({
       //================== fetchMonthlyWater ==================
       .addCase(fetchMonthlyWater.pending, (state) => {
         state.waterMonthly.isLoading = true;
+        state.waterMonthly.isError = null;
       })
       .addCase(fetchMonthlyWater.fulfilled, (state, action) => {
         state.waterMonthly.isLoading = false;
@@ -59,6 +60,7 @@ const waterSlice = createSlice({
       })
       .addCase(fetchMonthlyWater.rejected, (state) => {
         state.waterMonthly.isLoading = false;
+        state.waterMonthly.isError = true;
       })
 
       //======================= addWater ======================
@@ -99,7 +101,7 @@ const waterSlice = createSlice({
       .addCase(updateWaterIntakeRecord.fulfilled, (state, action) => {
         const updatedRecord = action.payload.data;
 
-        state.waterDaily.successMessage = action.payload.message;
+        state.waterDaily.successMessage = "Successfully updated";
 
         const dailyIndex = state.waterDaily.data.findIndex(
           (record) => record.id === updatedRecord.id

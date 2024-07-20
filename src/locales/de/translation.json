@@ -89,5 +89,6 @@
   "cancel": "Abbrechen",
   "logout": "Ausloggen",
   "confirmLogout": "Möchten Sie wirklich gehen?",
-  "noWaterAdded": "Wasser wurde noch nicht hinzugefügt"
+  "noWaterAdded": "Wasser wurde noch nicht hinzugefügt",
+  "waterMonthErrorMessage": "Etwas ist schiefgelaufen. Bitte laden Sie die Seite neu"
 }
