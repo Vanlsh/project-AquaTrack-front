@@ -12,4 +12,9 @@ export const WATER_INITIAL_STATE = {
     isLoading: false,
     isError: null,
   },
+  todayAmount: {
+    value: 0,
+    isLoading: false,
+    isError: null,
+  },
 };
