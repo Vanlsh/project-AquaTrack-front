@@ -115,17 +115,17 @@ const authSlice = createSlice({
 
       ////////////////////////////////////////////////////
       .addCase(uploadUserPhoto.pending, (state, action) => {
-        state.isLoading = true;
+        state.isLoadingPhoto = true;
         state.errorMessage = null;
         state.successMessage = null;
       })
       .addCase(uploadUserPhoto.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingPhoto = false;
         state.successMessage = "Photo updated";
         state.user.photo = action.payload;
       })
       .addCase(uploadUserPhoto.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingPhoto = false;
         state.errorMessage = "Something went wrong, try again later";
       });
   },

@@ -7,4 +7,5 @@ export const selectAuthErrorMessage = (state) => state.auth.errorMessage;
 export const selectAuthSuccessMessage = (state) => state.auth.successMessage;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectWaterRate = (state) => state.auth.user.dailyWaterConsumption;
+export const selectIsLoadingPhoto = (state) => state.auth.isLoadingPhoto;
 export const selectIsNewUser = (state) => state.auth.isNewUser

@@ -1,14 +1,12 @@
 import { useTranslation } from "react-i18next";
 import css from "./WaterProgressBar.module.css";
-import { selectWaterDailyAmount } from "../../redux/water/selectors";
 import { selectWaterRate } from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
 
 const WaterProgressBar = () => {
   const { t } = useTranslation();
-  const currentWater = useSelector(selectWaterDailyAmount);
+  const currentWater = useSelector((state) => state.water.todayAmount.value);
   const goal = useSelector(selectWaterRate);
-
   const calculatedPercentage = Math.round((currentWater / (goal * 1000)) * 100);
 
   const percentage = calculatedPercentage >= 100 ? 100 : calculatedPercentage;

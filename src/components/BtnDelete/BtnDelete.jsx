@@ -1,20 +1,18 @@
-// import { useDispatch } from 'react-redux';
 import css from './BtnDelete.module.css';
+import { useTranslation } from 'react-i18next';
 
-// const BtnDelete = ({handleClose, id}) => {
-const BtnDelete = ({handleClose}) => {
-    // const dispatch = useDispatch();
-    
-    // const handleDelete = (waterId) => {
-    const handleDelete = () => {
-        // dispatch();
-        // dispatch(deleteWater(waterId));
-        handleClose();
-    };
+const BtnDelete = ({ isLoading, handleDelete }) => {
+    const { t } = useTranslation();
     
     return (
-        <button type="button" onClick={handleDelete} className={css.btnDelete}>Delete</button>
-        // <button type="button" onClick={() => {handleDelete(id)}} className={css.btnDelete}>Delete</button>
+        <button
+            type="button"
+            onClick={() => handleDelete()}
+            className={css.btnDelete}
+            disabled={isLoading}
+        >
+            {t("delete")}
+        </button>
     );
 };
 
