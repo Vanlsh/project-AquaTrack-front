@@ -6,6 +6,7 @@ import {
   deleteWater,
   getDayWater,
   getMonthWater,
+  getWeekWater,
 } from "../../api/water.js";
 
 //===================== ADD WATER =====================
@@ -88,6 +89,19 @@ export const fetchTodayWater = createAsyncThunk(
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message
       );
+    }
+  }
+);
+//================= GET WEEKLY WATER =================
+
+export const fetchWeeklyWater = createAsyncThunk(
+  "water/fetchWeek",
+  async (formattedDate, thunkAPI) => {
+    try {
+      const { data } = await getWeekWater(formattedDate);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data || error.message);
     }
   }
 );

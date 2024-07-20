@@ -6,6 +6,7 @@ import {
   fetchDailyWater,
   fetchMonthlyWater,
   fetchTodayWater,
+  fetchWeeklyWater,
 } from "./operations";
 
 import { WATER_INITIAL_STATE } from "./initialState";
@@ -62,6 +63,20 @@ const waterSlice = createSlice({
         state.waterMonthly.isLoading = false;
         state.waterMonthly.isError = true;
       })
+
+      //================== fetchWeeklyWater ==================
+      .addCase(fetchWeeklyWater.pending, (state) => {
+        state.waterWeekly.isLoading = true;
+      })
+      .addCase(fetchWeeklyWater.fulfilled, (state, action) => {
+        state.waterWeekly.isLoading = false;
+        state.waterWeekly.data = action.payload.data;
+      })
+      .addCase(fetchWeeklyWater.rejected, (state) => {
+        state.waterWeekly.isLoading = false;
+
+        state.waterWeekly.errorMessage = 'An error occurred'
+      })  
 
       //======================= addWater ======================
       .addCase(addWater.pending, handleDailyPending)
