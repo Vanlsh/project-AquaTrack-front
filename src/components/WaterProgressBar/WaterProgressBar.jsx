@@ -14,7 +14,7 @@ const WaterProgressBar = () => {
   const percentage = calculatedPercentage >= 100 ? 100 : calculatedPercentage;
 
   return (
-    <div className={css.progressBarContainer}>
+    <div className={`${css.progressBarContainer} second-step`}>
       <h2 className={css.progressBarTitle}>{t("today")}</h2>
       <div className={css.progressBar}>
         <div

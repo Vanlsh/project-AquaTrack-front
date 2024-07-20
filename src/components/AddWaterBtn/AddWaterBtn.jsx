@@ -19,7 +19,7 @@ const AddWaterBtn = () => {
     
     
   return (
-    <button type="button" className={css.btnAdd} onClick={openModal}>
+    <button type="button" className={`${css.btnAdd} third-step`} onClick={openModal}>
       <svg className={css.plus}>
         <use xlinkHref={svgSprite + "#icon-plus"} />
       </svg>
