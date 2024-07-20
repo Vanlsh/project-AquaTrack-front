@@ -30,12 +30,12 @@ const UserSettingsForm = ({ handleClose }) => {
 
   const schema = yup.object({
     name: yup.string().required(t("nameRequired")),
-    weight: yup.number().min(0).typeError("Has to be a number"),
-    dailyActiveTime: yup.number().min(0).typeError("Has to be a number"),
+    weight: yup.number().min(0).typeError(t("hasToBeANumber")),
+    dailyActiveTime: yup.number().min(0).typeError(t("hasToBeANumber")),
     dailyWaterConsumption: yup
       .number()
       .min(0, "Value has to be greater than 0")
-      .typeError("Has to be a number"),
+      .typeError(t("hasToBeANumber")),
   });
 
   const {
@@ -256,7 +256,8 @@ const UserSettingsForm = ({ handleClose }) => {
                     className={css.inputBox}
                     onChange={(e) => {
                       let value = e.target.value;
-                      if (value === "" || Number(value)) {
+                      const regex = /^\d+(\.\d{0,3})?$/;
+                      if (value === "" || regex.test(value)) {
                         field.onChange(value);
                       }
                     }}
@@ -289,7 +290,8 @@ const UserSettingsForm = ({ handleClose }) => {
                     className={css.inputBox}
                     onChange={(e) => {
                       let value = e.target.value;
-                      if (!isNaN(value)) {
+                      const regex = /^\d+(\.\d{0,3})?$/;
+                      if (value === "" || regex.test(value)) {
                         field.onChange(value);
                       }
                     }}
@@ -331,19 +333,19 @@ const UserSettingsForm = ({ handleClose }) => {
                       className={css.inputBox}
                       onChange={(e) => {
                         let value = e.target.value;
-                        const regex = /^\d+(\.\d{0,2})?$/;
+                        const regex = /^\d+(\.\d{0,3})?$/;
 
                         if (value === "" || regex.test(value)) {
                           field.onChange(value);
                         }
                       }}
                       onFocus={() => {
-                        if (field.value === 0 || field.value === "0") {
+                        if (field.value === 0) {
                           field.onChange("");
                         }
                       }}
                       onBlur={() => {
-                        if (field.value === "" || field.value === "0") {
+                        if (field.value === "") {
                           field.onChange(0);
                         }
                       }}

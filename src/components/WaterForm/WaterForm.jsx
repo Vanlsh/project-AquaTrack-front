@@ -7,21 +7,11 @@ import css from "./WaterForm.module.css";
 import clsx from "clsx";
 import svgSprite from "../../assets/icons.svg";
 import { useDispatch } from "react-redux";
-import { addWater, updateWaterIntakeRecord } from "../../redux/water/operations";
+import {
+  addWater,
+  updateWaterIntakeRecord,
+} from "../../redux/water/operations";
 import LoaderComponent from "../LoaderComponent/LoaderComponent";
-
-const validationSchema = Yup.object().shape({
-  recordingTime: Yup.string()
-    .required("Recording time is required")
-    .matches(
-      /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
-      "Invalid time format, use HH:MM"
-    ),
-  waterValue: Yup.number()
-    .required("Water value is required")
-    .min(50, "Water value must be greater than or equal to 50")
-    .max(5000, "Water value must be less than or equal to 5000"),
-});
 
 const WaterForm = ({
   operationType = "add",
@@ -35,17 +25,27 @@ const WaterForm = ({
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  const dateFromUrl = new Date(editTime); 
+  const dateFromUrl = new Date(editTime);
 
-  const year = dateFromUrl.getFullYear(); 
-  const month = String(dateFromUrl.getMonth() + 1).padStart(2, '0');  
-  const day = String(dateFromUrl.getDate()).padStart(2, '0'); 
+  const year = dateFromUrl.getFullYear();
+  const month = String(dateFromUrl.getMonth() + 1).padStart(2, "0");
+  const day = String(dateFromUrl.getDate()).padStart(2, "0");
 
-  const hours = String(dateFromUrl.getHours()).padStart(2, '0'); 
-  const minutes = String(dateFromUrl.getMinutes()).padStart(2, '0'); 
+  const hours = String(dateFromUrl.getHours()).padStart(2, "0");
+  const minutes = String(dateFromUrl.getMinutes()).padStart(2, "0");
 
-  const [formHours, setFormHours] = useState(hours);   
-  const [formMinutes, setFormMinutes] = useState(minutes);  
+  const [formHours, setFormHours] = useState(hours);
+  const [formMinutes, setFormMinutes] = useState(minutes);
+
+  const validationSchema = Yup.object().shape({
+    recordingTime: Yup.string()
+      .required(t("recordTimeRequired"))
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, t("invalidTimeFormat")),
+    waterValue: Yup.number()
+      .required(t("waterValueRequired"))
+      .min(50, t("waterValueGreater"))
+      .max(5000, t("waterValueLess")),
+  });
 
   const {
     control,
@@ -61,7 +61,9 @@ const WaterForm = ({
   });
 
   const onSubmit = (data) => {
-    const combinedDateTime = new Date(`${year}-${month}-${day}T${formHours}:${formMinutes}:00`);
+    const combinedDateTime = new Date(
+      `${year}-${month}-${day}T${formHours}:${formMinutes}:00`
+    );
     const timeToSend = combinedDateTime.getTime().toString(); // Unix timestamp у мілісекундах
 
     const addWaterValue = {
@@ -78,26 +80,26 @@ const WaterForm = ({
 
     switch (operationType) {
       case "add":
-        dispatch(addWater(addWaterValue))
-          .then(({error}) => {
-            if (!error) {
-              setIsLoading(false);
-              handleClose();
-            } else {
-              setIsLoading(false);
-            }
-          });
+        dispatch(addWater(addWaterValue)).then(({ error }) => {
+          if (!error) {
+            setIsLoading(false);
+            handleClose();
+          } else {
+            setIsLoading(false);
+          }
+        });
         break;
       case "edit":
-        dispatch(updateWaterIntakeRecord({ id: waterID, formData: editWaterValue }))
-          .then(({error}) => {
-            if (!error) {
-              setIsLoading(false);
-              handleClose();
-            } else {
-              setIsLoading(false);
-            }
-          });
+        dispatch(
+          updateWaterIntakeRecord({ id: waterID, formData: editWaterValue })
+        ).then(({ error }) => {
+          if (!error) {
+            setIsLoading(false);
+            handleClose();
+          } else {
+            setIsLoading(false);
+          }
+        });
         break;
       default:
         setIsLoading(false);
