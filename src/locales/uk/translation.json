@@ -54,6 +54,11 @@
   "recordTime": "Час запису:",
   "enterWaterValue": "Введіть обєм води:",
   "save": "Зберегти",
+  "recordTimeRequired": "Час запису обов'язковий",
+  "invalidTimeFormat": "Невалідний формат часу, використовуйте ГГ:ХХ",
+  "waterValueRequired": "Значення води обов'язкове",
+  "waterValueGreater": "Значення води повинно бути більшим або рівним 50",
+  "waterValueLess": "Значення води повинно бути меншим або рівним 5000",
   "chooseValue": "Оберіть значення:",
   "settings": "Налаштування",
   "uploadPhoto": "Завантажити фото",
@@ -75,6 +80,7 @@
   "avatarRequired": "Аватар обов'язковий",
   "genderRequired": "Необхідно вказати стать",
   "nameRequired": "Ім'я обов'язкове",
+  "hasToBeANumber": "Має бути число",
   "invalidEmail": "Неправильний email",
   "positiveWeight": "Вага повинна бути позитивною",
   "weightRequired": "Вага обов'язкова",
@@ -88,5 +94,6 @@
   "cancel": "Скасувати",
   "logout": "Вийти",
   "confirmLogout": "Ви дійсно хочете вийти?",
-  "noWaterAdded": "Вода ще не додана"
+  "noWaterAdded": "Вода ще не додана",
+  "waterMonthErrorMessage": "Щось пішло не так. Будь ласка, перезавантажте сторінку"
 }

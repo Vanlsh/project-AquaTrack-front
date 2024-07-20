@@ -1,51 +1,55 @@
-@import '../../styles/variables.css';
+@import "../../styles/variables.css";
 
+.errorMessage {
+  margin-top: 10px;
+  text-align: center;
+  opacity: 0.7;
+}
 @media screen and (max-width: 767px) {
-	.container {
-		max-width: 303px;
-		min-width: 196px;
-		min-height: 100px;
-		background-color: var(--color-main-bg);
-	}
+  .container {
+    max-width: 303px;
+    min-width: 196px;
+    background-color: var(--color-main-bg);
+  }
 
-	.calendarList {
-		display: flex;
-		flex-wrap: wrap;
-		display: grid;
-		grid-template-columns: repeat(7, 28px);
-		row-gap: 20px;
-		column-gap: calc((100% - 196px) / 6);
-	}
+  .calendarList {
+    display: flex;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(7, 28px);
+    row-gap: 20px;
+    column-gap: calc((100% - 196px) / 6);
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1439px) {
-	.container {
-		width: 640px;
-		min-height: 100px;
+  .container {
+    width: 640px;
+    min-height: 100px;
 
-		background-color: var(--color-main-bg);
-	}
+    background-color: var(--color-main-bg);
+  }
 
-	.calendarList {
-		display: grid;
-		grid-template-columns: repeat(8, calc((100% - 301px) / 8));
-		row-gap: 15px;
-		column-gap: 43px;
-	}
+  .calendarList {
+    display: grid;
+    grid-template-columns: repeat(8, calc((100% - 301px) / 8));
+    row-gap: 15px;
+    column-gap: 43px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-	.container {
-		width: 608px;
-		height: 305px;
+  .container {
+    width: 608px;
+    height: 305px;
 
-		background-color: var(--color-main-bg);
-	}
+    background-color: var(--color-main-bg);
+  }
 
-	.calendarList {
-		display: grid;
-		grid-template-columns: repeat(8, calc((100% - 301px) / 8));
-		row-gap: 15px;
-		column-gap: 43px;
-	}
+  .calendarList {
+    display: grid;
+    grid-template-columns: repeat(8, calc((100% - 301px) / 8));
+    row-gap: 15px;
+    column-gap: 43px;
+  }
 }

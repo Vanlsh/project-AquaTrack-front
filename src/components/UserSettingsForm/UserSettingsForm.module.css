@@ -172,7 +172,6 @@
 .formulaDescription p {
   display: flex;
   flex-direction: column;
-  /* height: fit-content; */
   gap: 4px;
 }
 
@@ -358,6 +357,7 @@
   }
 }
 
+/*Desktop*/
 @media screen and (min-width: 1440px) {
   .userSettingForm {
     padding: 0 0 40px 40px;
@@ -368,7 +368,6 @@
   .userPreferences {
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 40px;
   }
 
   .formNameEmail {
@@ -397,8 +396,6 @@
     justify-content: center;
     align-items: center;
     height: 56px;
-    /*margin-top: 0;*/
-    /*padding: 0;*/
   }
 
   .submitBtn:hover {

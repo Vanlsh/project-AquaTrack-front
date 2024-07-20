@@ -54,6 +54,11 @@
   "recordTime": "Recording time:",
   "enterWaterValue": "Enter the value of the water used:",
   "save": "Save",
+  "recordTimeRequired": "Recording time is required",
+  "invalidTimeFormat": "Invalid time format, use HH:MM",
+  "waterValueRequired": "Water value is required",
+  "waterValueGreater": "Water value must be greater than or equal to 50",
+  "waterValueLess": "Water value must be less than or equal to 5000",
   "chooseValue": "Choose a value:",
   "settings": "Setting",
   "uploadPhoto": "Upload a photo",
@@ -75,6 +80,7 @@
   "avatarRequired": "Avatar is required",
   "genderRequired": "Gender is required",
   "nameRequired": "Name is required",
+  "hasToBeANumber": "Has to be a number",
   "invalidEmail": "Invalid email",
   "positiveWeight": "Weight must be positive",
   "weightRequired": "Weight is required",
@@ -88,5 +94,6 @@
   "cancel": "Cancel",
   "logout": "Log out",
   "confirmLogout": "Do you really want to leave?",
-  "noWaterAdded": "Water has not been added yet"
+  "noWaterAdded": "Water has not been added yet",
+  "waterMonthErrorMessage": "Something went wrong. Please reload the page"
 }

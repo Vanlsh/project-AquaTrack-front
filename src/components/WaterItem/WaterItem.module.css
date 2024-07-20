@@ -42,6 +42,11 @@
   padding: 0;
 }
 
+.editButton:hover,
+.deleteButton:hover {
+  transform: scale(1.2);
+}
+
 .container_buttons {
   display: flex;
   flex-direction: column;

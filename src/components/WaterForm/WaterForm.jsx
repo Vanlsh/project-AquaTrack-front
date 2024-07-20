@@ -11,19 +11,7 @@ import {
   addWater,
   updateWaterIntakeRecord,
 } from "../../redux/water/operations";
-
-const validationSchema = Yup.object().shape({
-  recordingTime: Yup.string()
-    .required("Recording time is required")
-    .matches(
-      /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
-      "Invalid time format, use HH:MM"
-    ),
-  waterValue: Yup.number()
-    .required("Water value is required")
-    .min(50, "Water value must be greater than or equal to 50")
-    .max(5000, "Water value must be less than or equal to 5000"),
-});
+import LoaderComponent from "../LoaderComponent/LoaderComponent";
 
 const WaterForm = ({
   operationType = "add",
@@ -35,15 +23,30 @@ const WaterForm = ({
   const { t } = useTranslation();
   const [waterAmount, setWaterAmount] = useState(waterPortion);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const formatTimeFromMillis = (millis) => {
-    const date = new Date(millis);
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    return `${hours}:${minutes}`;
-  };
+  const dateFromUrl = new Date(editTime);
 
-  const formattedTime = formatTimeFromMillis(editTime);
+  const year = dateFromUrl.getFullYear();
+  const month = String(dateFromUrl.getMonth() + 1).padStart(2, "0");
+  const day = String(dateFromUrl.getDate()).padStart(2, "0");
+
+  const currentTime = operationType === "add" ? new Date() : dateFromUrl;
+  const hours = String(currentTime.getHours()).padStart(2, "0");
+  const minutes = String(currentTime.getMinutes()).padStart(2, "0");
+
+  const [formHours, setFormHours] = useState(hours);
+  const [formMinutes, setFormMinutes] = useState(minutes);
+
+  const validationSchema = Yup.object().shape({
+    recordingTime: Yup.string()
+      .required(t("recordTimeRequired"))
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, t("invalidTimeFormat")),
+    waterValue: Yup.number()
+      .required(t("waterValueRequired"))
+      .min(50, t("waterValueGreater"))
+      .max(5000, t("waterValueLess")),
+  });
 
   const {
     control,
@@ -53,36 +56,56 @@ const WaterForm = ({
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      recordingTime: formattedTime,
+      recordingTime: `${formHours}:${formMinutes}`,
       waterValue: waterAmount.toString(),
     },
   });
 
   const onSubmit = (data) => {
-    const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
-    // Для оновлення також потрібно передавати час
+    const combinedDateTime = new Date(
+      `${year}-${month}-${day}T${formHours}:${formMinutes}:00`
+    );
+    const timeToSend = combinedDateTime.getTime().toString(); // Unix timestamp у мілісекундах
+
     const addWaterValue = {
-      amount: waterAmount,
-      date: `${recordingTimeInMillis}`,
+      amount: data.waterValue,
+      date: timeToSend,
     };
 
     const editWaterValue = {
-      amount: waterAmount,
-      date: `${recordingTimeInMillis}`,
+      amount: data.waterValue,
+      date: timeToSend,
     };
+
+    setIsLoading(true);
 
     switch (operationType) {
       case "add":
-        dispatch(addWater(addWaterValue));
+        dispatch(addWater(addWaterValue)).then(({ error }) => {
+          if (!error) {
+            setIsLoading(false);
+            handleClose();
+          } else {
+            setIsLoading(false);
+          }
+        });
         break;
       case "edit":
         dispatch(
           updateWaterIntakeRecord({ id: waterID, formData: editWaterValue })
-        );
+        ).then(({ error }) => {
+          if (!error) {
+            setIsLoading(false);
+            handleClose();
+          } else {
+            setIsLoading(false);
+          }
+        });
+        break;
+      default:
+        setIsLoading(false);
         break;
     }
-
-    handleClose();
   };
 
   const FormHeader = (operationType) => {
@@ -99,14 +122,6 @@ const WaterForm = ({
   const handleWaterAmountChange = (amount) => {
     setWaterAmount(amount);
     setValue("waterValue", amount.toString());
-  };
-
-  const convertTimeToMillis = (timeString) => {
-    const [hours, minutes] = timeString.split(":").map(Number);
-    const date = new Date();
-    date.setHours(hours);
-    date.setMinutes(minutes);
-    return date.getTime();
   };
 
   const isMinusButtonDisabled = waterAmount === 50;
@@ -147,13 +162,18 @@ const WaterForm = ({
         <Controller
           name="recordingTime"
           control={control}
-          defaultValue={formattedTime}
           render={({ field }) => (
             <input
               {...field}
               type="text"
               className={clsx(css.RecordingTime)}
               placeholder="HH:MM"
+              onChange={(e) => {
+                const [newHours, newMinutes] = e.target.value.split(":");
+                setFormHours(newHours);
+                setFormMinutes(newMinutes);
+                field.onChange(e);
+              }}
             />
           )}
         />
@@ -166,7 +186,6 @@ const WaterForm = ({
         <Controller
           name="waterValue"
           control={control}
-          defaultValue={waterAmount.toString()}
           render={({ field }) => (
             <input
               {...field}
@@ -181,8 +200,8 @@ const WaterForm = ({
           <p className={css.Error}>{errors.waterValue.message}</p>
         )}
       </label>
-      <button type="submit" className={css.SaveBtn}>
-        {t("save")}
+      <button type="submit" className={css.SaveBtn} disabled={isLoading}>
+        {isLoading ? <LoaderComponent height={44} width={44} /> : t("save")}
       </button>
     </form>
   );
