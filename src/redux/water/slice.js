@@ -5,9 +5,11 @@ import {
   updateWaterIntakeRecord,
   fetchDailyWater,
   fetchMonthlyWater,
+  fetchTodayWater,
 } from "./operations";
 
 import { WATER_INITIAL_STATE } from "./initialState";
+import { isToday } from "../../helpers/isToday";
 
 const handleDailyPending = (state) => {
   state.waterDaily.errorMessage = null;
@@ -23,6 +25,7 @@ const findDate = (oldDate) => {
     return firstDate === secondDate;
   };
 };
+
 const waterSlice = createSlice({
   name: "water",
   initialState: WATER_INITIAL_STATE,
@@ -49,6 +52,7 @@ const waterSlice = createSlice({
       //================== fetchMonthlyWater ==================
       .addCase(fetchMonthlyWater.pending, (state) => {
         state.waterMonthly.isLoading = true;
+        state.waterMonthly.isError = null;
       })
       .addCase(fetchMonthlyWater.fulfilled, (state, action) => {
         state.waterMonthly.isLoading = false;
@@ -56,6 +60,7 @@ const waterSlice = createSlice({
       })
       .addCase(fetchMonthlyWater.rejected, (state) => {
         state.waterMonthly.isLoading = false;
+        state.waterMonthly.isError = true;
       })
 
       //======================= addWater ======================
@@ -73,7 +78,9 @@ const waterSlice = createSlice({
         const monthlyRecordIndex = state.waterMonthly.data.findIndex(
           findDate(newRecord.date)
         );
-
+        if (isToday(newRecord.date)) {
+          state.todayAmount.value += newRecord.amount;
+        }
         if (monthlyRecordIndex !== -1) {
           state.waterDaily.successMessage = "Successfully added";
           state.waterMonthly.data[monthlyRecordIndex].amount +=
@@ -94,14 +101,13 @@ const waterSlice = createSlice({
       .addCase(updateWaterIntakeRecord.fulfilled, (state, action) => {
         const updatedRecord = action.payload.data;
 
-        state.waterDaily.successMessage = action.payload.message;
+        state.waterDaily.successMessage = "Successfully updated";
 
         const dailyIndex = state.waterDaily.data.findIndex(
           (record) => record.id === updatedRecord.id
         );
 
         if (dailyIndex !== -1) {
-          state.waterDaily.successMessage = "Successfully edited";
           const oldRecord = state.waterDaily.data[dailyIndex];
 
           state.waterDaily.data[dailyIndex] = updatedRecord;
@@ -121,9 +127,13 @@ const waterSlice = createSlice({
             findDate(oldRecord.date)
           );
 
+          if (isToday(updatedRecord.date)) {
+            state.todayAmount.value += updatedRecord.amount - oldRecord.amount;
+          }
           if (monthlyIndex !== -1) {
             state.waterMonthly.data[monthlyIndex].amount +=
               updatedRecord.amount - oldRecord.amount;
+
             state.waterMonthly.data[monthlyIndex].percentage =
               roundToTwoDecimals(
                 state.waterMonthly.data[monthlyIndex].percentage +
@@ -154,7 +164,9 @@ const waterSlice = createSlice({
           const monthlyIndex = state.waterMonthly.data.findIndex(
             findDate(removedRecord.date)
           );
-
+          if (isToday(removedRecord.date)) {
+            state.todayAmount.value -= removedRecord.amount;
+          }
           if (monthlyIndex !== -1) {
             state.waterMonthly.data[monthlyIndex].amount -=
               removedRecord.amount;
@@ -165,6 +177,19 @@ const waterSlice = createSlice({
       })
       .addCase(deleteWaterIntakeRecord.rejected, (state) => {
         state.errorMessage = "Something went wrong. Try again";
+      })
+      //====================== editWater ======================
+      .addCase(fetchTodayWater.pending, (state) => {
+        state.todayAmount.isLoading = true;
+        state.todayAmount.isError = false;
+      })
+      .addCase(fetchTodayWater.fulfilled, (state, action) => {
+        state.todayAmount.isLoading = false;
+        state.todayAmount.value = action.payload;
+      })
+      .addCase(fetchTodayWater.rejected, (state) => {
+        state.todayAmount.isLoading = false;
+        state.todayAmount.isError = true;
       });
   },
 });

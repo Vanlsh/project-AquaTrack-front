@@ -10,6 +10,7 @@ import {
 } from "../../redux/auth/operations.js";
 import {
   selectIsLoading,
+  selectIsLoadingPhoto,
   selectUser,
   selectUserPhoto,
 } from "../../redux/auth/selectors.js";
@@ -23,7 +24,7 @@ const UserSettingsForm = ({ handleClose }) => {
   const [waterIntake, setWaterIntake] = useState(0);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-
+  const isLoadingPhoto = useSelector(selectIsLoadingPhoto);
   const user = useSelector(selectUser);
   const avatar = useSelector(selectUserPhoto);
 
@@ -74,13 +75,34 @@ const UserSettingsForm = ({ handleClose }) => {
   }, [watchActiveTime, watchName, watchGender, watchWeight]);
 
   const onSubmit = (data) => {
-    const { email, ...payload } = data;
-    dispatch(updateUserProfile(payload)).then(({ error }) => {
-      if (!error) {
-        handleClose();
-      }
-    });
-    console.log(payload);
+    // eslint-disable-next-line no-unused-vars
+    const { photo, ...compareUser } = user;
+
+    const compareUserOrdered = Object.keys(compareUser)
+      .sort()
+      .reduce((obj, key) => {
+        obj[key] = compareUser[key];
+        return obj;
+      }, {});
+
+    const dataOrdered = Object.keys(data)
+      .sort()
+      .reduce((obj, key) => {
+        obj[key] = data[key];
+        return obj;
+      }, {});
+
+    if (JSON.stringify(compareUserOrdered) !== JSON.stringify(dataOrdered)) {
+      // eslint-disable-next-line no-unused-vars
+      const { email, ...payload } = data;
+      dispatch(updateUserProfile(payload)).then(({ error }) => {
+        if (!error) {
+          handleClose();
+        }
+      });
+    } else {
+      handleClose();
+    }
   };
 
   const handleAvatarChange = (e) => {
@@ -93,7 +115,7 @@ const UserSettingsForm = ({ handleClose }) => {
   return (
     <>
       <div className={css.userAvatar}>
-        {!isLoading ? (
+        {!isLoadingPhoto ? (
           <img
             src={avatar || "/img/avatar-placeholder.jpg"}
             alt="User's photo"
@@ -267,7 +289,7 @@ const UserSettingsForm = ({ handleClose }) => {
                     className={css.inputBox}
                     onChange={(e) => {
                       let value = e.target.value;
-                      if (value === "" || Number(value)) {
+                      if (!isNaN(value)) {
                         field.onChange(value);
                       }
                     }}
@@ -341,14 +363,14 @@ const UserSettingsForm = ({ handleClose }) => {
         <button
           disabled={isLoading}
           type="submit"
-          // className={
-          //   isLoading
-          //     ? `${css.submitFormBtnDisabled}`
-          //     : `${css.submitBtn} ${css.boldTextBtn}`
-          // }
           className={`${css.submitBtn} ${css.boldTextBtn}`}
         >
-          {!isLoading ? t("save") : <LoaderComponent height={56} width={56} />}
+          {t("save")}
+          {isLoading && (
+            <div className={css.loaderWrapper}>
+              <LoaderComponent height={56} width={56} />
+            </div>
+          )}
         </button>
       </form>
     </>

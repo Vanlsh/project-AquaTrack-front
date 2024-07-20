@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   cursor: pointer;
-  width: fit-content;
+  width: max-content;
 }
 
 .icon {
@@ -152,6 +152,11 @@
   background-color: transparent;
 }
 
+.inputBox:disabled {
+  color: #989c9d;
+  background-color: #f0eff4;
+}
+
 .inputBox:focus {
   border: 1px solid rgba(47, 47, 47, 0.4);
 }
@@ -167,7 +172,6 @@
 .formulaDescription p {
   display: flex;
   flex-direction: column;
-  /* height: fit-content; */
   gap: 4px;
 }
 
@@ -200,6 +204,7 @@
 }
 
 .submitBtn {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -221,9 +226,13 @@
 .submitBtn:disabled {
   background-color: transparent;
 }
-/* .submitFormBtnDisabled {
-  background-color: transparent;
-} */
+
+.loaderWrapper {
+  top: 0;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
 
 .boldTextBtn {
   font-size: 14px;
@@ -333,8 +342,7 @@
   }
 
   .submitBtn {
-    width: 141px;
-    padding: 20px 0px;
+    min-height: 56px;
   }
 
   .boldTextBtn {
@@ -349,6 +357,7 @@
   }
 }
 
+/*Desktop*/
 @media screen and (min-width: 1440px) {
   .userSettingForm {
     padding: 0 0 40px 40px;
@@ -359,7 +368,6 @@
   .userPreferences {
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 40px;
   }
 
   .formNameEmail {
@@ -374,20 +382,27 @@
     height: fit-content;
     width: 400px;
   }
+
   .ordinaryText {
     max-width: 400px;
   }
+
   .boldText {
     max-width: 400px;
   }
 
   .submitBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 56px;
-    margin-top: 0;
-    padding: 0;
   }
 
   .submitBtn:hover {
     background-color: var(--color-second-bg-hover);
+  }
+
+  .submitBtn:disabled {
+    background-color: transparent;
   }
 }

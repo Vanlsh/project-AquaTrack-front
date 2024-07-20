@@ -8,6 +8,8 @@ export const INITIAL_STATE = {
     dailyActiveTime: 0,
     dailyWaterConsumption: 0,
   },
+  isLoading: null,
+  isLoadingPhoto: null,
   token: null,
   isLoggedIn: false,
   errorMessage: null,
