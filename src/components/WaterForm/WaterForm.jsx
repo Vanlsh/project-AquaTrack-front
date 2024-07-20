@@ -6,10 +6,9 @@ import { useTranslation } from "react-i18next";
 import css from "./WaterForm.module.css";
 import clsx from "clsx";
 import svgSprite from "../../assets/icons.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addWater, updateWaterIntakeRecord } from "../../redux/water/operations";
 import LoaderComponent from "../LoaderComponent/LoaderComponent";
-import { selectIsLoading } from "../../redux/auth/selectors";
 
 const validationSchema = Yup.object().shape({
   recordingTime: Yup.string()
@@ -34,16 +33,19 @@ const WaterForm = ({
   const { t } = useTranslation();
   const [waterAmount, setWaterAmount] = useState(waterPortion);
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
-  const formatTimeFromMillis = (millis) => {
-    const date = new Date(millis);
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    return `${hours}:${minutes}`;
-  };
+  const dateFromUrl = new Date(editTime); 
 
-  const formattedTime = formatTimeFromMillis(editTime);
+  const year = dateFromUrl.getFullYear(); 
+  const month = String(dateFromUrl.getMonth() + 1).padStart(2, '0');  
+  const day = String(dateFromUrl.getDate()).padStart(2, '0'); 
+
+  const hours = String(dateFromUrl.getHours()).padStart(2, '0'); 
+  const minutes = String(dateFromUrl.getMinutes()).padStart(2, '0'); 
+
+  const [formHours, setFormHours] = useState(hours);   
+  const [formMinutes, setFormMinutes] = useState(minutes);  
 
   const {
     control,
@@ -53,21 +55,23 @@ const WaterForm = ({
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      recordingTime: formattedTime,
+      recordingTime: `${formHours}:${formMinutes}`,
       waterValue: waterAmount.toString(),
     },
   });
 
   const onSubmit = (data) => {
-    const recordingTimeInMillis = convertTimeToMillis(data.recordingTime);
+    const combinedDateTime = new Date(`${year}-${month}-${day}T${formHours}:${formMinutes}:00`);
+    const timeToSend = combinedDateTime.getTime().toString(); // Unix timestamp у мілісекундах
+
     const addWaterValue = {
-      amount:waterAmount,
-      date: `${recordingTimeInMillis}`,
+      amount: data.waterValue,
+      date: timeToSend,
     };
 
     const editWaterValue = {
-      amount: waterAmount,
-      date: `${recordingTimeInMillis}`,
+      amount: data.waterValue,
+      date: timeToSend,
     };
 
     setIsLoading(true);
@@ -79,8 +83,9 @@ const WaterForm = ({
             if (!error) {
               setIsLoading(false);
               handleClose();
+            } else {
+              setIsLoading(false);
             }
-            setIsLoading(false);
           });
         break;
       case "edit":
@@ -89,8 +94,9 @@ const WaterForm = ({
             if (!error) {
               setIsLoading(false);
               handleClose();
+            } else {
+              setIsLoading(false);
             }
-            setIsLoading(false);
           });
         break;
       default:
@@ -113,14 +119,6 @@ const WaterForm = ({
   const handleWaterAmountChange = (amount) => {
     setWaterAmount(amount);
     setValue("waterValue", amount.toString());
-  };
-
-  const convertTimeToMillis = (timeString) => {
-    const [hours, minutes] = timeString.split(":").map(Number);
-    const date = new Date();
-    date.setHours(hours);
-    date.setMinutes(minutes);
-    return date.getTime();
   };
 
   const isMinusButtonDisabled = waterAmount === 50;
@@ -161,13 +159,18 @@ const WaterForm = ({
         <Controller
           name="recordingTime"
           control={control}
-          defaultValue={formattedTime}
           render={({ field }) => (
             <input
               {...field}
               type="text"
               className={clsx(css.RecordingTime)}
               placeholder="HH:MM"
+              onChange={(e) => {
+                const [newHours, newMinutes] = e.target.value.split(":");
+                setFormHours(newHours);
+                setFormMinutes(newMinutes);
+                field.onChange(e);
+              }}
             />
           )}
         />
@@ -180,7 +183,6 @@ const WaterForm = ({
         <Controller
           name="waterValue"
           control={control}
-          defaultValue={waterAmount.toString()}
           render={({ field }) => (
             <input
               {...field}

@@ -1,17 +1,15 @@
 import { useTranslation } from "react-i18next";
 import css from "./WaterModal.module.css";
-import clsx from 'clsx';
 import WaterForm from "../WaterForm/WaterForm";
 import { useState } from "react";
 import { ANIMATION } from "../../constants";
 import svgSprite from "../../assets/icons.svg";
-import { useLocation, useParams } from "react-router-dom";
-import { parseDateTime } from "../../helpers/parseDate.js";
 
-const WaterModal = ({ operationType, onClose, water = {} }) => {
+
+
+const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl= '' }) => {
   // operationType: "add" | "edit", onClose: () => void, water: {id: 'string', amount: number, date: "string"}
   const { t } = useTranslation();
-  const location = useLocation();
   const [closing, setClosing] = useState(false);
 
   const handleClose = () => {
@@ -33,15 +31,8 @@ const WaterModal = ({ operationType, onClose, water = {} }) => {
     }
   };
 
-
-  const { date: dateUrl } = useParams();
-  const timestampFromUrl = parseDateTime(dateUrl);
-  let currentTimestamp = Date.now();
-  let combinedTimestamp = Math.max(timestampFromUrl, currentTimestamp);
-  let combinedTimestampString = combinedTimestamp.toString();
   
-
-  const curentTimestamp = Number(combinedTimestampString); 
+  const curentTimestamp = Number(timestampFromUrl); 
   const recordTimestamp = Number(water.date);
 
 
@@ -85,6 +76,7 @@ const WaterModal = ({ operationType, onClose, water = {} }) => {
         waterPortion={waterPortion(operationType)} // Передаємо порцію води
         waterID={waterID(operationType)} // Передаємо ID води
         handleClose={handleClose}
+        
       />
       <button
         type="button"
