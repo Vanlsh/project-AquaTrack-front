@@ -9,6 +9,13 @@
   background-repeat: no-repeat;
   width: 100%;
   height: 353px;
+  position: relative;
+}
+
+.userCount {
+  position: absolute;
+  left: 16px;
+  bottom: 96px;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -18,14 +25,16 @@
 }
 
 .advantagesList {
+  position: absolute;
+  right: 16px;
+  bottom: 32px;
+  width: 192px;
+
   list-style-type: none;
   padding: 0;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: auto;
-  margin-left: auto;
-  width: 205px;
 }
 
 .advantagesHabit,
@@ -33,6 +42,7 @@
 .advantagesSetting {
   padding: 9px 12px;
   border-radius: 30px;
+  font-weight: 700;
   font-size: 8px;
   line-height: 100%;
 }
@@ -72,13 +82,20 @@
     height: 446px;
   }
 
+  .userCount {
+    left: 32px;
+  }
+
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .advantagesSection {
       background-image: url("/img/bg/drinking_girl_bg_tab_2x.jpg");
     }
   }
+
   .advantagesList {
-    width: 270px;
+    width: 300px;
+
+    right: 32px;
   }
 
   .advantagesHabit,
@@ -105,11 +122,20 @@
     width: 672px;
   }
 
+  .userCount {
+    bottom: 132px;
+  }
+
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .advantagesSection {
       background-image: url("/img/bg/drinking_girl_bg_desk_2x.jpg");
     }
   }
+
+  .advantagesList {
+    bottom: 64px;
+  }
+
   .advantagesHabit {
     padding-left: 28px;
   }
