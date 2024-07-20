@@ -11,7 +11,7 @@ import { useTour } from "@reactour/tour";
 const WaterMainInfo = () => {
   const { t } = useTranslation();
   const waterRate = useSelector(selectWaterRate);
-  const { setIsOpen } = useTour();
+
 
   const waterRateString =
     waterRate < 1 ? `${waterRate * 1000} ${t("ml")}` : `${waterRate} ${t("l")}`;
@@ -19,7 +19,6 @@ const WaterMainInfo = () => {
   return (
     <div className={css.waterContainer}>
       <Logo className={css.waterTitle} />
-      <button onClick={() => setIsOpen(true)}>Open Tour</button>
 
       {waterRate === 0 ? (
         ""
