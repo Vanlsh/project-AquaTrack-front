@@ -31,8 +31,9 @@ const WaterForm = ({
   const month = String(dateFromUrl.getMonth() + 1).padStart(2, "0");
   const day = String(dateFromUrl.getDate()).padStart(2, "0");
 
-  const hours = String(dateFromUrl.getHours()).padStart(2, "0");
-  const minutes = String(dateFromUrl.getMinutes()).padStart(2, "0");
+  const currentTime = operationType === "add" ? new Date() : dateFromUrl;
+  const hours = String(currentTime.getHours()).padStart(2, "0");
+  const minutes = String(currentTime.getMinutes()).padStart(2, "0");
 
   const [formHours, setFormHours] = useState(hours);
   const [formMinutes, setFormMinutes] = useState(minutes);
