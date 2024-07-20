@@ -4,7 +4,6 @@ import {
   selectMonthlyIsLoading,
   selectMonthlyIsError,
 } from "../../redux/water/selectors.js";
-// import CalendarItem from "../CalendarItem/CalendarItem.jsx";
 import Loader from "../Loader/Loader.jsx";
 
 import css from "./Calendar.module.css";
