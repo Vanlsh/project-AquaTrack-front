@@ -40,13 +40,11 @@ const CalendarItem = ({ calendarDate, amount }) => {
   };
 
   const date = new Date(Number(calendarDate)).getDate();
-
-  const percent = Math.round((amount / (goal * 1000)) * 100);
+  const percent = Math.round((amount / (goal * 1000)) * 100) || 100;
   const isDisabled = isFuture(calendarDate);
   const isDane = Math.round(percent) < 100;
   const isActive = isDaySame(currentDate, calendarDate);
-  const percentString =
-    Math.round(percent) >= 100 ? "100%" : `${Math.round(percent)}%`;
+  const percentString = Math.round(percent) >= 100 ? "100%" : `${percent}%`;
 
   return (
     <button
