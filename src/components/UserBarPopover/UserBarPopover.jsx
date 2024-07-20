@@ -7,6 +7,7 @@ import UserSettingsModal from "../UserSettingsModal/UserSettingsModal.jsx";
 import styles from "./UserBarPopover.module.css";
 import { useTour } from "@reactour/tour";
 
+
 const UserBarPopover = forwardRef(function UserBarPopover(
   { handleOutsideClick },
   ref
