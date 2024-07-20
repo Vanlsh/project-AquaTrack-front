@@ -7,7 +7,10 @@ import css from "./WaterForm.module.css";
 import clsx from "clsx";
 import svgSprite from "../../assets/icons.svg";
 import { useDispatch } from "react-redux";
-import { addWater, updateWaterIntakeRecord } from "../../redux/water/operations";
+import {
+  addWater,
+  updateWaterIntakeRecord,
+} from "../../redux/water/operations";
 import LoaderComponent from "../LoaderComponent/LoaderComponent";
 
 const validationSchema = Yup.object().shape({
@@ -35,17 +38,18 @@ const WaterForm = ({
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  const dateFromUrl = new Date(editTime); 
+  const dateFromUrl = new Date(editTime);
 
-  const year = dateFromUrl.getFullYear(); 
-  const month = String(dateFromUrl.getMonth() + 1).padStart(2, '0');  
-  const day = String(dateFromUrl.getDate()).padStart(2, '0'); 
+  const year = dateFromUrl.getFullYear();
+  const month = String(dateFromUrl.getMonth() + 1).padStart(2, "0");
+  const day = String(dateFromUrl.getDate()).padStart(2, "0");
 
-  const hours = String(dateFromUrl.getHours()).padStart(2, '0'); 
-  const minutes = String(dateFromUrl.getMinutes()).padStart(2, '0'); 
+  const currentTime = operationType === "add" ? new Date() : dateFromUrl;
+  const hours = String(currentTime.getHours()).padStart(2, "0");
+  const minutes = String(currentTime.getMinutes()).padStart(2, "0");
 
-  const [formHours, setFormHours] = useState(hours);   
-  const [formMinutes, setFormMinutes] = useState(minutes);  
+  const [formHours, setFormHours] = useState(hours);
+  const [formMinutes, setFormMinutes] = useState(minutes);
 
   const {
     control,
@@ -61,7 +65,9 @@ const WaterForm = ({
   });
 
   const onSubmit = (data) => {
-    const combinedDateTime = new Date(`${year}-${month}-${day}T${formHours}:${formMinutes}:00`);
+    const combinedDateTime = new Date(
+      `${year}-${month}-${day}T${formHours}:${formMinutes}:00`
+    );
     const timeToSend = combinedDateTime.getTime().toString(); // Unix timestamp у мілісекундах
 
     const addWaterValue = {
@@ -78,26 +84,26 @@ const WaterForm = ({
 
     switch (operationType) {
       case "add":
-        dispatch(addWater(addWaterValue))
-          .then(({error}) => {
-            if (!error) {
-              setIsLoading(false);
-              handleClose();
-            } else {
-              setIsLoading(false);
-            }
-          });
+        dispatch(addWater(addWaterValue)).then(({ error }) => {
+          if (!error) {
+            setIsLoading(false);
+            handleClose();
+          } else {
+            setIsLoading(false);
+          }
+        });
         break;
       case "edit":
-        dispatch(updateWaterIntakeRecord({ id: waterID, formData: editWaterValue }))
-          .then(({error}) => {
-            if (!error) {
-              setIsLoading(false);
-              handleClose();
-            } else {
-              setIsLoading(false);
-            }
-          });
+        dispatch(
+          updateWaterIntakeRecord({ id: waterID, formData: editWaterValue })
+        ).then(({ error }) => {
+          if (!error) {
+            setIsLoading(false);
+            handleClose();
+          } else {
+            setIsLoading(false);
+          }
+        });
         break;
       default:
         setIsLoading(false);
