@@ -1,4 +1,10 @@
-.aaa {
-	color: red;
-	background-color: red;
+.container {
+	width: 608px;
+	height: 305px;
+	overflow: hidden;
+	padding: 25px 10px 7px 10px;
+}
+
+.oh {
+	overflow: hidden;
 }

@@ -8,6 +8,10 @@
 	transform: scale(1.4);
 }
 
+.btn:disabled {
+	cursor: default;
+}
+
 .btn_disabled {
 	opacity: 0.5;
 }
