@@ -16,8 +16,6 @@ import {
   selectDailyErrorMessage,
   selectDailySuccessMessage,
 } from "../redux/water/selectors.js";
-// import WaterIntakeChart from "./WaterIntakeChart/WaterIntakeChart.jsx";
-// import Calendar from "./Calendar/Calendar.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
@@ -27,7 +25,7 @@ const NotFoundPage = lazy(
   () => import("../pages/NotFoundPage/NotFoundPage.jsx")
 );
 const WaterIntakeChart = lazy(
-  () => import("./WaterIntakeChart/WaterIntakeChart.jsx")
+  () => import("./CalendarChart/CalendarChart.jsx")
 );
 const Calendar = lazy(() => import("./Calendar/Calendar.jsx"));
 
