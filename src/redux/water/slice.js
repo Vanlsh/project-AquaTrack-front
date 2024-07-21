@@ -79,8 +79,8 @@ const waterSlice = createSlice({
       .addCase(fetchWeeklyWater.rejected, (state) => {
         state.waterWeekly.isLoading = false;
 
-        state.waterWeekly.errorMessage = 'An error occurred'
-      })  
+        state.waterWeekly.errorMessage = "An error occurred";
+      })
 
       //======================= addWater ======================
       .addCase(addWater.pending, handleDailyPending)
@@ -97,6 +97,12 @@ const waterSlice = createSlice({
         const monthlyRecordIndex = state.waterMonthly.data.findIndex(
           findDate(newRecord.date)
         );
+        const weekRecordIndex = state.waterWeekly.data.findIndex(
+          findDate(newRecord.date)
+        );
+        if (weekRecordIndex !== -1) {
+          state.waterWeekly.data[weekRecordIndex].amount += newRecord.amount;
+        }
         if (isToday(newRecord.date)) {
           state.todayAmount.value += newRecord.amount;
         }
@@ -142,9 +148,17 @@ const waterSlice = createSlice({
             0
           );
           state.waterDaily.percentage = roundToTwoDecimals(totalPercentage);
+
           const monthlyIndex = state.waterMonthly.data.findIndex(
             findDate(oldRecord.date)
           );
+          const weekRecordIndex = state.waterWeekly.data.findIndex(
+            findDate(oldRecord.date)
+          );
+          if (weekRecordIndex !== -1) {
+            state.waterWeekly.data[weekRecordIndex].amount +=
+              updatedRecord.amount - oldRecord.amount;
+          }
 
           if (isToday(updatedRecord.date)) {
             state.todayAmount.value += updatedRecord.amount - oldRecord.amount;
@@ -183,6 +197,13 @@ const waterSlice = createSlice({
           const monthlyIndex = state.waterMonthly.data.findIndex(
             findDate(removedRecord.date)
           );
+          const weekRecordIndex = state.waterWeekly.data.findIndex(
+            findDate(removedRecord.date)
+          );
+          if (weekRecordIndex !== -1) {
+            state.waterWeekly.data[weekRecordIndex].amount +=
+              removedRecord.amount;
+          }
           if (isToday(removedRecord.date)) {
             state.todayAmount.value -= removedRecord.amount;
           }
