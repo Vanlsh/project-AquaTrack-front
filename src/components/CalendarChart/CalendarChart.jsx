@@ -7,7 +7,9 @@ import {
 	ResponsiveContainer,
 	AreaChart,
 } from 'recharts';
-import css from './WaterIntakeChart.module.css';
+import { useTranslation } from 'react-i18next';
+
+import css from './CalendarChart.module.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWaterWeeklyData } from '../../redux/water/selectors';
@@ -23,6 +25,7 @@ const formatDate = (timestamp) => {
 
 	return `${day}`;
 };
+
 const convertMlToL = (ml) => {
 	return (ml / 1000).toFixed(1);
 };
@@ -70,6 +73,7 @@ const formatYAxisTick = (tick, index) => {
 const WaterIntakeChart = () => {
 	const dispatch = useDispatch();
 	const waterWeeklyData = useSelector(selectWaterWeeklyData);
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		const formattedDate = Date.now();
@@ -82,72 +86,83 @@ const WaterIntakeChart = () => {
 		originalAmount: item.amount,
 	}));
 
+	const weeklyAmount = formattedData.reduce(
+		(acc, obj) => acc + obj.originalAmount,
+		0
+	);
+
 	return (
 		<div className={css.graphContainer}>
-			<ResponsiveContainer
-				width='100%'
-				height='100%'>
-				<AreaChart
-					data={formattedData}
-					margin={{
-						top: 10,
-						right: 10,
-						left: 0,
-						bottom: 10,
-					}}>
-					<defs>
-						<linearGradient
-							id='colorUv'
-							x1='0'
-							y1='0'
-							x2='0'
-							y2='1'>
-							<stop
-								offset='0%'
-								stopColor='#9BE1A0'
-								stopOpacity={1}
-							/>
-							<stop
-								offset='100%'
-								stopColor='#9BE1A0'
-								stopOpacity={0}
-							/>
-						</linearGradient>
-					</defs>
-					<XAxis
-						dataKey='date'
-						tickLine={false}
-						tickMargin={21}
-					/>
-					<YAxis
-						domain={[0, 'auto']}
-						tickCount={6}
-						tickFormatter={formatYAxisTick}
-						label={{ angle: -90, position: 'insideLeft' }}
-						tickLine={false}
-						tickMargin={53}
-						tick={{ textAnchor: 'start' }}
-					/>
-					<Tooltip
-						cursor={false}
-						position={{ y: -30 }}
-						content={<CustomTooltip />}
-					/>
-					<Area
-						type='monotone'
-						dataKey='amount'
-						stroke='#87D28D'
-						fill='url(#colorUv)'
-						dot={{
-							fill: '#fff',
-							stroke: '#87D28D',
-							strokeWidth: 2,
-							r: 8,
-							fillOpacity: 1,
-						}}
-					/>
-				</AreaChart>
-			</ResponsiveContainer>
+			{weeklyAmount > 0 ? (
+				<ResponsiveContainer
+					width='100%'
+					height='100%'>
+					<AreaChart
+						data={formattedData}
+						margin={{
+							top: 10,
+							right: 10,
+							left: 0,
+							bottom: 10,
+						}}>
+						<defs>
+							<linearGradient
+								id='colorUv'
+								x1='0'
+								y1='0'
+								x2='0'
+								y2='1'>
+								<stop
+									offset='0%'
+									stopColor='#9BE1A0'
+									stopOpacity={1}
+								/>
+								<stop
+									offset='100%'
+									stopColor='#9BE1A0'
+									stopOpacity={0}
+								/>
+							</linearGradient>
+						</defs>
+						<XAxis
+							dataKey='date'
+							tickLine={false}
+							tickMargin={21}
+						/>
+						<YAxis
+							domain={[0, 'auto']}
+							tickCount={6}
+							tickFormatter={formatYAxisTick}
+							label={{ angle: -90, position: 'insideLeft' }}
+							tickLine={false}
+							tickMargin={53}
+							tick={{ textAnchor: 'start' }}
+						/>
+						<Tooltip
+							cursor={false}
+							position={{ y: -30 }}
+							content={<CustomTooltip />}
+						/>
+						<Area
+							type='monotone'
+							dataKey='amount'
+							stroke='#87D28D'
+							fill='url(#colorUv)'
+							dot={{
+								fill: '#fff',
+								stroke: '#87D28D',
+								strokeWidth: 2,
+								r: 8,
+								fillOpacity: 1,
+							}}
+						/>
+					</AreaChart>
+				</ResponsiveContainer>
+			) : (
+				<p className={css.nodata}>
+					{t('NO DATA FOR WEEKLY STATISTIC CHART')}
+				</p>
+			)}
 		</div>
 	);
 };
