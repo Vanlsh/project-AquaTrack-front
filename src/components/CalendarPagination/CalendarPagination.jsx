@@ -54,7 +54,10 @@ const CalendarPagination = () => {
     <div className={css.calendar_title}>
       <Title title={t("month")} styles={css.month} />
       <div className={css.month_ind}>
-        <button onClick={decrement} className={css.btn} disabled={isLoading}>
+        <button onClick={decrement}
+          className={css.btn}
+          aria-label="View entries for the previous month"
+          disabled={isLoading}>
           <svg className={css.svg_arrow_left}>
             <use xlinkHref={svg + "#icon-arrow"}></use>
           </svg>
@@ -66,6 +69,7 @@ const CalendarPagination = () => {
         <button
           onClick={increment}
           className={`${css.btn} ${incrementDisabled ? css.btn_disabled : ""} `}
+          aria-label="View entries for the next month"
           disabled={isLoading || incrementDisabled}
         >
           <svg className={css.svg_arrow_right}>

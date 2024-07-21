@@ -69,6 +69,7 @@
 
 .icon_action:hover {
   opacity: 0.8;
+  fill: var(--color-second-bg);
 }
 .icon_water-glass {
   fill: var(--color-second-bg);
