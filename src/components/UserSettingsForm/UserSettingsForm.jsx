@@ -117,8 +117,12 @@ const UserSettingsForm = ({ handleClose }) => {
   const handleAvatarChange = (e) => {
     const formData = new FormData();
     const file = e.target.files[0];
-    formData.append("avatar", file);
-    dispatch(uploadUserPhoto(formData));
+    console.log(e.target.files);
+    if (file) {
+      formData.append("avatar", file);
+      dispatch(uploadUserPhoto(formData));
+    }
+    // formData.append("avatar", file);
   };
 
   return (
@@ -130,7 +134,9 @@ const UserSettingsForm = ({ handleClose }) => {
             alt="User's photo"
           />
         ) : (
-          <LoaderComponent width={110} height={110} />
+          <div className={css.loader}>
+            <LoaderComponent />
+          </div>
         )}
         <label>
           <div className={css.uploadContainer}>
