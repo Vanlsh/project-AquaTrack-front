@@ -14,14 +14,14 @@ const WaterItem = ({ water }) => {
   const closeModal = useCallback(() => {
     setModal();
   }, [setModal]);
-
+  console.log("water", water);
   const openModalDelete = useCallback(() => {
     setModal(<DeleteWaterModal id={water.id} onClose={closeModal} />);
   }, [setModal, closeModal, water]);
 
   const openModalEdit = useCallback(() => {
     setModal(
-      <WaterModal water={water} onClose={closeModal} operationType={"edit"} />,
+      <WaterModal water={water} onClose={closeModal} operationType={"edit"} />
     );
   }, [setModal, closeModal, water]);
 

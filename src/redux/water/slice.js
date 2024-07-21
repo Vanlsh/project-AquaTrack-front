@@ -189,7 +189,6 @@ const waterSlice = createSlice({
       })
       .addCase(fetchTodayWater.fulfilled, (state, action) => {
         state.todayAmount.isLoading = false;
-        console.log("action.payload", action.payload);
         state.todayAmount.value = action.payload;
       })
       .addCase(fetchTodayWater.rejected, (state) => {

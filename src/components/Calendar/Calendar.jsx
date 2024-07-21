@@ -9,16 +9,13 @@ import Loader from "../Loader/Loader.jsx";
 
 import css from "./Calendar.module.css";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
 
 const Calendar = () => {
   const { t } = useTranslation();
   const dateArray = useSelector(selectWaterMonthlyRecord);
   const isLoading = useSelector(selectMonthlyIsLoading);
   const isError = useSelector(selectMonthlyIsError);
-  useEffect(() => {
-    console.log(dateArray);
-  }, [dateArray]);
+
   if (isLoading) return <Loader />;
 
   if (isError)

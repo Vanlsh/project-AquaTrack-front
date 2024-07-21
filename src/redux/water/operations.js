@@ -34,7 +34,6 @@ export const addWater = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       formData.date = String(dateToUTC(formData.date).getTime());
-
       const response = await createWater(formData);
       response.data.data.date = dateToLocal(response.data.data.date);
       return response.data;
@@ -89,6 +88,7 @@ export const fetchMonthlyWater = createAsyncThunk(
         ...item,
         date: dateToLocal(item.date),
       }));
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data || error.message);
@@ -104,7 +104,7 @@ export const fetchDailyWater = createAsyncThunk(
     try {
       const dateUTC = String(dateToUTC(date).getTime());
       const response = await getDayWater(dateUTC);
-      response.data.data = response.data.data.map((item) => ({
+      response.data = response.data.map((item) => ({
         ...item,
         date: dateToLocal(item.date),
       }));
@@ -119,7 +119,8 @@ export const fetchTodayWater = createAsyncThunk(
   "water/today",
   async (_, thunkAPI) => {
     try {
-      const response = await getDayWater(new Date().getTime());
+      const dateUTC = String(dateToUTC(new Date().getTime()).getTime());
+      const response = await getDayWater(dateUTC);
       return response.dailyAmount;
     } catch (error) {
       return thunkAPI.rejectWithValue(
