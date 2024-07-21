@@ -22,24 +22,24 @@ const CalendarPagination = () => {
 
   const increment = () => {
     if (month === 11) {
-      dispatch(fetchMonthlyWater(new Date(year + 1, 0, 3).getTime()));
+      dispatch(fetchMonthlyWater(new Date(year + 1, 4).getTime()));
       setMonth(0);
       setYear(year + 1);
 
       return;
     }
-    dispatch(fetchMonthlyWater(new Date(year, month + 1, 3).getTime()));
+    dispatch(fetchMonthlyWater(new Date(year, month + 1, 4).getTime()));
     setMonth(month + 1);
   };
 
   const decrement = () => {
     if (month === 0) {
-      dispatch(fetchMonthlyWater(new Date(year - 1, 11, 3).getTime()));
+      dispatch(fetchMonthlyWater(new Date(year - 1, 11, 4).getTime()));
       setMonth(11);
       setYear(year - 1);
       return;
     }
-    dispatch(fetchMonthlyWater(new Date(year, month - 1, 3).getTime()));
+    dispatch(fetchMonthlyWater(new Date(year, month - 1, 4).getTime()));
     setMonth(month - 1);
   };
 
@@ -54,7 +54,12 @@ const CalendarPagination = () => {
     <div className={css.calendar_title}>
       <Title title={t("month")} styles={css.month} />
       <div className={css.month_ind}>
-        <button onClick={decrement} className={css.btn} disabled={isLoading}>
+        <button
+          onClick={decrement}
+          className={css.btn}
+          aria-label={t("viewPreviousMonthEntries")}
+          disabled={isLoading}
+        >
           <svg className={css.svg_arrow_left}>
             <use xlinkHref={svg + "#icon-arrow"}></use>
           </svg>
@@ -66,6 +71,7 @@ const CalendarPagination = () => {
         <button
           onClick={increment}
           className={`${css.btn} ${incrementDisabled ? css.btn_disabled : ""} `}
+          aria-label={t("viewNextMonthEntries")}
           disabled={isLoading || incrementDisabled}
         >
           <svg className={css.svg_arrow_right}>

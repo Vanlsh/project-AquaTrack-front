@@ -15,6 +15,7 @@ const Calendar = () => {
   const dateArray = useSelector(selectWaterMonthlyRecord);
   const isLoading = useSelector(selectMonthlyIsLoading);
   const isError = useSelector(selectMonthlyIsError);
+
   if (isLoading) return <Loader />;
 
   if (isError)

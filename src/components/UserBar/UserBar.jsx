@@ -1,11 +1,13 @@
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import svgIcons from "../../assets/icons.svg";
 import { selectUserPhoto } from "../../redux/auth/selectors.js";
 import UserBarPopover from "../UserBarPopover/UserBarPopover.jsx";
 import styles from "./UserBar.module.css";
 
 const UserBar = ({ name }) => {
+  const { t } = useTranslation();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const userBarPopoverRef = useRef(null);
 
@@ -40,6 +42,7 @@ const UserBar = ({ name }) => {
         type="button"
         name="openPopover"
         onClick={handlePopover}
+        aria-label={t("openCloseUserPanel")}
       >
         {name}
         <div

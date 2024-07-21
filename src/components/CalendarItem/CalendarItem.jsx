@@ -10,16 +10,13 @@ import { selectWaterRate } from "../../redux/auth/selectors.js";
 const isFuture = (date) => {
   const dateNow = new Date();
   const currentDate = new Date(Number(date));
-  const isBigger =
-    dateNow.getFullYear() < currentDate.getFullYear() ||
-    dateNow.getMonth() < currentDate.getMonth() ||
-    dateNow.getDate() < currentDate.getDate();
-  return isBigger;
+  return dateNow.getTime() < currentDate.getTime();
 };
 
 const isDaySame = (firstDay, secondDay) => {
   const first = new Date(Number(firstDay));
   const second = new Date(Number(secondDay));
+
   return (
     first.getFullYear() === second.getFullYear() &&
     first.getMonth() === second.getMonth() &&
@@ -44,6 +41,7 @@ const CalendarItem = ({ calendarDate, amount }) => {
   const percent =
     goal > 0 ? Math.round((amount / (goal * 1000)) * 100) : amount;
   const isDisabled = isFuture(calendarDate);
+
   const isDane = Math.round(percent) < 100;
   const isActive = isDaySame(currentDate, calendarDate);
   const percentString = Math.round(percent) >= 100 ? "100%" : `${percent}%`;

@@ -78,6 +78,7 @@ const WaterModal = ({
       <button
         type="button"
         onClick={handleClose}
+        aria-label={t("closeWaterModal")}
         className={css.WaterModalCloseBtn}
       >
         <svg>
