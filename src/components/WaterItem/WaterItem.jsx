@@ -14,7 +14,6 @@ const WaterItem = ({ water }) => {
   const closeModal = useCallback(() => {
     setModal();
   }, [setModal]);
-
   const openModalDelete = useCallback(() => {
     setModal(<DeleteWaterModal id={water.id} onClose={closeModal} />);
   }, [setModal, closeModal, water]);
@@ -41,7 +40,7 @@ const WaterItem = ({ water }) => {
         <button
           className={css.editButton}
           onClick={openModalEdit}
-          aria-label={t("editWaterAmountArea")}
+          aria-label="Edit the entered amount of water"
         >
           <svg className={css.icon_action} width="14" height="14">
             <use xlinkHref={svg + "#icon-edit"}></use>
@@ -50,7 +49,7 @@ const WaterItem = ({ water }) => {
         <button
           className={css.deleteButton}
           onClick={openModalDelete}
-          aria-label={t("deleteWaterAmount")}
+          aria-label="Delete the entered amount of water"
         >
           <svg className={css.icon_action} width="14" height="14">
             <use xlinkHref={svg + "#icon-trash"}></use>

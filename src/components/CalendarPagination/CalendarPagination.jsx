@@ -22,24 +22,24 @@ const CalendarPagination = () => {
 
   const increment = () => {
     if (month === 11) {
-      dispatch(fetchMonthlyWater(new Date(year + 1, 0, 3).getTime()));
+      dispatch(fetchMonthlyWater(new Date(year + 1, 4).getTime()));
       setMonth(0);
       setYear(year + 1);
 
       return;
     }
-    dispatch(fetchMonthlyWater(new Date(year, month + 1, 3).getTime()));
+    dispatch(fetchMonthlyWater(new Date(year, month + 1, 4).getTime()));
     setMonth(month + 1);
   };
 
   const decrement = () => {
     if (month === 0) {
-      dispatch(fetchMonthlyWater(new Date(year - 1, 11, 3).getTime()));
+      dispatch(fetchMonthlyWater(new Date(year - 1, 11, 4).getTime()));
       setMonth(11);
       setYear(year - 1);
       return;
     }
-    dispatch(fetchMonthlyWater(new Date(year, month - 1, 3).getTime()));
+    dispatch(fetchMonthlyWater(new Date(year, month - 1, 4).getTime()));
     setMonth(month - 1);
   };
 
