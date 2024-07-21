@@ -14,7 +14,6 @@ const WaterItem = ({ water }) => {
   const closeModal = useCallback(() => {
     setModal();
   }, [setModal]);
-  console.log("water", water);
   const openModalDelete = useCallback(() => {
     setModal(<DeleteWaterModal id={water.id} onClose={closeModal} />);
   }, [setModal, closeModal, water]);
@@ -38,12 +37,20 @@ const WaterItem = ({ water }) => {
         <p className={css.water_date}>{formatTime(water.date)}</p>
       </div>
       <div className={css.container_buttons}>
-        <button className={css.editButton} onClick={openModalEdit} aria-label="Edit the entered amount of water">
+        <button
+          className={css.editButton}
+          onClick={openModalEdit}
+          aria-label="Edit the entered amount of water"
+        >
           <svg className={css.icon_action} width="14" height="14">
             <use xlinkHref={svg + "#icon-edit"}></use>
           </svg>
         </button>
-        <button className={css.deleteButton} onClick={openModalDelete} aria-label="Delete the entered amount of water">
+        <button
+          className={css.deleteButton}
+          onClick={openModalDelete}
+          aria-label="Delete the entered amount of water"
+        >
           <svg className={css.icon_action} width="14" height="14">
             <use xlinkHref={svg + "#icon-trash"}></use>
           </svg>
