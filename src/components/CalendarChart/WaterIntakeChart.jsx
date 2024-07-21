@@ -1,7 +1,4 @@
-import {
-	// React,
-	useEffect,
-} from 'react';
+import { useEffect } from 'react';
 import {
 	Area,
 	XAxis,
@@ -11,7 +8,7 @@ import {
 	AreaChart,
 } from 'recharts';
 import css from './WaterIntakeChart.module.css';
-// import svg from '../../assets/icons.svg';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWaterWeeklyData } from '../../redux/water/selectors';
 import { fetchWeeklyWater } from '../../redux/water/operations';
@@ -23,36 +20,12 @@ const formatDate = (timestamp) => {
 	}
 	const date = new Date(timestampNum);
 	const day = date.getDate();
-	// const month = date.getMonth() + 1;
-	// const year = date.getFullYear();
+
 	return `${day}`;
 };
 const convertMlToL = (ml) => {
 	return (ml / 1000).toFixed(1);
 };
-
-// const CustomTooltip = ({ active, payload }) => {
-//   if (active && payload && payload.length) {
-//     const valueInMl = payload[0].payload.originalAmount;
-//     return (
-//       <div className={css.customTooltip}>
-//         <svg className={css.waterDropImg} width="53" height="39">
-//           <use xlinkHref={`${svg}#icon-water-drop`} />
-//           <text className={css.textHint} x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" fontSize="10" fill="black">
-//           {`${valueInMl} ml`}
-//           </text>
-//         </svg>
-//       </div>
-//     );
-//   }
-//   return null;
-// };
-// const calculateTooltipPosition = (tooltipPos) => {
-//   return {
-//     x: tooltipPos.cx - 15,
-//     y: tooltipPos.cy - 50
-//   };
-// };
 
 const CustomTooltip = ({ active, payload, coordinate }) => {
 	if (active && payload && payload.length) {
@@ -78,7 +51,6 @@ const CustomTooltip = ({ active, payload, coordinate }) => {
 			<div
 				className='custom-tooltip'
 				style={tooltipStyle}>
-				{/* <p className='label'>{`${label}`}</p> */}
 				<p style={labelStyle}>{`${payload[0].value * 1000} ml`}</p>
 			</div>
 		);
@@ -88,24 +60,12 @@ const CustomTooltip = ({ active, payload, coordinate }) => {
 };
 
 const formatYAxisTick = (tick, index) => {
-	// Первое значение (0) форматируем как 0%
 	if (index === 0) {
 		return '0%';
 	}
-	// Остальные значения форматируем как литры, округленные до 0.1
+
 	return `${tick.toFixed(1)} L`;
 };
-
-// Функция для генерации тиков с интервалом 0.5
-// const generateTicks = (min, max, interval) => {
-// 	let ticks = [];
-// 	for (let i = min; i <= max; i += interval) {
-// 		ticks.push(i);
-// 	}
-// 	return ticks;
-// };
-
-// Определение минимального и максимального значения данных
 
 const WaterIntakeChart = () => {
 	const dispatch = useDispatch();
@@ -116,9 +76,6 @@ const WaterIntakeChart = () => {
 		const formattedDate = Date.now();
 		dispatch(fetchWeeklyWater(formattedDate));
 	}, [dispatch]);
-
-	// const minUv = Math.min(...waterWeeklyData.map((d) => d.uv));
-	// const maxUv = Math.max(...waterWeeklyData.map((d) => d.uv));
 
 	const formattedData = waterWeeklyData.slice(0, 7).map((item) => ({
 		date: formatDate(item.date),
@@ -135,9 +92,9 @@ const WaterIntakeChart = () => {
 					data={formattedData}
 					margin={{
 						top: 10,
-						right: 30,
+						right: 10,
 						left: 0,
-						bottom: 20,
+						bottom: 10,
 					}}>
 					<defs>
 						<linearGradient
@@ -164,29 +121,17 @@ const WaterIntakeChart = () => {
 						tickMargin={21}
 					/>
 					<YAxis
-						domain={[0, 'auto']} // Начальное значение оси Y с 0
+						domain={[0, 'auto']}
 						tickCount={6}
-						// interval={0.5}
-						tickFormatter={formatYAxisTick} // Форматирование значений
-						// domain={[0, 2.5]}
-						// domain={['auto', 'auto']}
-						// ticks={[0, 0.5, 1, 1.5, 2, 2.5, 3]}
+						tickFormatter={formatYAxisTick}
 						label={{ angle: -90, position: 'insideLeft' }}
 						tickLine={false}
 						tickMargin={53}
 						tick={{ textAnchor: 'start' }}
-						// tickFormatter={(value) => `${value} L`}
-
-						// domain={[0, 3]}
-						// tickFormatter={(tick, index) =>
-						// 	index === 0 ? '0%' : `${tick.toFixed(1)} L`
-						// }
-						// ticks={generateTicks(0, maxUv, 0.5)}
 					/>
 					<Tooltip
 						cursor={false}
 						position={{ y: -30 }}
-						// position={calculateTooltipPosition}
 						content={<CustomTooltip />}
 					/>
 					<Area

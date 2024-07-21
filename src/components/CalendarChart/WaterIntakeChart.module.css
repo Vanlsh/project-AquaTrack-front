@@ -1,57 +1,23 @@
-.graphContainer {
-    margin: 0 auto;
-    width: 313px;
-    height: 253px;
+@media screen and (max-width: 767px) {
+	.graphContainer {
+		padding-top: 25px;
+		max-width: 303px;
+		height: 281px;
+	}
 }
 
-@media screen and (min-width: 768px) {
-    .graphContainer {
-        width: 588px;
-        height: 273px;
-    }
-    .waterDropImg {
-        width: 80px;
-        height: 48px;
-    }
-  }
-  /* //================== fetchWeeklyWater ==================
-      .addCase(fetchWeeklyWater.pending, (state) => {
-        state.waterWeekly.isLoading = true;
-        state.waterWeekly.errorMessage = null;
-        state.waterWeekly.successMessage = null;
-      })
-      .addCase(fetchWeeklyWater.fulfilled, (state, action) => {
-        state.waterWeekly.isLoading = false;
-        state.waterWeekly.successMessage = action.payload.message;
-        state.waterWeekly.data = action.payload.data;
-      })
-      .addCase(fetchWeeklyWater.rejected, (state, action) => {
-        state.waterWeekly.isLoading = false;
-        state.waterWeekly.errorMessage = action.payload.data.message;
-      }) */
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+	.graphContainer {
+		padding: 47px 16px 0 16px;
+		width: 640px;
+		height: 298px;
+	}
+}
 
-      /* waterWeekly: {
-        data: [],
-        isLoading: false,
-        errorMessage: null,
-      }, */
-
-/* //================= GET WEEKLY WATER =================
-
-export const fetchWeeklyWater = createAsyncThunk(
-  "water/fetchWeek",
-  async (formData, thunkAPI) => {
-    try {
-      const { data } = await getWeekWater(formData);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data || error.message);
-    }
-  }
-); */
-/* export const getWeekWater = async (date) => {
-    const data = await instance.get(`/water/week/${date}`);
-    return data;
-  }; */
-  /* export const selectWaterWeeklyRecord = (state) =>
-  state.water.waterWeekly.data; */
+@media screen and (min-width: 1440px) {
+	.graphContainer {
+		padding: 25px 10px 0 10px;
+		width: 608px;
+		height: 298px;
+	}
+}
