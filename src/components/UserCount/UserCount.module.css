@@ -1,8 +1,6 @@
 .userCountComponent {
   border-radius: 30px;
   padding: 10px 14px;
-  width: 180px;
-  height: 48px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background: var(--white);
   display: flex;
@@ -52,8 +50,6 @@
 @media screen and (min-width: 768px) {
   .userCountComponent {
     padding: 10px 20px;
-    width: 257px;
-    height: 67px;
   }
 
   .userCountList {
