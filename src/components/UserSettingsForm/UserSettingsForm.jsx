@@ -30,11 +30,20 @@ const UserSettingsForm = ({ handleClose }) => {
 
   const schema = yup.object({
     name: yup.string().required(t("nameRequired")),
-    weight: yup.number().min(0).typeError(t("hasToBeANumber")),
-    dailyActiveTime: yup.number().min(0).typeError(t("hasToBeANumber")),
+    weight: yup
+      .number()
+      .min(30, t("weightValueGreat"))
+      .max(300, t("weightValueLess"))
+      .typeError(t("hasToBeANumber")),
+    dailyActiveTime: yup
+      .number()
+      .min(0)
+      .max(12, t("activeSportTime"))
+      .typeError(t("hasToBeANumber")),
     dailyWaterConsumption: yup
       .number()
-      .min(0, "Value has to be greater than 0")
+      .min(0)
+      .max(8, t("dailyWaterConsumption"))
       .typeError(t("hasToBeANumber")),
   });
 
@@ -256,7 +265,7 @@ const UserSettingsForm = ({ handleClose }) => {
                     className={css.inputBox}
                     onChange={(e) => {
                       let value = e.target.value;
-                      const regex = /^\d+(\.\d{0,3})?$/;
+                      const regex = /^(\d+(\.\d{0,3})?|\.\d{1,3})$/;
                       if (value === "" || regex.test(value)) {
                         field.onChange(value);
                       }
@@ -269,6 +278,8 @@ const UserSettingsForm = ({ handleClose }) => {
                     onBlur={() => {
                       if (field.value === "") {
                         field.onChange(0);
+                      } else if (field.value.startsWith(".")) {
+                        field.onChange("0" + field.value);
                       }
                     }}
                   />
@@ -290,7 +301,7 @@ const UserSettingsForm = ({ handleClose }) => {
                     className={css.inputBox}
                     onChange={(e) => {
                       let value = e.target.value;
-                      const regex = /^\d+(\.\d{0,3})?$/;
+                      const regex = /^(\d+(\.\d{0,3})?|\.\d{1,3})$/;
                       if (value === "" || regex.test(value)) {
                         field.onChange(value);
                       }
@@ -303,6 +314,8 @@ const UserSettingsForm = ({ handleClose }) => {
                     onBlur={() => {
                       if (field.value === "") {
                         field.onChange(0);
+                      } else if (field.value.startsWith(".")) {
+                        field.onChange("0" + field.value);
                       }
                     }}
                   />
@@ -319,7 +332,9 @@ const UserSettingsForm = ({ handleClose }) => {
             <div className={css.consumeWater}>
               <p className={css.ordinaryText}>
                 {t("requiredWaterAmount")}&nbsp;
-                <span className={css.userNorma}>{waterIntake}&nbsp;L</span>
+                <span className={css.userNorma}>
+                  {isNaN(waterIntake) ? 0 : waterIntake}&nbsp;L
+                </span>
               </p>
 
               <label>
@@ -333,8 +348,7 @@ const UserSettingsForm = ({ handleClose }) => {
                       className={css.inputBox}
                       onChange={(e) => {
                         let value = e.target.value;
-                        const regex = /^\d+(\.\d{0,3})?$/;
-
+                        const regex = /^(\d+(\.\d{0,3})?|\.\d{1,3})$/;
                         if (value === "" || regex.test(value)) {
                           field.onChange(value);
                         }
@@ -347,6 +361,8 @@ const UserSettingsForm = ({ handleClose }) => {
                       onBlur={() => {
                         if (field.value === "") {
                           field.onChange(0);
+                        } else if (field.value.startsWith(".")) {
+                          field.onChange("0" + field.value);
                         }
                       }}
                     />
