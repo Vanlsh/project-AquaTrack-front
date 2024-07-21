@@ -11,7 +11,7 @@ import { injectStore } from "./axios.js";
 import "./index.css";
 import "./i18n/index.js";
 import { TourProvider } from '@reactour/tour'
-import { disableBody, enableBody, steps } from './onboarding/steps.js'
+import { disableBody, enableBody, steps, styles } from './onboarding/steps.jsx'
 
 injectStore(store);
 
@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <ModalProvider>
-            <TourProvider steps={steps} afterOpen={disableBody} beforeClose={enableBody}>
+            <TourProvider steps={steps} afterOpen={disableBody} beforeClose={enableBody} styles={styles}>
               <App />
             </TourProvider>  
           </ModalProvider>

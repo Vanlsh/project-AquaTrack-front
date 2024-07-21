@@ -6,19 +6,26 @@ import LogOutModal from "../LogOutModal/LogOutModal.jsx";
 import UserSettingsModal from "../UserSettingsModal/UserSettingsModal.jsx";
 import styles from "./UserBarPopover.module.css";
 import { useTour } from "@reactour/tour";
+import { disableBody } from "../../onboarding/steps.jsx";
 
 
 const UserBarPopover = forwardRef(function UserBarPopover(
   { handleOutsideClick },
   ref
 ) {
-  const { setIsOpen } = useTour();
+  const { setIsOpen, setCurrentStep } = useTour();
   const { t } = useTranslation();
   const windowHeight = window.innerHeight;
   const scrollPosition = window.scrollY;
   const [userBarPopoverTopPosition, setUserBarPopoverTopPosition] =
     useState(64);
   const setModal = useModal();
+
+    const startTour = () => {
+    setCurrentStep(0); 
+    setIsOpen(true); 
+    disableBody();
+  };
 
   const closeModal = useCallback(() => {
     setModal();
@@ -65,11 +72,11 @@ const UserBarPopover = forwardRef(function UserBarPopover(
           </svg>
           {t("settings")}
         </li>
-        <li className={styles.userBarPopoverListItem} onClick={() => setIsOpen(true)}>
+        <li className={styles.userBarPopoverListItem} onClick={startTour}>
           <svg className={styles.userBarPopoverIconSettings}>
             <use xlinkHref={svgIcons + "#icon-tour"}></use>
           </svg>
-          Open Tour
+          How to use
         </li>
         <li
           className={`${styles.userBarPopoverListItem} ${styles.userBarPopoverListItemLogOut}`}

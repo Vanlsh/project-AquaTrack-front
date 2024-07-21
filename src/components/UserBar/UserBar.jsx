@@ -34,7 +34,7 @@ const UserBar = ({ name }) => {
   };
 
   return (
-    <div className={styles.userBarWrapper}>
+    <div className={`${styles.userBarWrapper} four-step`}>
       <button
         className={styles.userBar}
         type="button"
