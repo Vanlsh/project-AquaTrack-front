@@ -6,7 +6,7 @@
   "checkTracker": "Überprüfen Tracker",
   "signInTitle": "Anmeldung",
   "signIn": "Anmelden",
-  "happyCustomers": "Unsere zufriedenen Kunden",
+  "userCountText": "Unsere <span class=\"{{userCountTextColor}}\">{{count}} glücklichen</span><br/> Kunden",
   "habitDrive": "Gewohnheitsantrieb",
   "viewStats": "Statistiken",
   "personalRate": "Persönliche Raten-Einstellung",
@@ -61,6 +61,7 @@
   "waterValueGreater": "Wasserwert muss größer oder gleich 50 sein",
   "waterValueLess": "Wasserwert muss kleiner oder gleich 5000 sein",
   "chooseValue": "Wählen Sie einen Wert:",
+  "settingLink": "Profil",
   "settings": "Einstellungen",
   "uploadPhoto": "Foto hochladen",
   "genderIdentity": "Ihre Geschlechtsidentität",
@@ -96,5 +97,14 @@
   "logout": "Ausloggen",
   "confirmLogout": "Möchten Sie wirklich gehen?",
   "noWaterAdded": "Wasser wurde noch nicht hinzugefügt",
-  "waterMonthErrorMessage": "Etwas ist schiefgelaufen. Bitte laden Sie die Seite neu"
+  "waterMonthErrorMessage": "Etwas ist schiefgelaufen. Bitte laden Sie die Seite neu",
+  "closeLogOutModal": "Abmelde-Fenster schließen",
+  "closeDeleteEntryModal": "Eintrag löschen-Fenster schließen",
+  "closeWaterModal": "Wasser-Fenster schließen",
+  "closeSettingModal": "Einstellungs-Fenster schließen",
+  "openCloseUserPanel": "Benutzerpanel öffnen oder schließen",
+  "editWaterAmountArea": "Eingegebene Wassermenge bearbeiten",
+  "deleteWaterAmount": "Eingegebene Wassermenge löschen",
+  "viewPreviousMonthEntries": "Einträge des vorherigen Monats anzeigen",
+  "viewNextMonthEntries": "Einträge des nächsten Monats anzeigen"
 }
