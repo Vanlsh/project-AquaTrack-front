@@ -17,9 +17,6 @@ const TrackerPage = () => {
   const [isRefreshingPage, setIsRefreshingPage] = useState(true);
 
   useEffect(() => {
-    const date = new Date();
-    const timezoneOffset = -date.getTimezoneOffset() / 60;
-    console.log("timezoneOffset", timezoneOffset);
     if (isRefreshingPage) {
       dispatch(fetchMonthlyWater(parsedDate));
       dispatch(fetchDailyWater(parsedDate));
