@@ -21,9 +21,13 @@ const roundToTwoDecimals = (num) => parseFloat(num.toFixed(2));
 
 const findDate = (oldDate) => {
   return ({ date }) => {
-    const firstDate = Math.floor(Number(date) / 1000 / 60 / 60 / 24);
-    const secondDate = Math.floor(Number(oldDate) / 1000 / 60 / 60 / 24);
-    return firstDate === secondDate;
+    const firstDate = new Date(Number(date));
+    const secondDate = new Date(Number(oldDate));
+    return (
+      firstDate.getFullYear() === secondDate.getFullYear() &&
+      firstDate.getMonth() === secondDate.getMonth() &&
+      firstDate.getDate() === secondDate.getDate()
+    );
   };
 };
 

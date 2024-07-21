@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { store } from "./redux/store.js";
 import { logOutReducer, setToken } from "./redux/auth/slice.js";
 
 const BASE_URL = "https://project-aquatrack-back.onrender.com";
