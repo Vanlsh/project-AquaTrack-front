@@ -44,7 +44,7 @@
 
 .editButton:hover,
 .deleteButton:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .container_buttons {
