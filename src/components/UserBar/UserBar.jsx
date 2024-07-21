@@ -40,6 +40,7 @@ const UserBar = ({ name }) => {
         type="button"
         name="openPopover"
         onClick={handlePopover}
+        aria-label="Open or close the user panel"
       >
         {name}
         <div
