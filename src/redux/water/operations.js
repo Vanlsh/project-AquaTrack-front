@@ -82,7 +82,7 @@ export const fetchTodayWater = createAsyncThunk(
   "water/today",
   async (_, thunkAPI) => {
     try {
-      const response = await getDayWater(Date.now());
+      const response = await getDayWater(new Date().getTime());
       return response.dailyAmount;
     } catch (error) {
       return thunkAPI.rejectWithValue(

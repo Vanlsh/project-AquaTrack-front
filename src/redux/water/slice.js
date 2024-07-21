@@ -20,9 +20,13 @@ const roundToTwoDecimals = (num) => parseFloat(num.toFixed(2));
 
 const findDate = (oldDate) => {
   return ({ date }) => {
-    const firstDate = Math.floor(Number(date) / 1000 / 60 / 60 / 24);
-    const secondDate = Math.floor(Number(oldDate) / 1000 / 60 / 60 / 24);
-    return firstDate === secondDate;
+    const firstDate = new Date(Number(date));
+    const secondDate = new Date(Number(oldDate));
+    return (
+      firstDate.getFullYear() === secondDate.getFullYear() &&
+      firstDate.getMonth() === secondDate.getMonth() &&
+      firstDate.getDate() === secondDate.getDate()
+    );
   };
 };
 
@@ -185,6 +189,7 @@ const waterSlice = createSlice({
       })
       .addCase(fetchTodayWater.fulfilled, (state, action) => {
         state.todayAmount.isLoading = false;
+        console.log("action.payload", action.payload);
         state.todayAmount.value = action.payload;
       })
       .addCase(fetchTodayWater.rejected, (state) => {
