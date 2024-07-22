@@ -201,7 +201,7 @@ const waterSlice = createSlice({
             findDate(removedRecord.date)
           );
           if (weekRecordIndex !== -1) {
-            state.waterWeekly.data[weekRecordIndex].amount +=
+            state.waterWeekly.data[weekRecordIndex].amount -=
               removedRecord.amount;
           }
           if (isToday(removedRecord.date)) {
