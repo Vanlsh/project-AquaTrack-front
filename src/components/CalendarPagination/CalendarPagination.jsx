@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 
 import { Title } from "../Title/Title.jsx";
 import { parseDateTime } from "../../helpers/parseDate.js";
@@ -10,6 +10,7 @@ import { fetchMonthlyWater } from "../../redux/water/operations.js";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMonthlyIsLoading } from "../../redux/water/selectors.js";
 import { useTranslation } from "react-i18next";
+import clsx from "clsx";
 
 const CalendarPagination = () => {
   const { date: dateUrl } = useParams();
@@ -19,6 +20,8 @@ const CalendarPagination = () => {
   const [month, setMonth] = useState(new Date(dateMs).getMonth());
   const isLoading = useSelector(selectMonthlyIsLoading);
   const { t } = useTranslation();
+  const location = useLocation();
+  const pathname = location.pathname.split("/").pop();
 
   const increment = () => {
     if (month === 11) {
@@ -44,7 +47,7 @@ const CalendarPagination = () => {
   };
 
   const selectedMonth = t(monthsName[month]);
-
+  const title = pathname === "schedule" ? t("statistics") : t("month");
   const yearNow = new Date(Date.now()).getFullYear();
   const monthNow = new Date(Date.now()).getMonth();
   const incrementDisabled =
@@ -52,14 +55,9 @@ const CalendarPagination = () => {
 
   return (
     <div className={css.calendar_title}>
-      <Title title={t("month")} styles={css.month} />
+      <Title title={title} styles={css.month} />
       <div className={css.month_ind}>
-        <button
-          onClick={decrement}
-          className={css.btn}
-          aria-label={t("viewPreviousMonthEntries")}
-          disabled={isLoading}
-        >
+        <button onClick={decrement} className={css.btn} disabled={isLoading}>
           <svg className={css.svg_arrow_left}>
             <use xlinkHref={svg + "#icon-arrow"}></use>
           </svg>
@@ -71,18 +69,36 @@ const CalendarPagination = () => {
         <button
           onClick={increment}
           className={`${css.btn} ${incrementDisabled ? css.btn_disabled : ""} `}
-          aria-label={t("viewNextMonthEntries")}
           disabled={isLoading || incrementDisabled}
         >
           <svg className={css.svg_arrow_right}>
             <use xlinkHref={svg + "#icon-arrow"}></use>
           </svg>
         </button>
-        <div className={css.statistic_btn}>
+        <NavLink
+          to="calendar"
+          className={({ isActive }) => {
+            return clsx(css.statistic_btn, {
+              [css.isHidden]: isActive,
+            });
+          }}
+        >
+          <svg className={css.svg_schedule}>
+            <use xlinkHref={svg + "#icon-pie-chart"}></use>
+          </svg>
+        </NavLink>
+        <NavLink
+          to="schedule"
+          className={({ isActive }) => {
+            return clsx(css.statistic_btn, {
+              [css.isHidden]: isActive,
+            });
+          }}
+        >
           <svg className={css.svg_pie}>
             <use xlinkHref={svg + "#icon-pie-chart"}></use>
           </svg>
-        </div>
+        </NavLink>
       </div>
     </div>
   );
