@@ -3,7 +3,7 @@ import Calendar from "../Calendar/Calendar.jsx";
 
 const MonthInfo = () => {
   return (
-    <div className="six-step">
+    <div>
       <CalendarPagination />
       <Calendar />
     </div>

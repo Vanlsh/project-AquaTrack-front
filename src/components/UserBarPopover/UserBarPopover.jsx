@@ -6,7 +6,7 @@ import LogOutModal from "../LogOutModal/LogOutModal.jsx";
 import UserSettingsModal from "../UserSettingsModal/UserSettingsModal.jsx";
 import styles from "./UserBarPopover.module.css";
 import { useTour } from "@reactour/tour";
-import { disableBody } from "../../onboarding/steps.jsx";
+import { disableBody } from "../../onboarding/onboardingStyles.js";
 
 
 const UserBarPopover = forwardRef(function UserBarPopover(
@@ -76,7 +76,7 @@ const UserBarPopover = forwardRef(function UserBarPopover(
           <svg className={styles.userBarPopoverIconSettings}>
             <use xlinkHref={svgIcons + "#icon-tour"}></use>
           </svg>
-          How to use
+          {t("use")}
         </li>
         <li
           className={`${styles.userBarPopoverListItem} ${styles.userBarPopoverListItemLogOut}`}

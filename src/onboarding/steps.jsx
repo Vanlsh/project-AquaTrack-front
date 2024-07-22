@@ -1,84 +1,67 @@
 import React from 'react';
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { useTranslation } from 'react-i18next';
+import { TourProvider } from '@reactour/tour';
+import { disableBody, enableBody, styles } from './onboardingStyles';
 
-export const steps = [
-  {
-    content: (
-      <div style={{ textAlign: 'center' }}>
-        <h2>Welcome to AquaTrack!</h2>
-        <p>We are glad to have you here!</p>
-      </div>
-    ),
-    position: 'center'
-  },
-  {
-    selector: '.first-step',
-    content: 'This is your daily water intake target.',
-  },
-  {
-    selector: '.second-step',
-    content: 'This is your water progress bar.',
-  },
-  {
-    selector: '.third-step',
-    content: 'Click here to add more water to your daily intake.',
-  },
-  {
-    selector: '.four-step',
-    content: 'Here you can use your profile settings to fill in your personal details and record your daily water intake.',
-  },
-  {
-    selector: '.five-step',
-    content:'This section shows how much water you have drunk today, including the quantity and the times.',
-  },
-  {
-    selector: '.six-step',
-    content: 'Here you can view your monthly water intake statistics, where each individual day is taken into account.',
-  },
-  {
-    content: (
-      <div style={{ textAlign: 'center' }}>
-        <h2>We hope you enjoy using AquaTrack!</h2>
-      </div>
-    ),
-    position: 'center'
-  },
-];
+const TourSteps = ({ children }) => {
+  const { t } = useTranslation();
 
-export const styles = {
-  maskWrapper: (base) => ({
-    ...base,
-    padding: '20px', 
-  }),
-  highlightedArea: (base, { x, y }) => ({
-    ...base,
-    x: x + 10,
-    y: y + 10,
-  }),
-  badge: (base) => ({
-    ...base,
-    color: 'blue',
-    display: 'none', 
-  }),
-  modal: (base) => ({
-    ...base,
-    margin: '20px',
-    borderRadius: '10px',
-    backgroundColor: '#fff',
-    position: 'relative',
-  }),
-  close: (base) => ({
-    ...base,
-    position: 'absolute',
-    top: '10px',
-    right: '10px',
-    cursor: 'pointer',
-    fontSize: '20px',
-    color: 'red', 
-  }),
+  const steps = [
+    {
+      content: (
+        <div style={{ textAlign: 'center' }}>
+          <h2>{t("greatingH")}</h2>
+          <p>{t("greatingP")}</p>
+        </div>
+      ),
+      position: 'center'
+    },
+    {
+      selector: '.first-step',
+      content: t('first-step'),
+    },
+    {
+      selector: '.second-step',
+      content: t('second-step'),
+    },
+    {
+      selector: '.third-step',
+      content: t('third-step'),
+    },
+    {
+      selector: '.four-step',
+      content: t('fourth-step'),
+    },
+    {
+      selector: '.five-step',
+      content: t('fifth-step'),
+    },
+    {
+      selector: '.six-step',
+      content: t('sixth-step'),
+    },
+    {
+      content: (
+        <div style={{ textAlign: 'center' }}>
+          <h2>{t("endingH")}</h2>
+        </div>
+      ),
+      position: 'center'
+    }
+  ];
+
+
+  return (
+    <TourProvider
+      steps={steps}
+      afterOpen={disableBody}
+      beforeClose={enableBody}
+      styles={styles}
+      badgeContent={({ totalSteps, currentStep }) => `${currentStep + 1}/${totalSteps}`}
+    >
+      {children}
+    </TourProvider>
+  );
 };
 
-
-export const disableBody = () => disableBodyScroll(document.body);
-export const enableBody = () => enableBodyScroll(document.body);
-
+export default TourSteps;

@@ -95,5 +95,15 @@
   "logout": "Log out",
   "confirmLogout": "Do you really want to leave?",
   "noWaterAdded": "Water has not been added yet",
-  "waterMonthErrorMessage": "Something went wrong. Please reload the page"
+  "waterMonthErrorMessage": "Something went wrong. Please reload the page",
+  "use":"Instruction",
+  "greatingH": "Welcome to AquaTrack!",
+  "greatingP": "We are glad to have you here!",
+  "first-step": "This is your daily water intake target.",
+  "second-step": "This is your water progress bar.",
+  "third-step": "Click here to add more water to your daily intake.",
+  "fourth-step": "Here you can use your profile settings to fill in your personal details and record your daily water intake.",
+  "fifth-step": "This section shows how much water you have drunk today, including the quantity and the times.",
+  "sixth-step": "Here you can view your monthly water intake statistics, where each individual day is taken into account.",
+  "endingH": "We hope you enjoy using AquaTrack!"
 }

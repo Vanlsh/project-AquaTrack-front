@@ -96,5 +96,15 @@
   "logout": "Ausloggen",
   "confirmLogout": "Möchten Sie wirklich gehen?",
   "noWaterAdded": "Wasser wurde noch nicht hinzugefügt",
-  "waterMonthErrorMessage": "Etwas ist schiefgelaufen. Bitte laden Sie die Seite neu"
+  "waterMonthErrorMessage": "Etwas ist schiefgelaufen. Bitte laden Sie die Seite neu",
+  "use":"Anleitung",
+  "greatingH": "Willkommen bei AquaTrack!",
+  "greatingP": "Wir freuen uns, dass Sie hier sind!",
+  "first-step": "Das ist Ihr tägliches Wasseraufnahmeziel.",
+  "second-step": "Das ist Ihre Wasserfortschrittsanzeige.",
+  "third-step": "Klicken Sie hier, um mehr Wasser zu Ihrer täglichen Aufnahme hinzuzufügen.",
+  "fourth-step": "Hier können Sie Ihre persönlichen Daten eingeben und Ihre tägliche Wasseraufnahme in den Profileinstellungen aufzeichnen.",
+  "fifth-step": "Dieser Abschnitt zeigt, wie viel Wasser Sie heute getrunken haben, einschließlich der Menge und der Zeiten.",
+  "sixth-step": "Hier können Sie Ihre monatliche Wasseraufnahme-Statistik ansehen, wobei jeder einzelne Tag berücksichtigt wird.",
+  "endingH": "Wir hoffen, Sie genießen die Nutzung von AquaTrack!"
 }

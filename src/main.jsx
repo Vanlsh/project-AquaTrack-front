@@ -1,3 +1,4 @@
+// src/main.jsx
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -10,8 +11,7 @@ import { persistor, store } from "./redux/store.js";
 import { injectStore } from "./axios.js";
 import "./index.css";
 import "./i18n/index.js";
-import { TourProvider } from '@reactour/tour'
-import { disableBody, enableBody, steps, styles } from './onboarding/steps.jsx'
+import TourSteps from './onboarding/steps.jsx';
 
 injectStore(store);
 
@@ -21,9 +21,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <ModalProvider>
-            <TourProvider steps={steps} afterOpen={disableBody} beforeClose={enableBody} styles={styles}>
+            <TourSteps>
               <App />
-            </TourProvider>  
+            </TourSteps>
           </ModalProvider>
         </BrowserRouter>
       </PersistGate>
