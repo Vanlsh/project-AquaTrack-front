@@ -22,7 +22,7 @@ const ModalLogout = ({ onClose }) => {
     <div className={css.modal}>
       <button
         type="button"
-        aria-label="Close the log out modal window"
+        aria-label={t("closeLogOutModal")}
         onClick={handleClose}
         className={css.closeBtn}
       >

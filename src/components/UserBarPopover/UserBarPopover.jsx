@@ -70,7 +70,7 @@ const UserBarPopover = forwardRef(function UserBarPopover(
           <svg className={styles.userBarPopoverIconSettings}>
             <use xlinkHref={svgIcons + "#icon-settings"}></use>
           </svg>
-          {t("settings")}
+          {t("settingLink")}
         </li>
         <li className={styles.userBarPopoverListItem} onClick={startTour}>
           <svg className={styles.userBarPopoverIconSettings}>
