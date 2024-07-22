@@ -7,6 +7,7 @@ import {
   fetchDailyWater,
   fetchMonthlyWater,
   fetchTodayWater,
+  fetchWeeklyWater,
 } from "../../redux/water/operations.js";
 import { parseDateTime } from "../../helpers/parseDate.js";
 import { useTour } from "@reactour/tour";
@@ -23,9 +24,11 @@ const TrackerPage = () => {
 
   useEffect(() => {
     if (isRefreshingPage) {
+      const formattedDate = Date.now();
       dispatch(fetchMonthlyWater(parsedDate));
       dispatch(fetchDailyWater(parsedDate));
       dispatch(fetchTodayWater());
+      dispatch(fetchWeeklyWater(formattedDate));
       setIsRefreshingPage(false);
     }
   }, [isRefreshingPage, parsedDate, dispatch]);
