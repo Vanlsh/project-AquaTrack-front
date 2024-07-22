@@ -32,7 +32,7 @@ const UserSettingsForm = ({ handleClose }) => {
     name: yup.string().required(t("nameRequired")),
     weight: yup
       .number()
-      .min(30, t("weightValueGreat"))
+      .min(0)
       .max(300, t("weightValueLess"))
       .typeError(t("hasToBeANumber")),
     dailyActiveTime: yup
