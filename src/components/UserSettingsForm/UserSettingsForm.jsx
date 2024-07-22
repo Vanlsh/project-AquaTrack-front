@@ -80,7 +80,7 @@ const UserSettingsForm = ({ handleClose }) => {
     } else {
       calcWaterIntake = weight * 0.04 + activeTime * 0.6;
     }
-    setWaterIntake(Math.min(parseFloat(calcWaterIntake), 15).toFixed(2));
+    setWaterIntake(Math.min(parseFloat(calcWaterIntake), 8).toFixed(2));
   }, [watchActiveTime, watchName, watchGender, watchWeight]);
 
   const onSubmit = (data) => {
