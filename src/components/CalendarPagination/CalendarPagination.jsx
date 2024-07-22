@@ -54,7 +54,7 @@ const CalendarPagination = () => {
     new Date(yearNow, monthNow) <= new Date(year, month);
 
   return (
-    <div className={css.calendar_title}>
+    <div className={`${css.calendar_title} six-step`}>
       <Title title={title} styles={css.month} />
       <div className={css.month_ind}>
         <button onClick={decrement} className={css.btn} disabled={isLoading}>

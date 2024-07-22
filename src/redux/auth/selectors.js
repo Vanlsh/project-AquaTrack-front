@@ -8,9 +8,10 @@ export const selectAuthSuccessMessage = (state) => state.auth.successMessage;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectWaterRate = (state) => state.auth.user.dailyWaterConsumption;
 export const selectIsLoadingPhoto = (state) => state.auth.isLoadingPhoto;
+export const selectIsNewUser = (state) => state.auth.isNewUser;
 
 export const selectIsAuthenticated = (state) => {
-    const token = selectToken(state);
-    const isLoggedIn = selectIsLoggedIn(state);
-    return !!token && isLoggedIn;
-  };
+  const token = selectToken(state);
+  const isLoggedIn = selectIsLoggedIn(state);
+  return !!token && isLoggedIn;
+};

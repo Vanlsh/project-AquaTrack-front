@@ -23,6 +23,9 @@ const authSlice = createSlice({
     setLoggedIn: (state, action) => {
       state.isLoggedIn = action.payload;
     },
+    setNewUser: (state, action) => {
+      state.isNewUser = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -37,6 +40,7 @@ const authSlice = createSlice({
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
+        state.isNewUser = true;
         state.successMessage = "Successfully registered";
         state.user = action.payload.user;
         state.token = action.payload.token;
@@ -128,4 +132,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { setToken, logOutReducer, setLoggedIn } = authSlice.actions;
+export const { setToken, logOutReducer, setLoggedIn, setNewUser } = authSlice.actions;

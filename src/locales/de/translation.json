@@ -110,5 +110,15 @@
   "editWaterAmountArea": "Eingegebene Wassermenge bearbeiten",
   "deleteWaterAmount": "Eingegebene Wassermenge löschen",
   "viewPreviousMonthEntries": "Einträge des vorherigen Monats anzeigen",
-  "viewNextMonthEntries": "Einträge des nächsten Monats anzeigen"
+  "viewNextMonthEntries": "Einträge des nächsten Monats anzeigen",
+  "use":"Anleitung",
+  "greatingH": "Willkommen bei AquaTrack!",
+  "greatingP": "Wir freuen uns, dass Sie hier sind!",
+  "first-step": "Das ist Ihr tägliches Wasseraufnahmeziel.",
+  "second-step": "Das ist Ihre Wasserfortschrittsanzeige.",
+  "third-step": "Klicken Sie hier, um mehr Wasser zu Ihrer täglichen Aufnahme hinzuzufügen.",
+  "fourth-step": "Hier können Sie Ihre persönlichen Daten eingeben und Ihre tägliche Wasseraufnahme in den Profileinstellungen aufzeichnen.",
+  "fifth-step": "Dieser Abschnitt zeigt, wie viel Wasser Sie heute getrunken haben, einschließlich der Menge und der Zeiten.",
+  "sixth-step": "Hier können Sie Ihre monatliche Wasseraufnahme-Statistik ansehen, wobei jeder einzelne Tag berücksichtigt wird.",
+  "endingH": "Wir hoffen, Sie genießen die Nutzung von AquaTrack!"
 }
