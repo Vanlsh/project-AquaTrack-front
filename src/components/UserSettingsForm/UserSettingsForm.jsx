@@ -32,7 +32,7 @@ const UserSettingsForm = ({ handleClose }) => {
     name: yup.string().required(t("nameRequired")),
     weight: yup
       .number()
-      .min(30, t("weightValueGreat"))
+      .min(0)
       .max(300, t("weightValueLess"))
       .typeError(t("hasToBeANumber")),
     dailyActiveTime: yup
@@ -80,7 +80,7 @@ const UserSettingsForm = ({ handleClose }) => {
     } else {
       calcWaterIntake = weight * 0.04 + activeTime * 0.6;
     }
-    setWaterIntake(Math.min(parseFloat(calcWaterIntake), 15).toFixed(2));
+    setWaterIntake(Math.min(parseFloat(calcWaterIntake), 8).toFixed(2));
   }, [watchActiveTime, watchName, watchGender, watchWeight]);
 
   const onSubmit = (data) => {

@@ -82,7 +82,6 @@
   "genderRequired": "Gender is required",
   "nameRequired": "Name is required",
   "weightValueLess": "Weight value must be less than or equal to 300",
-  "weightValueGreat": "Weight value must be greater than or equal to 30",
   "activeSportTime": "Active sports time value must be less than or equal to 12",
   "dailyWaterConsumption": "Daily water consumption value must be less than or equal to 8",
   "hasToBeANumber": "Has to be a number",
