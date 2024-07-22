@@ -10,6 +10,10 @@ import { selectWaterRate } from "../../redux/auth/selectors.js";
 const isFuture = (date) => {
   const dateNow = new Date();
   const currentDate = new Date(Number(date));
+  dateNow.setHours(23);
+  dateNow.setMinutes(59);
+  dateNow.setSeconds(59);
+  dateNow.setMilliseconds(999);
   return dateNow.getTime() < currentDate.getTime();
 };
 
