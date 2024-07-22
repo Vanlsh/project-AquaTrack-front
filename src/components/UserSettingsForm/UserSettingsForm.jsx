@@ -63,7 +63,7 @@ const UserSettingsForm = ({ handleClose }) => {
       dailyActiveTime: user.dailyActiveTime,
       dailyWaterConsumption: user.dailyWaterConsumption,
     },
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const watchWeight = watch("weight");
@@ -122,7 +122,28 @@ const UserSettingsForm = ({ handleClose }) => {
       formData.append("avatar", file);
       dispatch(uploadUserPhoto(formData));
     }
-    // formData.append("avatar", file);
+  };
+
+  const handleOnChange = (field) => (e) => {
+    let value = e.target.value;
+    const regex = /^(\d+(\.\d{0,3})?|\.\d{1,3})$/;
+    if (value === "" || regex.test(value)) {
+      field.onChange(value);
+    }
+  };
+
+  const handleOnFocus = (field) => () => {
+    if (field.value === 0) {
+      field.onChange("");
+    }
+  };
+
+  const handleOnBlur = (field) => () => {
+    if (field.value === "") {
+      field.onChange(0);
+    } else if (field.value.startsWith(".")) {
+      field.onChange("0" + field.value);
+    }
   };
 
   return (
@@ -269,25 +290,9 @@ const UserSettingsForm = ({ handleClose }) => {
                   <input
                     {...field}
                     className={css.inputBox}
-                    onChange={(e) => {
-                      let value = e.target.value;
-                      const regex = /^(\d+(\.\d{0,3})?|\.\d{1,3})$/;
-                      if (value === "" || regex.test(value)) {
-                        field.onChange(value);
-                      }
-                    }}
-                    onFocus={() => {
-                      if (field.value === 0) {
-                        field.onChange("");
-                      }
-                    }}
-                    onBlur={() => {
-                      if (field.value === "") {
-                        field.onChange(0);
-                      } else if (field.value.startsWith(".")) {
-                        field.onChange("0" + field.value);
-                      }
-                    }}
+                    onChange={handleOnChange(field)}
+                    onFocus={handleOnFocus(field)}
+                    onBlur={handleOnBlur(field)}
                   />
                 )}
               />
@@ -305,25 +310,9 @@ const UserSettingsForm = ({ handleClose }) => {
                   <input
                     {...field}
                     className={css.inputBox}
-                    onChange={(e) => {
-                      let value = e.target.value;
-                      const regex = /^(\d+(\.\d{0,3})?|\.\d{1,3})$/;
-                      if (value === "" || regex.test(value)) {
-                        field.onChange(value);
-                      }
-                    }}
-                    onFocus={() => {
-                      if (field.value === 0) {
-                        field.onChange("");
-                      }
-                    }}
-                    onBlur={() => {
-                      if (field.value === "") {
-                        field.onChange(0);
-                      } else if (field.value.startsWith(".")) {
-                        field.onChange("0" + field.value);
-                      }
-                    }}
+                    onChange={handleOnChange(field)}
+                    onFocus={handleOnFocus(field)}
+                    onBlur={handleOnBlur(field)}
                   />
                 )}
               />
@@ -352,25 +341,9 @@ const UserSettingsForm = ({ handleClose }) => {
                     <input
                       {...field}
                       className={css.inputBox}
-                      onChange={(e) => {
-                        let value = e.target.value;
-                        const regex = /^(\d+(\.\d{0,3})?|\.\d{1,3})$/;
-                        if (value === "" || regex.test(value)) {
-                          field.onChange(value);
-                        }
-                      }}
-                      onFocus={() => {
-                        if (field.value === 0) {
-                          field.onChange("");
-                        }
-                      }}
-                      onBlur={() => {
-                        if (field.value === "") {
-                          field.onChange(0);
-                        } else if (field.value.startsWith(".")) {
-                          field.onChange("0" + field.value);
-                        }
-                      }}
+                      onChange={handleOnChange(field)}
+                      onFocus={handleOnFocus(field)}
+                      onBlur={handleOnBlur(field)}
                     />
                   )}
                 />
