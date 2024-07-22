@@ -58,6 +58,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 374px 477px;
+    padding-top: 32px;
+    padding-left: 32px;
   }
 
   @media (min-device-pixel-ratio: 2),
