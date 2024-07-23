@@ -1,5 +1,7 @@
 .btn {
-  margin: 16px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 30px;
   border: none;
   padding: 16px;
@@ -11,8 +13,6 @@
   text-align: center;
   color: var(--color-font-main);
   background-color: var(--color-second-bg);
-  margin-bottom: 16px;
-  text-align: center;
 }
 
 .btn:hover,
@@ -22,10 +22,8 @@
 
 @media screen and (min-width: 768px) {
   .btn {
-    padding: 14px;
-    width: 436px;
+    padding: 18px;
     font-size: 16px;
     line-height: 1.5;
-    text-align: center;
   }
 }

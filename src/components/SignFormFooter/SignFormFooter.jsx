@@ -5,7 +5,6 @@ import GoogleBtn from "../GoogleBtn/GoogleBtn";
 const SignFormFooter = ({ text, link, linkName }) => {
   return (
     <>
-      <GoogleBtn />
       <p className={styles.signFormFooter}>
         {text}
         <Link className={styles.signFormFooterLink} to={link}>
