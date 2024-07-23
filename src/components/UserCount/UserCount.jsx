@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import photo1 from "../../../public/img/userCount/photo1.png";
-import photo2 from "../../../public/img/userCount/photo2.png";
-import photo3 from "../../../public/img/userCount/photo3.png";
+import photo1 from "/img/userCount/photo1.png";
+import photo2 from "/img/userCount/photo2.png";
+import photo3 from "/img/userCount/photo3.png";
 import styles from "./UserCount.module.css";
 import { requestUserCount } from "../../api/auth";
 import { useTranslation } from "react-i18next";
@@ -22,6 +22,7 @@ const UserCount = () => {
         console.log(err.message);
       }
     }
+
     getCount();
   });
 

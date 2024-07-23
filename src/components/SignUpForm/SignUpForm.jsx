@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import GoogleBtn from "../GoogleBtn/GoogleBtn.jsx";
 import styles from "./SignUpForm.module.css";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -155,13 +156,16 @@ const SignUpForm = () => {
             <LoaderComponent height={44} width={44} />
           </div>
         ) : (
-          <button
-            disabled={isLoading && true}
-            className={styles.signUpBtn}
-            type="submit"
-          >
-            {t("signUp")}
-          </button>
+          <div className={styles.signUpButtonsContainer}>
+            <button
+              disabled={isLoading && true}
+              className={styles.signUpBtn}
+              type="submit"
+            >
+              {t("signUp")}
+            </button>
+            <GoogleBtn />
+          </div>
         )}
       </form>
     </div>
