@@ -117,7 +117,6 @@ const UserSettingsForm = ({ handleClose }) => {
   const handleAvatarChange = (e) => {
     const formData = new FormData();
     const file = e.target.files[0];
-    console.log(e.target.files);
     if (file) {
       formData.append("avatar", file);
       dispatch(uploadUserPhoto(formData));
