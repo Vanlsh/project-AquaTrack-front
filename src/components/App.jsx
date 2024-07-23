@@ -48,7 +48,6 @@ function App() {
           dispatch(getUserInfo());
           dispatch(setLoggedIn(true));
         }
-        console.log(error);
         setIsRefreshed(true);
       });
     } else {
