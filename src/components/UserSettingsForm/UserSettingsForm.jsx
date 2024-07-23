@@ -29,7 +29,10 @@ const UserSettingsForm = ({ handleClose }) => {
   const avatar = useSelector(selectUserPhoto);
 
   const schema = yup.object({
-    name: yup.string().required(t("nameRequired")),
+    name: yup
+      .string()
+      .max(10, t("nameMaxCharacters"))
+      .required(t("nameRequired")),
     weight: yup
       .number()
       .min(0)
@@ -168,6 +171,7 @@ const UserSettingsForm = ({ handleClose }) => {
           <input
             className={css.hideBtn}
             type="file"
+            accept="image/*"
             onChange={handleAvatarChange}
           />
           {errors.avatar && <p>{errors.avatar.message}</p>}
