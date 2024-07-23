@@ -6,13 +6,16 @@ import Logo from "../Logo/Logo.jsx";
 import { selectWaterRate } from "../../redux/auth/selectors.js";
 import BtnUserSet from "../BtnUserSet/BtnUserSet.jsx";
 import AddWaterBtn from "../AddWaterBtn/AddWaterBtn.jsx";
+import { useTour } from "@reactour/tour";
 
 const WaterMainInfo = () => {
   const { t } = useTranslation();
   const waterRate = useSelector(selectWaterRate);
 
+
   const waterRateString =
     waterRate < 1 ? `${waterRate * 1000} ${t("ml")}` : `${waterRate} ${t("l")}`;
+    
   return (
     <div className={css.waterContainer}>
       <Logo className={css.waterTitle} />
@@ -20,7 +23,7 @@ const WaterMainInfo = () => {
       {waterRate === 0 ? (
         ""
       ) : (
-        <div className={css.normaContainer}>
+        <div className={`${css.normaContainer} first-step`}>
           <h2 className={css.normaL}>{waterRateString}</h2>
           <p className={css.normaText}>{t("dailyNorm")}</p>
         </div>

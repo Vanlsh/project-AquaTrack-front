@@ -8,7 +8,8 @@ const ChooseDate = () => {
   const { t } = useTranslation();
   const { date } = useParams();
   const { isToday, day, month } = getDateMonthString(parseDateTime(date));
-  const dateString = isToday ? t("today") : `${day} ${t(month)}`;
+
+  const dateString = isToday ? t("today") : `${day} ${t(month + "Day")}`;
   return <h3 className={css.selectedDate}>{dateString}</h3>;
 };
 

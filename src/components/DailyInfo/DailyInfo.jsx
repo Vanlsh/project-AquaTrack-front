@@ -6,7 +6,7 @@ import ChooseDate from "../ChooseDate/ChooseDate";
 const DailyInfo = () => {
   return (
     <div className={css.info}>
-      <div className={css.header}>
+      <div className={`${css.header} five-step`}>
         <ChooseDate />
         <AddWaterBtn />
       </div>

@@ -30,12 +30,21 @@ const UserSettingsForm = ({ handleClose }) => {
 
   const schema = yup.object({
     name: yup.string().required(t("nameRequired")),
-    weight: yup.number().min(0).typeError("Has to be a number"),
-    dailyActiveTime: yup.number().min(0).typeError("Has to be a number"),
+    weight: yup
+      .number()
+      .min(0)
+      .max(300, t("weightValueLess"))
+      .typeError(t("hasToBeANumber")),
+    dailyActiveTime: yup
+      .number()
+      .min(0)
+      .max(12, t("activeSportTime"))
+      .typeError(t("hasToBeANumber")),
     dailyWaterConsumption: yup
       .number()
-      .min(0, "Value has to be greater than 0")
-      .typeError("Has to be a number"),
+      .min(0)
+      .max(8, t("dailyWaterConsumption"))
+      .typeError(t("hasToBeANumber")),
   });
 
   const {
@@ -54,7 +63,7 @@ const UserSettingsForm = ({ handleClose }) => {
       dailyActiveTime: user.dailyActiveTime,
       dailyWaterConsumption: user.dailyWaterConsumption,
     },
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const watchWeight = watch("weight");
@@ -71,7 +80,7 @@ const UserSettingsForm = ({ handleClose }) => {
     } else {
       calcWaterIntake = weight * 0.04 + activeTime * 0.6;
     }
-    setWaterIntake(Math.min(parseFloat(calcWaterIntake), 15).toFixed(2));
+    setWaterIntake(Math.min(parseFloat(calcWaterIntake), 8).toFixed(2));
   }, [watchActiveTime, watchName, watchGender, watchWeight]);
 
   const onSubmit = (data) => {
@@ -108,8 +117,32 @@ const UserSettingsForm = ({ handleClose }) => {
   const handleAvatarChange = (e) => {
     const formData = new FormData();
     const file = e.target.files[0];
-    formData.append("avatar", file);
-    dispatch(uploadUserPhoto(formData));
+    if (file) {
+      formData.append("avatar", file);
+      dispatch(uploadUserPhoto(formData));
+    }
+  };
+
+  const handleOnChange = (field) => (e) => {
+    let value = e.target.value;
+    const regex = /^(\d+(\.\d{0,3})?|\.\d{1,3})$/;
+    if (value === "" || regex.test(value)) {
+      field.onChange(value);
+    }
+  };
+
+  const handleOnFocus = (field) => () => {
+    if (field.value === 0) {
+      field.onChange("");
+    }
+  };
+
+  const handleOnBlur = (field) => () => {
+    if (field.value === "") {
+      field.onChange(0);
+    } else if (field.value.startsWith(".")) {
+      field.onChange("0" + field.value);
+    }
   };
 
   return (
@@ -121,7 +154,9 @@ const UserSettingsForm = ({ handleClose }) => {
             alt="User's photo"
           />
         ) : (
-          <LoaderComponent width={110} height={110} />
+          <div className={css.loader}>
+            <LoaderComponent />
+          </div>
         )}
         <label>
           <div className={css.uploadContainer}>
@@ -254,22 +289,9 @@ const UserSettingsForm = ({ handleClose }) => {
                   <input
                     {...field}
                     className={css.inputBox}
-                    onChange={(e) => {
-                      let value = e.target.value;
-                      if (value === "" || Number(value)) {
-                        field.onChange(value);
-                      }
-                    }}
-                    onFocus={() => {
-                      if (field.value === 0) {
-                        field.onChange("");
-                      }
-                    }}
-                    onBlur={() => {
-                      if (field.value === "") {
-                        field.onChange(0);
-                      }
-                    }}
+                    onChange={handleOnChange(field)}
+                    onFocus={handleOnFocus(field)}
+                    onBlur={handleOnBlur(field)}
                   />
                 )}
               />
@@ -287,22 +309,9 @@ const UserSettingsForm = ({ handleClose }) => {
                   <input
                     {...field}
                     className={css.inputBox}
-                    onChange={(e) => {
-                      let value = e.target.value;
-                      if (!isNaN(value)) {
-                        field.onChange(value);
-                      }
-                    }}
-                    onFocus={() => {
-                      if (field.value === 0) {
-                        field.onChange("");
-                      }
-                    }}
-                    onBlur={() => {
-                      if (field.value === "") {
-                        field.onChange(0);
-                      }
-                    }}
+                    onChange={handleOnChange(field)}
+                    onFocus={handleOnFocus(field)}
+                    onBlur={handleOnBlur(field)}
                   />
                 )}
               />
@@ -317,7 +326,9 @@ const UserSettingsForm = ({ handleClose }) => {
             <div className={css.consumeWater}>
               <p className={css.ordinaryText}>
                 {t("requiredWaterAmount")}&nbsp;
-                <span className={css.userNorma}>{waterIntake}&nbsp;L</span>
+                <span className={css.userNorma}>
+                  {isNaN(waterIntake) ? 0 : waterIntake}&nbsp;L
+                </span>
               </p>
 
               <label>
@@ -329,24 +340,9 @@ const UserSettingsForm = ({ handleClose }) => {
                     <input
                       {...field}
                       className={css.inputBox}
-                      onChange={(e) => {
-                        let value = e.target.value;
-                        const regex = /^\d+(\.\d{0,2})?$/;
-
-                        if (value === "" || regex.test(value)) {
-                          field.onChange(value);
-                        }
-                      }}
-                      onFocus={() => {
-                        if (field.value === 0 || field.value === "0") {
-                          field.onChange("");
-                        }
-                      }}
-                      onBlur={() => {
-                        if (field.value === "" || field.value === "0") {
-                          field.onChange(0);
-                        }
-                      }}
+                      onChange={handleOnChange(field)}
+                      onFocus={handleOnFocus(field)}
+                      onBlur={handleOnBlur(field)}
                     />
                   )}
                 />

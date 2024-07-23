@@ -7,6 +7,7 @@ import styles from "./SignUpPage.module.css";
 
 const SignUpPage = () => {
   const { t } = useTranslation();
+
   return (
     <div className={styles.signUpPage}>
       <SignFormWrapper>

@@ -12,6 +12,7 @@ export const INITIAL_STATE = {
   isLoadingPhoto: null,
   token: null,
   isLoggedIn: false,
+  isNewUser: false,
   errorMessage: null,
   successMessage: null,
 };

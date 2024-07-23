@@ -4,6 +4,7 @@ import UserPanel from "../UserPanel/UserPanel.jsx";
 import styles from "./WaterDetailedInfo.module.css";
 
 const WaterDetailedInfo = () => {
+
   return (
     <section className={styles.waterDetailedInfo}>
       <UserPanel />

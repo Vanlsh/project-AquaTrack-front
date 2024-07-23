@@ -34,7 +34,7 @@ const ModalDeleteEntry = ({ id, onClose }) => {
     <div className={css.modal}>
       <button
         type="button"
-        aria-label="Close the delete entry modal window"
+        aria-label={t("closeDeleteEntryModal")}
         onClick={handleClose}
         className={css.closeBtn}
       >

@@ -19,6 +19,14 @@
   object-fit: cover;
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85px;
+  height: 85px;
+}
+
 .uploadContainer {
   display: flex;
   justify-content: center;
@@ -291,6 +299,11 @@
   .userAvatar img {
     width: 100px;
     height: 100px;
+  }
+
+  .loader {
+    width: 110px;
+    height: 110px;
   }
 
   .icon {

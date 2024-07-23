@@ -4,10 +4,10 @@ import {
   selectMonthlyIsLoading,
   selectMonthlyIsError,
 } from "../../redux/water/selectors.js";
-import CalendarItem from "../CalendarItem/CalendarItem.jsx";
 import Loader from "../Loader/Loader.jsx";
 
 import css from "./Calendar.module.css";
+import CalendarItem from "../CalendarItem/CalendarItem.jsx";
 import { useTranslation } from "react-i18next";
 
 const Calendar = () => {
@@ -15,6 +15,7 @@ const Calendar = () => {
   const dateArray = useSelector(selectWaterMonthlyRecord);
   const isLoading = useSelector(selectMonthlyIsLoading);
   const isError = useSelector(selectMonthlyIsError);
+
   if (isLoading) return <Loader />;
 
   if (isError)
