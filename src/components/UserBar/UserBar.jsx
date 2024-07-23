@@ -44,7 +44,7 @@ const UserBar = ({ name }) => {
         onClick={handlePopover}
         aria-label={t("openCloseUserPanel")}
       >
-        {name}
+        <div className={styles.userBarText}>{name}</div>
         <div
           className={styles.userBarAvatar}
           style={{ backgroundImage: `url(${userAvatar || avatarPlaceholder})` }}

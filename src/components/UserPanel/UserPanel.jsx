@@ -12,7 +12,7 @@ const UserPanel = () => {
     <div className={styles.userPanel}>
       <h1 className={styles.userPanelTitle}>
         {t("hello")}{" "}
-        <span className={styles.userPanelTitleName}>{`${userName}!`}</span>
+        <span className={styles.userPanelTitleName}>{` ${userName}!`}</span>
       </h1>
       <UserBar name={userName} />
     </div>
