@@ -82,6 +82,7 @@
   "recordWaterIntake": "Schreiben Sie auf, wie viel Wasser Sie trinken werden:",
   "avatarRequired": "Avatar ist erforderlich",
   "genderRequired": "Geschlecht ist erforderlich",
+  "nameMaxCharacters": "Ihr Name sollte nicht mehr als 10 Zeichen umfassen",
   "nameRequired": "Name ist erforderlich",
   "weightValueLess": "Gewichtswert muss kleiner oder gleich 300 sein",
   "activeSportTime": "Der Wert der aktiven Sportzeit muss kleiner oder gleich 12 sein",
