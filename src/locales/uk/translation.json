@@ -6,6 +6,7 @@
   "checkTracker": "Перевірити трекер",
   "signInTitle": "Вхід",
   "signIn": "Увійти",
+  "continueWithGoogle": "Продовжити з Google",
   "userCountText": "Наші <span class=\"{{userCountTextColor}}\">{{count}} щасливі</span><br/> клієнти",
   "habitDrive": "Вироблення звички",
   "viewStats": "Статистики",
