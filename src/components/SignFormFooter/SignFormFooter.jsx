@@ -5,14 +5,14 @@ import GoogleBtn from "../GoogleBtn/GoogleBtn";
 const SignFormFooter = ({ text, link, linkName }) => {
   return (
     <>
+      <GoogleBtn />
       <p className={styles.signFormFooter}>
         {text}
         <Link className={styles.signFormFooterLink} to={link}>
           {linkName}
         </Link>
       </p>
-      <p className={styles.or}>- or -</p>
-      <GoogleBtn />
+      {/* <p className={styles.or}>- or -</p> */}
     </>
   );
 };
