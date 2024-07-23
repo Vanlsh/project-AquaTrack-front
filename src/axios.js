@@ -13,6 +13,15 @@ export const instance = axios.create({
   withCredentials: true,
 });
 
+export const fetchRefreshToken = async () => {
+  const { data } = await axios.post(
+    `${BASE_URL}` + "/users/refresh",
+    {},
+    { withCredentials: true }
+  );
+  return data;
+};
+
 instance.interceptors.request.use(
   (config) => {
     const state = store.getState();
@@ -37,11 +46,7 @@ instance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        const response = await axios.post(
-          `${BASE_URL}` + "/users/refresh",
-          {},
-          { withCredentials: true }
-        );
+        const response = await fetchRefreshToken();
         store.dispatch(setToken(response.data.token));
         return instance(originalRequest);
       } catch (error) {

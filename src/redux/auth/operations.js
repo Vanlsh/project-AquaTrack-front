@@ -8,6 +8,7 @@ import {
   updateUserInfo,
   updateUserPhoto,
 } from "../../api/auth.js";
+import { fetchRefreshToken } from "../../axios.js";
 
 //====================== SIGN IN ======================
 
@@ -90,6 +91,19 @@ export const uploadUserPhoto = createAsyncThunk(
   }
 );
 
+//=================== REFRESH TOKEN =====================
+
+export const refreshToken = createAsyncThunk(
+  "users/refresh",
+  async (_, thunkAPI) => {
+    try {
+      const { token } = await fetchRefreshToken();
+      return token;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response);
+    }
+  }
+);
 //=====================================================
 
 //TODO: export const googleLogIn = createAsyncThunk();
