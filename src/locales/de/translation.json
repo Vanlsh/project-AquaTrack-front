@@ -6,7 +6,6 @@
   "checkTracker": "Überprüfen Tracker",
   "signInTitle": "Anmeldung",
   "signIn": "Anmelden",
-  "continueWithGoogle": "Weiter mit Google",
   "userCountText": "Unsere <span class=\"{{userCountTextColor}}\">{{count}} glücklichen</span><br/> Kunden",
   "habitDrive": "Gewohnheitsantrieb",
   "viewStats": "Statistiken",

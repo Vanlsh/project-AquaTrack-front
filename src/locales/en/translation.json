@@ -6,7 +6,6 @@
   "checkTracker": "Check Tracker",
   "signInTitle": "Sign In",
   "signIn": "Sign In",
-  "continueWithGoogle": "Continue with Google",
   "userCountText": "Our <span class=\"{{userCountTextColor}}\">{{count}} happy</span><br/> customers",
   "habitDrive": "Habit drive",
   "viewStats": "View statistics",
