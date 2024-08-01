@@ -31,7 +31,8 @@ const UserSettingsForm = ({ handleClose }) => {
   const schema = yup.object({
     name: yup
       .string()
-      .max(10, t("nameMaxCharacters"))
+      .min(2, "Name must contain at least 2 characters")
+      .max(60, t("nameMaxCharacters"))
       .required(t("nameRequired")),
     weight: yup
       .number()
@@ -66,11 +67,11 @@ const UserSettingsForm = ({ handleClose }) => {
       dailyActiveTime: user.dailyActiveTime,
       dailyWaterConsumption: user.dailyWaterConsumption,
     },
-    mode: "onSubmit",
+    mode: "onChange",
   });
 
   const watchWeight = watch("weight");
-  const watchName = watch("name");
+  // const watchName = watch("name");
   const watchGender = watch("gender");
   const watchActiveTime = watch("dailyActiveTime");
 
@@ -84,11 +85,16 @@ const UserSettingsForm = ({ handleClose }) => {
       calcWaterIntake = weight * 0.04 + activeTime * 0.6;
     }
     setWaterIntake(Math.min(parseFloat(calcWaterIntake), 8).toFixed(2));
-  }, [watchActiveTime, watchName, watchGender, watchWeight]);
+  }, [watchActiveTime, watchGender, watchWeight]);
 
   const onSubmit = (data) => {
     // eslint-disable-next-line no-unused-vars
     const { photo, ...compareUser } = user;
+
+    const isEndSpaceReg = /\s$/;
+    if (isEndSpaceReg.test(data.name)) {
+      data.name = data.name.trim();
+    }
 
     const compareUserOrdered = Object.keys(compareUser)
       .sort()
@@ -228,8 +234,8 @@ const UserSettingsForm = ({ handleClose }) => {
                     placeholder={t("placeholderName")}
                     onChange={(e) => {
                       let value = e.target.value;
-                      const regex = /^[A-Za-zА-Яа-яЇїІіЄєҐґ]*$/;
-                      if (regex.test(value)) {
+                      const regex = /^\s|\s{2}$/;
+                      if (!regex.test(value)) {
                         field.onChange(value);
                       }
                     }}
