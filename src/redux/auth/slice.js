@@ -138,7 +138,6 @@ const authSlice = createSlice({
       })
       .addCase(refreshToken.fulfilled, (state, action) => {
         state.isLoggedIn = true;
-        console.log(action.payload);
         state.token = action.payload;
       })
       .addCase(refreshToken.rejected, () => INITIAL_STATE);

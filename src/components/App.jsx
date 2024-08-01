@@ -1,4 +1,4 @@
-import { lazy, useEffect, useState } from "react";
+import { lazy, useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -16,8 +16,6 @@ import {
   selectDailyErrorMessage,
   selectDailySuccessMessage,
 } from "../redux/water/selectors.js";
-import { refreshToken } from "../redux/auth/operations.js";
-import Loader from "./Loader/Loader.jsx";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("../pages/SignInPage/SignInPage.jsx"));
@@ -39,19 +37,10 @@ function App() {
   const waterErrorMessage = useSelector(selectDailyErrorMessage);
   const waterSuccessMessage = useSelector(selectDailySuccessMessage);
 
-  const [isRefreshed, setIsRefreshed] = useState(false);
-
   useEffect(() => {
     if (token) {
-      dispatch(refreshToken()).then(({ error }) => {
-        if (!error) {
-          dispatch(getUserInfo());
-          dispatch(setLoggedIn(true));
-        }
-        setIsRefreshed(true);
-      });
-    } else {
-      setIsRefreshed(true);
+      dispatch(getUserInfo());
+      dispatch(setLoggedIn(true));
     }
   }, []);
 
@@ -75,12 +64,6 @@ function App() {
     }
   }, [waterErrorMessage, waterSuccessMessage]);
 
-  if (!isRefreshed)
-    return (
-      <SharedLayout>
-        <Loader />
-      </SharedLayout>
-    );
   return (
     <SharedLayout>
       <Routes>

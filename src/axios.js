@@ -1,6 +1,7 @@
 import axios from "axios";
 import { logOutReducer, setToken } from "./redux/auth/slice.js";
 
+// const BASE_URL = "http://localhost:3000";
 const BASE_URL = "https://project-aquatrack-back.onrender.com";
 
 let store;
@@ -47,7 +48,7 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const response = await fetchRefreshToken();
-        store.dispatch(setToken(response.data.token));
+        store.dispatch(setToken(response.token));
         return instance(originalRequest);
       } catch (error) {
         if (error.response.status === 401) {
